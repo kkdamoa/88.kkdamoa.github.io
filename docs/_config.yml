@@ -7,16 +7,16 @@
 # server process.
 
 # theme settings
-theme: "lone-wolf-theme"
-remote_theme: # "manid2/lone-wolf-theme"
+theme: #"lone-wolf-theme"
+remote_theme: "manid2/lone-wolf-theme"
 bootswatch_theme: "united" # cerulean, spacelab, united
 
 # site settings, follows the order used in jekyll-seo-tag plugin
 lang: "en_US"
 title: "Lone Wolf Theme"
 description: "A simple bootstrap based jekyll theme."
-url: # site url e.g. "https://manid2.github.io"
-baseurl: "" # the subpath of your site, e.g. "/blog"
+url: https://manid2.github.io
+baseurl: "/lone-wolf-theme"
 author: mani_d2
 twitter:
   username: mani_d2 # should be site's username
@@ -39,9 +39,8 @@ webmaster_verifications:
 
 # comments settings
 comments:
-  provider: false # false (default), "disqus", "discourse"
+  provider: false
   disqus:
-    # refer what is disqus shortname article online
     shortname:
 
 # feed
@@ -59,10 +58,10 @@ google:
 
 # Analytics
 analytics:
-  provider: false # false (default), "google", "google-universal", "custom"
+  provider: "google-gtag" # false (default), "google-gtag", "custom"
   google:
-    tracking_id:
-    anonymize_ip: # true, false (default)
+    tracking_id: "G-V16S8HM7DW"
+    anonymize_ip: false
 
 # Reading Files
 include:
@@ -119,15 +118,15 @@ kramdown:
   enable_coderay: false
 
 # Sass/SCSS
+# http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
 sass:
   sass_dir: _sass
-  # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
   style: compressed
 
 # Outputting
 permalink: /:categories/:title/
-paginate: 5 # amount of posts to show
-paginate_path: /page:num/
+paginate: 10
+paginate_path: "/blog/page/:num/"
 timezone: "" # https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 # Plugins (previously gems:)
@@ -139,6 +138,7 @@ plugins:
   - jekyll-seo-tag
   - jemoji
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # mimic GitHub Pages with --safe
 whitelist:
@@ -149,6 +149,7 @@ whitelist:
   - jekyll-seo-tag
   - jemoji
   - jekyll-include-cache
+  - jekyll-remote-theme
 
 # HTML Compression
 # - http://jch.penibelst.de/
@@ -170,7 +171,14 @@ defaults:
       show_toc: true
       share: true
       show_comments: false
-      show_ads: false
+      show_ads: true
+  # _pages
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: page
+      show_ads: true
   # any page
   - scope:
       path: ""
