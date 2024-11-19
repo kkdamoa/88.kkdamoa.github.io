@@ -1,9 +1,9 @@
 title: "Test IT Blog"
 description: "Test IT와 동일한 스타일의 블로그 테마"
 baseurl: "" # 루트 URL
-url: "https://test-it.co.kr" # 실제 사이트 URL
+url: "https://kkdamoa.github.io/k-test/ # 실제 사이트 URL
 
-theme: test-it-theme
+theme: 
 markdown: kramdown
 plugins:
   - jekyll-seo-tag
