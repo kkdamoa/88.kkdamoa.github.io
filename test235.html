@@ -1,0 +1,386 @@
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+
+     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5522499110435321"
+     crossorigin="anonymous"></script>
+
+
+
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>테스트잇 상황별 TF 능력고사</title>
+    <meta name="description" content="테스트잇 상황별 TF 능력고사">
+<meta name="keywords" content="테스트잇,성격테스트,연애타입,테스트잇상황별TF,상황별TF능력고사,연애능력테스트,연애테스트,연애mbti,연애성격테스트, 심리테스트, mbti테스트">
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="테스트잇 상황별 TF 능력고사">
+    <meta property="og:description" content="테스트잇 상황별 TF 능력고사">
+    <meta property="og:image" content="img_main235.png">
+    <meta property="og:url" content="https://test-it.co.kr/test235">
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+      <link rel="icon" type="image/png" href="favicon.png">
+<link href="https://fonts.googleapis.com/css2?family=Do+Hyeon&display=swap" rel="stylesheet">
+
+
+   <style>
+       
+ body {
+    font-family: 'Noto Sans KR', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+    display: flex;
+    flex-direction: column; /* 세로 방향으로 요소를 배치하도록 수정 */
+    align-items: center;
+}
+
+.logo {
+    width: 100px;
+    margin-top: 14px;
+}
+
+.main-nav {
+    display: flex;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 34px;
+    list-style: none;
+}
+
+.main-nav li {
+    margin-left: 36px;
+    font-family: 'Do Hyeon', sans-serif;
+    line-height: 1.7;
+    color: #432;
+}
+
+.main-nav a {
+    color: #432;
+    font-family: 'Do Hyeon', sans-serif;
+    line-height: 1.7;
+}
+
+.main-nav a:hover {
+    color: #0bd;
+}
+
+.page-header {
+    width: 100%;
+    background-color: #ffffff;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 2;
+}
+
+       
+#img_main{
+    width: 500px;
+    height: 600px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+       
+#start-container, #question-container, #result-container {
+  text-align: center;
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 600px;
+  width: 100%;
+}
+
+  button {
+        background-color: #ffdd57; /* 노란색으로 변경 */
+        color: #000000;
+        padding: 15px 15px;
+        font-size: 15px;
+        border: none;
+        border-radius: 15px;
+        cursor: pointer;
+        margin: 15px auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #ffe680; /* hover 시 더 밝은 노란색 */
+    }
+       
+#result-image {
+  max-width: 100%;
+  height: auto;
+  margin-top: 20px;
+}
+
+#question-image {
+    width: 500px;
+    height: 900px;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto;
+}
+.coupang_ad {
+    width: 320px;
+    margin: 0 auto;
+}
+
+ 
+
+       
+  </style>
+</head>
+<body>
+<body class="container" style="background-color:#ffffff">
+            
+    <header class="page-header wrapper">
+        <h1><a href="index.html"><img class="logo" src="img_logo.png" alt="test it"></a>
+        </h1>
+    <nav>
+        <u1 class="main-nav">
+            <li> <a href="https://test-it.co.kr/test.html">성격</a></li>
+            <li> <a href="https://test-it.co.kr/face.html">얼굴</a></li>
+            <li> <a href="https://test-it.co.kr/etc.html">그외</a></li>
+        </u1>
+    </nav>
+        
+        
+    </header>
+
+    <div id="start-container">
+        <img id="img_main" class="mt-3" src="img_main235.png">
+        <button onclick="startTest()">테스트 시작하기</button>
+    </div>
+    
+    
+
+<div id="question-container" style="display: none;">
+  <h2 id="question"></h2>
+  <img id="question-image" src="" alt="Question Image">
+  <div id="options"></div>
+</div>
+
+<div id="result-container" style="display: none;">
+  <p id="result"></p>
+  <img id="result-image" src="" alt="Result Image">
+    
+      <button type="button" class="btn btn-info mt-3" onclick="location.href='test235.html'" style="font-size:large; font-weight: bold; color: black;background-color: rgb(255, 213, 213); border-radius: 0px; border-width: 1px; border-color: rgb(0, 0, 0); width: 350px; height: 50px; margin: 0 auto;">다시 해보기</button>
+                <button type="button" class="btn btn-info mt-3" onclick="location.href='/'" style="font-size:large; font-weight: bold; color: black; background-color: rgb(255, 244, 199); border-radius: 0px; border-width: 1px; border-color: rgb(0, 0, 0); width: 350px; height: 50px; margin: 0 auto;">다른 테스트 해보기</button>
+        
+    </div>
+
+     <article class="coupang_ad mt-3">
+<a href="https://link.coupang.com/a/UJY9K" target="_blank" referrerpolicy="unsafe-url"><img src="https://ads-partners.coupang.com/banners/471299?subId=&traceId=V0-301-bae0f72e5e59e45f-I471299&w=320&h=100" alt=""></a>
+                
+
+<script>
+   const resultImages = [];
+
+for (let a = 0; a <= 3; a++) {
+    for (let b = 0; b <= 2; b++) {
+        for (let c = 0; c <= 2; c++) {
+            for (let d = 0; d <= 2; d++) {
+                const key = `235_a${a}_b${b}_c${c}_d${d}`;
+    const imageFileName = `result_image235_${key}.png`;
+resultImages.push(imageFileName);
+            }
+        }
+    }
+}
+
+  const questions = [
+    { 
+      image: 'image1_q235.png',
+      options: [
+        { text: '다시는 같은 실수가 일어나지 않게 각성함', value: 't' },
+        { text: '누구나 실수는 할 수 있으니 스스로를 용서함', value: 'f' },
+      ], 
+      area: 'a' 
+    },
+    { 
+          image: 'image2_q235.png',
+      options: [
+        { text: '그래도 그동안 너무 고생했다', value: 'f' },
+        { text: '이걸 왜 못했지? 이유가 뭘까?', value: 't' },
+      ], 
+      area: 'a' 
+    },    { 
+          image: 'image3_q235.png',
+      options: [
+        { text: '부족한 걸 보완할 수 있는 방법을 찾음', value: 't' },
+        { text: '괜찮아 완벽할 필요는 없어라고 다독임', value: 'f' },
+ 
+      ], 
+      area: 'a' 
+    },
+        { 
+     image: 'image4_q235.png',
+      options: [
+        { text: '너 충분히 멋지고 대단해라고 자존감을 높여줌', value: 'f' },
+        { text: '구체적으로 친구의 강점과 장점을 말해줌', value: 't' },
+      ], 
+      area: 'b' 
+    },
+          { 
+  image: 'image5_q235.png',
+      options: [
+        { text: '옆에 있어주며 많이 힘들었지 하고 공감해 줌', value: 'f' },
+        { text: '이유를 물어보고 해결할 방법을 함께 고민함', value: 't' },
+      ], 
+      area: 'b' 
+    },
+          { 
+     image: 'image6_q235.png',
+      options: [
+        { text: '그래? 어떤 부분이 그래 보여?', value: 't' },
+        { text: '왜 부족한 걸 알려주지 기분 나쁘게', value: 'f' },
+      ], 
+      area: 'b' 
+    },
+          { 
+    image: 'image7_q235.png',
+      options: [
+        { text: '그 지적이 맞는지 분석해 보고 아니면 따짐', value: 't' },
+        { text: '알겠어 다음에는 더 주의할게 하고 넘김', value: 'f' },
+      ], 
+      area: 'c' 
+    },
+          { 
+   image: 'image8_q235.png',
+      options: [
+        { text: '가족 모두가 즐겁게 보낼 수 있는 시간을 고려', value: 'f' },
+        { text: '예산, 일정 등 실질적인 요소를 철저하게 준비', value: 't' },
+      ], 
+      area: 'c' 
+    },
+          { 
+  image: 'image9_q235.png',
+      options: [
+        { text: '구체적으로 어디가 안 좋아? 병원 가', value: 't' },
+        { text: '피곤해서 그런가 봐 오늘 푹 쉬어', value: 'f' },
+      ], 
+      area: 'c' 
+    },
+          { 
+       image: 'image10_q235.png',
+      options: [
+        { text: '말없이 옆에 있어준다', value: 'f' },
+        { text: '왜 기분이 안 좋아? 상황을 묻는다', value: 't' },
+      ], 
+      area: 'd' 
+    },
+          { 
+  image: 'image11_q235.png',
+      options: [
+        { text: '서로의 의견을 비교하고 나은 쪽을 고름', value: 't' },
+        { text: '연인의 감정을 먼저 이해하고 맞춰줌', value: 'f' },
+      ], 
+      area: 'd' 
+    },
+          { 
+    image: 'image12_q235.png',
+      options: [
+        { text: '상처받지 않게 조심스럽게 이야기를 꺼냄', value: 'f' },
+        { text: '그 행동이 별로 좋아 보이지 않는다고 바로 말함', value: 't' },
+      ], 
+      area: 'd' 
+    },
+     
+        
+  ];
+   let currentQuestionIndex = 0;
+    let userAnswers = [];
+
+    function startTest() {
+        document.getElementById('start-container').style.display = 'none';
+        document.getElementById('question-container').style.display = 'block';
+        showQuestion();
+    }
+
+    function showQuestion() {
+        const questionElement = document.getElementById('question');
+        const questionImageElement = document.getElementById('question-image');
+        const optionsElement = document.getElementById('options');
+        const currentQuestion = questions[currentQuestionIndex];
+
+        questionElement.textContent = currentQuestion.question;
+        questionImageElement.src = currentQuestion.image;
+        optionsElement.innerHTML = '';
+
+        currentQuestion.options.forEach((option, index) => {
+            const button = document.createElement('button');
+            button.textContent = option.text;
+            button.onclick = () => selectAnswer(option); // 수정된 부분: selectAnswer 함수에 객체 전달
+            optionsElement.appendChild(button);
+        });
+    }
+
+    function selectAnswer(selectedOption) {
+        userAnswers.push(selectedOption.value); // 수정된 부분: 객체의 value 속성 사용
+        if (currentQuestionIndex < questions.length - 1) {
+            currentQuestionIndex++;
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }
+
+    function showResult() {
+        document.getElementById('question-container').style.display = 'none';
+        document.getElementById('result-container').style.display = 'block';
+
+        const resultElement = document.getElementById('result');
+        const areaScores = calculateScores();
+        const mostSelectedArea = getMostSelectedArea(areaScores);
+
+        let resultText = '가장 많이 선택한 구역: ';
+        for (const area in mostSelectedArea) {
+            resultText += `${area}: ${mostSelectedArea[area]}, `;
+        }
+        resultText = resultText.slice(0, -2); // 마지막 쉼표 제거
+
+        const resultImageElement = document.getElementById('result-image');
+        const resultImageFileName = getResultImageFileName(mostSelectedArea);
+        resultImageElement.src = resultImageFileName;
+    }
+
+ function calculateScores() {
+            const areaScores = { a: { t: 0, f: 0 }, b: { t: 0, f: 0 }, c: { t: 0, f: 0 }, d: { t: 0, f: 0 } };
+            userAnswers.forEach((score, index) => {
+                const currentQuestion = questions[index];
+                areaScores[currentQuestion.area][score]++;
+            });
+            return areaScores;
+        }
+
+  function getResultImageFileName(mostSelectedArea) {
+    const key = `235_a${mostSelectedArea.a}_b${mostSelectedArea.b}_c${mostSelectedArea.c}_d${mostSelectedArea.d}`;
+    return `result_image_${key}.png`;
+}
+
+
+    function getMostSelectedArea(areaScores) {
+        const mostSelectedArea = {};
+
+        for (const area in areaScores) {
+            const mostSelectedButton = Object.keys(areaScores[area]).reduce((a, b) =>
+                areaScores[area][a] > areaScores[area][b] ? a : b
+            );
+            mostSelectedArea[area] = mostSelectedButton;
+        }
+
+        return mostSelectedArea;
+    }
+</script>
+
+</body>
+</html>
