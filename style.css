@@ -11,7 +11,7 @@ html {
         flex-direction: column; /* 세로 정렬 */
         justify-content: center;
         align-items: center;
-        padding: 10px 15px;
+        padding: 10px; /* 여백 최소화 */
     }
 
     .logo {
@@ -53,7 +53,7 @@ html {
         flex-direction: row; /* 가로 정렬 */
         justify-content: space-between;
         align-items: center;
-        padding: 15px 30px;
+        padding: 10px 20px; /* 좌우 여백 최소화 */
     }
 
     .logo {
@@ -74,7 +74,7 @@ html {
     .kakao-share {
         display: flex;
         align-items: center; /* 버튼 중앙 정렬 */
-        margin-left: 20px; /* 네비게이션 바와의 간격 */
+        margin-left: 10px; /* 네비게이션 바와의 간격 */
     }
 
     .kakao-share img {
@@ -86,6 +86,8 @@ html {
 
 /* 기본 스타일 */
 body {
+    margin: 0; /* 기본 여백 제거 */
+    padding: 0; /* 기본 패딩 제거 */
     font-family: 'Nanum Gothic', sans-serif; /* 기본 글씨체 */
     line-height: 1.7;
     color: #f5e8c7; /* 황금색 텍스트 */
@@ -110,7 +112,7 @@ img {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 15px 10px;
+    padding: 10px 20px; /* 상하, 좌우 여백 최소화 */
     background-color: #282a36; /* 헤더 배경색 */
 }
 
@@ -122,7 +124,7 @@ img {
 .main-nav {
     display: flex;
     font-size: 1.5rem; /* 메뉴 글씨 크기 */
-    gap: 30px; /* 메뉴 간격 */
+    gap: 20px; /* 메뉴 간격 */
     list-style: none;
     margin: 0;
 }
@@ -147,7 +149,7 @@ img {
 .kakao-share {
     display: flex;
     align-items: center; /* 버튼 중앙 정렬 */
-    margin-left: 20px;
+    margin-left: 10px; /* 좌측 여백 최소화 */
 }
 
 .kakao-share img {
@@ -159,10 +161,10 @@ img {
 /* 테스트 아이템 그리드 */
 .grid {
     display: grid;
-    gap: 26px;
+    gap: 20px; /* 요소 간격 최소화 */
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    margin-top: 6%;
-    margin-bottom: 50px;
+    margin-top: 20px; /* 상단 여백 최소화 */
+    margin-bottom: 20px; /* 하단 여백 최소화 */
 }
 
 .grid .item img {
@@ -180,7 +182,7 @@ footer {
     background-color: #2d2d44;
     color: #f5e8c7;
     text-align: center;
-    padding: 26px 0;
+    padding: 20px 0; /* 상하 여백 조정 */
 }
 
 footer p {
