@@ -12,42 +12,25 @@
     <meta property="og:image" content="https://kkdamoa.github.io/k-test/메인.png">
     <meta property="og:url" content="https://kkdamoa.github.io/k-test/">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
-    <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
+    <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9">
+    <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE">
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
 
-    <!-- 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
-<!-- k-test -->
-<ins class="adsbygoogle"
-     style="display:block"
-     data-ad-client="ca-pub-9374368296307755"
-     data-ad-slot="3201247599"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>
-     (adsbygoogle = window.adsbygoogle || []).push({});
-</script>
-
-
     <!-- 카카오 SDK 초기화 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 SDK 초기화 (JavaScript 키 사용)
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
     </script>
-
-
 
     <!-- 방문자 카운터 관리 -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
-            let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
-            visitCount = parseInt(visitCount) + 1; // 방문자 수 증가
-            localStorage.setItem('visitCount', visitCount); // 업데이트된 방문자 수 저장
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount = parseInt(visitCount) + 1;
+            localStorage.setItem('visitCount', visitCount);
             document.getElementById('visitor-count').innerText = `방문자 수: ${visitCount}`;
         });
     </script>
@@ -109,10 +92,53 @@
         <img src="메인.png" alt="메인 이미지" style="max-width: 80%; border-radius: 10px;">
     </div>
 
-    <!-- 광고 컨테이너 -->
-    <div id="ads-container" style="text-align: center; margin: 20px 0;">
-        <!-- 광고가 여기에 삽입됨 -->
+    <!-- 좌측 고정 광고 -->
+    <div id="left-ad" style="position: fixed; top: 50%; left: 0; transform: translateY(-50%); width: 120px; background: white; border-right: 1px solid #ddd; z-index: 1000;">
+        <ins class="adsbygoogle"
+            style="display:block;width:120px;height:600px"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
+
+    <!-- 우측 고정 광고 -->
+    <div id="right-ad" style="position: fixed; top: 50%; right: 0; transform: translateY(-50%); width: 120px; background: white; border-left: 1px solid #ddd; z-index: 1000;">
+        <ins class="adsbygoogle"
+            style="display:block;width:120px;height:600px"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 애드센스 광고 (기본 위치) -->
+    <div style="margin: 20px 0;">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+    <!-- 하단 앵커 광고 -->
+    <div id="anchor-ad" style="position: fixed; bottom: 0; left: 0; width: 100%; background: white; z-index: 1000; border-top: 1px solid #ddd; text-align: center;">
+        <ins class="adsbygoogle"
+            style="display:inline-block;width:100%;height:50px"
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+
 
     <!-- 테스트 리스트 -->
     <div class="wrapper grid" style="text-align: center;">
