@@ -27,12 +27,11 @@ html {
     margin-top: 50px;
 }
 
-/* 배경 디자인 변경 */
 body {
-    font-family: 'Do Hyeon', sans-serif; /* 기존 글씨체 유지 */
+    font-family: 'Do Hyeon', sans-serif;
     line-height: 1.7;
     color: #432;
-    background: linear-gradient(to bottom, #fff7e6, #ffe4e1); /* 부드러운 베이지와 핑크의 그라데이션 */
+    background: #fbeffc;
 }
 
 a {
@@ -43,12 +42,14 @@ img {
     max-width: 100%;
 }
 
+.logo {
+    width: 100px;
+    margin-top: 14px;
+}
 
-
-/* 네비게이션 스타일 */
 .main-nav {
     display: flex;
-    font-size: 1.5rem; /* 크기를 키움 */
+    font-size: 1.25rem;
     text-transform: uppercase;
     margin-top: 34px;
     list-style: none;
@@ -58,16 +59,12 @@ img {
     margin-left: 36px;
 }
 
-/* 네비게이션 글씨체 및 호버 효과 수정 */
 .main-nav a {
-    font-family: 'Nanum Brush Script', cursive; /* 신비로운 글씨체 */
     color: #432;
-    transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #d9534f; /* 강조된 색상 */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    color: #0bd;
 }
 
 .page-header {
@@ -86,24 +83,12 @@ img {
     margin-top: 10%;
 }
 
-/* 테스트 아이템 그리드 */
 .grid {
     display: grid;
     gap: 26px;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     margin-top: 6%;
-    margin-bottom: 50px;
-}
-
-/* 테스트 아이템 호버 효과 */
-.grid .item img {
-    border-radius: 10px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 추가 */
-}
-
-.grid .item img:hover {
-    transform: scale(1.1); /* 확대 효과 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
+    margin-bottom: 50px; /* 세미콜론 추가 */
 }
 
 /* 아이콘 스타일 */
@@ -143,15 +128,11 @@ img {
     margin: 0 auto;
 }
 
-/* 푸터 스타일 */
 footer {
-    background-color: #4a4a4a; /* 어두운 배경 */
-    color: #fff; /* 흰색 글씨 */
     text-align: center;
     padding: 26px 0;
 }
 
 footer p {
     font-size: 0.875rem;
-    margin: 5px 0;
 }
