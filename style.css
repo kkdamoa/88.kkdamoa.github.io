@@ -29,21 +29,26 @@ html {
 
 /* 배경 디자인 변경 */
 body {
-    font-family: 'Do Hyeon', sans-serif; /* 기존 글씨체 유지 */
+    font-family: 'Nanum Gothic', sans-serif; /* 신비로운 느낌의 글씨체 */
     line-height: 1.7;
-    color: #432;
-    background: linear-gradient(to bottom, #fff7e6, #ffe4e1); /* 부드러운 베이지와 핑크의 그라데이션 */
+    color: #f5e8c7; /* 은은한 황금색 텍스트 */
+    background: linear-gradient(to bottom, #282a36, #3a3d52, #563d7c); /* 짙은 남색에서 보라색으로 그라데이션 */
 }
 
+/* 링크 스타일 */
 a {
     text-decoration: none;
+    color: #f5e8c7; /* 황금색 */
 }
 
+a:hover {
+    color: #f9d56e; /* 밝은 황금색 강조 */
+}
+
+/* 이미지 */
 img {
     max-width: 100%;
 }
-
-
 
 /* 네비게이션 스타일 */
 .main-nav {
@@ -60,21 +65,23 @@ img {
 
 /* 네비게이션 글씨체 및 호버 효과 수정 */
 .main-nav a {
-    font-family: 'Nanum Brush Script', cursive; /* 신비로운 글씨체 */
-    color: #432;
+    font-family: 'Nanum Brush Script', cursive; /* 운명적인 느낌의 글씨체 */
+    color: #f5e8c7;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #d9534f; /* 강조된 색상 */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
+    color: #f9d56e; /* 강조된 밝은 황금색 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
 }
 
+/* 헤더 */
 .page-header {
     display: flex;
     justify-content: space-between;
 }
 
+/* 컨텐츠 박스 */
 .wrapper {
     max-width: 1100px;
     margin: 0 auto;
@@ -84,6 +91,7 @@ img {
 .home-content {
     text-align: center;
     margin-top: 10%;
+    color: #f5e8c7;
 }
 
 /* 테스트 아이템 그리드 */
@@ -145,8 +153,8 @@ img {
 
 /* 푸터 스타일 */
 footer {
-    background-color: #4a4a4a; /* 어두운 배경 */
-    color: #fff; /* 흰색 글씨 */
+    background-color: #2d2d44; /* 짙은 남색 */
+    color: #f5e8c7; /* 황금색 글씨 */
     text-align: center;
     padding: 26px 0;
 }
@@ -154,4 +162,5 @@ footer {
 footer p {
     font-size: 0.875rem;
     margin: 5px 0;
+    color: #f9d56e; /* 밝은 황금색 */
 }
