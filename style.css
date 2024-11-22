@@ -28,10 +28,10 @@ html {
 }
 
 body {
-    font-family: 'Do Hyeon', sans-serif;
+    font-family: 'Cinzel', serif;
     line-height: 1.7;
-    color: #432;
-    background: #fbeffc;
+    color: #f5d742; /* 금빛 글씨 */
+    background: #1b1f3a; /* 어두운 남색 배경 */
 }
 
 a {
@@ -60,11 +60,11 @@ img {
 }
 
 .main-nav a {
-    color: #432;
+    color: #f5d742;
 }
 
 .main-nav a:hover {
-    color: #0bd;
+    color: #d4af37; /* 더 밝은 금색 */
 }
 
 .page-header {
@@ -81,6 +81,7 @@ img {
 .home-content {
     text-align: center;
     margin-top: 10%;
+    font-family: 'Cormorant Garamond', serif; /* 고풍스러운 글씨체 */
 }
 
 .grid {
@@ -88,7 +89,7 @@ img {
     gap: 26px;
     grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
     margin-top: 6%;
-    margin-bottom: 50px; /* 세미콜론 추가 */
+    margin-bottom: 50px;
 }
 
 /* 아이콘 스타일 */
@@ -131,6 +132,8 @@ img {
 footer {
     text-align: center;
     padding: 26px 0;
+    color: #d4af37; /* 밝은 금색 */
+    font-family: 'Cormorant Garamond', serif;
 }
 
 footer p {
