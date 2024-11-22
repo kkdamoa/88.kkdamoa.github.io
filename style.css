@@ -4,69 +4,98 @@ html {
     font-size: 100%;
 }
 
+/* 모바일 화면 레이아웃 */
 @media (max-width: 600px) {
-    /* 모바일 화면 레이아웃 */
     .page-header {
         display: flex;
-        flex-direction: column; /* 세로 정렬 */
+        flex-direction: row; /* 가로 정렬 */
+        justify-content: space-between;
         align-items: center;
-        padding: 10px;
+        padding: 10px 15px;
     }
 
     .logo {
-        width: 120px; /* 모바일에서 로고 크기 축소 */
-        margin-bottom: 10px; /* 아래 여백 추가 */
+        width: 120px; /* 모바일 로고 크기 */
     }
 
     .main-nav {
         display: flex;
         flex-direction: row; /* 메뉴 가로 정렬 */
-        justify-content: center;
-        gap: 20px; /* 메뉴 간격 조정 */
-        font-size: 1.2rem; /* 글씨 크기 조정 */
-        margin-top: 0;
+        gap: 10px; /* 메뉴 간격 */
+        font-size: 1rem; /* 메뉴 글씨 크기 축소 */
+        margin: 0;
     }
 
     .main-nav li {
-        margin: 0; /* 기본 여백 제거 */
+        margin: 0;
     }
 
-    /* 카카오톡 버튼 정렬 */
-    #kakao-channel-icon {
-        position: fixed;
-        bottom: 15px;
-        right: 15px;
-        z-index: 9999;
-        width: 60px; /* 버튼 크기 조정 */
-        height: 60px;
+    .kakao-share {
+        display: flex;
+        align-items: center; /* 카카오톡 버튼 중앙 정렬 */
+        margin-left: 10px; /* 네비게이션 바와의 간격 */
     }
 
-    #kakao-channel-icon img {
-        width: 100%;
-        height: auto;
-        border-radius: 50%; /* 둥근 버튼 */
+    .kakao-share img {
+        width: 24px; /* 모바일에서 버튼 크기 */
+        height: 24px;
+        border-radius: 50%; /* 둥근 모양 */
     }
 }
 
-.section {
-    margin-top: 50px;
+/* PC 화면 레이아웃 */
+@media (min-width: 601px) {
+    .page-header {
+        display: flex;
+        flex-direction: row; /* 가로 정렬 */
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 30px;
+    }
+
+    .logo {
+        width: 150px; /* PC 로고 크기 */
+    }
+
+    .main-nav {
+        display: flex;
+        flex-direction: row; /* 가로 정렬 */
+        gap: 20px; /* 메뉴 간격 */
+        font-size: 1.2rem; /* 메뉴 글씨 크기 */
+    }
+
+    .main-nav li {
+        margin: 0;
+    }
+
+    .kakao-share {
+        display: flex;
+        align-items: center; /* 카카오톡 버튼 중앙 정렬 */
+        margin-left: 20px; /* 네비게이션 바와의 간격 */
+    }
+
+    .kakao-share img {
+        width: 30px; /* PC에서 버튼 크기 */
+        height: 30px;
+        border-radius: 50%; /* 둥근 모양 */
+    }
 }
 
-/* 배경 디자인 변경 */
+/* 기본 스타일 */
 body {
-    font-family: 'Nanum Gothic', sans-serif; /* 깔끔한 본문 글씨체 */
+    font-family: 'Nanum Gothic', sans-serif; /* 기본 글씨체 */
     line-height: 1.7;
     color: #f5e8c7; /* 황금색 텍스트 */
-    background: linear-gradient(to bottom, #282a36, #3a3d52, #563d7c); /* 신비로운 느낌의 그라데이션 */
+    background: linear-gradient(to bottom, #282a36, #3a3d52, #563d7c); /* 신비로운 그라데이션 */
 }
 
 a {
     text-decoration: none;
-    color: #f5e8c7; /* 황금색 링크 */
+    color: #f5e8c7;
 }
 
 a:hover {
-    color: #f9d56e; /* 강조된 황금색 */
+    color: #f9d56e;
 }
 
 img {
@@ -90,10 +119,9 @@ img {
 .main-nav {
     display: flex;
     font-size: 1.5rem; /* 메뉴 글씨 크기 */
-    text-transform: uppercase;
     gap: 30px; /* 메뉴 간격 */
     list-style: none;
-    margin-top: 0;
+    margin: 0;
 }
 
 .main-nav li {
@@ -102,14 +130,27 @@ img {
 
 /* 네비게이션 메뉴 글씨체 및 호버 효과 */
 .main-nav a {
-    font-family: 'Nanum Brush Script', cursive; /* 신비로운 느낌의 글씨체 */
+    font-family: 'Nanum Brush Script', cursive; /* 신비로운 느낌 */
     color: #f5e8c7;
     transition: color 0.3s ease, text-shadow 0.3s ease;
 }
 
 .main-nav a:hover {
-    color: #f9d56e; /* 강조된 밝은 황금색 */
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* 그림자 효과 */
+    color: #f9d56e; /* 강조된 황금색 */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* 카카오톡 버튼 스타일 */
+.kakao-share {
+    display: flex;
+    align-items: center; /* 버튼 중앙 정렬 */
+    margin-left: 20px;
+}
+
+.kakao-share img {
+    width: 30px; /* 기본 버튼 크기 */
+    height: 30px;
+    border-radius: 50%; /* 둥근 모양 */
 }
 
 /* 테스트 아이템 그리드 */
@@ -121,53 +162,20 @@ img {
     margin-bottom: 50px;
 }
 
-/* 테스트 아이템 호버 효과 */
 .grid .item img {
-    border-radius: 10px; /* 둥근 모서리 */
-    transition: transform 0.3s ease, box-shadow 0.3s ease; /* 애니메이션 추가 */
+    border-radius: 10px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .grid .item img:hover {
-    transform: scale(1.1); /* 확대 효과 */
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* 그림자 추가 */
-}
-
-/* 카카오톡 버튼 스타일 */
-#kakao-channel-icon {
-    position: fixed;
-    right: 20px;
-    bottom: 20px;
-    z-index: 9999;
-    width: 80px; /* 기본 버튼 크기 */
-    height: 80px;
-}
-
-#kakao-channel-icon img {
-    width: 100%;
-    height: auto;
-    border-radius: 50%; /* 둥근 버튼 */
-}
-
-/* 광고 레이아웃 */
-.kakao_ad {
-    width: 320px;
-    margin: 0 auto;
-}
-
-.kakao_ad2 {
-    width: 320px;
-    margin: 0 auto;
-}
-
-.coupang_ad {
-    width: 320px;
-    margin: 0 auto;
+    transform: scale(1.1);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 /* 푸터 스타일 */
 footer {
-    background-color: #2d2d44; /* 짙은 남색 */
-    color: #f5e8c7; /* 황금색 텍스트 */
+    background-color: #2d2d44;
+    color: #f5e8c7;
     text-align: center;
     padding: 26px 0;
 }
@@ -175,5 +183,5 @@ footer {
 footer p {
     font-size: 0.875rem;
     margin: 5px 0;
-    color: #f9d56e; /* 강조된 황금색 */
+    color: #f9d56e;
 }
