@@ -141,3 +141,23 @@ this.i.get(d)||!e||await Bi(this,c,d)){var f=this.i.get(d);if(f)if(d!==2||await 
 !0)}C(){for(const a of this.u.values())a.dispose();this.u.clear();for(const a of this.i.values())a.dispose();this.i.clear();this.F&&this.F.dispose();super.C()}};function Fi(a){{n.google_llp||(n.google_llp={});var b=n.google_llp;let c=b[7];if(!c){const {promise:d,resolve:e}=new T;c={promise:d,resolve:e};b[7]=c}b=c}b.resolve(a)};Gd(I,723,()=>{const a=new ke;try{pb(d=>{var e=new Yd,f=new Xd;try{var g=Yc(window);z(f,1,yb(g),"0")}catch(q){}try{var h=J(ne).g();bc(f,2,h,xb)}catch(q){}try{C(f,3,window.document.URL)}catch(q){}f==null&&(f=void 0);g=e.G;h=g[w];lb(h);y(g,h,2,f);f=new Wd;f=z(f,1,vb(1196),0);try{var k=Pa(d?.name)?d.name:"Unknown error";C(f,2,k)}catch(q){}try{var m=Pa(d?.message)?d.message:`Caught ${d}`;C(f,3,m)}catch(q){}try{const q=Pa(d?.stack)?d.stack:Error().stack;q&&bc(f,4,q.split(/\n\s*/),Bb)}catch(q){}d=fc(e,1, 
 Zd,f);e=new Vd;try{C(e,1,ie())}catch{}fc(d,6,$d,e);z(d,5,yb(1),"0");be(a,d)})}catch(d){}var b=mh(),c=kh();jh(b,c);eh();b=c.g().g()||A(Cb(x(b,2)),"");b=new qh(b);b=Oe?new ei(b):b;c={error(...d){console.error("[Ad Placement API]",...d)},warn(...d){console.warn("[Ad Placement API]",...d)}};(t()?0:r("Trident")||r("MSIE"))?c.warn("Internet Explorer is not supported."):Fi(new Ei(c,b))}); 
 }).call(this,"[2021,\"r20241120\",\"r20110914\",null,null,null,null,\".google.co.kr\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[0,0,0]]");
+<>
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossOrigin="anonymous"
+    ></script>
+    <div>
+        <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        ></ins>
+    </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</>

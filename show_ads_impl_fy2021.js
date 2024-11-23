@@ -767,3 +767,23 @@ w=new Jo;try{Uh(w,1,pE())}catch{}F(l,6,Po,w);Sh(l,5,1);d.I(l)})}catch(l){}var e=
 ek:Zc`https://pagead2.googlesyndication.com/pagead/js/${d}/${e}/rum_debug${c}.js`,xh:Zc`https://pagead2.googlesyndication.com/pagead/managed/js/adsense/${a}/reactive_library${c}.js`,Oi:Zc`https://pagead2.googlesyndication.com/pagead/managed/js/adsense/${a}/debug_card_library${c}.js`,Io:Zc`https://pagead2.googlesyndication.com/pagead/managed/js/adsense/${a}/slotcar_library${c}.js`,Co:Zc`https://pagead2.googlesyndication.com/pagead/managed/js/adsense/${a}/gallerify${c}.js`,Zb:Zc`https://pagead2.googlesyndication.com/pagead/managed/js/adsense/${a}/autogames${c}.js`, 
 Wh:Zc`https://googleads.g.doubleclick.net/pagead/html/${d}/${e}/zrt_lookup${c}.html`,Vh:Zc`https://pagead2.googlesyndication.com/pagead/html/${d}/${e}/zrt_lookup${c}.html`}}); 
 }).call(this,"[2021,\"r20241120\",\"r20110914\",null,null,null,null,\".google.co.kr\",null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,null,[0,0,0]]");
+<>
+    <script
+        async
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossOrigin="anonymous"
+    ></script>
+    <div>
+        <ins
+            className="adsbygoogle"
+            style={{ display: "block" }}
+            data-ad-client="ca-pub-9374368296307755"
+            data-ad-slot="3201247599"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+        ></ins>
+    </div>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</>
