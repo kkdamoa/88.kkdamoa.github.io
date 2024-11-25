@@ -151,6 +151,9 @@ footer {
     text-align: center;
     padding: 26px 0;
     background: #252546;
+    max-width: 1100px; /* 본문 레이아웃 크기 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 26px 4%; /* 본문 여백에 맞춤 */
 }
 
 footer p {
