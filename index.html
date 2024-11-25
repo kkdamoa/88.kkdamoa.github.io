@@ -171,22 +171,36 @@
             });
         });
 
-        // 방문자 카운터 관리
-        document.addEventListener('DOMContentLoaded', function () {
-            let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
-            visitCount = parseInt(visitCount) + 1; // 방문자 수 증가
-            localStorage.setItem('visitCount', visitCount); // 업데이트된 방문자 수 저장
-            document.getElementById('visitor-count').innerText = `방문자 수: ${visitCount}`;
-        });
-    </script>
+        <!-- 방문자 카운터 관리 -->
 
-    <!-- 페이지 하단 -->
-    <footer>
-        <div class="wrapper" style="text-align: center; padding: 10px 0;">
-            <p>제작/광고문의 - sd26242624@gmail.com</p>
-            <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
-            <p id="visitor-count">방문자 수: 로딩 중...</p>
-        </div>
-    </footer>
-</body>
-</html>
+            document.addEventListener('DOMContentLoaded', function () {
+                const currentDate = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD)
+                const savedDate = localStorage.getItem('lastVisitDate'); // 마지막 방문 날짜 가져오기
+                let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
+    
+                // 날짜가 다르면 방문자 수 초기화
+                if (savedDate !== currentDate) {
+                    visitCount = 0; // 방문자 수 초기화
+                    localStorage.setItem('lastVisitDate', currentDate); // 오늘 날짜 저장
+                }
+    
+                // 방문자 수 증가
+                visitCount = parseInt(visitCount) + 1;
+                localStorage.setItem('visitCount', visitCount); // 업데이트된 방문자 수 저장
+    
+                // 방문자 수 업데이트
+                document.getElementById('visitor-count').innerText = `방문자 수: ${visitCount}`;
+            });
+        </script>
+    
+        <!-- 페이지 하단 -->
+        <footer>
+            <div class="wrapper" style="text-align: center; padding: 10px 0;">
+                <p>제작/광고문의 - sd26242624@gmail.com</p>
+                <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
+                <p id="visitor-count">방문자 수: 로딩 중...</p>
+            </div>
+        </footer>
+    </body>
+    </html>
+    
