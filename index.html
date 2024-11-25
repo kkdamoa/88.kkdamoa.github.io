@@ -49,70 +49,37 @@
 <body>
     <!-- 페이지 헤더 -->
     <header class="page-header wrapper">
-        <div style="display: flex; align-items: center; justify-content: space-between;">
-            <!-- 로고 -->
-            <a href="index.html">
-                <img class="logo" src="로고.png" alt="나의 운명 이야기" style="width: 180px; height: auto; margin-right: 30px;">
-            </a>
-            <!-- 네비게이션 메뉴 -->
-            <nav style="display: flex; align-items: center; gap: 30px;">
-                <ul class="main-nav" style="display: flex; align-items: center; gap: 30px; margin: 0; padding: 0; list-style: none;">
-                    <li><a href="꿈해몽.html">꿈해몽</a></li>
-                    <li><a href="사주팔자.html">사주팔자</a></li>
-                    <li><a href="심리테스트.html">심리테스트</a></li>
-                </ul>
-                <!-- 카카오톡 공유 버튼 (데스크톱용) -->
-                <button id="kakao-share-button-desktop" style="cursor: pointer; background: none; border: none; margin-left: 30px;">
-                    <img src="catalk.png" alt="카카오톡 공유하기" style="width: 50px; height: auto;">
-                </button>
-            </nav>
-        </div>
+        <a href="index.html">
+            <img class="logo" src="로고.png" alt="나의 운명 이야기" style="width: 180px; height: auto;">
+        </a>
+        <nav>
+            <ul class="main-nav">
+                <li><a href="꿈해몽.html">꿈해몽</a></li>
+                <li><a href="사주팔자.html">사주팔자</a></li>
+                <li><a href="심리테스트.html">심리테스트</a></li>
+            </ul>
+        </nav>
     </header>
 
-    <!-- 카카오톡 공유 버튼 (모바일용) -->
-    <button id="kakao-share-button-mobile" style="display: none; position: fixed; bottom: 20px; right: 20px; background: none; border: none; z-index: 9999;">
-        <img src="catalk.png" alt="카카오톡 공유하기" style="width: 60px; height: auto;">
+    <!-- 카카오톡 공유 버튼 (모바일/데스크톱 공통) -->
+    <button id="kakao-share-button" style="position: fixed; bottom: 20px; right: 20px; z-index: 9999; background: none; border: none;">
+        <img src="catalk.png" alt="카카오톡 공유하기" style="width: 60px; height: 60px;">
     </button>
 
-    <!-- 메인 이미지 -->
-    <div style="text-align: center; margin: 20px 0;">
-        <img src="메인.png" alt="이미지 메인">
-    </div>
-
-    <!-- 광고 영역 -->
-    <div style="text-align: center; margin: 20px 0;">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-    </div>
-
-    <!-- 테스트 리스트 -->
-    <div class="wrapper grid" style="text-align: center;">
-        <div class="item">
-            <a href="1.html"><img src="1.png" alt="검색창 성격 테스트"></a>
+    <!-- 메인 콘텐츠 -->
+    <main>
+        <div style="text-align: center; margin: 20px 0;">
+            <img src="메인.png" alt="이미지 메인">
         </div>
-        <div class="item">
-            <a href="2.html"><img src="2.png" alt="2024년 나의 연관검색어"></a>
+        <div class="grid">
+            <div class="item">
+                <a href="1.html"><img src="1.png" alt="검색창 성격 테스트"></a>
+            </div>
+            <div class="item">
+                <a href="2.html"><img src="2.png" alt="2024년 나의 연관검색어"></a>
+            </div>
         </div>
-        <div class="item">
-            <a href="3.html"><img src="3.png" alt="상황별 TF 능력고사"></a>
-        </div>
-        <div class="item">
-            <a href="4.html"><img src="4.png" alt="타고난 기질 성격 보고서 테스트"></a>
-        </div>
-        <div class="item">
-            <a href="5.html"><img src="5.png" alt="2025년 신년 운세 테스트"></a>
-        </div>
-        <div class="item">
-            <a href="6.html"><img src="6.png" alt="붕어빵 성격 테스트"></a>
-        </div>
-    </div>
+    </main>
 
     <!-- 카카오톡 공유 기능 -->
     <script>
@@ -139,6 +106,7 @@
                 ]
             });
         });
+
 
         // 방문자 카운터
         document.addEventListener('DOMContentLoaded', function () {
