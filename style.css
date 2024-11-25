@@ -1,15 +1,30 @@
 @charset "UTF-8";
 
-/* 기본 Reset & Normalize */
 html {
     font-size: 100%;
-    scroll-behavior: smooth;
 }
 
-*, *::before, *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@media (max-width: 600px) {
+    .page-title {
+        font-size: 2.5rem;
+    }
+
+    .main-nav {
+        font-size: 1rem;
+        margin-top: 10px;
+    }
+
+    .main-nav li {
+        margin: 0 20px;
+    }
+
+    .home-content {
+        margin-top: 20%;
+    }
+}
+
+.section {
+    margin-top: 50px;
 }
 
 body {
@@ -17,14 +32,10 @@ body {
     line-height: 1.7;
     color: #f5f5f5;
     background: #1a1a2e; /* 어두운 배경 */
-    margin: 0; /* Reset margin */
-    font-size: 16px; /* 기본 폰트 크기 */
 }
 
-/* 공통 링크 스타일 */
 a {
     text-decoration: none;
-    color: inherit;
 }
 
 a:hover {
@@ -33,16 +44,13 @@ a:hover {
 
 img {
     max-width: 100%;
-    height: auto;
 }
 
-/* 로고 스타일 */
 .logo {
     width: 100px;
     margin-top: 14px;
 }
 
-/* 네비게이션 스타일 */
 .main-nav {
     display: flex;
     justify-content: space-between; /* 좌우 정렬 */
@@ -54,7 +62,6 @@ img {
     padding: 0 20px;
     background-color: #1a1a2e; /* 네비게이션 바 배경 */
     position: relative; /* 아이콘 배치 */
-    z-index: 1000; /* 네비게이션이 다른 요소 위에 오도록 설정 */
 }
 
 .main-nav li {
@@ -69,43 +76,7 @@ img {
     color: #ffcc29; /* 호버 효과 강조 */
 }
 
-/* 브라우저별 스타일 분기 처리 */
-@supports (-webkit-touch-callout: none) {
-    /* Webkit 기반 브라우저 전용 스타일 */
-    .main-nav {
-        font-size: 1.125rem;
-    }
-}
-
-@-moz-document url-prefix() {
-    /* Firefox 전용 스타일 */
-    .main-nav {
-        font-size: 1.25rem;
-    }
-}
-
-@supports not (-webkit-touch-callout: none) {
-    /* 기본 브라우저 스타일 */
-    .main-nav {
-        font-size: 1rem;
-    }
-}
-
-/* 페이지 헤더 */
-.page-header {
-    display: flex;
-    justify-content: space-between;
-}
-
-/* 페이지 제목 */
-.page-title {
-    font-size: 3rem;
-    text-align: center;
-    margin-top: 2rem;
-    color: #f5f5f5;
-}
-
-/* 카카오톡 공유 아이콘 스타일 */
+/* 카카오톡 공유 아이콘 스타일 수정 */
 #kakao-channel-icon {
     position: fixed; /* 화면 고정 */
     right: 20px; /* 오른쪽 여백 */
@@ -125,17 +96,22 @@ img {
     background-color: transparent;
 }
 
-/* 메인 콘텐츠 */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 4%;
+}
+
 .home-content {
     text-align: center;
     margin-top: 10%;
 }
 
-.section {
-    margin-top: 50px;
-}
-
-/* 그리드 설정 */
 .grid {
     display: grid;
     gap: 26px;
@@ -144,38 +120,34 @@ img {
     margin-bottom: 50px;
 }
 
-/* 레이아웃 설정 */
-.wrapper {
-    max-width: 1100px;
-    margin: 0 auto;
-    padding: 0 4%;
-}
-
 /* 애드센스 광고 스타일 */
 .adsense-ad {
     margin: 50px 0;
     text-align: center;
 }
 
-/* 광고 배치 */
-.left-ad, .right-ad {
+/* 왼쪽 광고 스타일 */
+.left-ad {
     position: fixed;
     top: 20%;
+    left: 10px;
     width: 120px;
     height: auto;
     text-align: center;
     z-index: 999;
 }
 
-.left-ad {
-    left: 10px;
-}
-
+/* 오른쪽 광고 스타일 */
 .right-ad {
+    position: fixed;
+    top: 20%;
     right: 10px;
+    width: 120px;
+    height: auto;
+    text-align: center;
+    z-index: 999;
 }
 
-/* 푸터 스타일 */
 footer {
     text-align: center;
     padding: 26px 0;
@@ -188,24 +160,4 @@ footer {
 footer p {
     font-size: 0.875rem;
     color: #f5f5f5;
-}
-
-/* 미디어 쿼리 */
-@media (max-width: 600px) {
-    .page-title {
-        font-size: 2.5rem;
-    }
-
-    .main-nav {
-        font-size: 1rem;
-        margin-top: 10px;
-    }
-
-    .main-nav li {
-        margin: 0 20px;
-    }
-
-    .home-content {
-        margin-top: 20%;
-    }
 }
