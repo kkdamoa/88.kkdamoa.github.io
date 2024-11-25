@@ -21,25 +21,6 @@ html {
     .home-content {
         margin-top: 20%;
     }
-
-    /* 모바일용 카카오톡 공유 버튼 위치 고정 */
-    #kakao-share-button {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        z-index: 10000;
-        width: 60px;
-        height: 60px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* 아이콘 이미지 스타일 */
-    #kakao-share-button img {
-        width: 100%;
-        height: 100%;
-    }
 }
 
 .section {
@@ -93,6 +74,26 @@ img {
 
 .main-nav a:hover {
     color: #ffcc29; /* 호버 효과 강조 */
+}
+
+/* 카카오톡 공유 아이콘 스타일 수정 */
+#kakao-channel-icon {
+    position: fixed; /* 화면 고정 */
+    right: 20px; /* 오른쪽 여백 */
+    bottom: 20px; /* 하단 여백 */
+    z-index: 10000; /* 광고보다 위로 보이도록 높은 z-index 설정 */
+    width: 50px; /* 아이콘 크기 */
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 아이콘 이미지 스타일 */
+#kakao-channel-icon img {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
 }
 
 .page-header {
