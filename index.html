@@ -173,26 +173,51 @@
 
         <!-- 방문자 카운터 관리 -->
 
-            document.addEventListener('DOMContentLoaded', function () {
-                const currentDate = new Date().toISOString().split('T')[0]; // 오늘 날짜 (YYYY-MM-DD)
-                const savedDate = localStorage.getItem('lastVisitDate'); // 마지막 방문 날짜 가져오기
-                let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
-    
-                // 날짜가 다르면 방문자 수 초기화
-                if (savedDate !== currentDate) {
-                    visitCount = 0; // 방문자 수 초기화
-                    localStorage.setItem('lastVisitDate', currentDate); // 오늘 날짜 저장
-                }
-    
-                // 방문자 수 증가
-                visitCount = parseInt(visitCount) + 1;
-                localStorage.setItem('visitCount', visitCount); // 업데이트된 방문자 수 저장
-    
-                // 방문자 수 업데이트
-                document.getElementById('visitor-count').innerText = `방문자 수: ${visitCount}`;
+            document.addEventListener('DOMContentLoaded', async function () {
+                // IP 주소 가져오기 (외부 API 사용)
+                const getIp = async () => {
+                    try {
+                        const response = await fetch('https://api.ipify.org?format=json');
+                        const data = await response.json();
+                        return data.ip; // 사용자 IP 반환
+                    } catch (error) {
+                        console.error('IP를 가져오는 중 오류 발생:', error);
+                        return null; // IP 가져오지 못하면 null 반환
+                    }
+                };
+        
+                // 방문자 관리
+                const updateVisitorCount = async () => {
+                    const ip = await getIp(); // 사용자 IP 가져오기
+        
+                    if (!ip) {
+                        console.error('IP 정보를 가져올 수 없어 방문자 수를 업데이트하지 못했습니다.');
+                        return;
+                    }
+        
+                    // LocalStorage에서 방문자 데이터 가져오기
+                    let visitorData = JSON.parse(localStorage.getItem('visitorData')) || {};
+        
+                    // IP 확인 및 방문자 수 증가
+                    if (!visitorData[ip]) {
+                        visitorData[ip] = 1; // 새로운 IP는 첫 방문
+                    } else {
+                        visitorData[ip] += 1; // 기존 IP는 방문 횟수 증가
+                    }
+        
+                    // LocalStorage에 방문자 데이터 저장
+                    localStorage.setItem('visitorData', JSON.stringify(visitorData));
+        
+                    // 고유 IP 기준 방문자 수 계산
+                    const uniqueVisitors = Object.keys(visitorData).length;
+                    document.getElementById('visitor-count').innerText = `방문자 수: ${uniqueVisitors}`;
+                };
+        
+                // 방문자 수 업데이트 실행
+                updateVisitorCount();
             });
         </script>
-    
+        
         <!-- 페이지 하단 -->
         <footer>
             <div class="wrapper" style="text-align: center; padding: 10px 0;">
@@ -201,6 +226,6 @@
                 <p id="visitor-count">방문자 수: 로딩 중...</p>
             </div>
         </footer>
-    </body>
-    </html>
-    
+        </body>
+        </html>
+        
