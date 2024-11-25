@@ -54,6 +54,7 @@ img {
     padding: 0 20px;
     background-color: #1a1a2e; /* 네비게이션 바 배경 */
     position: relative; /* 아이콘 배치 */
+    z-index: 1000; /* 네비게이션이 다른 요소 위에 오도록 설정 */
 }
 
 .main-nav li {
@@ -70,23 +71,23 @@ img {
 
 /* 브라우저별 스타일 분기 처리 */
 @supports (-webkit-touch-callout: none) {
-    /* 삼성 브라우저 및 Webkit 기반 브라우저 전용 */
+    /* Webkit 기반 브라우저 전용 스타일 */
     .main-nav {
         font-size: 1.125rem;
     }
 }
 
-@supports not (-webkit-touch-callout: none) {
-    /* 네이버 브라우저 및 기타 브라우저 */
+@-moz-document url-prefix() {
+    /* Firefox 전용 스타일 */
     .main-nav {
-        font-size: 1rem; /* 기본 스타일 */
+        font-size: 1.25rem;
     }
 }
 
-@-moz-document url-prefix() {
-    /* Firefox 전용 */
+@supports not (-webkit-touch-callout: none) {
+    /* 기본 브라우저 스타일 */
     .main-nav {
-        font-size: 1.25rem;
+        font-size: 1rem;
     }
 }
 
