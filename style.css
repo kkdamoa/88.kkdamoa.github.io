@@ -53,11 +53,15 @@ img {
 
 .main-nav {
     display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
     font-size: 1.25rem;
     text-transform: uppercase;
     margin-top: 34px;
     list-style: none;
-    position: relative; /* 아이콘을 네비게이션 바 안에 위치시키기 위해 추가 */
+    padding: 0 20px;
+    background-color: #1a1a2e; /* 네비게이션 바 배경 */
+    position: relative; /* 아이콘 배치 */
 }
 
 .main-nav li {
@@ -74,13 +78,13 @@ img {
 
 /* 카카오톡 공유 아이콘 스타일 */
 #kakao-channel-icon {
-    position: absolute;
-    right: 0;
-    top: 50%;
-    transform: translateY(-50%); /* 네비게이션 바 중간에 위치하도록 조정 */
+    position: absolute; /* 네비게이션 안에서 고정 */
+    right: 20px; /* 오른쪽 여백 */
+    top: 50%; /* 네비게이션 높이의 중앙 */
+    transform: translateY(-50%); /* 세로 정렬 보정 */
     z-index: 9999;
-    width: 50px;
-    height: 50px;
+    width: 40px; /* 아이콘 크기 */
+    height: 40px;
     background-color: transparent;
     border: none;
     cursor: pointer;
