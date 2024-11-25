@@ -10,16 +10,17 @@ html {
     }
 
     .main-nav {
-        font-size: 1rem;
+        font-size: 1.125rem; /* 폰트 크기 크롬 기준 수정 */
         margin-top: 10px;
+        padding: 10px 15px; /* 좌우 패딩 조정 */
     }
 
     .main-nav li {
-        margin: 0 20px;
+        margin: 0 15px; /* 간격 조정 */
     }
 
     .home-content {
-        margin-top: 20%;
+        margin-top: 15%; /* 화면 비율 수정 */
     }
 }
 
@@ -32,6 +33,7 @@ body {
     line-height: 1.7;
     color: #f5f5f5;
     background: #1a1a2e; /* 어두운 배경 */
+    margin: 0; /* 기본 여백 제거 */
 }
 
 a {
@@ -44,28 +46,29 @@ a:hover {
 
 img {
     max-width: 100%;
+    height: auto; /* 비율 유지 */
 }
 
 .logo {
-    width: 100px;
-    margin-top: 14px;
+    width: 90px; /* 크롬과 유사하게 조정 */
+    margin-top: 10px;
 }
 
 .main-nav {
     display: flex;
-    justify-content: space-between; /* 좌우 정렬 */
+    justify-content: center; /* 중앙 정렬 */
     align-items: center; /* 세로 중앙 정렬 */
-    font-size: 1.25rem;
+    font-size: 1.125rem; /* 크기 수정 */
     text-transform: uppercase;
-    margin-top: 34px;
+    margin-top: 20px;
     list-style: none;
-    padding: 0 20px;
+    padding: 10px 0;
     background-color: #1a1a2e; /* 네비게이션 바 배경 */
-    position: relative; /* 아이콘 배치 */
+    position: relative;
 }
 
 .main-nav li {
-    margin-left: 36px;
+    margin-left: 20px; /* 마진 조정 */
 }
 
 .main-nav a {
@@ -78,12 +81,12 @@ img {
 
 /* 카카오톡 공유 아이콘 스타일 수정 */
 #kakao-channel-icon {
-    position: fixed; /* 화면 고정 */
-    right: 20px; /* 오른쪽 여백 */
-    bottom: 20px; /* 하단 여백 */
-    z-index: 10000; /* 광고보다 위로 보이도록 높은 z-index 설정 */
-    width: 50px; /* 아이콘 크기 */
-    height: 50px;
+    position: fixed;
+    right: 15px;
+    bottom: 15px;
+    z-index: 10000;
+    width: 48px; /* 크기 축소 */
+    height: 48px;
     background-color: transparent;
     border: none;
     cursor: pointer;
@@ -102,27 +105,27 @@ img {
 }
 
 .wrapper {
-    max-width: 1100px;
+    max-width: 1080px; /* 본문 크기 조정 */
     margin: 0 auto;
-    padding: 0 4%;
+    padding: 0 5%; /* 모바일 패딩 조정 */
 }
 
 .home-content {
     text-align: center;
-    margin-top: 10%;
+    margin-top: 15%; /* 여백 수정 */
 }
 
 .grid {
     display: grid;
-    gap: 26px;
-    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-    margin-top: 6%;
-    margin-bottom: 50px;
+    gap: 20px; /* 간격 축소 */
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* 최소 폭 수정 */
+    margin-top: 5%;
+    margin-bottom: 40px; /* 간격 축소 */
 }
 
 /* 애드센스 광고 스타일 */
 .adsense-ad {
-    margin: 50px 0;
+    margin: 40px 0; /* 간격 축소 */
     text-align: center;
 }
 
@@ -131,7 +134,7 @@ img {
     position: fixed;
     top: 20%;
     left: 10px;
-    width: 120px;
+    width: 110px; /* 크기 조정 */
     height: auto;
     text-align: center;
     z-index: 999;
@@ -142,7 +145,7 @@ img {
     position: fixed;
     top: 20%;
     right: 10px;
-    width: 120px;
+    width: 110px; /* 크기 조정 */
     height: auto;
     text-align: center;
     z-index: 999;
@@ -150,11 +153,11 @@ img {
 
 footer {
     text-align: center;
-    padding: 26px 0;
+    padding: 20px 0;
     background: #252546;
-    max-width: 1100px; /* 본문 레이아웃 크기 */
+    max-width: 1080px; /* 본문 크기 조정 */
     margin: 0 auto; /* 가운데 정렬 */
-    padding: 26px 4%; /* 본문 여백에 맞춤 */
+    padding: 20px 5%; /* 패딩 조정 */
 }
 
 footer p {
