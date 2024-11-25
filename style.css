@@ -95,20 +95,35 @@ img {
     margin-bottom: 50px;
 }
 
-/* 카드 디자인 */
-.card {
-    background: #252546;
-    color: #f5f5f5;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+/* 애드센스 광고 스타일 */
+.adsense-ad {
+    margin: 50px 0;
+    text-align: center;
 }
 
-.card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+/* 왼쪽 광고 스타일 */
+.left-ad {
+    position: fixed;
+    top: 20%;
+    left: 10px;
+    width: 120px;
+    height: auto;
+    text-align: center;
+    z-index: 999;
 }
+
+/* 오른쪽 광고 스타일 */
+.right-ad {
+    position: fixed;
+    top: 20%;
+    right: 10px;
+    width: 120px;
+    height: auto;
+    text-align: center;
+    z-index: 999;
+}
+
 
 /* 아이콘 스타일 */
 #kakao-channel-icon {
@@ -130,13 +145,6 @@ img {
 /* 아이콘 이미지 스타일 */
 #kakao-channel-icon img {
     background-color: transparent;
-}
-
-.kakao_ad,
-.kakao_ad2,
-.coupang_ad {
-    width: 320px;
-    margin: 0 auto;
 }
 
 footer {
