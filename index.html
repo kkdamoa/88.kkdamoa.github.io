@@ -172,53 +172,55 @@
         });
 
 
- 
+        <h1>방문자 카운터</h1>
+
+    
+
             // 방문자 카운터 관리 (24시간 기준)
             document.addEventListener('DOMContentLoaded', function () {
-               const now = new Date(); // 현재 시간 가져오기
-               const lastVisit = localStorage.getItem('lastVisit'); // 마지막 방문 시간 가져오기
-               let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
-   
-               if (lastVisit) {
-                   const lastVisitDate = new Date(lastVisit); // 마지막 방문 시간 파싱
-                   const timeDifference = now - lastVisitDate; // 현재 시간과의 차이 계산
-                   
-                   // 24시간(밀리초) 경과 확인: 24 * 60 * 60 * 1000
-                   if (timeDifference > 24 * 60 * 60 * 1000) {
-                       visitCount = parseInt(visitCount) + 1; // 방문자 수 증가
-                       updateVisitData(visitCount, now); // 데이터 업데이트
-                   }
-               } else {
-                   // 첫 방문인 경우
-                   visitCount = parseInt(visitCount) + 1;
-                   updateVisitData(visitCount, now); // 데이터 업데이트
-               }
-   
-               // 방문 데이터 업데이트 함수
-               function updateVisitData(count, currentTime) {
-                   localStorage.setItem('visitCount', count); // 방문자 수 저장
-                   localStorage.setItem('lastVisit', currentTime.toISOString()); // 마지막 방문 시간 저장
-                   displayVisitCount(count); // 방문자 수 표시
-               }
-   
-               // 방문자 수 표시 함수
-               function displayVisitCount(count) {
-                   document.getElementById('visitor-count').innerText = `방문자 수: ${count}`;
-               }
-   
-               // 현재 방문자 수 표시
-               displayVisitCount(visitCount);
-           });
-       </script>
-   
-       <!-- 페이지 하단 -->
-       <footer>
-           <div class="wrapper" style="text-align: center; padding: 10px 0;">
-               <p>제작/광고문의 - sd26242624@gmail.com</p>
-               <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
-               <p id="visitor-count">방문자 수: 로딩 중...</p>
-           </div>
-       </footer>
-   </body>
-   </html>
-   
+                const now = new Date(); // 현재 시간 가져오기
+                const lastVisit = localStorage.getItem('lastVisit'); // 마지막 방문 시간 가져오기
+                let visitCount = localStorage.getItem('visitCount') || 0; // LocalStorage에서 방문자 수 가져오기
+    
+                if (lastVisit) {
+                    const lastVisitDate = new Date(lastVisit); // 마지막 방문 시간 파싱
+                    const timeDifference = now - lastVisitDate; // 현재 시간과의 차이 계산
+                    
+                    // 24시간(밀리초) 경과 확인: 24 * 60 * 60 * 1000
+                    if (timeDifference > 24 * 60 * 60 * 1000) {
+                        visitCount = parseInt(visitCount) + 1; // 방문자 수 증가
+                        updateVisitData(visitCount, now); // 데이터 업데이트
+                    }
+                } else {
+                    // 첫 방문인 경우
+                    visitCount = parseInt(visitCount) + 1;
+                    updateVisitData(visitCount, now); // 데이터 업데이트
+                }
+    
+                // 방문 데이터 업데이트 함수
+                function updateVisitData(count, currentTime) {
+                    localStorage.setItem('visitCount', count); // 방문자 수 저장
+                    localStorage.setItem('lastVisit', currentTime.toISOString()); // 마지막 방문 시간 저장
+                    displayVisitCount(count); // 방문자 수 표시
+                }
+    
+                // 방문자 수 표시 함수
+                function displayVisitCount(count) {
+                    document.getElementById('visitor-count').innerText = `방문자 수: ${count}`;
+                }
+    
+                // 현재 방문자 수 표시
+                displayVisitCount(visitCount);
+            });
+        </script>
+    
+        <!-- 페이지 하단 -->
+        <footer>
+            <div class="wrapper" style="text-align: center; padding: 10px 0;">
+                <p>제작/광고문의 - sd26242624@gmail.com</p>
+                <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
+                <p id="visitor-count">방문자 수: 로딩 중...</p>
+            </div>
+        </footer>
+    </body>
+    </html>
