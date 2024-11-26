@@ -202,61 +202,63 @@
     <div id="result"></div>
     
     <script>
-    function calculateResults() {
-        const form = document.forms['enneagram-test'];
-        let scores = {
-            type1: 0,  // 유형 1 (개혁자)
-            type2: 0,  // 유형 2 (조력자)
-            type3: 0,  // 유형 3 (성취자)
-            type4: 0,  // 유형 4 (개성추구자)
-            type5: 0,  // 유형 5 (탐구자)
-            type6: 0,  // 유형 6 (충실한 사람)
-            type7: 0,  // 유형 7 (열정적인 사람)
-            type8: 0,  // 유형 8 (도전적인 사람)
-            type9: 0   // 유형 9 (평화주의자)
-        };
-    
-        // 각 질문에 대해 점수 계산
-        for (let i = 1; i <= 10; i++) {  // 10개의 질문
-            const question = form['q' + i];
-            for (let j = 0; j < question.length; j++) {
-                if (question[j].checked) {
-                    let answerValue = question[j].value;
-    
-                    // 선택지에 따른 점수 반영
-                    if (answerValue == "1") scores.type1 += 1;
-                    if (answerValue == "2") scores.type2 += 1;
-                    if (answerValue == "3") scores.type3 += 1;
-                    if (answerValue == "4") scores.type4 += 1;
-                    if (answerValue == "5") scores.type5 += 1;
-                    if (answerValue == "6") scores.type6 += 1;
-                    if (answerValue == "7") scores.type7 += 1;
-                    if (answerValue == "8") scores.type8 += 1;
-                    if (answerValue == "9") scores.type9 += 1;
+        function calculateResults() {
+            const form = document.forms['enneagram-test'];
+            let scores = {
+                type1: 0,  // 유형 1 (개혁자)
+                type2: 0,  // 유형 2 (조력자)
+                type3: 0,  // 유형 3 (성취자)
+                type4: 0,  // 유형 4 (개성추구자)
+                type5: 0,  // 유형 5 (탐구자)
+                type6: 0,  // 유형 6 (충실한 사람)
+                type7: 0,  // 유형 7 (열정적인 사람)
+                type8: 0,  // 유형 8 (도전적인 사람)
+                type9: 0   // 유형 9 (평화주의자)
+            };
+        
+            // 각 질문에 대해 점수 계산
+            for (let i = 1; i <= 10; i++) {  // 10개의 질문
+                const question = form['q' + i];
+                for (let j = 0; j < question.length; j++) {
+                    if (question[j].checked) {
+                        let answerValue = question[j].value;
+        
+                        // 각 유형에 대한 점수 증가
+                        if (answerValue == "1") scores.type1 += 1;  // 유형 1
+                        else if (answerValue == "2") scores.type2 += 1;  // 유형 2
+                        else if (answerValue == "3") scores.type3 += 1;  // 유형 3
+                        else if (answerValue == "4") scores.type4 += 1;  // 유형 4
+                        else if (answerValue == "5") scores.type5 += 1;  // 유형 5
+                        else if (answerValue == "6") scores.type6 += 1;  // 유형 6
+                        else if (answerValue == "7") scores.type7 += 1;  // 유형 7
+                        else if (answerValue == "8") scores.type8 += 1;  // 유형 8
+                        else if (answerValue == "9") scores.type9 += 1;  // 유형 9
+                    }
                 }
             }
+        
+            // 가장 높은 점수의 유형 찾기
+            let highestScore = Math.max(...Object.values(scores));
+            let resultType = Object.keys(scores).find(type => scores[type] === highestScore);
+        
+            // 결과 텍스트 준비
+            let resultText = "당신의 에니어그램 유형은: ";
+            switch (resultType) {
+                case 'type1': resultText += "유형 1 (개혁자)"; break;
+                case 'type2': resultText += "유형 2 (조력자)"; break;
+                case 'type3': resultText += "유형 3 (성취자)"; break;
+                case 'type4': resultText += "유형 4 (개성추구자)"; break;
+                case 'type5': resultText += "유형 5 (탐구자)"; break;
+                case 'type6': resultText += "유형 6 (충실한 사람)"; break;
+                case 'type7': resultText += "유형 7 (열정적인 사람)"; break;
+                case 'type8': resultText += "유형 8 (도전적인 사람)"; break;
+                case 'type9': resultText += "유형 9 (평화주의자)"; break;
+            }
+        
+            // 결과를 페이지에 표시
+            document.getElementById('result').innerHTML = resultText;
         }
-    
-        // 가장 높은 점수의 유형 찾기
-        let highestScore = Math.max(...Object.values(scores));
-        let resultType = Object.keys(scores).find(type => scores[type] === highestScore);
-    
-        // 결과 표시
-        let resultText = "당신의 에니어그램 유형은: ";
-        switch (resultType) {
-            case 'type1': resultText += "유형 1 (개혁자)"; break;
-            case 'type2': resultText += "유형 2 (조력자)"; break;
-            case 'type3': resultText += "유형 3 (성취자)"; break;
-            case 'type4': resultText += "유형 4 (개성추구자)"; break;
-            case 'type5': resultText += "유형 5 (탐구자)"; break;
-            case 'type6': resultText += "유형 6 (충실한 사람)"; break;
-            case 'type7': resultText += "유형 7 (열정적인 사람)"; break;
-            case 'type8': resultText += "유형 8 (도전적인 사람)"; break;
-            case 'type9': resultText += "유형 9 (평화주의자)"; break;
-        }
-    
-        document.getElementById('result').innerHTML = resultText;
-    }
+        
     </script>
     
     </body>
