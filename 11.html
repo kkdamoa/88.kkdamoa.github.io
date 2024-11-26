@@ -112,272 +112,152 @@
 </head>
 <body>
     <h1>에니어그램 성격 테스트</h1>
+    <p>각 질문에 가장 적합한 답변을 선택해 주세요.</p>
+    
     <form id="enneagram-test">
-        <!-- 질문 1 -->
-        <div>
-            <p>1. 내가 주로 느끼는 감정은 무엇인가?</p>
-            <label>
-                <input type="radio" name="q1" value="1"> 죄책감이나 자책을 자주 느낀다
-            </label><br>
-            <label>
-                <input type="radio" name="q1" value="2"> 사람들이 나를 인정해주길 원한다
-            </label><br>
-            <label>
-                <input type="radio" name="q1" value="3"> 독립적이고 스스로 해결하려 한다
-            </label><br>
-            <label>
-                <input type="radio" name="q1" value="4"> 주변과 평화롭고 조화를 이루려고 한다
-            </label><br>
+        <!-- 10개의 질문 -->
+        <div class="question">
+            <p>1. 나는 규칙과 질서를 중요하게 생각한다.</p>
+            <label><input type="radio" name="q1" value="1"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q1" value="2"> 그렇다</label><br>
+            <label><input type="radio" name="q1" value="3"> 보통이다</label><br>
+            <label><input type="radio" name="q1" value="4"> 아니다</label><br>
         </div>
-
-        <!-- 질문 2 -->
-        <div>
-            <p>2. 나는 어떤 상황에서 스트레스를 받는가?</p>
-            <label>
-                <input type="radio" name="q2" value="1"> 내가 실수를 하면 크게 자책한다
-            </label><br>
-            <label>
-                <input type="radio" name="q2" value="2"> 다른 사람들이 나를 인정하지 않으면 불안하다
-            </label><br>
-            <label>
-                <input type="radio" name="q2" value="3"> 상황을 통제할 수 없을 때 불안하다
-            </label><br>
-            <label>
-                <input type="radio" name="q2" value="4"> 갈등이 있을 때 평화가 깨져 불편하다
-            </label><br>
+    
+        <div class="question">
+            <p>2. 나는 타인의 감정을 잘 이해하고 돕는 것이 중요하다.</p>
+            <label><input type="radio" name="q2" value="2"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q2" value="3"> 그렇다</label><br>
+            <label><input type="radio" name="q2" value="1"> 보통이다</label><br>
+            <label><input type="radio" name="q2" value="4"> 아니다</label><br>
         </div>
-
-        <!-- 질문 3 -->
-        <div>
-            <p>3. 나는 다른 사람과의 관계에서 어떻게 행동하는가?</p>
-            <label>
-                <input type="radio" name="q3" value="1"> 나의 의견을 중요하게 생각하고 강하게 주장한다
-            </label><br>
-            <label>
-                <input type="radio" name="q3" value="2"> 타인의 감정을 신경 쓰고, 상대방을 돕고 싶어 한다
-            </label><br>
-            <label>
-                <input type="radio" name="q3" value="3"> 타인의 의견에 덜 의존하고 독립적이다
-            </label><br>
-            <label>
-                <input type="radio" name="q3" value="4"> 갈등을 피하고 조화를 이루는 것이 중요하다
-            </label><br>
+    
+        <div class="question">
+            <p>3. 나는 경쟁에서 이기는 것이 중요하다.</p>
+            <label><input type="radio" name="q3" value="3"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q3" value="2"> 그렇다</label><br>
+            <label><input type="radio" name="q3" value="4"> 보통이다</label><br>
+            <label><input type="radio" name="q3" value="1"> 아니다</label><br>
         </div>
-
-        <!-- 질문 4 -->
-        <div>
-            <p>4. 나는 주로 어떤 방식으로 목표를 달성하려 하는가?</p>
-            <label>
-                <input type="radio" name="q4" value="1"> 목표를 달성하는 데 있어 규칙과 기준을 중요시한다
-            </label><br>
-            <label>
-                <input type="radio" name="q4" value="2"> 사람들이 나를 인정하고 칭찬해줄 때 목표를 이루는 동기부여가 된다
-            </label><br>
-            <label>
-                <input type="radio" name="q4" value="3"> 목표를 달성하기 위해서 구체적인 계획을 세우고 실천한다
-            </label><br>
-            <label>
-                <input type="radio" name="q4" value="4"> 목표를 달성하는 과정에서 사람들이 서로 협력하는 것이 중요하다
-            </label><br>
+    
+        <div class="question">
+            <p>4. 나는 나만의 독특한 개성을 중요하게 생각한다.</p>
+            <label><input type="radio" name="q4" value="4"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q4" value="3"> 그렇다</label><br>
+            <label><input type="radio" name="q4" value="2"> 보통이다</label><br>
+            <label><input type="radio" name="q4" value="1"> 아니다</label><br>
         </div>
-
-<!-- 질문 5 -->
-<div>
-    <p>5. 나는 주로 어떤 방식으로 스트레스를 관리하는가?</p>
-    <label>
-        <input type="radio" name="q5" value="1"> 규칙적이고 체계적인 방식으로 문제를 해결한다
-    </label><br>
-    <label>
-        <input type="radio" name="q5" value="2"> 다른 사람에게 도움을 요청하거나 나누는 것이 중요하다
-    </label><br>
-    <label>
-        <input type="radio" name="q5" value="3"> 혼자 시간을 보내며 생각을 정리한다
-    </label><br>
-    <label>
-        <input type="radio" name="q5" value="4"> 다른 사람들과의 관계에서 평화를 유지하려 한다
-    </label><br>
-</div>
-
-<!-- 질문 6 -->
-<div>
-    <p>6. 나는 일상에서 주로 어떤 태도를 보이는가?</p>
-    <label>
-        <input type="radio" name="q6" value="1"> 내 방식대로 일을 추진하고 리더 역할을 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q6" value="2"> 사람들에게 도움을 주고 그들과 함께 일하는 것이 중요하다
-    </label><br>
-    <label>
-        <input type="radio" name="q6" value="3"> 독립적으로 작업을 처리하며 혼자 일하는 것을 선호한다
-    </label><br>
-    <label>
-        <input type="radio" name="q6" value="4"> 조화와 평화를 중요시하고 팀워크를 중시한다
-    </label><br>
-</div>
-
-<!-- 질문 7 -->
-<div>
-    <p>7. 나는 갈등을 어떻게 처리하는가?</p>
-    <label>
-        <input type="radio" name="q7" value="1"> 논리적이고 철저한 방법으로 해결하려 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q7" value="2"> 갈등이 생기면 다른 사람들을 돕고 중재하려 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q7" value="3"> 갈등을 피하고 불편한 상황을 회피하려 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q7" value="4"> 갈등을 해결하려면 다른 사람들과 협력해야 한다
-    </label><br>
-</div>
-
-<!-- 질문 8 -->
-<div>
-    <p>8. 나는 자아를 어떻게 생각하는가?</p>
-    <label>
-        <input type="radio" name="q8" value="1"> 내가 잘못한 부분을 인정하고 개선하려 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q8" value="2"> 내가 중요한 사람이고 다른 사람들이 나를 인정해야 한다
-    </label><br>
-    <label>
-        <input type="radio" name="q8" value="3"> 나는 독립적인 존재이며 스스로를 자랑스럽게 생각한다
-    </label><br>
-    <label>
-        <input type="radio" name="q8" value="4"> 나는 다른 사람들과의 조화를 유지하는 것이 중요하다
-    </label><br>
-</div>
-
-<!-- 질문 9 -->
-<div>
-    <p>9. 나는 대체로 어떤 방식으로 목표를 설정하는가?</p>
-    <label>
-        <input type="radio" name="q9" value="1"> 목표를 이루기 위한 구체적인 계획을 세운다
-    </label><br>
-    <label>
-        <input type="radio" name="q9" value="2"> 사람들에게 인정받는 것이 나의 목표가 된다
-    </label><br>
-    <label>
-        <input type="radio" name="q9" value="3"> 내면의 자유와 독립을 추구하는 목표를 세운다
-    </label><br>
-    <label>
-        <input type="radio" name="q9" value="4"> 사람들이 함께 협력하여 목표를 달성하는 것을 중요시한다
-    </label><br>
-</div>
-
-<!-- 질문 10 -->
-<div>
-    <p>10. 나는 주변에서 어떻게 인식되기를 원하는가?</p>
-    <label>
-        <input type="radio" name="q10" value="1"> 내가 리더로서 존경받고 싶다
-    </label><br>
-    <label>
-        <input type="radio" name="q10" value="2"> 내가 다른 사람들을 돕는 존재로 기억되길 원한다
-    </label><br>
-    <label>
-        <input type="radio" name="q10" value="3"> 내가 독립적이고 자립적인 존재로 인정받고 싶다
-    </label><br>
-    <label>
-        <input type="radio" name="q10" value="4"> 사람들이 나와 함께 평화롭게 지낼 수 있다고 느끼길 원한다
-    </label><br>
-</div>
-
-        <!-- 결과 버튼 -->
+    
+        <div class="question">
+            <p>5. 나는 타인의 기대에 부응하려는 압박을 느낀다.</p>
+            <label><input type="radio" name="q5" value="1"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q5" value="2"> 그렇다</label><br>
+            <label><input type="radio" name="q5" value="3"> 보통이다</label><br>
+            <label><input type="radio" name="q5" value="4"> 아니다</label><br>
+        </div>
+    
+        <div class="question">
+            <p>6. 나는 독립적이고 자립적인 생활을 선호한다.</p>
+            <label><input type="radio" name="q6" value="5"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q6" value="6"> 그렇다</label><br>
+            <label><input type="radio" name="q6" value="4"> 보통이다</label><br>
+            <label><input type="radio" name="q6" value="7"> 아니다</label><br>
+        </div>
+    
+        <div class="question">
+            <p>7. 나는 사람들이 나를 즐겁고 긍정적으로 바라보는 것이 중요하다.</p>
+            <label><input type="radio" name="q7" value="7"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q7" value="8"> 그렇다</label><br>
+            <label><input type="radio" name="q7" value="5"> 보통이다</label><br>
+            <label><input type="radio" name="q7" value="6"> 아니다</label><br>
+        </div>
+    
+        <div class="question">
+            <p>8. 나는 감정적인 갈등을 피하고 싶어 한다.</p>
+            <label><input type="radio" name="q8" value="9"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q8" value="6"> 그렇다</label><br>
+            <label><input type="radio" name="q8" value="7"> 보통이다</label><br>
+            <label><input type="radio" name="q8" value="5"> 아니다</label><br>
+        </div>
+    
+        <div class="question">
+            <p>9. 나는 문제를 직면하고 해결하려는 성향이 강하다.</p>
+            <label><input type="radio" name="q9" value="8"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q9" value="7"> 그렇다</label><br>
+            <label><input type="radio" name="q9" value="6"> 보통이다</label><br>
+            <label><input type="radio" name="q9" value="5"> 아니다</label><br>
+        </div>
+    
+        <div class="question">
+            <p>10. 나는 모든 상황에서 신뢰와 안정감을 찾는다.</p>
+            <label><input type="radio" name="q10" value="6"> 매우 그렇다</label><br>
+            <label><input type="radio" name="q10" value="9"> 그렇다</label><br>
+            <label><input type="radio" name="q10" value="8"> 보통이다</label><br>
+            <label><input type="radio" name="q10" value="7"> 아니다</label><br>
+        </div>
+    
         <button type="button" onclick="calculateResults()">결과 보기</button>
     </form>
-
+    
     <div id="result"></div>
-
+    
     <script>
-        // JavaScript 코드 시작
-        function calculateResults() {
-            const form = document.forms['enneagram-test'];
-            let scores = {
-                type1: 0,  // 유형 1 (개혁자)
-                type2: 0,  // 유형 2 (조력자)
-                type3: 0,  // 유형 3 (성취자)
-                type4: 0,  // 유형 4 (개성추구자)
-                type5: 0,  // 유형 5 (탐구자)
-                type6: 0,  // 유형 6 (충실한 사람)
-                type7: 0,  // 유형 7 (열정적인 사람)
-                type8: 0,  // 유형 8 (도전적인 사람)
-                type9: 0   // 유형 9 (평화주의자)
-            };
-
-            // 각 질문에 대해 점수 계산
-            for (let i = 1; i <= 10; i++) {  // 10개의 질문
-                const question = form['q' + i];
-                for (let j = 0; j < question.length; j++) {
-                    if (question[j].checked) {
-                        let answerValue = question[j].value;
-
-                        // 선택지에 따른 점수 반영
-                        if (answerValue == "1") {
-                            scores.type1 += 1;  // 유형 1 (개혁자)
-                        } else if (answerValue == "2") {
-                            scores.type2 += 1;  // 유형 2 (조력자)
-                        } else if (answerValue == "3") {
-                            scores.type3 += 1;  // 유형 3 (성취자)
-                        } else if (answerValue == "4") {
-                            scores.type4 += 1;  // 유형 4 (개성추구자)
-                        } else if (answerValue == "5") {
-                            scores.type5 += 1;  // 유형 5 (탐구자)
-                        } else if (answerValue == "6") {
-                            scores.type6 += 1;  // 유형 6 (충실한 사람)
-                        } else if (answerValue == "7") {
-                            scores.type7 += 1;  // 유형 7 (열정적인 사람)
-                        } else if (answerValue == "8") {
-                            scores.type8 += 1;  // 유형 8 (도전적인 사람)
-                        } else if (answerValue == "9") {
-                            scores.type9 += 1;  // 유형 9 (평화주의자)
-                        }
-                    }
+    function calculateResults() {
+        const form = document.forms['enneagram-test'];
+        let scores = {
+            type1: 0,  // 유형 1 (개혁자)
+            type2: 0,  // 유형 2 (조력자)
+            type3: 0,  // 유형 3 (성취자)
+            type4: 0,  // 유형 4 (개성추구자)
+            type5: 0,  // 유형 5 (탐구자)
+            type6: 0,  // 유형 6 (충실한 사람)
+            type7: 0,  // 유형 7 (열정적인 사람)
+            type8: 0,  // 유형 8 (도전적인 사람)
+            type9: 0   // 유형 9 (평화주의자)
+        };
+    
+        // 각 질문에 대해 점수 계산
+        for (let i = 1; i <= 10; i++) {  // 10개의 질문
+            const question = form['q' + i];
+            for (let j = 0; j < question.length; j++) {
+                if (question[j].checked) {
+                    let answerValue = question[j].value;
+    
+                    // 선택지에 따른 점수 반영
+                    if (answerValue == "1") scores.type1 += 1;
+                    if (answerValue == "2") scores.type2 += 1;
+                    if (answerValue == "3") scores.type3 += 1;
+                    if (answerValue == "4") scores.type4 += 1;
+                    if (answerValue == "5") scores.type5 += 1;
+                    if (answerValue == "6") scores.type6 += 1;
+                    if (answerValue == "7") scores.type7 += 1;
+                    if (answerValue == "8") scores.type8 += 1;
+                    if (answerValue == "9") scores.type9 += 1;
                 }
             }
-
-            // 결과 계산: 가장 높은 점수를 받은 유형을 찾기
-            let highestScore = Math.max(...Object.values(scores));
-            let resultType = Object.keys(scores).find(type => scores[type] === highestScore);
-
-            // 결과 출력
-            let resultText = "당신의 에니어그램 유형은: ";
-            switch (resultType) {
-                case 'type1':
-                    resultText += "유형 1 (개혁자)";
-                    break;
-                case 'type2':
-                    resultText += "유형 2 (조력자)";
-                    break;
-                case 'type3':
-                    resultText += "유형 3 (성취자)";
-                    break;
-                case 'type4':
-                    resultText += "유형 4 (개성추구자)";
-                    break;
-                case 'type5':
-                    resultText += "유형 5 (탐구자)";
-                    break;
-                case 'type6':
-                    resultText += "유형 6 (충실한 사람)";
-                    break;
-                case 'type7':
-                    resultText += "유형 7 (열정적인 사람)";
-                    break;
-                case 'type8':
-                    resultText += "유형 8 (도전적인 사람)";
-                    break;
-                case 'type9':
-                    resultText += "유형 9 (평화주의자)";
-                    break;
-                default:
-                    resultText += "알 수 없음";
-            }
-
-            // 결과를 페이지에 출력
-            document.getElementById('result').innerHTML = resultText;
         }
-        // JavaScript 코드 끝
+    
+        // 가장 높은 점수의 유형 찾기
+        let highestScore = Math.max(...Object.values(scores));
+        let resultType = Object.keys(scores).find(type => scores[type] === highestScore);
+    
+        // 결과 표시
+        let resultText = "당신의 에니어그램 유형은: ";
+        switch (resultType) {
+            case 'type1': resultText += "유형 1 (개혁자)"; break;
+            case 'type2': resultText += "유형 2 (조력자)"; break;
+            case 'type3': resultText += "유형 3 (성취자)"; break;
+            case 'type4': resultText += "유형 4 (개성추구자)"; break;
+            case 'type5': resultText += "유형 5 (탐구자)"; break;
+            case 'type6': resultText += "유형 6 (충실한 사람)"; break;
+            case 'type7': resultText += "유형 7 (열정적인 사람)"; break;
+            case 'type8': resultText += "유형 8 (도전적인 사람)"; break;
+            case 'type9': resultText += "유형 9 (평화주의자)"; break;
+        }
+    
+        document.getElementById('result').innerHTML = resultText;
+    }
     </script>
-</body>
-</html>
+    
+    </body>
+    </html>
