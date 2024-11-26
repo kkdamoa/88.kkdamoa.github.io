@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const currentQuestion = questions[currentQuestionIndex];
         const selectedOption = currentQuestion.querySelector("input:checked");
 
-        // 사용자가 선택하지 않은 경우 알림
+        // 선택 확인
         if (!selectedOption) {
             alert("답변을 선택해주세요!");
             return;
@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (currentQuestionIndex < questions.length) {
             questions[currentQuestionIndex].classList.remove("hidden");
         } else {
-            // 질문이 모두 끝난 경우
+            // 테스트 완료 처리
             alert("테스트가 완료되었습니다!");
             nextQuestionButton.classList.add("hidden");
         }
