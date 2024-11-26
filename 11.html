@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>나의 운명 이야기</title>
+    <meta name="description" content="사주, 운명, 미래, 심리 테스트와 다양한 재미있는 테스트, 당신의 운명을 알아보고 다양한 심리와 성격 테스트를 통해 자신을 탐구해보세요.">
+    <meta name="keywords" content="무료 사주풀이, 사주 궁합 테스트, 심리테스트 모음, MBTI 성격 유형 검사, 타로 카드 운세, 연애 심리테스트, 이름으로 보는 사주, 생년월일로 보는 운세, 별자리 궁합, 직업 적성 심리테스트, 오늘의 운세, 혈액형 성격 테스트, 숫자로 보는 사주, 꿈해몽 풀이, 가족 궁합 테스트, 친구 심리테스트, 전생 테스트, 재물운 테스트, 띠별 운세, 미래 배우자 테스트">
+    <meta property="og:type" content="website"> 
+    <meta property="og:title" content="나의 운명 이야기">
+    <meta property="og:description" content="흥미로운 심리 테스트와 사주, 운세를 알아보는 나의 운명 이야기">
+    <meta property="og:image" content="https://kkdamoa.github.io/k-test/메인.png">
+    <meta property="og:url" content="https://kkdamoa.github.io/k-test/">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
+    <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
+    
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화 코드
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
+    </script>
+
+    <!-- 코드 보호 및 난독화 방지 스크립트 -->
+    <script>
+        // F12 및 개발자 도구 차단
+        document.addEventListener('keydown', function (e) {
+            if (e.key === "F12") {
+                e.preventDefault();
+                alert("F12 개발자 도구는 사용하실 수 없습니다.");
+            }
+            if ((e.ctrlKey && (e.key === "u" || e.key === "U")) || 
+                (e.ctrlKey && e.shiftKey && e.key === "I")) {
+                e.preventDefault();
+                alert("소스 코드는 보호되고 있습니다.");
+            }
+        });
+
+        // 우클릭 차단
+        document.addEventListener('contextmenu', function (e) {
+            e.preventDefault();
+            alert("우클릭은 비활성화되었습니다.");
+        });
+
+        // 개발자 도구 감지
+        (function devToolsChecker() {
+            const element = new Image();
+            Object.defineProperty(element, 'id', {
+                get: function () {
+                    alert('개발자 도구가 감지되었습니다. 사용을 멈추세요!');
+                    throw new Error('개발자 도구 사용 금지!');
+                }
+            });
+            setInterval(function () {
+                console.log(element);
+            }, 1000);
+        })();
+    </script>
+</head>
+
+<body>
+    <!-- 페이지 헤더 -->
+    <header class="page-header wrapper">
+        <div style="display: flex; align-items: center; justify-content: space-between;">
+            <div style="display: flex; align-items: center;">
+                <a href="index.html">
+                    <!-- 로고 -->
+                    <img class="logo" src="로고.png" alt="나의 운명 이야기" style="width: 180px; height: auto; margin-right: 30px;">
+                </a>
+                <nav>
+                    <!-- 네비게이션 메뉴 -->
+                    <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
+                        <li><a href="심리테스트.html">심리테스트</a></li>
+                        <li><a href="준비중.html">중비중</a></li>
+
+
+                    </ul>
+                </nav>
+            </div>
+            <!-- 카카오톡 공유 버튼 -->
+            <div style="display: flex; align-items: center;">
+                <button id="kakao-share-button" style="cursor: pointer; background: none; border: none;">
+                    <img src="catalk.png" alt="Kakao Share Icon" style="width: 50px; height: auto;">
+                </button>
+            </div>
+        </div>
+    </header>
+
+
+    
+    <!-- Google AdSense 광고 영역 -->
+    <div style="text-align: center; margin: 20px 0;">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
+
+</head>
+<body>
+    <h1>에니어그램 성격 테스트</h1>
+    <form id="enneagram-test">
+        <!-- 질문 1 -->
+        <div>
+            <p>1. 내가 주로 느끼는 감정은 무엇인가?</p>
+            <label>
+                <input type="radio" name="q1" value="1"> 죄책감이나 자책을 자주 느낀다
+            </label><br>
+            <label>
+                <input type="radio" name="q1" value="2"> 사람들이 나를 인정해주길 원한다
+            </label><br>
+            <label>
+                <input type="radio" name="q1" value="3"> 독립적이고 스스로 해결하려 한다
+            </label><br>
+            <label>
+                <input type="radio" name="q1" value="4"> 주변과 평화롭고 조화를 이루려고 한다
+            </label><br>
+        </div>
+
+        <!-- 질문 2 -->
+        <div>
+            <p>2. 나는 어떤 상황에서 스트레스를 받는가?</p>
+            <label>
+                <input type="radio" name="q2" value="1"> 내가 실수를 하면 크게 자책한다
+            </label><br>
+            <label>
+                <input type="radio" name="q2" value="2"> 다른 사람들이 나를 인정하지 않으면 불안하다
+            </label><br>
+            <label>
+                <input type="radio" name="q2" value="3"> 상황을 통제할 수 없을 때 불안하다
+            </label><br>
+            <label>
+                <input type="radio" name="q2" value="4"> 갈등이 있을 때 평화가 깨져 불편하다
+            </label><br>
+        </div>
+
+        <!-- 질문 3 -->
+        <div>
+            <p>3. 나는 다른 사람과의 관계에서 어떻게 행동하는가?</p>
+            <label>
+                <input type="radio" name="q3" value="1"> 나의 의견을 중요하게 생각하고 강하게 주장한다
+            </label><br>
+            <label>
+                <input type="radio" name="q3" value="2"> 타인의 감정을 신경 쓰고, 상대방을 돕고 싶어 한다
+            </label><br>
+            <label>
+                <input type="radio" name="q3" value="3"> 타인의 의견에 덜 의존하고 독립적이다
+            </label><br>
+            <label>
+                <input type="radio" name="q3" value="4"> 갈등을 피하고 조화를 이루는 것이 중요하다
+            </label><br>
+        </div>
+
+        <!-- 질문 4 -->
+        <div>
+            <p>4. 나는 주로 어떤 방식으로 목표를 달성하려 하는가?</p>
+            <label>
+                <input type="radio" name="q4" value="1"> 목표를 달성하는 데 있어 규칙과 기준을 중요시한다
+            </label><br>
+            <label>
+                <input type="radio" name="q4" value="2"> 사람들이 나를 인정하고 칭찬해줄 때 목표를 이루는 동기부여가 된다
+            </label><br>
+            <label>
+                <input type="radio" name="q4" value="3"> 목표를 달성하기 위해서 구체적인 계획을 세우고 실천한다
+            </label><br>
+            <label>
+                <input type="radio" name="q4" value="4"> 목표를 달성하는 과정에서 사람들이 서로 협력하는 것이 중요하다
+            </label><br>
+        </div>
+
+<!-- 질문 5 -->
+<div>
+    <p>5. 나는 주로 어떤 방식으로 스트레스를 관리하는가?</p>
+    <label>
+        <input type="radio" name="q5" value="1"> 규칙적이고 체계적인 방식으로 문제를 해결한다
+    </label><br>
+    <label>
+        <input type="radio" name="q5" value="2"> 다른 사람에게 도움을 요청하거나 나누는 것이 중요하다
+    </label><br>
+    <label>
+        <input type="radio" name="q5" value="3"> 혼자 시간을 보내며 생각을 정리한다
+    </label><br>
+    <label>
+        <input type="radio" name="q5" value="4"> 다른 사람들과의 관계에서 평화를 유지하려 한다
+    </label><br>
+</div>
+
+<!-- 질문 6 -->
+<div>
+    <p>6. 나는 일상에서 주로 어떤 태도를 보이는가?</p>
+    <label>
+        <input type="radio" name="q6" value="1"> 내 방식대로 일을 추진하고 리더 역할을 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q6" value="2"> 사람들에게 도움을 주고 그들과 함께 일하는 것이 중요하다
+    </label><br>
+    <label>
+        <input type="radio" name="q6" value="3"> 독립적으로 작업을 처리하며 혼자 일하는 것을 선호한다
+    </label><br>
+    <label>
+        <input type="radio" name="q6" value="4"> 조화와 평화를 중요시하고 팀워크를 중시한다
+    </label><br>
+</div>
+
+<!-- 질문 7 -->
+<div>
+    <p>7. 나는 갈등을 어떻게 처리하는가?</p>
+    <label>
+        <input type="radio" name="q7" value="1"> 논리적이고 철저한 방법으로 해결하려 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q7" value="2"> 갈등이 생기면 다른 사람들을 돕고 중재하려 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q7" value="3"> 갈등을 피하고 불편한 상황을 회피하려 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q7" value="4"> 갈등을 해결하려면 다른 사람들과 협력해야 한다
+    </label><br>
+</div>
+
+<!-- 질문 8 -->
+<div>
+    <p>8. 나는 자아를 어떻게 생각하는가?</p>
+    <label>
+        <input type="radio" name="q8" value="1"> 내가 잘못한 부분을 인정하고 개선하려 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q8" value="2"> 내가 중요한 사람이고 다른 사람들이 나를 인정해야 한다
+    </label><br>
+    <label>
+        <input type="radio" name="q8" value="3"> 나는 독립적인 존재이며 스스로를 자랑스럽게 생각한다
+    </label><br>
+    <label>
+        <input type="radio" name="q8" value="4"> 나는 다른 사람들과의 조화를 유지하는 것이 중요하다
+    </label><br>
+</div>
+
+<!-- 질문 9 -->
+<div>
+    <p>9. 나는 대체로 어떤 방식으로 목표를 설정하는가?</p>
+    <label>
+        <input type="radio" name="q9" value="1"> 목표를 이루기 위한 구체적인 계획을 세운다
+    </label><br>
+    <label>
+        <input type="radio" name="q9" value="2"> 사람들에게 인정받는 것이 나의 목표가 된다
+    </label><br>
+    <label>
+        <input type="radio" name="q9" value="3"> 내면의 자유와 독립을 추구하는 목표를 세운다
+    </label><br>
+    <label>
+        <input type="radio" name="q9" value="4"> 사람들이 함께 협력하여 목표를 달성하는 것을 중요시한다
+    </label><br>
+</div>
+
+<!-- 질문 10 -->
+<div>
+    <p>10. 나는 주변에서 어떻게 인식되기를 원하는가?</p>
+    <label>
+        <input type="radio" name="q10" value="1"> 내가 리더로서 존경받고 싶다
+    </label><br>
+    <label>
+        <input type="radio" name="q10" value="2"> 내가 다른 사람들을 돕는 존재로 기억되길 원한다
+    </label><br>
+    <label>
+        <input type="radio" name="q10" value="3"> 내가 독립적이고 자립적인 존재로 인정받고 싶다
+    </label><br>
+    <label>
+        <input type="radio" name="q10" value="4"> 사람들이 나와 함께 평화롭게 지낼 수 있다고 느끼길 원한다
+    </label><br>
+</div>
+
+        <!-- 결과 버튼 -->
+        <button type="button" onclick="calculateResults()">결과 보기</button>
+    </form>
+
+    <div id="result"></div>
+
+    <script>
+        // JavaScript 코드 시작
+        function calculateResults() {
+            const form = document.forms['enneagram-test'];
+            let scores = {
+                type1: 0,  // 유형 1 (개혁자)
+                type2: 0,  // 유형 2 (조력자)
+                type3: 0,  // 유형 3 (성취자)
+                type4: 0,  // 유형 4 (개성추구자)
+                type5: 0,  // 유형 5 (탐구자)
+                type6: 0,  // 유형 6 (충실한 사람)
+                type7: 0,  // 유형 7 (열정적인 사람)
+                type8: 0,  // 유형 8 (도전적인 사람)
+                type9: 0   // 유형 9 (평화주의자)
+            };
+
+            // 각 질문에 대해 점수 계산
+            for (let i = 1; i <= 10; i++) {  // 10개의 질문
+                const question = form['q' + i];
+                for (let j = 0; j < question.length; j++) {
+                    if (question[j].checked) {
+                        let answerValue = question[j].value;
+
+                        // 선택지에 따른 점수 반영
+                        if (answerValue == "1") {
+                            scores.type1 += 1;  // 유형 1 (개혁자)
+                        } else if (answerValue == "2") {
+                            scores.type2 += 1;  // 유형 2 (조력자)
+                        } else if (answerValue == "3") {
+                            scores.type3 += 1;  // 유형 3 (성취자)
+                        } else if (answerValue == "4") {
+                            scores.type4 += 1;  // 유형 4 (개성추구자)
+                        } else if (answerValue == "5") {
+                            scores.type5 += 1;  // 유형 5 (탐구자)
+                        } else if (answerValue == "6") {
+                            scores.type6 += 1;  // 유형 6 (충실한 사람)
+                        } else if (answerValue == "7") {
+                            scores.type7 += 1;  // 유형 7 (열정적인 사람)
+                        } else if (answerValue == "8") {
+                            scores.type8 += 1;  // 유형 8 (도전적인 사람)
+                        } else if (answerValue == "9") {
+                            scores.type9 += 1;  // 유형 9 (평화주의자)
+                        }
+                    }
+                }
+            }
+
+            // 결과 계산: 가장 높은 점수를 받은 유형을 찾기
+            let highestScore = Math.max(...Object.values(scores));
+            let resultType = Object.keys(scores).find(type => scores[type] === highestScore);
+
+            // 결과 출력
+            let resultText = "당신의 에니어그램 유형은: ";
+            switch (resultType) {
+                case 'type1':
+                    resultText += "유형 1 (개혁자)";
+                    break;
+                case 'type2':
+                    resultText += "유형 2 (조력자)";
+                    break;
+                case 'type3':
+                    resultText += "유형 3 (성취자)";
+                    break;
+                case 'type4':
+                    resultText += "유형 4 (개성추구자)";
+                    break;
+                case 'type5':
+                    resultText += "유형 5 (탐구자)";
+                    break;
+                case 'type6':
+                    resultText += "유형 6 (충실한 사람)";
+                    break;
+                case 'type7':
+                    resultText += "유형 7 (열정적인 사람)";
+                    break;
+                case 'type8':
+                    resultText += "유형 8 (도전적인 사람)";
+                    break;
+                case 'type9':
+                    resultText += "유형 9 (평화주의자)";
+                    break;
+                default:
+                    resultText += "알 수 없음";
+            }
+
+            // 결과를 페이지에 출력
+            document.getElementById('result').innerHTML = resultText;
+        }
+        // JavaScript 코드 끝
+    </script>
+</body>
+</html>
