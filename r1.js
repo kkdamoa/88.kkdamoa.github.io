@@ -1,7 +1,6 @@
 let currentQuestion = 1;
 const totalQuestions = 60;
 const progressBar = document.getElementById('progressBar');
-const nextButton = document.getElementById('nextButton');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
@@ -29,8 +28,6 @@ function showQuestion(questionNumber) {
     // 라디오 버튼 선택 상태 체크
     const radioButtons = current.querySelectorAll('input[type="radio"]');
     radioButtons.forEach(radio => radio.addEventListener('change', handleAnswer));
-
-    nextButton.disabled = true; // 초기화
 }
 
 // 진행 바 업데이트
@@ -40,22 +37,10 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(percentage)}%`;
 }
 
-// 답변이 완료되었는지 확인하고 버튼 활성화
+// 답변 처리 및 다음 질문으로 이동
 function handleAnswer() {
-    nextButton.disabled = false;
-}
-
-// 시작 버튼 클릭 시
-document.getElementById('startTest').addEventListener('click', () => {
-    document.querySelector('header').classList.add('hidden');
-    testSection.classList.remove('hidden');
-    showQuestion(currentQuestion);
-});
-
-// 다음 버튼 클릭 시
-nextButton.addEventListener('click', () => {
     const selectedValue = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`).value;
-    
+
     // 현재 질문에 대한 점수 누적
     if (currentQuestion <= 20) {
         scores.type1 += parseInt(selectedValue); // 예: 1번 유형 점수 추가
@@ -65,6 +50,7 @@ nextButton.addEventListener('click', () => {
         scores.type3 += parseInt(selectedValue); // 예: 3번 유형 점수 추가
     }
 
+    // 진행 상황 업데이트
     currentQuestion++;
 
     if (currentQuestion <= totalQuestions) {
@@ -73,6 +59,13 @@ nextButton.addEventListener('click', () => {
     } else {
         showResult();
     }
+}
+
+// 시작 버튼 클릭 시
+document.getElementById('startTest').addEventListener('click', () => {
+    document.querySelector('header').classList.add('hidden');
+    testSection.classList.remove('hidden');
+    showQuestion(currentQuestion);
 });
 
 // 결과 계산 및 표시
