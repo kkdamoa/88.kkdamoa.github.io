@@ -9,50 +9,63 @@
             font-family: Arial, sans-serif;
             text-align: center;
             padding: 20px;
+            margin: 0;
+            background-color: #f9f9f9;
         }
+
         header {
             margin-top: 20px;
         }
+
         .hidden {
             display: none;
         }
+
         .progress-container {
             width: 100%;
-            background-color: #f3f3f3;
-            border-radius: 25px;
-            height: 20px;
-            margin-top: 20px;
+            background-color: #e0e0e0;
+            border-radius: 15px;
+            height: 12px;
+            margin-top: 15px;
         }
+
         .progress-bar {
             height: 100%;
             background-color: #4caf50;
             width: 0%;
-            border-radius: 25px;
+            border-radius: 15px;
             text-align: center;
             color: white;
-            line-height: 20px;
+            line-height: 12px;
             font-weight: bold;
             transition: width 0.5s ease;
         }
+
         .question {
             margin-bottom: 20px;
         }
+
         .options label {
             display: block;
-            margin: 10px 0;
+            margin: 12px 0;
         }
+
         .radioContainer {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            margin-bottom: 15px;
         }
+
         .labelContainer {
             display: inline-block;
             position: relative;
         }
+
         .labelContainer input[type="radio"] {
             display: none;
         }
+
         .labelContainer .checkmark {
             width: 20px;
             height: 20px;
@@ -64,9 +77,11 @@
             left: 0;
             cursor: pointer;
         }
+
         .labelContainer input[type="radio"]:checked + .checkmark {
             background-color: #4caf50;
         }
+
         .labelContainer .checkmark::after {
             content: '';
             width: 10px;
@@ -77,16 +92,21 @@
             top: 5px;
             left: 5px;
         }
+
         .false, .true {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
+            width: 100px;
+            text-align: center;
         }
+
         .labelContainer:hover .checkmark {
             border-color: #4caf50;
         }
+
         button {
-            margin-top: 20px;
-            padding: 10px 20px;
+            margin-top: 30px;
+            padding: 12px 25px;
             background-color: #4caf50;
             color: white;
             border: none;
@@ -94,8 +114,40 @@
             font-size: 16px;
             border-radius: 5px;
         }
+
         button:disabled {
             background-color: #ccc;
+        }
+
+        @media (max-width: 600px) {
+            .radioContainer {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .labelContainer .checkmark {
+                width: 18px;
+                height: 18px;
+            }
+
+            .false, .true {
+                font-size: 10px;
+                width: auto;
+            }
+
+            button {
+                padding: 10px 20px;
+                font-size: 14px;
+            }
+        }
+
+        #testSection {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
     </style>
 </head>
@@ -228,59 +280,57 @@
             </div>
         </div>
 
-        <button id="nextQuestion" disabled>다음 질문</button>
+        <button id="nextButton" disabled>다음 질문 ➔</button>
     </main>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            let currentQuestion = 1;
-            const totalQuestions = 4;
-            const progressBar = document.getElementById('progressBar');
-            const nextButton = document.getElementById('nextQuestion');
-            const testSection = document.getElementById('testSection');
+        let currentQuestion = 1;
+        const totalQuestions = 4;
+        const progressBar = document.getElementById('progressBar');
+        const nextButton = document.getElementById('nextButton');
+        const testSection = document.getElementById('testSection');
 
-            // 테스트 시작 버튼 클릭 시
-            document.getElementById('startTest').addEventListener('click', () => {
-                document.querySelector('header').classList.add('hidden');
-                testSection.classList.remove('hidden');
-                showQuestion(currentQuestion);
-            });
+        // 질문 보기
+        function showQuestion(questionNumber) {
+            const questions = document.querySelectorAll('.question');
+            questions.forEach(q => q.classList.add('hidden'));
+            const current = document.querySelector(`.question[data-question="${questionNumber}"]`);
+            current.classList.remove('hidden');
 
-            // 다음 질문 버튼 클릭 시
-            nextButton.addEventListener('click', () => {
-                currentQuestion++;
-                showQuestion(currentQuestion);
-                updateProgressBar();
-                if (currentQuestion > totalQuestions) {
-                    alert('테스트가 완료되었습니다!');
-                }
-            });
+            // 라디오 버튼 선택 상태 체크
+            const radioButtons = current.querySelectorAll('input[type="radio"]');
+            radioButtons.forEach(radio => radio.addEventListener('change', checkIfAnswered));
 
-            // 질문 보여주는 함수
-            function showQuestion(questionNumber) {
-                const questions = document.querySelectorAll('.question');
-                questions.forEach(q => q.classList.add('hidden'));
-                const current = document.querySelector(`.question[data-question="${questionNumber}"]`);
-                current.classList.remove('hidden');
+            nextButton.disabled = true; // 초기화
+        }
 
-                // 라디오 버튼 선택 상태 체크
-                const radioButtons = current.querySelectorAll('input[type="radio"]');
-                radioButtons.forEach(radio => radio.addEventListener('change', checkIfAnswered));
+        // 진행 바 업데이트
+        function updateProgressBar() {
+            const percentage = (currentQuestion / totalQuestions) * 100;
+            progressBar.style.width = `${percentage}%`;
+            progressBar.textContent = `${Math.round(percentage)}%`;
+        }
 
-                nextButton.disabled = true; // 초기화
-            }
+        // 답변이 완료되었는지 확인
+        function checkIfAnswered() {
+            const selected = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`);
+            nextButton.disabled = !selected;
+        }
 
-            // 진행 바 업데이트 함수
-            function updateProgressBar() {
-                const percentage = (currentQuestion / totalQuestions) * 100;
-                progressBar.style.width = `${percentage}%`;
-                progressBar.textContent = `${Math.round(percentage)}%`;
-            }
+        // 시작 버튼 클릭 시
+        document.getElementById('startTest').addEventListener('click', () => {
+            document.querySelector('header').classList.add('hidden');
+            testSection.classList.remove('hidden');
+            showQuestion(currentQuestion);
+        });
 
-            // 답변이 완료되었는지 확인하는 함수
-            function checkIfAnswered() {
-                const selected = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`);
-                nextButton.disabled = !selected;
+        // 다음 버튼 클릭 시
+        nextButton.addEventListener('click', () => {
+            currentQuestion++;
+            showQuestion(currentQuestion);
+            updateProgressBar();
+            if (currentQuestion > totalQuestions) {
+                alert('테스트가 완료되었습니다!');
             }
         });
     </script>
