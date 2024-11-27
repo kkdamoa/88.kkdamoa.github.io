@@ -28,7 +28,7 @@ function showQuestion(questionNumber) {
 
     // 라디오 버튼 선택 상태 체크
     const radioButtons = current.querySelectorAll('input[type="radio"]');
-    radioButtons.forEach(radio => radio.addEventListener('change', checkIfAnswered));
+    radioButtons.forEach(radio => radio.addEventListener('change', handleAnswer));
 
     nextButton.disabled = true; // 초기화
 }
@@ -40,10 +40,9 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(percentage)}%`;
 }
 
-// 답변이 완료되었는지 확인
-function checkIfAnswered() {
-    const selected = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`);
-    nextButton.disabled = !selected;
+// 답변이 완료되었는지 확인하고 버튼 활성화
+function handleAnswer() {
+    nextButton.disabled = false;
 }
 
 // 시작 버튼 클릭 시
@@ -56,6 +55,7 @@ document.getElementById('startTest').addEventListener('click', () => {
 // 다음 버튼 클릭 시
 nextButton.addEventListener('click', () => {
     const selectedValue = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`).value;
+    
     // 현재 질문에 대한 점수 누적
     if (currentQuestion <= 20) {
         scores.type1 += parseInt(selectedValue); // 예: 1번 유형 점수 추가
@@ -66,6 +66,7 @@ nextButton.addEventListener('click', () => {
     }
 
     currentQuestion++;
+
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
         updateProgressBar();
