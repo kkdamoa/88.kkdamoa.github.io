@@ -36,11 +36,11 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(percentage)}%`;
 }
 
-// 답변 처리 및 자동으로 다음 질문으로 넘어가기
-function handleAnswer() {
+// 라디오 버튼 선택 시 자동으로 다음 질문으로 넘어가기
+function handleAnswer(event) {
     // 선택된 값 가져오기
-    const selectedValue = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`).value;
-
+    const selectedValue = event.target.value;
+    
     // 현재 질문에 대한 점수 누적
     if (currentQuestion <= 20) {
         scores.type1 += parseInt(selectedValue); // 예: 1번 유형 점수 추가
@@ -50,7 +50,7 @@ function handleAnswer() {
         scores.type3 += parseInt(selectedValue); // 예: 3번 유형 점수 추가
     }
 
-    // 진행 상황을 업데이트하고, 현재 질문을 1 증가시켜서 다음 질문을 자동으로 표시
+    // 현재 질문을 1 증가시켜서 다음 질문을 자동으로 표시
     currentQuestion++;
 
     // 모든 질문이 끝나면 결과 표시
@@ -68,7 +68,7 @@ document.getElementById('startTest').addEventListener('click', () => {
     showQuestion(currentQuestion);
 });
 
-// 라디오 버튼 선택 시 자동으로 다음 질문으로 넘어가도록
+// 라디오 버튼에 이벤트 리스너 추가
 document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
 });
