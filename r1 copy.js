@@ -1,6 +1,7 @@
 let currentQuestion = 1;
 const totalQuestions = 60;
 const progressBar = document.getElementById('progressBar');
+const nextButton = document.getElementById('nextButton');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
@@ -25,8 +26,11 @@ function showQuestion(questionNumber) {
     const current = document.querySelector(`.question[data-question="${questionNumber}"]`);
     current.classList.remove('hidden');
 
-    // 진행 상황 업데이트
-    updateProgressBar();
+    // 라디오 버튼 선택 상태 체크
+    const radioButtons = current.querySelectorAll('input[type="radio"]');
+    radioButtons.forEach(radio => radio.addEventListener('change', checkIfAnswered));
+
+    nextButton.disabled = true; // 초기화
 }
 
 // 진행 바 업데이트
@@ -36,29 +40,10 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(percentage)}%`;
 }
 
-// 답변 처리 및 자동으로 다음 질문으로 넘어가기
-function handleAnswer() {
-    // 선택된 값 가져오기
-    const selectedValue = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`).value;
-
-    // 현재 질문에 대한 점수 누적
-    if (currentQuestion <= 20) {
-        scores.type1 += parseInt(selectedValue); // 예: 1번 유형 점수 추가
-    } else if (currentQuestion <= 40) {
-        scores.type2 += parseInt(selectedValue); // 예: 2번 유형 점수 추가
-    } else if (currentQuestion <= 60) {
-        scores.type3 += parseInt(selectedValue); // 예: 3번 유형 점수 추가
-    }
-
-    // 진행 상황을 업데이트하고, 현재 질문을 1 증가시켜서 다음 질문을 자동으로 표시
-    currentQuestion++;
-
-    // 모든 질문이 끝나면 결과 표시
-    if (currentQuestion <= totalQuestions) {
-        showQuestion(currentQuestion);
-    } else {
-        showResult();
-    }
+// 답변이 완료되었는지 확인
+function checkIfAnswered() {
+    const selected = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`);
+    nextButton.disabled = !selected;
 }
 
 // 시작 버튼 클릭 시
@@ -68,9 +53,25 @@ document.getElementById('startTest').addEventListener('click', () => {
     showQuestion(currentQuestion);
 });
 
-// 라디오 버튼 선택 시 자동으로 다음 질문으로 넘어가도록
-document.querySelectorAll('.question input[type="radio"]').forEach(input => {
-    input.addEventListener('change', handleAnswer);
+// 다음 버튼 클릭 시
+nextButton.addEventListener('click', () => {
+    const selectedValue = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`).value;
+    // 현재 질문에 대한 점수 누적
+    if (currentQuestion <= 20) {
+        scores.type1 += parseInt(selectedValue); // 예: 1번 유형 점수 추가
+    } else if (currentQuestion <= 40) {
+        scores.type2 += parseInt(selectedValue); // 예: 2번 유형 점수 추가
+    } else if (currentQuestion <= 60) {
+        scores.type3 += parseInt(selectedValue); // 예: 3번 유형 점수 추가
+    }
+
+    currentQuestion++;
+    if (currentQuestion <= totalQuestions) {
+        showQuestion(currentQuestion);
+        updateProgressBar();
+    } else {
+        showResult();
+    }
 });
 
 // 결과 계산 및 표시
@@ -78,7 +79,6 @@ function showResult() {
     let maxScore = -Infinity;
     let dominantType = '';
 
-    // 가장 점수가 높은 유형 계산
     for (let type in scores) {
         if (scores[type] > maxScore) {
             maxScore = scores[type];
@@ -86,7 +86,6 @@ function showResult() {
         }
     }
 
-    // 결과 메시지 설정
     let resultMessage = '';
     switch (dominantType) {
         case 'type1':
@@ -120,7 +119,6 @@ function showResult() {
             resultMessage = '결과를 계산할 수 없습니다.';
     }
 
-    // 결과 표시
     resultText.innerText = resultMessage;
     resultSection.classList.remove('hidden');
 }
