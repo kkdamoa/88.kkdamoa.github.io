@@ -3,140 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>진행 바와 라디오 버튼 예제</title>
+    <title>에니어그램 테스트</title>
+    <link rel="stylesheet" href="에리어.css">
     <style>
-        /* 전체 진행 바 컨테이너 */
+        /* 진행 바 스타일 */
         .progress-container {
-            width: 100%; /* 전체 너비 */
-            background-color: #f3f3f3; /* 회색 배경 */
-            border-radius: 10px; /* 모서리 둥글게 */
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 그림자 효과 */
-            height: 30px; /* 높이 설정 */
+            width: 100%;
+            background-color: #f3f3f3;
+            border-radius: 25px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            height: 20px;
             margin-top: 20px;
         }
-
-        /* 실제 진행 바 */
         .progress-bar {
-            height: 100%; /* 높이를 100%로 */
-            background-color: #4caf50; /* 초록색 진행 바 */
-            width: 0%; /* 초기 진행률 (0%) */
-            border-radius: 10px; /* 진행 바 끝 모서리 둥글게 */
+            height: 100%;
+            background-color: #4caf50;
+            width: 0%;
+            border-radius: 25px;
             text-align: center;
             color: white;
-            line-height: 30px; /* 텍스트 수직 정렬 */
+            line-height: 20px;
             font-weight: bold;
+            transition: width 0.5s ease;
         }
-
-        /* 라디오 버튼 컨테이너 */
-        .radioContainer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 20px;
+        .question {
+            margin-bottom: 20px;
         }
-
-        /* 라벨 스타일 */
-        .labelContainer {
-            display: inline-block;
-            position: relative;
-            padding-left: 30px;
-            cursor: pointer;
-        }
-
-        /* 라디오 버튼 숨기기 */
-        .labelContainer input[type="radio"] {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-
-        /* 체크마크 스타일 */
-        .checkmark {
-            position: absolute;
-            left: 0;
-            top: 0;
-            height: 20px;
-            width: 20px;
-            background-color: #eee;
-            border-radius: 50%;
-        }
-
-        .labelContainer input[type="radio"]:checked + .checkmark {
-            background-color: #4caf50; /* 초록색으로 변경 */
-        }
-
-        /* 라디오 버튼을 클릭할 때 체크 표시 */
-        .checkmark:after {
-            content: "";
-            position: absolute;
+        .hidden {
             display: none;
-        }
-
-        .labelContainer input[type="radio"]:checked + .checkmark:after {
-            display: block;
-            left: 7px;
-            top: 7px;
-            width: 8px;
-            height: 8px;
-            background-color: white;
-            border-radius: 50%;
-        }
-
-        /* "전혀 그렇지 않다"와 "매우 그렇다" 텍스트 */
-        .false, .true {
-            font-size: 14px;
         }
     </style>
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1>에니어그램 테스트</h1>
+            <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
+            <p>이 테스트는 여러분의 에니어그램 유형과 가장 두드러진 날개 유형을 찾아내는 데 목적이 있습니다.</p>
+            <button id="startTest">테스트 시작 ➔</button>
+        </header>
 
-    <h2>진행 바와 라디오 버튼 예제</h2>
+        <main id="testSection" class="hidden">
+            <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
+            
+            <!-- 진행 바 -->
+            <div class="progress-container">
+                <div class="progress-bar" id="progressBar">0%</div>
+            </div>
 
-    <!-- 진행 바 -->
-    <div class="progress-container">
-        <div class="progress-bar" id="progressBar">0%</div>
+            <!-- 질문 목록 -->
+            <div class="question active" data-question="1">
+                <p>나는 종종 다른 사람들에게 성공한 사람으로 인식되며 이는 나에게 동기를 부여한다.</p>
+                <div class="options">
+                    <label><input type="radio" name="q1" value="1"> 전혀 그렇지 않다</label>
+                    <label><input type="radio" name="q1" value="2"> 그렇지 않다</label>
+                    <label><input type="radio" name="q1" value="3"> 보통이다</label>
+                    <label><input type="radio" name="q1" value="4"> 그렇다</label>
+                    <label><input type="radio" name="q1" value="5"> 매우 그렇다</label>
+                </div>
+            </div>
+
+            <div class="question hidden" data-question="2">
+                <p>나는 종종 다른 사람들을 돕기 위해 나 자신의 필요를 희생하는 경향이 있다.</p>
+                <div class="options">
+                    <label><input type="radio" name="q2" value="1"> 전혀 그렇지 않다</label>
+                    <label><input type="radio" name="q2" value="2"> 그렇지 않다</label>
+                    <label><input type="radio" name="q2" value="3"> 보통이다</label>
+                    <label><input type="radio" name="q2" value="4"> 그렇다</label>
+                    <label><input type="radio" name="q2" value="5"> 매우 그렇다</label>
+                </div>
+            </div>
+
+            <div class="question hidden" data-question="3">
+                <p>나는 일이 계획대로 진행되지 않으면 스트레스를 받는 편이다.</p>
+                <div class="options">
+                    <label><input type="radio" name="q3" value="1"> 전혀 그렇지 않다</label>
+                    <label><input type="radio" name="q3" value="2"> 그렇지 않다</label>
+                    <label><input type="radio" name="q3" value="3"> 보통이다</label>
+                    <label><input type="radio" name="q3" value="4"> 그렇다</label>
+                    <label><input type="radio" name="q3" value="5"> 매우 그렇다</label>
+                </div>
+            </div>
+
+            <div class="question hidden" data-question="4">
+                <p>나는 종종 새로운 사람들에게 빠르게 마음을 열고 친해진다.</p>
+                <div class="options">
+                    <label><input type="radio" name="q4" value="1"> 전혀 그렇지 않다</label>
+                    <label><input type="radio" name="q4" value="2"> 그렇지 않다</label>
+                    <label><input type="radio" name="q4" value="3"> 보통이다</label>
+                    <label><input type="radio" name="q4" value="4"> 그렇다</label>
+                    <label><input type="radio" name="q4" value="5"> 매우 그렇다</label>
+                </div>
+            </div>
+
+            <button id="nextQuestion">다음 질문</button>
+        </main>
     </div>
-
-    <!-- 라디오 버튼들 -->
-    <div class="radioContainer">
-        <span class="false">전혀 그렇지 않다</span>
-        <label class="labelContainer">
-            <input name="66" value="-2" type="radio" onclick="updateProgress(-2)">
-            <span class="checkmark"></span>
-        </label>
-        <label class="labelContainer">
-            <input name="66" value="-1" type="radio" onclick="updateProgress(-1)">
-            <span class="checkmark"></span>
-        </label>
-        <label class="labelContainer">
-            <input name="66" value="0" type="radio" onclick="updateProgress(0)">
-            <span class="checkmark"></span>
-        </label>
-        <label class="labelContainer">
-            <input name="66" value="1" type="radio" onclick="updateProgress(1)">
-            <span class="checkmark"></span>
-        </label>
-        <label class="labelContainer">
-            <input name="66" value="2" type="radio" onclick="updateProgress(2)">
-            <span class="checkmark"></span>
-        </label>
-        <span class="true">매우 그렇다</span>
-    </div>
-
-    <script>
-        // 진행 바의 초기값
-        let progress = 0;
-
-        // 진행 바를 업데이트하는 함수
-        function updateProgress(value) {
-            // -2 ~ 2 값을 0 ~ 100%로 변환
-            progress = (value + 2) * 25; // -2 => 0%, 2 => 100%
-            // 진행 바 업데이트
-            const progressBar = document.getElementById('progressBar');
-            progressBar.style.width = progress + '%';
-            progressBar.innerHTML = progress + '%';
-        }
-    </script>
-
+    <script src="에리어1.js"></script>
 </body>
 </html>
