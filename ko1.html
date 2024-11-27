@@ -8,9 +8,10 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
+            padding: 20px;
         }
         header {
-            margin-top: 50px;
+            margin-top: 20px;
         }
         .hidden {
             display: none;
@@ -39,6 +40,49 @@
         .options label {
             display: block;
             margin: 10px 0;
+        }
+        .radioContainer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .labelContainer {
+            display: inline-block;
+            position: relative;
+        }
+        .labelContainer input[type="radio"] {
+            display: none;
+        }
+        .labelContainer .checkmark {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #4caf50;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            top: 0;
+            left: 0;
+            cursor: pointer;
+        }
+        .labelContainer input[type="radio"]:checked + .checkmark {
+            background-color: #4caf50;
+        }
+        .labelContainer .checkmark::after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: white;
+            position: absolute;
+            top: 5px;
+            left: 5px;
+        }
+        .false, .true {
+            font-size: 14px;
+            color: #666;
+        }
+        .labelContainer:hover .checkmark {
+            border-color: #4caf50;
         }
         button {
             margin-top: 20px;
@@ -74,45 +118,113 @@
         <!-- 질문 목록 -->
         <div class="question active" data-question="1">
             <p>나는 종종 다른 사람들에게 성공한 사람으로 인식되며 이는 나에게 동기를 부여한다.</p>
-            <div class="options">
-                <label><input type="radio" name="q1" value="1"> 전혀 그렇지 않다</label>
-                <label><input type="radio" name="q1" value="2"> 그렇지 않다</label>
-                <label><input type="radio" name="q1" value="3"> 보통이다</label>
-                <label><input type="radio" name="q1" value="4"> 그렇다</label>
-                <label><input type="radio" name="q1" value="5"> 매우 그렇다</label>
+            <div class="radioContainer">
+                <span class="false">전혀 그렇지 않다</span>
+                <label class="labelContainer">
+                    <input name="q1" value="-2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q1" value="-1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q1" value="0" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q1" value="1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q1" value="2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="true">매우 그렇다</span>
             </div>
         </div>
 
         <div class="question hidden" data-question="2">
             <p>나는 종종 다른 사람들을 돕기 위해 나 자신의 필요를 희생하는 경향이 있다.</p>
-            <div class="options">
-                <label><input type="radio" name="q2" value="1"> 전혀 그렇지 않다</label>
-                <label><input type="radio" name="q2" value="2"> 그렇지 않다</label>
-                <label><input type="radio" name="q2" value="3"> 보통이다</label>
-                <label><input type="radio" name="q2" value="4"> 그렇다</label>
-                <label><input type="radio" name="q2" value="5"> 매우 그렇다</label>
+            <div class="radioContainer">
+                <span class="false">전혀 그렇지 않다</span>
+                <label class="labelContainer">
+                    <input name="q2" value="-2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="-1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="0" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q2" value="2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="true">매우 그렇다</span>
             </div>
         </div>
 
         <div class="question hidden" data-question="3">
             <p>나는 일이 계획대로 진행되지 않으면 스트레스를 받는 편이다.</p>
-            <div class="options">
-                <label><input type="radio" name="q3" value="1"> 전혀 그렇지 않다</label>
-                <label><input type="radio" name="q3" value="2"> 그렇지 않다</label>
-                <label><input type="radio" name="q3" value="3"> 보통이다</label>
-                <label><input type="radio" name="q3" value="4"> 그렇다</label>
-                <label><input type="radio" name="q3" value="5"> 매우 그렇다</label>
+            <div class="radioContainer">
+                <span class="false">전혀 그렇지 않다</span>
+                <label class="labelContainer">
+                    <input name="q3" value="-2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q3" value="-1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q3" value="0" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q3" value="1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q3" value="2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="true">매우 그렇다</span>
             </div>
         </div>
 
         <div class="question hidden" data-question="4">
             <p>나는 종종 새로운 사람들에게 빠르게 마음을 열고 친해진다.</p>
-            <div class="options">
-                <label><input type="radio" name="q4" value="1"> 전혀 그렇지 않다</label>
-                <label><input type="radio" name="q4" value="2"> 그렇지 않다</label>
-                <label><input type="radio" name="q4" value="3"> 보통이다</label>
-                <label><input type="radio" name="q4" value="4"> 그렇다</label>
-                <label><input type="radio" name="q4" value="5"> 매우 그렇다</label>
+            <div class="radioContainer">
+                <span class="false">전혀 그렇지 않다</span>
+                <label class="labelContainer">
+                    <input name="q4" value="-2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q4" value="-1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q4" value="0" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q4" value="1" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <label class="labelContainer">
+                    <input name="q4" value="2" type="radio">
+                    <span class="checkmark"></span>
+                </label>
+                <span class="true">매우 그렇다</span>
             </div>
         </div>
 
@@ -129,55 +241,48 @@
 
             // 테스트 시작 버튼 클릭 시
             document.getElementById('startTest').addEventListener('click', () => {
+                document.querySelector('header').classList.add('hidden');
                 testSection.classList.remove('hidden');
                 showQuestion(currentQuestion);
             });
 
             // 다음 질문 버튼 클릭 시
             nextButton.addEventListener('click', () => {
-                const selectedOption = document.querySelector(`input[name="q${currentQuestion}"]:checked`);
-                if (selectedOption) {
-                    // 진행 바 업데이트
-                    updateProgress();
-                    currentQuestion++;
-
-                    if (currentQuestion <= totalQuestions) {
-                        showQuestion(currentQuestion);
-                    } else {
-                        alert("테스트가 완료되었습니다!");
-                        nextButton.textContent = "완료";
-                    }
-                } else {
-                    alert("질문에 답해주세요!");
+                currentQuestion++;
+                showQuestion(currentQuestion);
+                updateProgressBar();
+                if (currentQuestion > totalQuestions) {
+                    alert('테스트가 완료되었습니다!');
                 }
             });
 
             // 질문 보여주는 함수
             function showQuestion(questionNumber) {
-                // 이전 질문 숨기기
-                const previousQuestion = document.querySelector(`.question[data-question="${questionNumber - 1}"]`);
-                if (previousQuestion) {
-                    previousQuestion.classList.add('hidden');
-                }
+                const questions = document.querySelectorAll('.question');
+                questions.forEach(q => q.classList.add('hidden'));
+                const current = document.querySelector(`.question[data-question="${questionNumber}"]`);
+                current.classList.remove('hidden');
 
-                // 현재 질문 보이기
-                const currentQuestionElement = document.querySelector(`.question[data-question="${questionNumber}"]`);
-                if (currentQuestionElement) {
-                    currentQuestionElement.classList.remove('hidden');
-                }
+                // 라디오 버튼 선택 상태 체크
+                const radioButtons = current.querySelectorAll('input[type="radio"]');
+                radioButtons.forEach(radio => radio.addEventListener('change', checkIfAnswered));
 
-                // "다음 질문" 버튼 활성화
-                nextButton.disabled = false;
+                nextButton.disabled = true; // 초기화
             }
 
             // 진행 바 업데이트 함수
-            function updateProgress() {
-                const progress = (currentQuestion - 1) / totalQuestions * 100;
-                progressBar.style.width = `${progress}%`;
-                progressBar.textContent = `${Math.round(progress)}%`;
+            function updateProgressBar() {
+                const percentage = (currentQuestion / totalQuestions) * 100;
+                progressBar.style.width = `${percentage}%`;
+                progressBar.textContent = `${Math.round(percentage)}%`;
+            }
+
+            // 답변이 완료되었는지 확인하는 함수
+            function checkIfAnswered() {
+                const selected = document.querySelector(`.question[data-question="${currentQuestion}"] input[type="radio"]:checked`);
+                nextButton.disabled = !selected;
             }
         });
     </script>
-
 </body>
 </html>
