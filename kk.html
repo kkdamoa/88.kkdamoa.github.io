@@ -1,15 +1,22 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>에니어그램 테스트</title>
-    <link rel="stylesheet" href="r1.css"> <!-- 외부 CSS 파일을 연결 -->
-</head>
-<body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-    crossorigin="anonymous"></script>
+<!-- 결과 보기 버튼 -->
+<button id="viewResultsBtn">결과 보기</button>
 
+<!-- 오버레이 및 광고 콘텐츠 -->
+<div id="overlay" onclick="closePopup()" style="display: none;"></div>
+
+<div id="adContainer" style="display: none;">
+    <div class="ad-header">
+        <span id="adCounter">광고가 5초 후에 닫힐 수 있습니다...</span>
+        <button class="close-btn" onclick="closeAd()">&times;</button>
+    </div>
+    <h2>광고</h2>
+    <div style="text-align:center; margin-bottom:10px;">
+        <button onclick="closeAd()" style="border:none; background:none; font-size:20px; cursor:pointer;">&times;</button>
+    </div>
+
+    <!-- 새로운 광고 코드 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossorigin="anonymous"></script>
     <!-- k-test -->
     <ins class="adsbygoogle"
         style="display:block"
@@ -20,108 +27,40 @@
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
+</div>
 
-    <header>
-        <h1>에니어그램 테스트</h1>
-        <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
-        <button id="startTest">테스트 시작 ➔</button>
-    </header>
+<script>
+    // '결과 보기' 버튼 클릭 시 팝업 표시
+    document.getElementById('viewResultsBtn').onclick = function() {
+        showPopup(); // 팝업을 표시하는 함수 호출
+    };
 
-    <main id="testSection" class="hidden">
-        <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
-        
-        <!-- 진행 바 -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar">0%</div>
-        </div>
+    function showPopup() {
+        document.getElementById('overlay').style.display = 'block';
+        document.getElementById('adContainer').style.display = 'block'; // 광고 컨테이너 표시
+        document.body.style.overflow = 'hidden'; // 스크롤 비활성화
 
-        <!-- 질문 목록 -->
-        <div class="question active" data-question="1">
-            <p>나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.</p>
-            <div class="radioContainer">
-                <span class="false">전혀 그렇지 않다</span>
-                <label class="labelContainer">
-                    <input name="q2" value="-2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="-1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="0" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <span class="true">매우 그렇다</span>
-            </div>
-        </div>
+        let counter = 5;
+        let adCounter = document.getElementById('adCounter');
+        let countdown = setInterval(function() {
+            counter--;
+            adCounter.textContent = `광고가 ${counter}초 후에 닫힐 수 있습니다...`;
+            if (counter <= 0) {
+                clearInterval(countdown);
+                adCounter.textContent = "광고를 닫을 수 있습니다.";
+            }
+        }, 1000);
+    }
 
-        <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
-        <button id="showResultButton" class="hidden">결과 보기</button>
-    </main>
+    function closePopup() {
+        document.getElementById('overlay').style.display = 'none';
+        document.getElementById('adContainer').style.display = 'none';
+        document.body.style.overflow = ''; // 스크롤 활성화
+    }
 
-    <!-- 광고 팝업 -->
-    <div id="overlay" onclick="closePopup()" style="display: none;"></div>
-    <div id="popup" style="display: none;">
-        <h2>광고</h2>
-        <p>광고를 시청해주세요. 5초 후 광고가 종료됩니다.</p>
-        <p id="popupCounter">5초 후 광고가 종료됩니다...</p>
-        <button onclick="closePopup()">닫기</button>
-    </div>
-
-    <div id="resultSection" class="hidden">
-        <h2>테스트 결과</h2>
-        <p id="resultText">여기에 결과가 표시됩니다.</p>
-    </div>
-
-    <script src="r1.js"></script>
-    
-    <script>
-        // 테스트 시작 버튼 클릭 시 테스트 시작
-        document.getElementById('startTest').onclick = function() {
-            document.getElementById('testSection').classList.remove('hidden');
-            document.getElementById('startTest').classList.add('hidden');
-        };
-
-        // 결과 보기 버튼 클릭 시 팝업 표시
-        document.getElementById('showResultButton').onclick = function() {
-            showPopup(); // 광고 팝업 표시
-        };
-
-        function showPopup() {
-            // 팝업을 표시
-            document.getElementById('overlay').style.display = 'block';
-            document.getElementById('popup').style.display = 'block';
-            document.body.style.overflow = 'hidden'; // 스크롤 비활성화
-
-            let counter = 5;
-            let popupCounter = document.getElementById('popupCounter');
-            let countdown = setInterval(function() {
-                counter--;
-                popupCounter.textContent = `${counter}초 후 광고가 종료됩니다...`;
-                if (counter <= 0) {
-                    clearInterval(countdown);
-                    popupCounter.textContent = "광고 종료";
-                    closePopup(); // 5초 후 광고 팝업 닫기
-                    document.getElementById('resultSection').classList.remove('hidden'); // 결과 섹션 보이기
-                }
-            }, 1000);
-        }
-
-        function closePopup() {
-            // 팝업을 닫고 결과 섹션 보이기
-            document.getElementById('overlay').style.display = 'none';
-            document.getElementById('popup').style.display = 'none';
-            document.body.style.overflow = ''; // 스크롤 활성화
-        }
-    </script>
-</body>
-</html>
+    function closeAd() {
+        document.getElementById('adContainer').style.display = 'none';
+        document.body.style.overflow = '';
+        alert('광고 시청이 완료되었습니다.');
+    }
+</script>
