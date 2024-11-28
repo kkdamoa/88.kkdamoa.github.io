@@ -96,7 +96,7 @@ function showResult() {
 
     // 결과 메시지 설정
     sortedScores.forEach((item, index) => {
-        resultDetails.push(`${index + 1}. ${item.type}: ${item.score}점`);
+        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${item.score}점`);
     });
 
     resultMessage += resultDetails.join('\n');
@@ -104,4 +104,20 @@ function showResult() {
     // 결과 표시
     resultText.innerText = resultMessage;
     resultSection.classList.remove('hidden');
+}
+
+// 유형 이름 반환 함수
+function getTypeName(type) {
+    switch (type) {
+        case 'type1': return '완벽주의자';
+        case 'type2': return '헌신자';
+        case 'type3': return '성취자';
+        case 'type4': return '개성추구자';
+        case 'type5': return '탐구자';
+        case 'type6': return '충실한 사람';
+        case 'type7': return '열정적인 사람';
+        case 'type8': return '도전자';
+        case 'type9': return '평화주의자';
+        default: return '';
+    }
 }
