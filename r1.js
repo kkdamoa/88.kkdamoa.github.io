@@ -26,7 +26,7 @@ function showResult() {
     let resultText = document.getElementById('resultText');
 
     resultSection.classList.remove('hidden');
-    resultText.innerText = "테스트를 완료하셨습니다! 선택한 답변에 따라 결과가 나옵니다."; // 결과 내용 변경 가능
+    resultText.innerText = "결과: 2"; // 결과로 숫자 2를 표시합니다.
 }
 
 // 이벤트 리스너 설정
