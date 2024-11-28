@@ -8,15 +8,12 @@ function showAnswers() {
         return;
     }
 
-    const answers = {
-        q1: q1.value === "yes" ? "감정 이해가 뛰어납니다." : "감정 이해가 부족할 수 있습니다.",
-        q2: q2.value === "yes" ? "논리적인 접근을 선호합니다." : "감정적인 접근을 선호합니다.",
-        q3: q3.value === "yes" ? "긴장감을 자주 느낍니다." : "긴장감을 덜 느낍니다."
-    };
+    // 항상 '나는 바보다'라는 답변을 출력
+    const answers = "나는 바보다";
 
-    document.getElementById("resultQ1").textContent = `질문 1: ${answers.q1}`;
-    document.getElementById("resultQ2").textContent = `질문 2: ${answers.q2}`;
-    document.getElementById("resultQ3").textContent = `질문 3: ${answers.q3}`;
+    document.getElementById("resultQ1").textContent = `질문 1: ${answers}`;
+    document.getElementById("resultQ2").textContent = `질문 2: ${answers}`;
+    document.getElementById("resultQ3").textContent = `질문 3: ${answers}`;
 
     document.getElementById("answers").style.display = "block";
 }
