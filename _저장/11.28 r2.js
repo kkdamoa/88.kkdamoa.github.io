@@ -4,10 +4,6 @@ const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
-const adsSection = document.getElementById('adsSection');
-const countdown = document.getElementById('countdown');
-const countdownMessage = document.getElementById('countdownMessage');
-const closeAdButton = document.getElementById('closeAdButton');
 
 // 각 유형에 대한 점수
 let scores = {
@@ -67,7 +63,7 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showAdBeforeResult();  // 결과 전에 광고 표시
+        showResult();
     }
 }
 
@@ -81,36 +77,6 @@ document.getElementById('startTest').addEventListener('click', () => {
 // 라디오 버튼에 이벤트 리스너 추가
 document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
-});
-
-// 광고 카운트다운 시작
-let countdownTimer;
-let countdownValue = 5; // 5초 카운트다운
-
-function startCountdown() {
-    countdownMessage.innerText = `광고가 ${countdownValue}초 후에 닫힙니다.`;
-    countdownTimer = setInterval(() => {
-        countdownValue--;
-        countdownMessage.innerText = `광고가 ${countdownValue}초 후에 닫힙니다.`;
-        if (countdownValue <= 0) {
-            clearInterval(countdownTimer);
-            closeAdButton.style.display = 'block'; // 광고 닫기 버튼 표시
-        }
-    }, 1000);
-}
-
-// 광고가 끝난 후 결과 표시
-function showAdBeforeResult() {
-    adsSection.classList.remove('hidden');  // 광고 영역 보이기
-    countdownValue = 5;  // 카운트다운 초기화
-    closeAdButton.style.display = 'none'; // 광고 닫기 버튼 숨기기
-    startCountdown();  // 카운트다운 시작
-}
-
-// 광고 닫기 버튼 클릭 시
-closeAdButton.addEventListener('click', () => {
-    adsSection.classList.add('hidden');  // 광고 숨기기
-    showResult();  // 결과 표시
 });
 
 // 결과 계산 및 표시

@@ -112,6 +112,33 @@ button:disabled {
     background-color: #ccc;
 }
 
+#adsSection {
+    margin-top: 20px;
+    padding: 20px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+}
+
+#countdown {
+    font-size: 30px;
+    color: #ff0000;
+    font-weight: bold;
+    margin-top: 20px;
+}
+
+#closeAdButton {
+    background-color: #f44336;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#closeAdButton:hover {
+    background-color: #d32f2f;
+}
+
 @media (max-width: 600px) {
     .radioContainer {
         flex-direction: column;
@@ -132,13 +159,4 @@ button:disabled {
         padding: 10px 20px;
         font-size: 14px;
     }
-}
-
-#testSection {
-    max-width: 600px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
