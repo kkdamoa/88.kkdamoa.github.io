@@ -4,6 +4,7 @@ const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
+const resultButton = document.getElementById('resultButton');  // 결과 보기 버튼
 
 // 각 유형에 대한 점수
 let scores = {
@@ -49,7 +50,7 @@ function updateProgressBar() {
     progressBar.textContent = `${Math.round(percentage)}%`;
 }
 
-// 라디오 버튼 선택 시 점수 누적 및 자동으로 다음 질문으로 이동
+// 라디오 버튼 선택 시 점수 누적
 function handleAnswer(event) {
     const selectedValue = parseInt(event.target.value);  // 선택된 값 가져오기
     
@@ -63,9 +64,19 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showResult();
+        showEndButton();  // 마지막 질문 이후 "결과 보기" 버튼을 보이도록 처리
     }
 }
+
+// 결과 보기 버튼 표시
+function showEndButton() {
+    resultButton.classList.remove('hidden');
+}
+
+// 결과 보기 버튼 클릭 시 결과 표시
+resultButton.addEventListener('click', () => {
+    showResult();
+});
 
 // 시작 버튼 클릭 시
 document.getElementById('startTest').addEventListener('click', () => {
