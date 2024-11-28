@@ -4,9 +4,6 @@ const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
-const closeButton = document.getElementById('closeButton');  // 닫기 버튼
-const resultPopup = document.getElementById('resultPopup');  // 결과 팝업
-let timer;  // 타이머 변수
 
 // 각 유형에 대한 점수
 let scores = {
@@ -66,7 +63,7 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showResult();  // 63번 질문 이후 결과를 표시하도록 호출
+        showResult();
     }
 }
 
@@ -106,37 +103,8 @@ function showResult() {
 
     // 결과 표시
     resultText.innerText = resultMessage;
-
-    // 결과 팝업 표시
-    resultPopup.classList.remove('hidden');
-    startResultTimer();
+    resultSection.classList.remove('hidden');
 }
-
-// 5초 타이머 시작
-function startResultTimer() {
-    let countdown = 5;  // 카운트다운 시간 (초)
-
-    // 카운트다운 시작
-    timer = setInterval(() => {
-        countdown--;
-        resultText.innerText += `\n\n결과를 표시합니다... ${countdown}초 남음`;
-
-        if (countdown <= 0) {
-            clearInterval(timer);
-            showCloseButton();
-        }
-    }, 1000);
-}
-
-// 5초 후 "닫기" 버튼 활성화
-function showCloseButton() {
-    closeButton.classList.remove('hidden');
-}
-
-// 닫기 버튼 클릭 시
-closeButton.addEventListener('click', () => {
-    resultPopup.classList.add('hidden');
-});
 
 // 유형 이름 반환 함수
 function getTypeName(type) {
