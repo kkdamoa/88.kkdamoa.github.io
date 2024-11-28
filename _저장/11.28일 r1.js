@@ -82,42 +82,52 @@ document.querySelectorAll('.question input[type="radio"]').forEach(input => {
 
 // 결과 계산 및 표시
 function showResult() {
-    let resultMessage = '당신의 에니어그램 유형은:\n\n';
-    let resultDetails = [];
-    let sortedScores = [];
+    let maxScore = -Infinity;
+    let dominantType = '';
 
-    // 각 유형의 점수를 배열에 저장하여 내림차순으로 정렬
+    // 가장 높은 점수 유형 찾기
     for (let type in scores) {
-        sortedScores.push({ type: type, score: scores[type] });
+        if (scores[type] > maxScore) {
+            maxScore = scores[type];
+            dominantType = type;
+        }
     }
 
-    // 점수 내림차순으로 정렬
-    sortedScores.sort((a, b) => b.score - a.score);
-
     // 결과 메시지 설정
-    sortedScores.forEach((item, index) => {
-        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${item.score}점`);
-    });
-
-    resultMessage += resultDetails.join('\n');
+    let resultMessage = '';
+    switch (dominantType) {
+        case 'type1':
+            resultMessage = '당신은 1번 유형: 완벽주의자입니다.';
+            break;
+        case 'type2':
+            resultMessage = '당신은 2번 유형: 헌신적인 사람입니다.';
+            break;
+        case 'type3':
+            resultMessage = '당신은 3번 유형: 성취를 추구하는 사람입니다.';
+            break;
+        case 'type4':
+            resultMessage = '당신은 4번 유형: 개성추구자입니다.';
+            break;
+        case 'type5':
+            resultMessage = '당신은 5번 유형: 탐구자입니다.';
+            break;
+        case 'type6':
+            resultMessage = '당신은 6번 유형: 충실한 사람입니다.';
+            break;
+        case 'type7':
+            resultMessage = '당신은 7번 유형: 열정적인 사람입니다.';
+            break;
+        case 'type8':
+            resultMessage = '당신은 8번 유형: 도전자입니다.';
+            break;
+        case 'type9':
+            resultMessage = '당신은 9번 유형: 평화주의자입니다.';
+            break;
+        default:
+            resultMessage = '결과를 계산할 수 없습니다.';
+    }
 
     // 결과 표시
     resultText.innerText = resultMessage;
     resultSection.classList.remove('hidden');
-}
-
-// 유형 이름 반환 함수
-function getTypeName(type) {
-    switch (type) {
-        case 'type1': return '완벽주의자';
-        case 'type2': return '헌신자';
-        case 'type3': return '성취자';
-        case 'type4': return '개성추구자';
-        case 'type5': return '탐구자';
-        case 'type6': return '충실한 사람';
-        case 'type7': return '열정적인 사람';
-        case 'type8': return '도전자';
-        case 'type9': return '평화주의자';
-        default: return '';
-    }
 }
