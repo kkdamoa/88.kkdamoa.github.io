@@ -1879,45 +1879,14 @@
     <script src="r1.js"></script>
     <script>
         const showResultButton = document.querySelector('#showResultButton');
-        const questions = document.querySelectorAll('.question');
-        const progressBar = document.querySelector('#progressBar');
         const popup = document.querySelector('.popup');
         const popupOverlay = document.querySelector('.popup-overlay');
         const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
         const adsenseContainer = document.querySelector('#adsense-container');
         const counter = document.querySelector('#counter');
         let countdown;
-        let currentQuestion = 0;
-        const totalQuestions = questions.length;
 
-        // '테스트 시작' 버튼 클릭 시 테스트 시작
-        document.querySelector('#startTest').addEventListener('click', () => {
-            document.querySelector('#testSection').classList.remove('hidden');
-            document.querySelector('#startTest').classList.add('hidden');
-            showQuestion(currentQuestion);
-        });
-
-        // 각 질문을 보여주는 함수
-        function showQuestion(index) {
-            // 이전 질문 숨기기
-            if (index > 0) {
-                questions[index - 1].classList.remove('active');
-            }
-
-            // 현재 질문 보이기
-            questions[index].classList.add('active');
-
-            // 진행 바 업데이트
-            const progress = ((index + 1) / totalQuestions) * 100;
-            progressBar.textContent = `${Math.round(progress)}%`;
-
-            // 마지막 질문이 끝날 때 '결과 보기' 버튼 보이기
-            if (index === totalQuestions - 1) {
-                showResultButton.classList.remove('hidden');
-            }
-        }
-
-        // '결과 보기' 버튼 클릭 시 팝업 띄우기
+        // 결과 보기 버튼 클릭 이벤트
         showResultButton.addEventListener('click', () => {
             popup.style.display = 'block'; // 팝업 표시
             popupOverlay.style.display = 'block'; // 배경 표시
@@ -1925,7 +1894,7 @@
             startCountdown(); // 카운트다운 시작
         });
 
-        // 확인 버튼 클릭 시 팝업 닫기
+        // 확인 버튼 클릭 이벤트
         confirmPopupBtn.addEventListener('click', () => {
             popup.style.display = 'none'; // 팝업 숨기기
             popupOverlay.style.display = 'none'; // 배경 숨기기
@@ -1933,32 +1902,54 @@
             clearInterval(countdown); // 카운트다운 정지
         });
 
-        // 광고 로드
+        // 배경 클릭 시 팝업 닫기
+        popupOverlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
+        });
+
+        // 광고 로드 함수
         function loadAd() {
             const adScript = document.createElement('script');
-            adScript.src = 'https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755';
             adScript.async = true;
-            adsenseContainer.appendChild(adScript);
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
+            document.head.appendChild(adScript);
+
+            const adContainer = document.createElement('ins');
+            adContainer.classList.add('adsbygoogle');
+            adContainer.style.display = 'block';
+            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            adContainer.setAttribute('data-ad-slot', '3201247599');
+            adContainer.setAttribute('data-ad-format', 'auto');
+            adContainer.setAttribute('data-full-width-responsive', 'true');
+
+            adsenseContainer.appendChild(adContainer);
+
+            (adsbygoogle = window.adsbygoogle || []).push({});
         }
 
-        // 광고 제거
+        // 광고 제거 함수
         function clearAd() {
-            adsenseContainer.innerHTML = ''; // 광고 제거
+            adsenseContainer.innerHTML = '';
         }
 
-        // 카운트다운 타이머
+        // 카운트다운 함수
         function startCountdown() {
-            let timeLeft = 30; // 30초 카운트다운
-            counter.textContent = `결과값 분석중 입니다. 남은 시간: ${timeLeft}s`;
+            let timeLeft = 7;
+            counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
+
             countdown = setInterval(() => {
                 timeLeft--;
-                counter.textContent = `결과값 분석중 입니다. 남은 시간: ${timeLeft}s`;
+                counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
                 if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    counter.textContent = '결과값 분석이 완료되었습니다!';
+                    clearInterval(countdown); // 카운트다운 종료
+                    confirmPopupBtn.style.display = 'block'; // 7초 후 확인 버튼 표시
                 }
             }, 1000);
         }
     </script>
+
 </body>
 </html>
