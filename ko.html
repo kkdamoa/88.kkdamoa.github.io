@@ -57,12 +57,16 @@
             border-radius: 5px;
             margin-top: 10px;
         }
+        /* 결과 보기 버튼 */
+        #showResultButton {
+            display: none; /* 기본적으로 숨김 */
+        }
     </style>
 </head>
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
     crossorigin="anonymous"></script>
-    
+
     <!-- k-test -->
     <ins class="adsbygoogle"
         style="display:block"
@@ -79,6 +83,7 @@
         <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
+
 
 
     <main id="testSection" class="hidden">
@@ -1850,7 +1855,7 @@
 
 
         <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
-        <button id="showResultButton" class="hidden">결과 보기</button>
+        <button id="showResultButton">결과 보기</button>
     </main>
 
     <div id="resultSection" class="hidden">
@@ -1858,44 +1863,102 @@
         <p id="resultText"></p>
     </div>
 
-    <!-- 결과 팝업 -->
-    <div class="popup-overlay" id="popupOverlay"></div>
-    <div class="popup" id="resultPopup">
-        <h3>테스트 결과</h3>
-        <p id="popupResultText">결과 내용이 여기에 표시됩니다.</p>
-        <button class="close-popup-btn" id="closePopupBtn">확인</button>
+    <!-- 팝업 배경 -->
+    <div class="popup-overlay"></div>
+
+    <!-- 팝업 콘텐츠 -->
+    <div class="popup">
+        <!-- Google AdSense 광고 삽입 -->
+        <div id="adsense-container"></div>
+        <br>
+        <div class="counter" id="counter">결과값 분석중 입니다.</div>
+        <button class="confirm-popup-btn">확인</button>
     </div>
 
     <script src="r1.js"></script>
     <script>
-        const showResultButton = document.getElementById("showResultButton");
-        const resultPopup = document.getElementById("resultPopup");
-        const popupOverlay = document.getElementById("popupOverlay");
-        const closePopupBtn = document.getElementById("closePopupBtn");
-        const popupResultText = document.getElementById("popupResultText");
+        const radioButtons = document.querySelectorAll('.radio63');
+        const showResultButton = document.querySelector('#showResultButton');
+        const popup = document.querySelector('.popup');
+        const popupOverlay = document.querySelector('.popup-overlay');
+        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
+        const adsenseContainer = document.querySelector('#adsense-container');
+        const counter = document.querySelector('#counter');
+        let countdown;
 
-        // 결과 보기 버튼 클릭 시 팝업 열기
-        showResultButton.addEventListener("click", function() {
-            // 팝업 열기
-            resultPopup.style.display = "block";
-            popupOverlay.style.display = "block";
-
-            // 결과 내용 표시
-            popupResultText.textContent = "여기에 결과 내용이 들어갑니다.";  // 테스트 결과로 변경
+        // 라디오 버튼 클릭 시 결과 보기 버튼 보이기
+        radioButtons.forEach(radio => {
+            radio.addEventListener('change', () => {
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
+            });
+        });
+        // 결과 보기 버튼 클릭 이벤트
+        showResultButton.addEventListener('click', () => {
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
+            startCountdown(); // 카운트다운 시작
         });
 
-        // 팝업 닫기 버튼 클릭 시 팝업 닫기
-        closePopupBtn.addEventListener("click", function() {
-            resultPopup.style.display = "none";
-            popupOverlay.style.display = "none";
+        // 확인 버튼 클릭 이벤트
+        confirmPopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none'; // 팝업 숨기기
+            popupOverlay.style.display = 'none'; // 배경 숨기기
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
+            // 결과 값 표시
+            document.getElementById('resultText').innerText = '테스트 결과가 여기 표시됩니다.'; // 여기에서 결과를 넣어줄 수 있음
         });
 
         // 배경 클릭 시 팝업 닫기
-        popupOverlay.addEventListener("click", function() {
-            resultPopup.style.display = "none";
-            popupOverlay.style.display = "none";
+        popupOverlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
         });
+
+        // 광고 로드 함수
+        function loadAd() {
+            const adScript = document.createElement('script');
+            adScript.async = true;
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
+            document.head.appendChild(adScript);
+
+            const adContainer = document.createElement('ins');
+            adContainer.classList.add('adsbygoogle');
+            adContainer.style.display = 'block';
+            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            adContainer.setAttribute('data-ad-slot', '3201247599');
+            adContainer.setAttribute('data-ad-format', 'auto');
+            adContainer.setAttribute('data-full-width-responsive', 'true');
+
+            adsenseContainer.appendChild(adContainer);
+
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+
+        // 광고 제거 함수
+        function clearAd() {
+            adsenseContainer.innerHTML = '';
+        }
+
+        // 카운트다운 함수
+        function startCountdown() {
+            let timeLeft = 7;
+            counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown); // 카운트다운 종료
+                    confirmPopupBtn.style.display = 'block'; // 7초 후 확인 버튼 표시
+                }
+            }, 1000);
+        }
     </script>
+
 </body>
 </html>
 
