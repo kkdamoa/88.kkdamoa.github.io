@@ -57,10 +57,6 @@
             border-radius: 5px;
             margin-top: 10px;
         }
-        /* 결과 보기 버튼 */
-        #showResultButton {
-            display: none; /* 기본적으로 숨김 */
-        }
     </style>
 </head>
 <body>
@@ -1877,7 +1873,6 @@
 
     <script src="r1.js"></script>
     <script>
-        const radioButtons = document.querySelectorAll('.radio63');
         const showResultButton = document.querySelector('#showResultButton');
         const popup = document.querySelector('.popup');
         const popupOverlay = document.querySelector('.popup-overlay');
@@ -1885,13 +1880,6 @@
         const adsenseContainer = document.querySelector('#adsense-container');
         const counter = document.querySelector('#counter');
         let countdown;
-
-        // 라디오 버튼 클릭 시 결과 보기 버튼 보이기
-        radioButtons.forEach(radio => {
-            radio.addEventListener('change', () => {
-                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
-            });
-        });
 
         // 결과 보기 버튼 클릭 이벤트
         showResultButton.addEventListener('click', () => {
@@ -1907,9 +1895,6 @@
             popupOverlay.style.display = 'none'; // 배경 숨기기
             clearAd(); // 광고 제거
             clearInterval(countdown); // 카운트다운 정지
-
-            // 결과 값 표시
-            document.getElementById('resultText').innerText = '테스트 결과가 여기 표시됩니다.'; // 여기에서 결과를 넣어줄 수 있음
         });
 
         // 배경 클릭 시 팝업 닫기
