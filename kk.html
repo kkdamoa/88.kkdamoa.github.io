@@ -91,34 +91,6 @@
             </div>
         </div>
 
-        <div class="question" data-question="2">
-            <p>나는 사람들에게 규칙이나 절차를 잘 지키라고 강조하는 편이다.</p>
-            <div class="radioContainer">
-                <span class="false">전혀 그렇지 않다</span>
-                <label class="labelContainer">
-                    <input name="q2" value="-2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="-1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="0" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q2" value="2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <span class="true">매우 그렇다</span>
-            </div>
-        </div>
-
         <button id="showResultButton" class="hidden">결과 보기</button>
     </main>
 
@@ -185,6 +157,9 @@
         showResultButton.addEventListener('click', function() {
             document.getElementById('popup').style.display = 'block';
             document.getElementById('popupOverlay').style.display = 'block';
+            
+            // 팝업이 열릴 때마다 광고를 로드
+            (adsbygoogle = window.adsbygoogle || []).push({});
         });
 
         // 팝업 닫기
