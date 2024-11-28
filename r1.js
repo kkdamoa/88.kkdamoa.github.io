@@ -66,7 +66,7 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showResult();
+        showResult();  // 63번 질문 이후 결과를 표시하도록 호출
     }
 }
 
