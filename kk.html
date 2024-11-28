@@ -12,15 +12,19 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 600px;
+            width: 90%; /* 팝업 너비 확대 */
+            max-width: 800px; /* 최대 너비 800px로 제한 */
+            height: 80%; /* 팝업 높이 확대 */
+            max-height: 600px; /* 최대 높이 600px로 제한 */
             background-color: white;
             border: 1px solid #ccc;
             padding: 20px;
             z-index: 1000;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
             display: none;
+            overflow: auto; /* 팝업 내용이 넘칠 경우 스크롤을 추가 */
         }
+
         .popup-overlay {
             position: fixed;
             top: 0;
@@ -31,6 +35,7 @@
             z-index: 999;
             display: none;
         }
+
         .popup button {
             padding: 10px 20px;
             background-color: #007bff;
