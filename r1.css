@@ -171,8 +171,10 @@ button:disabled {
     text-align: center;  /* 광고 내용 가운데 정렬 */
 }
 
+/* 광고 크기 지정 */
 .adsbygoogle {
-    display: inline-block; /* 광고 블록을 인라인으로 설정 */
-    max-width: 100%;  /* 광고가 화면 크기에 맞게 크기 조절 */
+    display: block;
+    width: 100%;  /* 광고가 화면 크기에 맞게 가로폭을 가득 채우도록 */
+    height: 100px; /* 광고의 높이를 명시적으로 설정 */
     margin: 0 auto;  /* 광고를 중앙 정렬 */
 }
