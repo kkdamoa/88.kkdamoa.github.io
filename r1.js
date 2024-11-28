@@ -95,7 +95,8 @@ function showResult() {
 
     // 결과 메시지 설정
     sortedScores.forEach((item, index) => {
-        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${item.score}점`);
+        const percentage = (item.score / 63) * 100;  // 63점 기준으로 퍼센트 계산
+        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${item.score}점 (${percentage.toFixed(2)}%)`);
     });
 
     resultMessage += resultDetails.join('\n');
