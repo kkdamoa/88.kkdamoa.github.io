@@ -63,6 +63,7 @@
         }
     </style>
 </head>
+
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
     crossorigin="anonymous"></script>
@@ -1854,7 +1855,8 @@
 
 
 
-        <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
+
+        <!-- 결과 보기 버튼 (63번 질문에 보이도록 설정) -->
         <button id="showResultButton">결과 보기</button>
     </main>
 
@@ -1949,17 +1951,15 @@
         function startCountdown() {
             let timeLeft = 7;
             counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
-
             countdown = setInterval(() => {
                 timeLeft--;
                 counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
                 if (timeLeft <= 0) {
-                    clearInterval(countdown); // 카운트다운 종료
-                    confirmPopupBtn.style.display = 'block'; // 7초 후 확인 버튼 표시
+                    clearInterval(countdown);
+                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
                 }
             }, 1000);
         }
     </script>
-
 </body>
 </html>
