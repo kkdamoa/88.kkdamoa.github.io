@@ -162,19 +162,3 @@ button:disabled {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
-/* 광고 영역 스타일 추가 */
-.advertisement {
-    margin-top: 20px; /* 진행 바와 광고 사이에 여백 추가 */
-    margin-bottom: 20px; /* 광고와 질문 사이에 여백 추가 */
-    width: 100%;  /* 광고가 부모 요소의 가로폭을 가득 채우게 */
-    text-align: center;  /* 광고 내용 가운데 정렬 */
-}
-
-/* 광고 크기 지정 */
-.adsbygoogle {
-    display: block;
-    width: 100%;  /* 광고가 화면 크기에 맞게 가로폭을 가득 채우도록 */
-    height: 100px; /* 광고의 높이를 명시적으로 설정 */
-    margin: 0 auto;  /* 광고를 중앙 정렬 */
-}
