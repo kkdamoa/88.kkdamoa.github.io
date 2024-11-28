@@ -1,274 +1,109 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>광고 페이지</title>
-
-  <!-- Google AdSense 스크립트 -->
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-          crossorigin="anonymous"></script>
-
-  <style>
-    /* 상단 고정 광고 */
-    .anchor-ad-top {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        background-color: #fff;
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 하단 고정 광고 */
-    .anchor-ad-bottom {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 90px;
-        background-color: #fff;
-        z-index: 10000;
-        text-align: center;
-        box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    /* 상단 및 하단 고정 광고로 인한 본문 여백 추가 */
-    body {
-        padding-top: 90px;
-        padding-bottom: 90px;
-        margin: 0;
-    }
-
-    /* 팝업 및 오버레이 스타일 */
-    #overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-    }
-
-    #popup {
-        display: none;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 80%;
-        max-width: 400px;
-        background-color: #fff;
-        padding: 20px;
-        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        border-radius: 10px;
-        z-index: 1000;
-        text-align: center;
-    }
-
-    #adContainer {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: #fff;
-        z-index: 1001;
-        overflow: auto;
-        text-align: center;
-        padding-top: 50px;
-    }
-
-    .ad-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 10px;
-        background-color: #f1f1f1;
-        border-bottom: 1px solid #ddd;
-    }
-
-    .close-btn {
-        cursor: pointer;
-        font-size: 18px;
-        font-weight: bold;
-        background: none;
-        border: none;
-    }
-  </style>
-
-  <script>
-    // 모바일 화면일 경우 광고 높이를 20px로 조정
-    window.addEventListener('load', function() {
-        if (window.innerWidth <= 768) {
-            // 상단 광고 높이 조정
-            document.querySelector('.anchor-ad-top').style.height = '90px';
-            document.querySelector('.anchor-ad-top ins').style.height = '90px';
-            
-            // 하단 광고 높이 조정
-            document.querySelector('.anchor-ad-bottom').style.height = '90px';
-            document.querySelector('.anchor-ad-bottom ins').style.height = '90px';
-
-            // 본문 여백 조정
-            document.body.style.paddingTop = '90px';
-            document.body.style.paddingBottom = '90px';
-        }
-    });
-
-    // IP 방문 추적 및 차단 로직
-    window.addEventListener('load', function() {
-        const currentTime = new Date().getTime();
-        const ipVisitKey = 'ipVisitData';
-        const ONE_DAY = 24 * 60 * 60 * 1000;
-
-        const clientIp = 'user-ip-address'; // 예시로 IP를 설정했습니다.
-
-        let ipVisitData = JSON.parse(localStorage.getItem(ipVisitKey)) || {};
-
-        function resetData() {
-            Object.keys(ipVisitData).forEach(ip => {
-                if (currentTime - ipVisitData[ip].lastVisit > ONE_DAY) {
-                    delete ipVisitData[ip];
-                }
-            });
-            localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>팝업 광고</title>
+    <style>
+        /* 팝업 창 스타일 */
+        .popup {
+            display: none;
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 500px;
+            background-color: white;
+            border: 2px solid #ccc;
+            padding: 20px;
+            z-index: 1000;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
-        function handleVisit() {
-            const visitData = ipVisitData[clientIp] || { count: 0, lastVisit: 0 };
-
-            if (visitData.count === 0 || currentTime - visitData.lastVisit > ONE_DAY) {
-                // 첫 번째 접속 시 아무 작업도 하지 않음
-                visitData.count = 1; // 카운트를 1로 설정
-            } else if (visitData.count === 1) {
-                // 두 번째 접속 시 아무 작업도 하지 않음
-                visitData.count = 2; // 카운트를 2로 증가
-            } else if (visitData.count === 2) {
-                // 세 번째 접속 시 페이지 차단
-                document.body.innerHTML = ''; // 페이지 내용 제거
-                window.location.href = "about:blank"; // 빈 페이지로 리다이렉트
-                return; // 페이지 로딩을 중단
-            }
-
-            visitData.lastVisit = currentTime;
-            ipVisitData[clientIp] = visitData;
-            localStorage.setItem(ipVisitKey, JSON.stringify(ipVisitData));
+        /* 배경 어두운 부분 스타일 */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
 
-        resetData();
-        handleVisit();
-    });
-  </script>
+        /* 팝업을 닫는 버튼 스타일 */
+        .close-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 18px;
+            background: none;
+            border: none;
+            color: #333;
+        }
+
+        /* 버튼 스타일 */
+        #showPopupBtn {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        #showPopupBtn:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
 
-  <!-- 상단 고정 광고 -->
-  <div class="anchor-ad-top">
-    <ins class="adsbygoogle"
-         style="display:inline-block;width:728px;height:90px"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3603389079"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-  </div>
-  
-  <!-- 본문 콘텐츠 -->
-  <div id="main" role="main">
-    <h1>메인 콘텐츠 시작</h1>
-    <p>여기에 메인 콘텐츠가 표시됩니다.</p>
-  </div>
-  
-  <!-- 하단 고정 광고 -->
-  <div class="anchor-ad-bottom">
-    <ins class="adsbygoogle"
-    style="display:inline-block;width:728px;height:90px"
-    data-ad-client="ca-pub-9374368296307755"
-    data-ad-slot="4202989029"></ins>
-  <script>
-   (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
-  </div>
-  
-  <!-- 오버레이 및 팝업 콘텐츠 -->
-  <div id="overlay" onclick="closePopup()"></div>
-  <div id="popup">
-      <h2>kkdamoa에 오신 것을 환영합니다</h2>
-      <p>5초 후 광고 시청 후 추천 페이지로 이동합니다. 원치 않으시면 닫기 버튼을 클릭해주세요.</p>
-      <p id="popupCounter">5초 후 광고 시청이 시작됩니다...</p>
-      <button onclick="closePopup()">닫기</button>
-  </div>
-  <div id="adContainer">
-    <div class="ad-header">
-       <span id="adCounter">광고 5초 후 닫기</span>
-       <button class="close-btn" onclick="closeAd()">X</button>
+    <!-- 팝업을 띄우는 버튼 -->
+    <button id="showPopupBtn">팝업 띄우기</button>
+
+    <!-- 팝업 배경 (overlay) -->
+    <div class="overlay" id="overlay"></div>
+
+    <!-- 팝업 내용 -->
+    <div class="popup" id="popup">
+        <button class="close-btn" id="closePopupBtn">&times;</button>
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossorigin="anonymous"></script>
+        <!-- k-test -->
+        <ins class="adsbygoogle"
+        style="display:block"
+        data-ad-client="ca-pub-9374368296307755"
+        data-ad-slot="3201247599"
+        data-ad-format="auto"
+        data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
     </div>
-    <div id="adContent"></div>
-  </div>
 
-  <script>
-    let popupTimer;
-    let adTimer;
-    let adCloseTimer;
-
-    // 팝업 띄우기 및 카운트다운
-    function showPopup() {
-      document.getElementById('overlay').style.display = 'block';
-      document.getElementById('popup').style.display = 'block';
-      let seconds = 5;
-
-      popupTimer = setInterval(function() {
-        document.getElementById('popupCounter').innerText = `${seconds}초 후 광고 시청이 시작됩니다...`;
-        seconds--;
-        if (seconds < 0) {
-          clearInterval(popupTimer);
-          showAd();
+    <script>
+        // 팝업 띄우기
+        document.getElementById('showPopupBtn').onclick = function() {
+            document.getElementById('popup').style.display = 'block';
+            document.getElementById('overlay').style.display = 'block';
         }
-      }, 1000);
-    }
 
-    // 광고 표시
-    function showAd() {
-      document.getElementById('popup').style.display = 'none';
-      document.getElementById('adContainer').style.display = 'block';
-
-      let adCounter = 5;
-      document.getElementById('adCounter').innerText = `광고 ${adCounter}초 후 닫기`;
-
-      adTimer = setInterval(function() {
-        adCounter--;
-        document.getElementById('adCounter').innerText = `광고 ${adCounter}초 후 닫기`;
-
-        if (adCounter <= 0) {
-          closeAd();
+        // 팝업 닫기
+        document.getElementById('closePopupBtn').onclick = function() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
         }
-      }, 1000);
-    }
 
-    // 광고 닫기
-    function closeAd() {
-      clearInterval(adTimer);
-      document.getElementById('adContainer').style.display = 'none';
-      window.location.href = "https://newpage.com"; // 이동할 페이지 URL
-    }
-
-    // 팝업 닫기
-    function closePopup() {
-      clearInterval(popupTimer);
-      document.getElementById('overlay').style.display = 'none';
-      document.getElementById('popup').style.display = 'none';
-      window.location.href = "https://anotherpage.com"; // 팝업 닫고 이동할 페이지
-    }
-
-    // 페이지 로드 후 광고 팝업 표시
-    setTimeout(showPopup, Math.random() * (10000 - 5000) + 5000);
-  </script>
+        // 배경 클릭 시 팝업 닫기
+        document.getElementById('overlay').onclick = function() {
+            document.getElementById('popup').style.display = 'none';
+            document.getElementById('overlay').style.display = 'none';
+        }
+    </script>
 
 </body>
 </html>
