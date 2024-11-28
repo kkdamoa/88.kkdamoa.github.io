@@ -1,35 +1,12 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-    crossorigin="anonymous"></script>
-    
-    <!-- 상단 광고 (모바일에서만 보이도록 설정) -->
-    <ins class="adsbygoogle top-ad"
-         style="display:none;"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3201247599"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-
-    <!-- 사이드바 하단 앵커 광고 (PC에서도 보이도록 설정) -->
-    <div class="sidebar-ad">
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-    </div>
-
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에니어그램 테스트</title>
     <link rel="stylesheet" href="r1.css"> <!-- 외부 CSS 파일을 연결 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+            crossorigin="anonymous"></script>
 </head>
 <body>
 
@@ -38,6 +15,38 @@
         <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
+
+    <!-- 모바일에서만 보이는 상단 광고 -->
+    <ins class="adsbygoogle top-ad"
+         style="display:none;"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+
+    <!-- 모바일에서만 보이는 앵커 광고 -->
+    <ins class="adsbygoogle anchor-ad"
+         style="display:none;"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247600" <!-- 다른 ad-slot 값 사용 -->
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+
+    <!-- 사이드바 하단 광고 (PC와 모바일에서 모두 보이도록 설정) -->
+    <div class="sidebar-ad">
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599" <!-- 기존 상단 광고와 동일한 slot -->
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+    </div>
+
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+</body>
 
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
