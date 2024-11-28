@@ -15,43 +15,15 @@
 
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
-        
+
         <!-- 진행 바 -->
         <div class="progress-container">
             <div class="progress-bar" id="progressBar">0%</div>
         </div>
 
         <!-- 질문 목록 -->
-        <div class="question" data-question="1">
+        <div class="question active" data-question="1">
             <p>나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.</p>
-            <div class="radioContainer">
-                <span class="false">전혀 그렇지 않다</span>
-                <label class="labelContainer">
-                    <input name="q1" value="-2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q1" value="-1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q1" value="0" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q1" value="1" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <label class="labelContainer">
-                    <input name="q1" value="2" type="radio">
-                    <span class="checkmark"></span>
-                </label>
-                <span class="true">매우 그렇다</span>
-            </div>
-        </div>
-
-        <div class="question" data-question="2">
-            <p>나는 일을 할 때, 결과보다 과정에 더 많은 신경을 쓴다.</p>
             <div class="radioContainer">
                 <span class="false">전혀 그렇지 않다</span>
                 <label class="labelContainer">
@@ -78,12 +50,12 @@
             </div>
         </div>
 
-        <button id="resultButton" class="hidden">결과 보기</button>
+        <div id="resultButton" class="hidden">결과 보기</div>
     </main>
 
     <div id="resultSection" class="hidden">
         <h2>테스트 결과</h2>
-        <p id="resultText">여기에 결과가 표시됩니다.</p>
+        <p id="resultText"></p>
     </div>
 
     <script src="r1.js"></script>

@@ -132,3 +132,38 @@ button:disabled {
     margin: 20px auto;
     display: none;
 }
+/* 기존 CSS는 그대로 사용하되, hidden 클래스만 점검 */
+
+.hidden {
+    display: none;
+}
+
+/* 추가: 버튼 스타일과 기타 필요한 스타일 유지 */
+#resultButton {
+    padding: 12px 25px;
+    background-color: #008CBA;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 5px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#resultButton:hover {
+    background-color: #007B9A;
+}
+
+/* 결과 영역 스타일 */
+#resultSection {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 20px auto;
+    display: none;
+}
