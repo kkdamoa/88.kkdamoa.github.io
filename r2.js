@@ -1,9 +1,13 @@
 let currentQuestion = 1;
-const totalQuestions = 63;
+const totalQuestions = 7;
 const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
+const adsSection = document.getElementById('adsSection');
+const countdown = document.getElementById('countdown');
+const countdownMessage = document.getElementById('countdownMessage');
+const closeAdButton = document.getElementById('closeAdButton');
 
 // 각 유형에 대한 점수
 let scores = {
