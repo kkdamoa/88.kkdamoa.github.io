@@ -3,79 +3,93 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팝업 광고 예제</title>
+    <title>팝업 광고 예시</title>
     <style>
         /* 팝업 스타일 */
         .popup {
-            display: none;
+            display: none; /* 기본적으로 팝업은 숨김 */
             position: fixed;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             width: 80%;
             max-width: 600px;
-            padding: 20px;
             background-color: white;
-            border: 1px solid #ccc;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
             z-index: 1000;
         }
-
-        /* 팝업 내용 스타일 */
-        .popup-content {
-            text-align: center;
+        /* 배경 클릭 시 팝업 닫기 */
+        .popup-overlay {
+            display: none; /* 기본적으로 배경은 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
         }
-
-        /* 팝업 닫기 버튼 스타일 */
-        .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
+        /* 버튼 스타일 */
+        .open-popup-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
             cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
 <body>
-    <!-- 팝업 버튼 -->
-    <button id="openPopupBtn">팝업 열기</button>
 
-    <!-- 팝업 창 -->
-    <div class="popup" id="popup">
-        <span class="close-btn" id="closePopupBtn">&times;</span>
-        <div class="popup-content">
-            <!-- 광고 코드 -->
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-                    crossorigin="anonymous"></script>
-            <!-- k-test -->
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
-        </div>
+    <button class="open-popup-btn">팝업 열기</button>
+
+    <!-- 팝업 배경 -->
+    <div class="popup-overlay"></div>
+
+    <!-- 팝업 콘텐츠 -->
+    <div class="popup">
+        <h2>애드센스 광고 팝업</h2>
+        <!-- Google AdSense 광고 삽입 -->
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        <br>
+        <button class="close-popup-btn">닫기</button>
     </div>
 
     <script>
         // 팝업 열기 버튼 클릭 이벤트
-        document.getElementById('openPopupBtn').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'block';
+        const openPopupBtn = document.querySelector('.open-popup-btn');
+        const popup = document.querySelector('.popup');
+        const popupOverlay = document.querySelector('.popup-overlay');
+        const closePopupBtn = document.querySelector('.close-popup-btn');
+
+        openPopupBtn.addEventListener('click', () => {
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
         });
 
         // 팝업 닫기 버튼 클릭 이벤트
-        document.getElementById('closePopupBtn').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'none';
+        closePopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none'; // 팝업 숨기기
+            popupOverlay.style.display = 'none'; // 배경 숨기기
         });
 
-        // 팝업 외부 클릭 시 닫기
-        window.addEventListener('click', function(event) {
-            if (event.target == document.getElementById('popup')) {
-                document.getElementById('popup').style.display = 'none';
-            }
+        // 배경 클릭 시 팝업 닫기
+        popupOverlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
         });
     </script>
+
 </body>
 </html>
