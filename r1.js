@@ -1,115 +1,93 @@
+document.getElementById("startTest").addEventListener("click", startTest);
+
 let currentQuestion = 1;
 const totalQuestions = 63;
-const progressBar = document.getElementById('progressBar');
-const testSection = document.getElementById('testSection');
-const resultSection = document.getElementById('resultSection');
-const resultText = document.getElementById('resultText');
+const results = {};
 
-// 각 유형에 대한 점수
-let scores = {
-    type1: 0, // 완벽주의자
-    type2: 0, // 헌신자
-    type3: 0, // 성취자
-    type4: 0, // 개성추구자
-    type5: 0, // 탐구자
-    type6: 0, // 충실한 사람
-    type7: 0, // 열정적인 사람
-    type8: 0, // 도전자
-    type9: 0  // 평화주의자
+// 에니어그램 유형 9개에 대한 초기 점수 (각각 0으로 시작)
+const types = {
+    type1: 0,
+    type2: 0,
+    type3: 0,
+    type4: 0,
+    type5: 0,
+    type6: 0,
+    type7: 0,
+    type8: 0,
+    type9: 0
 };
 
-// 각 질문에 대한 유형 매핑
-const questionTypeMapping = {};
-
-// 1번~7번: type1, 8번~14번: type2, 15번~21번: type3, ..., 57번~63번: type9
-for (let i = 1; i <= totalQuestions; i++) {
-    if (i <= 7) questionTypeMapping[i] = 'type1'; // 1~7번은 type1
-    else if (i <= 14) questionTypeMapping[i] = 'type2'; // 8~14번은 type2
-    else if (i <= 21) questionTypeMapping[i] = 'type3'; // 15~21번은 type3
-    else if (i <= 28) questionTypeMapping[i] = 'type4'; // 22~28번은 type4
-    else if (i <= 35) questionTypeMapping[i] = 'type5'; // 29~35번은 type5
-    else if (i <= 42) questionTypeMapping[i] = 'type6'; // 36~42번은 type6
-    else if (i <= 49) questionTypeMapping[i] = 'type7'; // 43~49번은 type7
-    else if (i <= 56) questionTypeMapping[i] = 'type8'; // 50~56번은 type8
-    else questionTypeMapping[i] = 'type9'; // 57~63번은 type9
+function startTest() {
+    document.querySelector("header").style.display = "none"; // 테스트 시작 버튼 숨기기
+    document.getElementById("testSection").classList.remove("hidden"); // 질문 섹션 보이기
+    showQuestion(currentQuestion);
 }
 
-// 질문 표시
 function showQuestion(questionNumber) {
-    const questions = document.querySelectorAll('.question');
-    questions.forEach(q => q.classList.add('hidden'));
-    const current = document.querySelector(`.question[data-question="${questionNumber}"]`);
-    current.classList.remove('hidden');
+    const question = document.querySelector(`.question[data-question="${questionNumber}"]`);
+    question.classList.add("active");
 
-    // 진행 상황 업데이트
-    updateProgressBar();
+    // 진행 바 업데이트
+    updateProgressBar(questionNumber);
 }
 
-// 진행 바 업데이트
-function updateProgressBar() {
-    const percentage = (currentQuestion / totalQuestions) * 100;
-    progressBar.style.width = `${percentage}%`;
-    progressBar.textContent = `${Math.round(percentage)}%`;
+function updateProgressBar(questionNumber) {
+    const progressBar = document.getElementById("progressBar");
+    const percentage = (questionNumber / totalQuestions) * 100;
+    progressBar.style.width = percentage + "%";
+    progressBar.textContent = Math.round(percentage) + "%";
 }
 
-// 라디오 버튼 선택 시 점수 누적 및 자동으로 다음 질문으로 이동
-function handleAnswer(event) {
-    const selectedValue = event.target.value;  // 선택된 값 가져오기
-    
-    // 선택된 값에 해당하는 점수 추가
-    const questionType = questionTypeMapping[currentQuestion]; // 현재 질문에 해당하는 유형 가져오기
-    scores[questionType] += parseInt(selectedValue); // 해당 유형에 점수 추가
+document.querySelectorAll(".radioContainer input").forEach(input => {
+    input.addEventListener("change", function () {
+        const questionData = this.closest(".question");
+        const questionId = questionData.dataset.question;
+        const score = parseInt(this.value);
 
-    // 질문 번호 증가 후, 다음 질문 표시
-    currentQuestion++;
+        // 선택된 점수로 해당 유형 업데이트
+        const questionType = getQuestionType(questionId);
+        types[questionType] += score;
 
-    if (currentQuestion <= totalQuestions) {
-        showQuestion(currentQuestion);
-    } else {
+        // 다음 질문으로 이동
+        nextQuestion(questionId);
+    });
+});
+
+function getQuestionType(questionId) {
+    // 각 질문에 대해 해당 유형을 분배 (예시로 임의 배정)
+    // 이 부분은 각 질문이 어떤 유형에 해당하는지 매핑해야 합니다.
+    if (questionId <= 7) return 'type1';
+    else if (questionId <= 14) return 'type2';
+    else if (questionId <= 21) return 'type3';
+    else if (questionId <= 28) return 'type4';
+    else if (questionId <= 35) return 'type5';
+    else if (questionId <= 42) return 'type6';
+    else if (questionId <= 49) return 'type7';
+    else if (questionId <= 56) return 'type8';
+    else return 'type9';
+}
+
+function nextQuestion(currentQuestionId) {
+    // 현재 질문 숨기기
+    document.querySelector(`.question[data-question="${currentQuestionId}"]`).classList.remove("active");
+
+    // 다음 질문으로 이동
+    currentQuestionId++;
+
+    if (currentQuestionId > totalQuestions) {
         showResult();
+    } else {
+        showQuestion(currentQuestionId);
     }
 }
 
-// 시작 버튼 클릭 시
-document.getElementById('startTest').addEventListener('click', () => {
-    document.querySelector('header').classList.add('hidden');
-    testSection.classList.remove('hidden');
-    showQuestion(currentQuestion);
-});
-
-// 라디오 버튼에 이벤트 리스너 추가
-document.querySelectorAll('.question input[type="radio"]').forEach(input => {
-    input.addEventListener('change', handleAnswer);
-});
-
-// 결과 계산 및 표시
 function showResult() {
-    // 점수 내림차순으로 정렬
-    const sortedScores = Object.keys(scores).sort((a, b) => scores[b] - scores[a]);
-    
-    // 상위 3개 유형 선택
-    let resultMessage = '당신의 성격 유형은:\n';
-    sortedScores.slice(0, 3).forEach((type, index) => {
-        resultMessage += `${index + 1}. ${getTypeName(type)} (점수: ${scores[type]})\n`;
-    });
+    // 가장 높은 점수를 받은 유형을 계산
+    const highestType = Object.keys(types).reduce((a, b) => types[a] > types[b] ? a : b);
 
-    // 결과 표시
-    resultText.innerText = resultMessage;
-    resultSection.classList.remove('hidden');
-}
+    let resultText = `당신의 에니어그램 유형은: ${highestType}입니다.`;
 
-// 유형 이름을 반환하는 함수
-function getTypeName(type) {
-    const typeNames = {
-        type1: '완벽주의자',
-        type2: '헌신적인 사람',
-        type3: '성취를 추구하는 사람',
-        type4: '개성추구자',
-        type5: '탐구자',
-        type6: '충실한 사람',
-        type7: '열정적인 사람',
-        type8: '도전자',
-        type9: '평화주의자'
-    };
-    return typeNames[type] || '알 수 없음';
+    document.getElementById("resultText").textContent = resultText;
+    document.getElementById("resultSection").classList.remove("hidden");
+    document.getElementById("testSection").classList.add("hidden");
 }
