@@ -36,23 +36,11 @@ header {
 
 .question {
     margin-bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.options {
-    display: flex;
-    flex-direction: row; /* 답변을 가로로 나열 */
-    justify-content: space-between; /* 각 답변을 간격을 두고 배치 */
-    margin-top: 10px;
-    width: 100%;
-    align-items: center; /* 세로 정렬 */
 }
 
 .options label {
     display: block;
-    margin: 0 10px; /* 각 옵션 간의 여백 */
+    margin: 12px 0;
 }
 
 .radioContainer {
@@ -60,7 +48,6 @@ header {
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
-    width: 100%;
 }
 
 .labelContainer {
@@ -126,23 +113,9 @@ button:disabled {
 }
 
 @media (max-width: 600px) {
-    /* 모바일 화면에서도 답변이 가로로 나열되도록 수정 */
-    .question {
-        margin-bottom: 10px;
-    }
-
-    .options {
-        width: 100%;
-        margin-top: 5px;
-        flex-wrap: wrap; /* 답변이 화면에 맞게 자동으로 줄 바꿈 */
-        justify-content: space-around; /* 각 답변의 간격을 고르게 분배 */
-    }
-
     .radioContainer {
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
     }
 
     .labelContainer .checkmark {
@@ -168,44 +141,4 @@ button:disabled {
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-/* 광고 팝업 스타일 */
-#adSection {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.5); /* 배경 어두운 색 */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 999;
-}
-
-.ad-popup {
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-#adSection.hidden {
-    display: none;
-}
-
-#closeAdButton {
-    margin-top: 20px;
-    padding: 10px 20px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-#closeAdButton:hover {
-    background-color: #45a049;
 }
