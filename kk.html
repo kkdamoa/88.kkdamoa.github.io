@@ -52,43 +52,65 @@
     <div class="popup">
         <h2>애드센스 광고 팝업</h2>
         <!-- Google AdSense 광고 삽입 -->
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-        <script>
-             (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+        <div id="adsense-container"></div>
         <br>
         <button class="close-popup-btn">닫기</button>
     </div>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     <script>
-        // 팝업 열기 버튼 클릭 이벤트
         const openPopupBtn = document.querySelector('.open-popup-btn');
         const popup = document.querySelector('.popup');
         const popupOverlay = document.querySelector('.popup-overlay');
         const closePopupBtn = document.querySelector('.close-popup-btn');
+        const adsenseContainer = document.querySelector('#adsense-container');
 
+        // 팝업 열기 버튼 클릭 이벤트
         openPopupBtn.addEventListener('click', () => {
             popup.style.display = 'block'; // 팝업 표시
             popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
         });
 
         // 팝업 닫기 버튼 클릭 이벤트
         closePopupBtn.addEventListener('click', () => {
             popup.style.display = 'none'; // 팝업 숨기기
             popupOverlay.style.display = 'none'; // 배경 숨기기
+            clearAd(); // 광고 제거
         });
 
         // 배경 클릭 시 팝업 닫기
         popupOverlay.addEventListener('click', () => {
             popup.style.display = 'none';
             popupOverlay.style.display = 'none';
+            clearAd(); // 광고 제거
         });
+
+        // 광고 로드 함수
+        function loadAd() {
+            const adScript = document.createElement('script');
+            adScript.async = true;
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
+            document.head.appendChild(adScript);
+
+            const adContainer = document.createElement('ins');
+            adContainer.classList.add('adsbygoogle');
+            adContainer.style.display = 'block';
+            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            adContainer.setAttribute('data-ad-slot', '3201247599');
+            adContainer.setAttribute('data-ad-format', 'auto');
+            adContainer.setAttribute('data-full-width-responsive', 'true');
+
+            adsenseContainer.appendChild(adContainer);
+
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+
+        // 광고 제거 함수
+        function clearAd() {
+            // 광고가 로드되었으면 제거
+            adsenseContainer.innerHTML = '';
+        }
     </script>
 
 </body>
