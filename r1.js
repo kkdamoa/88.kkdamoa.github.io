@@ -114,7 +114,7 @@ function showResult() {
 
     // 결과 표시
     resultText.innerText = resultMessage;
-    resultSection.classList.remove('hidden');
+    resultSection.classList.remove('hidden');  // 결과 섹션을 보이게 합니다.
 }
 
 // 유형 이름 반환 함수

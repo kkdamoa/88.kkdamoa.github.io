@@ -1793,15 +1793,20 @@
         </div>
 
 
-        <!-- 결과 보기 버튼 (기본적으로 숨겨져 있음) -->
-        <button id="resultButton" class="hidden">결과 보기</button>
-    </main>
+        <section id="testSection" class="hidden">
+            <!-- 여기에 테스트 내용 -->
+        </section>
+        
+        <section id="resultSection" class="hidden">
+            <h3 id="resultText"></h3>
+            <button id="resultButton" class="hidden">결과 보기</button>
+        </section>
 
-    <div id="resultSection" class="hidden">
-        <h2>테스트 결과</h2>
-        <p id="resultText"></p>
-    </div>
+<!-- 결과 표시 영역 -->
+<div id="resultSection" class="hidden">
+    <h2>테스트 결과</h2>
+    <p id="resultText"></p>
+</div>
 
 <script src="r1.js"></script>
 </body>
-</html>
