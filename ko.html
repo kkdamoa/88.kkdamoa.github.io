@@ -1796,14 +1796,62 @@
 
         <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
         <button id="showResultButton" class="hidden">결과 보기</button>
-
     </main>
+
+    <!-- 광고 팝업 -->
+    <div id="overlay" onclick="closePopup()" style="display: none;"></div>
+    <div id="popup" style="display: none;">
+        <h2>광고</h2>
+        <p>광고를 시청해주세요. 5초 후 광고가 종료됩니다.</p>
+        <p id="popupCounter">5초 후 광고가 종료됩니다...</p>
+        <button onclick="closePopup()">닫기</button>
+    </div>
 
     <div id="resultSection" class="hidden">
         <h2>테스트 결과</h2>
-        <p id="resultText"></p>
+        <p id="resultText">여기에 결과가 표시됩니다.</p>
     </div>
 
     <script src="r1.js"></script>
+    
+    <script>
+        // 테스트 시작 버튼 클릭 시 테스트 시작
+        document.getElementById('startTest').onclick = function() {
+            document.getElementById('testSection').classList.remove('hidden');
+            document.getElementById('startTest').classList.add('hidden');
+        };
+
+        // 결과 보기 버튼 클릭 시 팝업 표시
+        document.getElementById('showResultButton').onclick = function() {
+            showPopup(); // 광고 팝업 표시
+        };
+
+        function showPopup() {
+            // 팝업을 표시
+            document.getElementById('overlay').style.display = 'block';
+            document.getElementById('popup').style.display = 'block';
+            document.body.style.overflow = 'hidden'; // 스크롤 비활성화
+
+            let counter = 5;
+            let popupCounter = document.getElementById('popupCounter');
+            let countdown = setInterval(function() {
+                counter--;
+                popupCounter.textContent = `${counter}초 후 광고가 종료됩니다...`;
+                if (counter <= 0) {
+                    clearInterval(countdown);
+                    popupCounter.textContent = "광고 종료";
+                    closePopup(); // 5초 후 광고 팝업 닫기
+                    document.getElementById('resultSection').classList.remove('hidden'); // 결과 섹션 보이기
+                }
+            }, 1000);
+        }
+
+        function closePopup() {
+            // 팝업을 닫고 결과 섹션 보이기
+            document.getElementById('overlay').style.display = 'none';
+            document.getElementById('popup').style.display = 'none';
+            document.body.style.overflow = ''; // 스크롤 활성화
+        }
+    </script>
 </body>
 </html>
