@@ -1,3 +1,28 @@
+/* 기본적으로 모든 광고는 보이게 설정 */
+.adsbygoogle {
+    display: block;
+}
+
+/* 모바일에서만 상단 광고 보이게 */
+@media (max-width: 600px) {
+    .top-ad {
+        display: block; /* 모바일에서만 상단 광고를 보이게 */
+    }
+}
+
+/* PC 화면에서 상단 광고 숨기기 */
+@media (min-width: 601px) {
+    .top-ad {
+        display: none; /* PC에서는 상단 광고 숨김 */
+    }
+}
+
+/* 사이드 광고와 하단 광고는 모든 화면에서 보이도록 */
+.side-ad,
+.bottom-ad {
+    display: block;
+}
+
 body {
     font-family: Arial, sans-serif;
     text-align: center;
