@@ -1,169 +1,63 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: Arial, sans-serif;
-    text-align: center;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: white;
     padding: 20px;
-    margin: 0;
-    background-color: #f9f9f9;
-}
-
-header {
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-.progress-container {
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    height: 12px;
-    margin-top: 15px;
+    max-width: 600px;
 }
 
-.progress-bar {
-    height: 100%;
-    background-color: #4caf50;
-    width: 0%;
-    border-radius: 15px;
+h1 {
     text-align: center;
-    color: white;
-    line-height: 12px;
-    font-weight: bold;
-    transition: width 0.5s ease;
-}
-
-.question {
     margin-bottom: 20px;
 }
 
-.radioContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.question {
     margin-bottom: 15px;
 }
 
-.labelContainer {
-    display: inline-block;
-    position: relative;
-}
-
-.labelContainer input[type="radio"] {
-    display: none;
-}
-
-.labelContainer .checkmark {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #4caf50;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-}
-
-.labelContainer input[type="radio"]:checked + .checkmark {
-    background-color: #4caf50;
-}
-
-.labelContainer .checkmark::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-}
-
-.false, .true {
-    font-size: 12px;
-    color: #666;
-    width: 100px;
-    text-align: center;
+label {
+    display: block;
+    margin: 5px 0;
 }
 
 button {
-    margin-top: 30px;
-    padding: 12px 25px;
-    background-color: #4caf50;
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
     color: white;
     border: none;
-    cursor: pointer;
-    font-size: 16px;
     border-radius: 5px;
-}
-
-button:disabled {
-    background-color: #ccc;
-}
-
-/* 결과 보기 버튼 스타일 */
-#resultButton {
+    font-size: 16px;
+    cursor: pointer;
     margin-top: 20px;
-    padding: 12px 25px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
 }
 
-#resultButton:hover {
-    background-color: #007B9A;
+button:hover {
+    background-color: #45a049;
 }
 
-#resultSection {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 20px auto;
+.answers {
     display: none;
-}
-/* 기존 CSS는 그대로 사용하되, hidden 클래스만 점검 */
-
-.hidden {
-    display: none;
+    margin-top: 20px;
 }
 
-/* 추가: 버튼 스타일과 기타 필요한 스타일 유지 */
-#resultButton {
-    padding: 12px 25px;
-    background-color: #008CBA;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-#resultButton:hover {
-    background-color: #007B9A;
-}
-
-/* 결과 영역 스타일 */
-#resultSection {
-    margin-top: 30px;
-    padding: 20px;
-    background-color: white;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
-    margin: 20px auto;
-    display: none;
+.answers p {
+    margin: 10px 0;
 }

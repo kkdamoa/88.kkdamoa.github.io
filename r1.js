@@ -1,43 +1,22 @@
-// JavaScript (r1.js)
-
-let currentQuestion = 0;
-let answers = [];
-
-// 2번 질문에 대한 라디오 버튼 클릭 시 결과 보기 버튼 활성화
-function checkRadioButton() {
-    const question2Radios = document.querySelectorAll('input[name="q2"]');
-    let resultButton = document.getElementById('resultButton');
-
-    // 2번 질문에 대해 라디오 버튼이 체크되었는지 확인
-    let isQuestion2Answered = Array.from(question2Radios).some(radio => radio.checked);
-
-    if (isQuestion2Answered) {
-        resultButton.classList.remove('hidden'); // 버튼 활성화
-    } else {
-        resultButton.classList.add('hidden'); // 버튼 비활성화
+function showAnswers() {
+    const q1 = document.querySelector('input[name="q1"]:checked');
+    const q2 = document.querySelector('input[name="q2"]:checked');
+    const q3 = document.querySelector('input[name="q3"]:checked');
+    
+    if (!q1 || !q2 || !q3) {
+        alert("모든 질문에 답변을 선택해주세요.");
+        return;
     }
+
+    const answers = {
+        q1: q1.value === "yes" ? "감정 이해가 뛰어납니다." : "감정 이해가 부족할 수 있습니다.",
+        q2: q2.value === "yes" ? "논리적인 접근을 선호합니다." : "감정적인 접근을 선호합니다.",
+        q3: q3.value === "yes" ? "긴장감을 자주 느낍니다." : "긴장감을 덜 느낍니다."
+    };
+
+    document.getElementById("resultQ1").textContent = `질문 1: ${answers.q1}`;
+    document.getElementById("resultQ2").textContent = `질문 2: ${answers.q2}`;
+    document.getElementById("resultQ3").textContent = `질문 3: ${answers.q3}`;
+
+    document.getElementById("answers").style.display = "block";
 }
-
-// 결과 보기 클릭 시 결과 표시 함수
-function showResult() {
-    let resultSection = document.getElementById('resultSection');
-    let resultText = document.getElementById('resultText');
-
-    // 결과를 "2"로 설정
-    resultSection.classList.remove('hidden'); // 결과 섹션 보이기
-    resultText.innerText = "결과: 2"; // 숫자 2 출력
-}
-
-// 시작 버튼 클릭 시 테스트 시작
-document.getElementById('startTest').addEventListener('click', function() {
-    document.getElementById('testSection').classList.remove('hidden');
-    this.classList.add('hidden');
-});
-
-// 2번 질문에 대한 라디오 버튼 클릭 시 checkRadioButton 함수 실행
-document.querySelectorAll('input[name="q2"]').forEach(radio => {
-    radio.addEventListener('change', checkRadioButton);
-});
-
-// 결과 보기 버튼 클릭 시 showResult 함수 실행
-document.getElementById('resultButton').addEventListener('click', showResult);
