@@ -5,6 +5,7 @@ const testSection = document.getElementById('testSection');
 const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
 const adsSection = document.getElementById('adsSection');
+const countdown = document.getElementById('countdown');
 const countdownMessage = document.getElementById('countdownMessage');
 const closeAdButton = document.getElementById('closeAdButton');
 
@@ -23,15 +24,15 @@ let scores = {
 
 // 각 질문에 대한 점수 매핑 (각 유형별로 7개의 질문)
 const questionTypeMapping = {
-    1: 'type1', 2: 'type1', 3: 'type1', 4: 'type1', 5: 'type1', 6: 'type1', 7: 'type1',
-    8: 'type2', 9: 'type2', 10: 'type2', 11: 'type2', 12: 'type2', 13: 'type2', 14: 'type2',
-    15: 'type3', 16: 'type3', 17: 'type3', 18: 'type3', 19: 'type3', 20: 'type3', 21: 'type3',
-    22: 'type4', 23: 'type4', 24: 'type4', 25: 'type4', 26: 'type4', 27: 'type4', 28: 'type4',
-    29: 'type5', 30: 'type5', 31: 'type5', 32: 'type5', 33: 'type5', 34: 'type5', 35: 'type5',
-    36: 'type6', 37: 'type6', 38: 'type6', 39: 'type6', 40: 'type6', 41: 'type6', 42: 'type6',
-    43: 'type7', 44: 'type7', 45: 'type7', 46: 'type7', 47: 'type7', 48: 'type7', 49: 'type7',
-    50: 'type8', 51: 'type8', 52: 'type8', 53: 'type8', 54: 'type8', 55: 'type8', 56: 'type8',
-    57: 'type9', 58: 'type9', 59: 'type9', 60: 'type9', 61: 'type9', 62: 'type9', 63: 'type9'
+    1: 'type1', 2: 'type1', 3: 'type1', 4: 'type1', 5: 'type1', 6: 'type1', 7: 'type1', // 1~7번 질문 type1
+    8: 'type2', 9: 'type2', 10: 'type2', 11: 'type2', 12: 'type2', 13: 'type2', 14: 'type2', // 8~14번 질문 type2
+    15: 'type3', 16: 'type3', 17: 'type3', 18: 'type3', 19: 'type3', 20: 'type3', 21: 'type3', // 15~21번 질문 type3
+    22: 'type4', 23: 'type4', 24: 'type4', 25: 'type4', 26: 'type4', 27: 'type4', 28: 'type4', // 22~28번 질문 type4
+    29: 'type5', 30: 'type5', 31: 'type5', 32: 'type5', 33: 'type5', 34: 'type5', 35: 'type5', // 29~35번 질문 type5
+    36: 'type6', 37: 'type6', 38: 'type6', 39: 'type6', 40: 'type6', 41: 'type6', 42: 'type6', // 36~42번 질문 type6
+    43: 'type7', 44: 'type7', 45: 'type7', 46: 'type7', 47: 'type7', 48: 'type7', 49: 'type7', // 43~49번 질문 type7
+    50: 'type8', 51: 'type8', 52: 'type8', 53: 'type8', 54: 'type8', 55: 'type8', 56: 'type8', // 50~56번 질문 type8
+    57: 'type9', 58: 'type9', 59: 'type9', 60: 'type9', 61: 'type9', 62: 'type9', 63: 'type9'  // 57~63번 질문 type9
 };
 
 // 질문 표시
@@ -55,7 +56,7 @@ function updateProgressBar() {
 // 라디오 버튼 선택 시 점수 누적 및 자동으로 다음 질문으로 이동
 function handleAnswer(event) {
     const selectedValue = parseInt(event.target.value);  // 선택된 값 가져오기
-
+    
     // 선택된 값에 해당하는 점수 추가 (해당 유형에 점수 반영)
     const questionType = questionTypeMapping[currentQuestion];
     scores[questionType] += selectedValue;
@@ -66,7 +67,7 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showAdBeforeResult();  // 결과 전에 광고 표시
+        showResult();
     }
 }
 
@@ -80,36 +81,6 @@ document.getElementById('startTest').addEventListener('click', () => {
 // 라디오 버튼에 이벤트 리스너 추가
 document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
-});
-
-// 광고 카운트다운 시작
-let countdownTimer;
-let countdownValue = 5; // 5초 카운트다운
-
-function startCountdown() {
-    countdownMessage.innerText = `광고가 ${countdownValue}초 후에 닫힙니다.`;
-    countdownTimer = setInterval(() => {
-        countdownValue--;
-        countdownMessage.innerText = `광고가 ${countdownValue}초 후에 닫힙니다.`;
-        if (countdownValue <= 0) {
-            clearInterval(countdownTimer);
-            closeAdButton.style.display = 'block'; // 광고 닫기 버튼 표시
-        }
-    }, 1000);
-}
-
-// 광고가 끝난 후 결과 표시
-function showAdBeforeResult() {
-    adsSection.classList.remove('hidden');  // 광고 영역 보이기
-    countdownValue = 5;  // 카운트다운 초기화
-    closeAdButton.style.display = 'none'; // 광고 닫기 버튼 숨기기
-    startCountdown();  // 카운트다운 시작
-}
-
-// 광고 닫기 버튼 클릭 시
-closeAdButton.addEventListener('click', () => {
-    adsSection.classList.add('hidden');  // 광고 숨기기
-    showResult();  // 결과 표시
 });
 
 // 결과 계산 및 표시
