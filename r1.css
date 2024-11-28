@@ -162,7 +162,6 @@ button:disabled {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 /* 기본적으로 광고는 보이게 설정 */
 .adsbygoogle {
     display: block;
