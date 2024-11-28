@@ -65,7 +65,7 @@ function handleAnswer(event) {
     if (currentQuestion <= totalQuestions) {
         showQuestion(currentQuestion);
     } else {
-        showPopup();
+        showResultWithCountdown();
     }
 }
 
@@ -81,17 +81,23 @@ document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
 });
 
-// 결과 보기 팝업 표시
-function showPopup() {
-    popup.classList.remove('hidden');
-}
+// 결과값 정리중 및 광고 카운트다운
+function showResultWithCountdown() {
+    // 결과값 정리중 메시지와 카운트다운 시작
+    let countdown = 5; // 5초 카운트다운
+    countdownText.innerText = `결과값 정리중... 광고를 잠시 시청해 주세요.`;
 
-// 팝업 클릭 시 결과 정리중 메시지와 광고 카운트다운 시작
-popup.addEventListener('click', () => {
-    popup.classList.add('hidden');
-    showResult();
-    showCountdown();
-});
+    const interval = setInterval(() => {
+        countdown--;
+        countdownText.innerText = `결과값 정리중... ${countdown}초 후에 결과를 확인할 수 있습니다.`;
+        
+        if (countdown <= 0) {
+            clearInterval(interval);
+            // 5초 후 결과를 표시
+            showResult();
+        }
+    }, 1000);
+}
 
 // 결과 계산 및 표시
 function showResult() {
@@ -118,23 +124,6 @@ function showResult() {
     // 결과 표시
     resultText.innerText = resultMessage;
     resultSection.classList.remove('hidden');
-}
-
-// 결과값 정리중 및 광고 카운트다운
-function showCountdown() {
-    let countdown = 5; // 5초 카운트다운
-    countdownText.innerText = `결과값 정리중... 광고를 잠시 시청해 주세요.`;
-
-    const interval = setInterval(() => {
-        countdown--;
-        countdownText.innerText = `결과값 정리중... ${countdown}초 후에 결과를 확인할 수 있습니다.`;
-        
-        if (countdown <= 0) {
-            clearInterval(interval);
-            // 5초 후 결과를 보여줍니다.
-            countdownText.innerText = `결과를 확인해주세요!`;
-        }
-    }, 1000);
 }
 
 // 유형 이름 반환 함수
