@@ -18,16 +18,13 @@ let scores = {
     type9: 0  // 평화주의자
 };
 
-// 각 질문에 대한 점수 매핑
-// 1~7번: type1, 8~14번: type2, ..., 57~63번: type9
+// 각 질문에 대한 점수 매핑 (1번~7번: type1, 8번~14번: type2, ..., 57번~63번: type9)
 const questionTypeMapping = {};
 
 // 1부터 63까지 질문을 각 유형에 7개씩 매핑
 for (let i = 1; i <= totalQuestions; i++) {
     const typeIndex = Math.ceil(i / 7); // 1부터 9까지 유형을 순차적으로 매핑
-    questionTypeMapping[i] = { 
-        [`type${typeIndex}`]: 1 // 각 질문마다 해당 유형에 점수 1점 추가
-    };
+    questionTypeMapping[i] = typeIndex; // 각 질문에 해당하는 유형을 매핑
 }
 
 // 질문 표시
@@ -53,10 +50,8 @@ function handleAnswer(event) {
     const selectedValue = event.target.value;  // 선택된 값 가져오기
     
     // 선택된 값에 해당하는 점수 추가
-    const questionScores = questionTypeMapping[currentQuestion];
-    Object.keys(questionScores).forEach(type => {
-        scores[type] += parseInt(selectedValue) * questionScores[type];
-    });
+    const questionType = questionTypeMapping[currentQuestion]; // 현재 질문에 해당하는 유형 가져오기
+    scores[`type${questionType}`] += parseInt(selectedValue); // 해당 유형에 점수 추가
 
     // 질문 번호 증가 후, 다음 질문 표시
     currentQuestion++;
