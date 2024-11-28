@@ -5,42 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에니어그램 테스트</title>
     <link rel="stylesheet" href="r1.css"> <!-- 외부 CSS 파일을 연결 -->
-    <style>
-        /* 팝업 스타일 */
-        .popup {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80%;
-            max-width: 600px;
-            background-color: white;
-            border: 1px solid #ccc;
-            padding: 20px;
-            z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            display: none;
-        }
-        .popup-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.5);
-            z-index: 999;
-            display: none;
-        }
-        .popup button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-    </style>
 </head>
-
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
     crossorigin="anonymous"></script>
@@ -1829,7 +1794,9 @@
         </div>
 
 
+        <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
         <button id="showResultButton" class="hidden">결과 보기</button>
+
     </main>
 
     <div id="resultSection" class="hidden">
@@ -1837,45 +1804,6 @@
         <p id="resultText"></p>
     </div>
 
-    <!-- 팝업 overlay -->
-    <div class="popup-overlay" id="popupOverlay"></div>
-    
-    <!-- 팝업 창 -->
-    <div class="popup" id="popup">
-        <h2>테스트 결과</h2>
-        <p id="popupText">이곳에 결과가 표시됩니다.</p>
-
-        <!-- 광고 팝업 -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-9374368296307755"
-            data-ad-slot="3201247599"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
-
-        <button onclick="closePopup()">닫기</button>
-    </div>
-
     <script src="r1.js"></script>
-    
-    <script>
-        // 결과 보기 버튼 클릭 시 팝업 띄우기
-        document.getElementById('showResultButton').addEventListener('click', function() {
-            document.getElementById('popup').style.display = 'block';
-            document.getElementById('popupOverlay').style.display = 'block';
-        });
-
-        // 팝업 닫기
-        function closePopup() {
-            document.getElementById('popup').style.display = 'none';
-            document.getElementById('popupOverlay').style.display = 'none';
-        }
-
-        // 결과 보기 버튼 표시
-        document.getElementById('showResultButton').classList.remove('hidden');
-    </script>
 </body>
 </html>
