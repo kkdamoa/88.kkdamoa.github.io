@@ -1,8 +1,12 @@
+// 현재 질문 번호 (예시로 1부터 시작)
 let currentQuestion = 1;
 const totalQuestions = 63;
 const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
+const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
+const popup = document.getElementById('popup');  // 팝업창
+const confirmButton = document.getElementById('confirmButton');  // 팝업의 확인 버튼
 
 // 각 유형에 대한 점수
 let scores = {
@@ -30,7 +34,7 @@ const questionTypeMapping = {
     57: 'type9', 58: 'type9', 59: 'type9', 60: 'type9', 61: 'type9', 62: 'type9', 63: 'type9'  // 57~63번 질문 type9
 };
 
-// 질문 표시
+// 질문 표시 함수
 function showQuestion(questionNumber) {
     const questions = document.querySelectorAll('.question');
     questions.forEach(q => q.classList.add('hidden'));
@@ -41,7 +45,7 @@ function showQuestion(questionNumber) {
     updateProgressBar();
 }
 
-// 진행 바 업데이트
+// 진행 바 업데이트 함수
 function updateProgressBar() {
     const percentage = (currentQuestion / totalQuestions) * 100;
     progressBar.style.width = `${percentage}%`;
@@ -79,18 +83,21 @@ document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
 });
 
-// 결과 보기 버튼 클릭 시 팝업창 띄우기
+// 결과 보기 버튼 클릭 시 팝업 띄우기
 document.getElementById('showResultButton').addEventListener('click', () => {
-    showResult(); // 결과 계산
-    document.getElementById('resultPopup').classList.remove('hidden'); // 팝업창 띄우기
+    popup.classList.remove('hidden'); // 팝업 보이기
 });
 
-// 확인 버튼 클릭 시 팝업창 닫기
-document.getElementById('closePopupButton').addEventListener('click', () => {
-    document.getElementById('resultPopup').classList.add('hidden'); // 팝업창 숨기기
+// 팝업의 "확인" 버튼 클릭 시 결과 표시
+confirmButton.addEventListener('click', () => {
+    // 팝업 숨기기
+    popup.classList.add('hidden');
+    
+    // 결과 화면 표시
+    showResult();
 });
 
-// 결과 계산 및 표시
+// 결과 계산 및 표시 함수
 function showResult() {
     let resultMessage = '당신의 에니어그램 유형은:\n\n';
     let resultDetails = [];
@@ -114,6 +121,9 @@ function showResult() {
 
     // 결과 표시
     resultText.innerText = resultMessage;
+
+    // 결과 섹션을 보이도록 설정
+    resultSection.classList.remove('hidden');
 }
 
 // 유형 이름 반환 함수
