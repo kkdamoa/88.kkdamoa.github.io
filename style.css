@@ -21,25 +21,6 @@ html {
     .home-content {
         margin-top: 20%;
     }
-
-    /* 모바일용 카카오톡 공유 버튼 위치 고정 */
-    #kakao-share-button {
-        position: fixed;
-        right: 20px;
-        bottom: 20px;
-        z-index: 10000;
-        width: 60px;
-        height: 60px;
-        background-color: transparent;
-        border: none;
-        cursor: pointer;
-    }
-
-    /* 아이콘 이미지 스타일 */
-    #kakao-share-button img {
-        width: 100%;
-        height: 100%;
-    }
 }
 
 .section {
@@ -50,7 +31,7 @@ body {
     font-family: 'Do Hyeon', sans-serif;
     line-height: 1.7;
     color: #f5f5f5;
-    background: #1a1a2e; /* 어두운 배경 */
+    background: #003366; /* 신뢰감을 주는 어두운 파랑 배경 */
 }
 
 a {
@@ -93,6 +74,26 @@ img {
 
 .main-nav a:hover {
     color: #ffcc29; /* 호버 효과 강조 */
+}
+
+/* 카카오톡 공유 아이콘 스타일 수정 */
+#kakao-channel-icon {
+    position: fixed; /* 화면 고정 */
+    right: 20px; /* 오른쪽 여백 */
+    bottom: 20px; /* 하단 여백 */
+    z-index: 10000; /* 광고보다 위로 보이도록 높은 z-index 설정 */
+    width: 50px; /* 아이콘 크기 */
+    height: 50px;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+/* 아이콘 이미지 스타일 */
+#kakao-channel-icon img {
+    width: 100%;
+    height: 100%;
+    background-color: transparent;
 }
 
 .page-header {
@@ -151,12 +152,19 @@ footer {
     text-align: center;
     padding: 26px 0;
     background: #252546;
-    max-width: 1050px; /* 본문 레이아웃 크기 */
-    margin: 0 auto; /* 가운데 정렬 */c
+    max-width: 1100px; /* 본문 레이아웃 크기 */
+    margin: 0 auto; /* 가운데 정렬 */
     padding: 26px 4%; /* 본문 여백에 맞춤 */
 }
 
 footer p {
     font-size: 0.875rem;
     color: #f5f5f5;
+}
+
+.item h3 {
+    font-size: 18px; /* 제목 크기 조정 */
+    color: #333; /* 제목 색상 */
+    margin-top: 10px; /* 이미지와 제목 간의 간격 */
+    text-align: center; /* 제목 중앙 정렬 */
 }
