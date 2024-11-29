@@ -2,6 +2,7 @@ let currentQuestion = 1;
 const totalQuestions = 63;
 const progressBar = document.getElementById('progressBar');
 const testSection = document.getElementById('testSection');
+const resultSection = document.getElementById('resultSection');
 const resultText = document.getElementById('resultText');
 
 // 각 유형에 대한 점수
@@ -79,15 +80,9 @@ document.querySelectorAll('.question input[type="radio"]').forEach(input => {
     input.addEventListener('change', handleAnswer);
 });
 
-// 결과 보기 버튼 클릭 시 팝업창 띄우기
+// 결과 보기 버튼 클릭 시 결과 화면으로 전환
 document.getElementById('showResultButton').addEventListener('click', () => {
-    showResult(); // 결과 계산
-    document.getElementById('resultPopup').classList.remove('hidden'); // 팝업창 띄우기
-});
-
-// 확인 버튼 클릭 시 팝업창 닫기
-document.getElementById('closePopupButton').addEventListener('click', () => {
-    document.getElementById('resultPopup').classList.add('hidden'); // 팝업창 숨기기
+    showResult();
 });
 
 // 결과 계산 및 표시
@@ -114,6 +109,7 @@ function showResult() {
 
     // 결과 표시
     resultText.innerText = resultMessage;
+    resultSection.classList.remove('hidden');
 }
 
 // 유형 이름 반환 함수
