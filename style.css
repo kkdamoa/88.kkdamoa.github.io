@@ -31,7 +31,7 @@ body {
     font-family: 'Do Hyeon', sans-serif;
     line-height: 1.7;
     color: #f5f5f5;
-    background: #003366; /* 신뢰감을 주는 어두운 파랑 배경 */
+    background: #1a1a2e; /* 어두운 배경 */
 }
 
 a {
@@ -160,11 +160,4 @@ footer {
 footer p {
     font-size: 0.875rem;
     color: #f5f5f5;
-}
-
-.item h3 {
-    font-size: 18px; /* 제목 크기 조정 */
-    color: #333; /* 제목 색상 */
-    margin-top: 10px; /* 이미지와 제목 간의 간격 */
-    text-align: center; /* 제목 중앙 정렬 */
 }
