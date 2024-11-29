@@ -20,6 +20,7 @@
             padding: 20px;
             z-index: 1000;
         }
+
         /* 배경 클릭 시 팝업 닫기 */
         .popup-overlay {
             display: none; /* 기본적으로 배경은 숨김 */
@@ -31,8 +32,10 @@
             background: rgba(0, 0, 0, 0.5);
             z-index: 999;
         }
+
         /* 버튼 스타일 */
-        .open-popup-btn {
+        .open-popup-btn,
+        .confirm-popup-btn {
             padding: 10px 20px;
             background-color: #007bff;
             color: white;
@@ -40,40 +43,36 @@
             cursor: pointer;
             border-radius: 5px;
         }
+
+        .confirm-popup-btn {
+            display: none; /* 초기에는 숨김 */
+            background-color: green;
+        }
+
         /* 카운터 스타일 */
         .counter {
             font-size: 20px;
             margin-top: 10px;
             font-weight: bold;
         }
-        /* 확인 버튼 숨김 */
-        .confirm-popup-btn {
-            display: none; /* 초기에는 숨김 */
-            padding: 10px 20px;
-            background-color: green;
-            color: white;
-            border: none;
-            cursor: pointer;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
+
         /* 결과 보기 버튼 */
         #showResultButton {
-            display: none; /* 기본적으로 숨김 */
+            display: none; /* 처음에는 숨김 */
         }
     </style>
 </head>
 <body>
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
     crossorigin="anonymous"></script>
-
-    <!-- k-test -->
+    
+    <!-- 광고 삽입 -->
     <ins class="adsbygoogle"
-        style="display:block"
-        data-ad-client="ca-pub-9374368296307755"
-        data-ad-slot="3201247599"
-        data-ad-format="auto"
-        data-full-width-responsive="true"></ins>
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
@@ -83,6 +82,7 @@
         <p>에니어그램 테스트에 오신 것을 환영합니다.</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
+
 
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
@@ -1852,11 +1852,11 @@
         </div>
 
 
-
-        <!-- 결과 보기 버튼 (테스트 끝난 후 보이도록 설정) -->
+        <!-- 결과 보기 버튼 -->
         <button id="showResultButton">결과 보기</button>
     </main>
 
+    <!-- 결과 섹션 -->
     <div id="resultSection" class="hidden">
         <h2>테스트 결과</h2>
         <p id="resultText"></p>
@@ -1867,16 +1867,14 @@
 
     <!-- 팝업 콘텐츠 -->
     <div class="popup">
-        <!-- Google AdSense 광고 삽입 -->
         <div id="adsense-container"></div>
-        <br>
-        <div class="counter" id="counter">결과값 분석중 입니다.</div>
+        <div class="counter" id="counter">결과값 분석중입니다.</div>
         <button class="confirm-popup-btn">확인</button>
     </div>
 
     <script src="r1.js"></script>
     <script>
-        const showResultButton = document.querySelector('#showResultButton');
+        const showResultButton = document.getElementById('showResultButton');
         const popup = document.querySelector('.popup');
         const popupOverlay = document.querySelector('.popup-overlay');
         const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
@@ -1884,7 +1882,7 @@
         const counter = document.querySelector('#counter');
         let countdown;
 
-        // 결과 보기 버튼 클릭 이벤트
+        // 결과 보기 버튼 클릭 시 팝업 열기
         showResultButton.addEventListener('click', () => {
             popup.style.display = 'block'; // 팝업 표시
             popupOverlay.style.display = 'block'; // 배경 표시
@@ -1892,7 +1890,7 @@
             startCountdown(); // 카운트다운 시작
         });
 
-        // 확인 버튼 클릭 이벤트
+        // 확인 버튼 클릭 시 팝업 닫기
         confirmPopupBtn.addEventListener('click', () => {
             popup.style.display = 'none'; // 팝업 숨기기
             popupOverlay.style.display = 'none'; // 배경 숨기기
@@ -1936,18 +1934,26 @@
         // 카운트다운 함수
         function startCountdown() {
             let timeLeft = 7;
-            counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
+            counter.textContent = `${timeLeft}초 남음`;
 
             countdown = setInterval(() => {
                 timeLeft--;
-                counter.textContent = `${timeLeft}결과값 분석중 입니다.`;
+                counter.textContent = `${timeLeft}초 남음`;
                 if (timeLeft <= 0) {
-                    clearInterval(countdown); // 카운트다운 종료
-                    confirmPopupBtn.style.display = 'block'; // 7초 후 확인 버튼 표시
+                    clearInterval(countdown);
+                    counter.textContent = "카운트다운 종료";
+                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
                 }
             }, 1000);
         }
-    </script>
 
+        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
+        const q63Radios = document.querySelectorAll('input[name="q63"]');
+        q63Radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
+            });
+        });
+    </script>
 </body>
 </html>
