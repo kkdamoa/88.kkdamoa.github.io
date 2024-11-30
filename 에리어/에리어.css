@@ -162,25 +162,24 @@ button:disabled {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
+
 .result-item {
-    margin-bottom: 20px; /* 각 항목 사이에 간격을 추가 */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
+    margin-bottom: 10px; /* 항목 간의 간격 */
+    display: flex; /* 한 줄로 정렬 */
+    align-items: center; /* 세로 가운데 정렬 */
 }
 
 .result-type {
     font-weight: bold;
-    font-size: 16px;
+    margin-right: 10px; /* 각 항목 간의 간격 */
 }
 
 .result-score {
-    margin-top: 5px;
-    font-size: 14px;
+    margin-right: 10px; /* 퍼센트와 '자세히 알아보기' 간의 간격 */
+    font-style: italic;
 }
 
 .more-info {
-    margin-top: 10px;
     color: #007bff;
     text-decoration: none;
 }
