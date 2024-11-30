@@ -107,9 +107,11 @@ function showResult() {
 
     resultMessage += resultDetails.join('\n');
 
-    // 결과 표시
-    resultText.innerText = resultMessage;
-    resultSection.classList.remove('hidden');
+    // 7초 뒤에 결과 표시
+    setTimeout(() => {
+        resultText.innerText = resultMessage;
+        resultSection.classList.remove('hidden');
+    }, 7000);  // 7초(7000ms) 후에 실행
 }
 
 // 유형 이름 반환 함수
