@@ -14,8 +14,6 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="naver-site-verification" content="3ddea906f4511e2e5c2374bc1bbc6f8700c898a9" />
     <meta name="google-site-verification" content="wpS7lDe_HCr6OV4p0Ky9YOfaS4cu2gDh56ey8K1leIE" />
-
-
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -31,7 +29,6 @@
 
     <!-- 코드 보호 및 난독화 방지 스크립트 -->
     <script>
-        // F12 및 개발자 도구 차단
         document.addEventListener('keydown', function (e) {
             if (e.key === "F12") {
                 e.preventDefault();
@@ -44,13 +41,11 @@
             }
         });
 
-        // 우클릭 차단
         document.addEventListener('contextmenu', function (e) {
             e.preventDefault();
             alert("우클릭은 비활성화되었습니다.");
         });
 
-        // 개발자 도구 감지
         (function devToolsChecker() {
             const element = new Image();
             Object.defineProperty(element, 'id', {
@@ -64,6 +59,32 @@
             }, 1000);
         })();
     </script>
+
+    <style>
+        /* 테스트 리스트 제목 스타일 */
+        .wrapper .grid .item div {
+            font-size: 18px; /* 글자 크기 */
+            font-weight: 700; /* 글자 굵기 */
+            color: #3E2723; /* 연한 갈색 */
+            text-align: center; /* 중앙 정렬 */
+            margin-top: 10px;
+            font-family: 'Cormorant Garamond', serif; /* 세련된 서체 */
+            line-height: 1.4; /* 줄 간격 */
+            transition: color 0.3s ease; /* 호버 효과 */
+        }
+
+        /* 마우스 오버 시 글자 색상 변경 */
+        .wrapper .grid .item:hover div {
+            color: #5D4037; /* 진한 갈색으로 변경 */
+        }
+
+        /* 전체 테스트 리스트 배경색 */
+        .wrapper.grid {
+            background-color: #F1EFE7; /* 부드러운 베이지색 */
+            padding: 20px;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -79,9 +100,7 @@
                     <!-- 네비게이션 메뉴 -->
                     <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
                         <li><a href="심리테스트.html">심리테스트</a></li>
-                        <li><a href="준비중.html">중비중</a></li>
-
-
+                        <li><a href="준비중.html">준비중</a></li>
                     </ul>
                 </nav>
             </div>
@@ -117,76 +136,73 @@
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">에리어 테스트</div>
+                <div>에리어 테스트</div>
             </a>
         </div>
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">2024년 나의 연관검색어</div>
+                <div>2024년 나의 연관검색어</div>
             </a>
         </div>
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">상황별 TF 능력고사</div>
+                <div>상황별 TF 능력고사</div>
             </a>
         </div>
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">타고난 기질 성격 보고서 테스트</div>
+                <div>타고난 기질 성격 보고서 테스트</div>
             </a>
         </div>
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">2025년 신년 운세 테스트</div>
+                <div>2025년 신년 운세 테스트</div>
             </a>
         </div>
         <div class="item">
             <a href="에리어.html">
                 <img src="에리어.png" alt="검색창 성격 테스트">
-                <div style="font-size: 14px; color: #333; margin-top: 10px;">붕어빵 성격 테스트</div>
+                <div>붕어빵 성격 테스트</div>
             </a>
         </div>
     </div>
 
     <script>
-        // 카카오톡 공유 기능
         document.getElementById('kakao-share-button').addEventListener('click', function () {
             Kakao.Link.sendDefault({
                 objectType: 'feed',
                 content: {
                     title: '나의 운명 이야기',
                     description: '흥미로운 테스트가 가득한 나의 운명 이야기!',
-                    imageUrl: 'https://kkdamoa.github.io/k-test/메인.png', // 대표 이미지
+                    imageUrl: 'https://kkdamoa.github.io/k-test/메인.png',
                     link: {
-                        mobileWebUrl: window.location.href, // 현재 페이지 URL
-                        webUrl: window.location.href       // 현재 페이지 URL
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href
                     }
                 },
                 buttons: [
                     {
                         title: '테스트 보러 가기',
                         link: {
-                            mobileWebUrl: window.location.href, // 현재 페이지 URL
-                            webUrl: window.location.href       // 현재 페이지 URL
+                            mobileWebUrl: window.location.href,
+                            webUrl: window.location.href
                         }
                     }
                 ]
             });
         });
+    </script>
 
-
-        </script>
-
-        <!-- 페이지 하단 -->
-        <footer>
-            <div class="wrapper" style="text-align: center; padding: 10px 0;">
-                <p>제작/광고문의 - sd26242624@gmail.com</p>
-                <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
-
-            </div>
-        </footer>
-    </body>
+    <!-- 페이지 하단 -->
+    <footer>
+        <div class="wrapper" style="text-align: center; padding: 10px 0;">
+            <p>제작/광고문의 - sd26242624@gmail.com</p>
+            <p>&copy; 나의 운명 이야기. All Rights Reserved. Unauthorized use is prohibited. 모든 권리 보유. 무단 사용을 금지합니다.</p>
+        </div>
+    </footer>
+</body>
+</html>
