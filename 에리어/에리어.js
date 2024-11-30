@@ -102,7 +102,7 @@ function showResult() {
     // 결과 메시지 설정
     sortedScores.forEach((item, index) => {
         const percentage = (item.score / 63) * 100;  // 63점 기준으로 퍼센트 계산
-        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${percentage.toFixed(2)}%`);
+        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${percentage.toFixed(2)}% ${createLearnMoreLink(item.type)}`);
     });
 
     resultMessage += resultDetails.join('\n');
@@ -114,7 +114,7 @@ function showResult() {
     }, 7000);  // 7초(7000ms) 후에 실행
 }
 
-// 유형 이름 반환 함수
+// 각 유형 이름 반환 함수
 function getTypeName(type) {
     switch (type) {
         case 'type1': return '완벽주의자';
@@ -127,5 +127,27 @@ function getTypeName(type) {
         case 'type8': return '도전자';
         case 'type9': return '평화주의자';
         default: return '';
+    }
+}
+
+// "자세히 알아보기" 링크 생성 함수
+function createLearnMoreLink(type) {
+    const url = getLearnMoreUrl(type);
+    return `[자세히 알아보기](${url})`;  // 링크 형식으로 반환
+}
+
+// 각 유형에 대한 "자세히 알아보기" 링크 URL 반환 함수
+function getLearnMoreUrl(type) {
+    switch (type) {
+        case 'type1': return 'https://example.com/perfectionist'; // 완벽주의자 링크
+        case 'type2': return 'https://example.com/helper'; // 헌신자 링크
+        case 'type3': return 'https://example.com/achiever'; // 성취자 링크
+        case 'type4': return 'https://example.com/individualist'; // 개성추구자 링크
+        case 'type5': return 'https://example.com/investigator'; // 탐구자 링크
+        case 'type6': return 'https://example.com/loyalist'; // 충실한 사람 링크
+        case 'type7': return 'https://example.com/enthusiast'; // 열정적인 사람 링크
+        case 'type8': return 'https://example.com/challenger'; // 도전자 링크
+        case 'type9': return 'https://example.com/peacemaker'; // 평화주의자 링크
+        default: return '#'; // 기본 링크
     }
 }
