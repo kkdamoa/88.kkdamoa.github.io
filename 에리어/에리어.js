@@ -102,19 +102,29 @@ function showResult() {
     // 결과 메시지 설정
     sortedScores.forEach((item, index) => {
         const percentage = (item.score / 63) * 100;  // 63점 기준으로 퍼센트 계산
-        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${percentage.toFixed(2)}% ${createLearnMoreLink(item.type)}`);
+        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${percentage.toFixed(2)}%`);
+        resultDetails.push(`<a href="#" class="more-info" data-type="${item.type}">자세히 알아보기</a>`);
     });
 
     resultMessage += resultDetails.join('\n');
 
     // 7초 뒤에 결과 표시
     setTimeout(() => {
-        resultText.innerText = resultMessage;
+        resultText.innerHTML = resultMessage;
         resultSection.classList.remove('hidden');
+
+        // "자세히 알아보기" 클릭 이벤트 추가
+        document.querySelectorAll('.more-info').forEach(link => {
+            link.addEventListener('click', (e) => {
+                e.preventDefault();
+                const type = e.target.getAttribute('data-type');
+                showDetailedPage(type);
+            });
+        });
     }, 7000);  // 7초(7000ms) 후에 실행
 }
 
-// 각 유형 이름 반환 함수
+// 유형 이름 반환 함수
 function getTypeName(type) {
     switch (type) {
         case 'type1': return '완벽주의자';
@@ -130,24 +140,21 @@ function getTypeName(type) {
     }
 }
 
-// "자세히 알아보기" 링크 생성 함수
-function createLearnMoreLink(type) {
-    const url = getLearnMoreUrl(type);
-    return `[자세히 알아보기](${url})`;  // 링크 형식으로 반환
-}
+// 자세히 알아보기 페이지로 이동
+function showDetailedPage(type) {
+    // 각 유형에 맞는 페이지 URL 설정
+    const pageUrls = {
+        type1: '/type1',  // 완벽주의자 페이지
+        type2: '/type2',  // 헌신자 페이지
+        type3: '/type3',  // 성취자 페이지
+        type4: '/type4',  // 개성추구자 페이지
+        type5: '/type5',  // 탐구자 페이지
+        type6: '/type6',  // 충실한 사람 페이지
+        type7: '/type7',  // 열정적인 사람 페이지
+        type8: '/type8',  // 도전자 페이지
+        type9: '/type9'   // 평화주의자 페이지
+    };
 
-// 각 유형에 대한 "자세히 알아보기" 링크 URL 반환 함수
-function getLearnMoreUrl(type) {
-    switch (type) {
-        case 'type1': return 'https://example.com/perfectionist'; // 완벽주의자 링크
-        case 'type2': return 'https://example.com/helper'; // 헌신자 링크
-        case 'type3': return 'https://example.com/achiever'; // 성취자 링크
-        case 'type4': return 'https://example.com/individualist'; // 개성추구자 링크
-        case 'type5': return 'https://example.com/investigator'; // 탐구자 링크
-        case 'type6': return 'https://example.com/loyalist'; // 충실한 사람 링크
-        case 'type7': return 'https://example.com/enthusiast'; // 열정적인 사람 링크
-        case 'type8': return 'https://example.com/challenger'; // 도전자 링크
-        case 'type9': return 'https://example.com/peacemaker'; // 평화주의자 링크
-        default: return '#'; // 기본 링크
-    }
+    // 해당 페이지로 이동
+    window.location.href = pageUrls[type];
 }
