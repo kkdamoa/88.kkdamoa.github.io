@@ -99,14 +99,19 @@ function showResult() {
     // 점수 내림차순으로 정렬
     sortedScores.sort((a, b) => b.score - a.score);
 
-    // 결과 메시지 설정
+    // 결과 메시지 설정 (세로로 정렬)
     sortedScores.forEach((item, index) => {
         const percentage = (item.score / 63) * 100;  // 63점 기준으로 퍼센트 계산
-        resultDetails.push(`${index + 1}. ${getTypeName(item.type)}: ${percentage.toFixed(2)}%`);
-        resultDetails.push(`<a href="#" class="more-info" data-type="${item.type}">자세히 알아보기</a>`);
+        resultDetails.push(`
+            <div class="result-item">
+                <div class="result-type">${index + 1}. ${getTypeName(item.type)}</div>
+                <div class="result-score">${percentage.toFixed(2)}%</div>
+                <div><a href="#" class="more-info" data-type="${item.type}">자세히 알아보기</a></div>
+            </div>
+        `);
     });
 
-    resultMessage += resultDetails.join('\n');
+    resultMessage += resultDetails.join('');
 
     // 7초 뒤에 결과 표시
     setTimeout(() => {
@@ -123,6 +128,7 @@ function showResult() {
         });
     }, 7000);  // 7초(7000ms) 후에 실행
 }
+
 
 // 유형 이름 반환 함수
 function getTypeName(type) {
@@ -144,7 +150,7 @@ function getTypeName(type) {
 function showDetailedPage(type) {
     // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: '/type1',  // 완벽주의자 페이지
+        type1: '/에리어/완벽주의자.html',  // 완벽주의자 페이지
         type2: '/type2',  // 헌신자 페이지
         type3: '/type3',  // 성취자 페이지
         type4: '/type4',  // 개성추구자 페이지

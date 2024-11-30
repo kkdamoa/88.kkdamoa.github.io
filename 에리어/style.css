@@ -162,29 +162,3 @@ button:disabled {
     border-radius: 10px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.result-item {
-    margin-bottom: 20px; /* 각 항목 사이에 간격을 추가 */
-    padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-.result-type {
-    font-weight: bold;
-    font-size: 16px;
-}
-
-.result-score {
-    margin-top: 5px;
-    font-size: 14px;
-}
-
-.more-info {
-    margin-top: 10px;
-    color: #007bff;
-    text-decoration: none;
-}
-
-.more-info:hover {
-    text-decoration: underline;
-}
