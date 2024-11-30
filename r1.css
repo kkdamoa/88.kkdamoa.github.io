@@ -1,164 +1,162 @@
-body {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 20px;
-    margin: 0;
-    background-color: #f9f9f9;
-}
+@charset "UTF-8";
 
-header {
-    margin-top: 20px;
-}
-
-.hidden {
-    display: none;
-}
-
-.progress-container {
-    width: 100%;
-    background-color: #e0e0e0;
-    border-radius: 15px;
-    height: 12px;
-    margin-top: 15px;
-}
-
-.progress-bar {
-    height: 100%;
-    background-color: #4caf50;
-    width: 0%;
-    border-radius: 15px;
-    text-align: center;
-    color: white;
-    line-height: 12px;
-    font-weight: bold;
-    transition: width 0.5s ease;
-}
-
-.question {
-    margin-bottom: 20px;
-}
-
-.options label {
-    display: block;
-    margin: 12px 0;
-}
-
-.radioContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 15px;
-}
-
-.labelContainer {
-    display: inline-block;
-    position: relative;
-}
-
-.labelContainer input[type="radio"] {
-    display: none;
-}
-
-.labelContainer .checkmark {
-    width: 20px;
-    height: 20px;
-    border: 2px solid #4caf50;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-    top: 0;
-    left: 0;
-    cursor: pointer;
-}
-
-.labelContainer input[type="radio"]:checked + .checkmark {
-    background-color: #4caf50;
-}
-
-.labelContainer .checkmark::after {
-    content: '';
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background-color: white;
-    position: absolute;
-    top: 5px;
-    left: 5px;
-}
-
-.false, .true {
-    font-size: 12px;
-    color: #666;
-    width: 100px;
-    text-align: center;
-}
-
-.labelContainer:hover .checkmark {
-    border-color: #4caf50;
-}
-
-button {
-    margin-top: 30px;
-    padding: 12px 25px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    cursor: pointer;
-    font-size: 16px;
-    border-radius: 5px;
-}
-
-button:disabled {
-    background-color: #ccc;
+html {
+    font-size: 100%;
 }
 
 @media (max-width: 600px) {
-    .radioContainer {
-        flex-direction: row;  /* 라디오 버튼을 가로로 나열 */
-        justify-content: space-between;  /* 선택지 간 균등하게 배치 */
-        align-items: center;  /* 수평 중앙 정렬 */
-        margin-bottom: 10px;
+    .page-title {
+        font-size: 2.5rem;
     }
 
-    .labelContainer .checkmark {
-        width: 18px;
-        height: 18px;
+    .main-nav {
+        font-size: 1rem;
+        margin-top: 10px;
     }
 
-    .false, .true {
-        font-size: 10px;
-        width: auto;
+    .main-nav li {
+        margin: 0 20px;
     }
 
-    button {
-        padding: 10px 20px;
-        font-size: 14px;
+    .home-content {
+        margin-top: 20%;
     }
 
-    #testSection {
-        max-width: 95%;  /* 모바일 화면에서 넓게 보이도록 */
-        padding: 15px;   /* 패딩을 줄여서 공간을 더 활용 */
+    /* 모바일용 카카오톡 공유 버튼 위치 고정 */
+    #kakao-share-button {
+        position: fixed;
+        right: 20px;
+        bottom: 20px;
+        z-index: 10000;
+        width: 60px;
+        height: 60px;
+        background-color: transparent;
+        border: none;
+        cursor: pointer;
     }
 
-    /* 질문과 라디오 버튼 간격 조정 */
-    .question {
-        margin-bottom: 10px; /* 질문 간격 줄이기 */
-    }
-
-    .options {
-        margin-bottom: 10px;  /* 각 선택지 아래 간격 줄이기 */
-    }
-
-    .labelContainer {
-        margin-right: 10px; /* 선택지 간의 오른쪽 여백을 줄여서 맞춤 */
+    /* 아이콘 이미지 스타일 */
+    #kakao-share-button img {
+        width: 100%;
+        height: 100%;
     }
 }
 
-#testSection {
-    max-width: 600px;
+.section {
+    margin-top: 50px;
+}
+
+body {
+    font-family: 'Do Hyeon', sans-serif;
+    line-height: 1.7;
+    color: #f5f5f5;
+    background: #1a1a2e; /* 어두운 배경 */
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #ffcc29; /* 호버 효과 */
+}
+
+img {
+    max-width: 100%;
+}
+
+.logo {
+    width: 100px;
+    margin-top: 14px;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    margin-top: 34px;
+    list-style: none;
+    padding: 0 20px;
+    background-color: #1a1a2e; /* 네비게이션 바 배경 */
+    position: relative; /* 아이콘 배치 */
+}
+
+.main-nav li {
+    margin-left: 36px;
+}
+
+.main-nav a {
+    color: #f5f5f5;
+}
+
+.main-nav a:hover {
+    color: #ffcc29; /* 호버 효과 강조 */
+}
+
+.page-header {
+    display: flex;
+    justify-content: space-between;
+}
+
+.wrapper {
+    max-width: 1100px;
     margin: 0 auto;
-    background-color: white;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 0 4%;
+}
+
+.home-content {
+    text-align: center;
+    margin-top: 10%;
+}
+
+.grid {
+    display: grid;
+    gap: 26px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    margin-top: 6%;
+    margin-bottom: 50px;
+}
+
+/* 애드센스 광고 스타일 */
+.adsense-ad {
+    margin: 50px 0;
+    text-align: center;
+}
+
+/* 왼쪽 광고 스타일 */
+.left-ad {
+    position: fixed;
+    top: 20%;
+    left: 10px;
+    width: 120px;
+    height: auto;
+    text-align: center;
+    z-index: 999;
+}
+
+/* 오른쪽 광고 스타일 */
+.right-ad {
+    position: fixed;
+    top: 20%;
+    right: 10px;
+    width: 120px;
+    height: auto;
+    text-align: center;
+    z-index: 999;
+}
+
+footer {
+    text-align: center;
+    padding: 26px 0;
+    background: #252546;
+    max-width: 1050px; /* 본문 레이아웃 크기 */
+    margin: 0 auto; /* 가운데 정렬 */
+    padding: 26px 4%; /* 본문 여백에 맞춤 */
+}
+
+footer p {
+    font-size: 0.875rem;
+    color: #f5f5f5;
 }
