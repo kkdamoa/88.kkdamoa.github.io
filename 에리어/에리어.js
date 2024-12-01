@@ -149,7 +149,7 @@ function getTypeName(type) {
 function showDetailedPage(type) {
     // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: '/에리어/완벽주의자.html',  // 완벽주의자 페이지
+        type1: '/k-test/에리어/에리어.html',  // 완벽주의자 페이지
         type2: '/type2',  // 헌신자 페이지
         type3: '/type3',  // 성취자 페이지
         type4: '/type4',  // 개성추구자 페이지
