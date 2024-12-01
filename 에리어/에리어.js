@@ -149,10 +149,10 @@ function getTypeName(type) {
 function showDetailedPage(type) {
     // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: 'https://testpro.site/k-test/에리어/완벽주의자.HTML',  // 완벽주의자 페이지
-        type2: '/type2',  // 헌신자 페이지
-        type3: '/type3',  // 성취자 페이지
-        type4: '/type4',  // 개성추구자 페이지
+        type1: '/에리어/완벽주의자.html',  // 완벽주의자 페이지
+        type2: 'https://testpro.site/k-test/%EC%97%90%EB%A6%AC%EC%96%B4/%EC%99%84%EB%B2%BD%EC%A3%BC%EC%9D%98%EC%9E%90',  // 헌신자 페이지
+        type3: 'https://testpro.site/k-test/에리어/완벽주의자',  // 성취자 페이지
+        type4: '/에리어/완벽주의자',  // 개성추구자 페이지
         type5: '/type5',  // 탐구자 페이지
         type6: '/type6',  // 충실한 사람 페이지
         type7: '/type7',  // 열정적인 사람 페이지
