@@ -149,15 +149,15 @@ function getTypeName(type) {
 function showDetailedPage(type) {
     // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: '/에리어/완벽주의자.html',  // 완벽주의자 페이지
-        type2: 'https://testpro.site/k-test/%EC%97%90%EB%A6%AC%EC%96%B4/%EC%99%84%EB%B2%BD%EC%A3%BC%EC%9D%98%EC%9E%90',  // 헌신자 페이지
-        type3: 'https://testpro.site/k-test/에리어/완벽주의자',  // 성취자 페이지
-        type4: '/에리어/완벽주의자',  // 개성추구자 페이지
-        type5: '/type5',  // 탐구자 페이지
-        type6: '/type6',  // 충실한 사람 페이지
-        type7: '/type7',  // 열정적인 사람 페이지
-        type8: '/type8',  // 도전자 페이지
-        type9: '/type9'   // 평화주의자 페이지
+        type1: 'https://testpro.site/k-test/에리어/완벽주의자',  // 완벽주의자 페이지
+        type2: 'https://testpro.site/k-test/에리어/헌신자',  // 헌신자 페이지
+        type3: 'https://testpro.site/k-test/에리어/성취자',  // 성취자 페이지
+        type4: 'https://testpro.site/k-test/에리어/개성추구자',  // 개성추구자 페이지
+        type5: 'https://testpro.site/k-test/에리어/탐구자',  // 탐구자 페이지
+        type6: 'https://testpro.site/k-test/에리어/충살한 사람',  // 충실한 사람 페이지
+        type7: 'https://testpro.site/k-test/에리어/열정적인 사람',  // 열정적인 사람 페이지
+        type8: 'https://testpro.site/k-test/에리어/도전자',  // 도전자 페이지
+        type9: 'https://testpro.site/k-test/에리어/평화주의자'   // 평화주의자 페이지
     };
 
     // 해당 페이지로 이동
