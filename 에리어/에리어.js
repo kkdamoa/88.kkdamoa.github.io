@@ -154,7 +154,7 @@ function showDetailedPage(type) {
         type3: 'https://testpro.site/k-test/에리어/성취자',  // 성취자 페이지
         type4: 'https://testpro.site/k-test/에리어/개성추구자',  // 개성추구자 페이지
         type5: 'https://testpro.site/k-test/에리어/탐구자',  // 탐구자 페이지
-        type6: 'https://testpro.site/k-test/에리어/충살한 사람',  // 충실한 사람 페이지
+        type6: 'https://testpro.site/k-test/에리어/충실한 사람',  // 충실한 사람 페이지
         type7: 'https://testpro.site/k-test/에리어/열정적인 사람',  // 열정적인 사람 페이지
         type8: 'https://testpro.site/k-test/에리어/도전자',  // 도전자 페이지
         type9: 'https://testpro.site/k-test/에리어/평화주의자'   // 평화주의자 페이지
