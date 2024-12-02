@@ -126,75 +126,7 @@ function showResult() {
                 showDetailedPage(type);
             });
         });
-
-        // 소셜 미디어 공유 버튼 추가
-        addShareButtons();
     }, 7000);  // 7초(7000ms) 후에 실행
-}
-
-// 소셜 미디어 공유 버튼 추가
-function addShareButtons() {
-    const shareButtons = [
-        { id: 'facebookShare', alt: '페이스북 공유', icon: '로고/페이스북.png' },
-        { id: 'instagramShare', alt: '인스타그램 공유', icon: '로고/인스타.png' },
-        { id: 'twitterShare', alt: '트위터 공유', icon: '로고/트위터.png' },
-        { id: 'kakaoShare', alt: '카카오톡 공유', icon: '로고/카카오톡.png' },
-        { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '로고/라인.png' },
-        { id: 'wechatShare', alt: '위챗 공유', icon: '로고/위쳇.png' },
-        { id: 'urlShare', alt: 'URL 공유', icon: '로고/url.png' }
-    ];
-
-    const resultSection = document.getElementById('resultSection');
-    const shareContainer = document.createElement('div');
-    shareContainer.classList.add('share-buttons');
-
-    // 각 버튼을 생성하여 추가
-    shareButtons.forEach(button => {
-        const buttonElement = document.createElement('button');
-        buttonElement.id = button.id;
-        buttonElement.classList.add('share-button');
-        buttonElement.innerHTML = `<img src="${button.icon}" alt="${button.alt}" />`;
-
-        // 공유 버튼 클릭 이벤트
-        buttonElement.addEventListener('click', () => {
-            shareContent(button.id);
-        });
-
-        shareContainer.appendChild(buttonElement);
-    });
-
-    // 공유 버튼을 결과 화면에 추가
-    resultSection.appendChild(shareContainer);
-}
-
-// 콘텐츠 공유 함수 (각 소셜 미디어 버튼 클릭 시)
-function shareContent(platform) {
-    const url = window.location.href;  // 현재 페이지 URL
-    const text = '나의 에니어그램 유형은? 확인해보세요!';
-    
-    switch(platform) {
-        case 'facebookShare':
-            window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'instagramShare':
-            window.open(`https://www.instagram.com/?url=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'twitterShare':
-            window.open(`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
-            break;
-        case 'kakaoShare':
-            window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'naverLineShare':
-            window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'wechatShare':
-            window.open(`https://web.whatsapp.com/share?url=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'urlShare':
-            alert('URL이 복사되었습니다: ' + url); // URL 복사 메시지
-            break;
-    }
 }
 
 // 유형 이름 반환 함수
@@ -217,15 +149,15 @@ function getTypeName(type) {
 function showDetailedPage(type) {
     // 각 유형에 맞는 페이지 URL 설정
     const pageUrls = {
-        type1: 'https://testpro.site/k-test/에리어/완벽주의자',
-        type2: 'https://testpro.site/k-test/에리어/헌신자',
-        type3: 'https://testpro.site/k-test/에리어/성취자',
-        type4: 'https://testpro.site/k-test/에리어/개성추구자',
-        type5: 'https://testpro.site/k-test/에리어/탐구자',
-        type6: 'https://testpro.site/k-test/에리어/충실한 사람',
-        type7: 'https://testpro.site/k-test/에리어/열정적인 사람',
-        type8: 'https://testpro.site/k-test/에리어/도전자',
-        type9: 'https://testpro.site/k-test/에리어/평화주의자'
+        type1: 'https://testpro.site/k-test/에리어/완벽주의자',  // 완벽주의자 페이지
+        type2: 'https://testpro.site/k-test/에리어/헌신자',  // 헌신자 페이지
+        type3: 'https://testpro.site/k-test/에리어/성취자',  // 성취자 페이지
+        type4: 'https://testpro.site/k-test/에리어/개성추구자',  // 개성추구자 페이지
+        type5: 'https://testpro.site/k-test/에리어/탐구자',  // 탐구자 페이지
+        type6: 'https://testpro.site/k-test/에리어/충실한 사람',  // 충실한 사람 페이지
+        type7: 'https://testpro.site/k-test/에리어/열정적인 사람',  // 열정적인 사람 페이지
+        type8: 'https://testpro.site/k-test/에리어/도전자',  // 도전자 페이지
+        type9: 'https://testpro.site/k-test/에리어/평화주의자'   // 평화주의자 페이지
     };
 
     // 해당 페이지로 이동
