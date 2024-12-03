@@ -140,7 +140,7 @@ function addShareButtons() {
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
         { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
-        { id: 'wechatShare', alt: '위챗 공유', icon: '/k-test/log/위챗.png' },
+        { id: 'wechatShare', alt: '위챗 공유', icon: '/k-test/log/u.png' },
         { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },     
     ];
 
@@ -182,7 +182,10 @@ function shareContent(platform) {
         case 'twitterShare':
             window.open(`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
             break;
-        case 'kakaoShare':
+       case 'kakaoShare':
+    const url = window.location.href;  // 공유할 URL
+    window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
+    break; case 'kakaoShare':
             window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
             break;
         case 'naverLineShare':
