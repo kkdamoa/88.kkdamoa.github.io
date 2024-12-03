@@ -18,7 +18,7 @@ let scores = {
     type9: 0  // 평화주의자
 };
 
-// 각 질문에 대한 점수 매핑 (각 유형별로 7개의 질문)
+// 각 질문에 대한 점수 매핑
 const questionTypeMapping = {
     1: 'type1', 2: 'type1', 3: 'type1', 4: 'type1', 5: 'type1', 6: 'type1', 7: 'type1', // 1~7번 질문 type1
     8: 'type2', 9: 'type2', 10: 'type2', 11: 'type2', 12: 'type2', 13: 'type2', 14: 'type2', // 8~14번 질문 type2
