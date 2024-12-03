@@ -135,15 +135,14 @@ function showResult() {
 // 소셜 미디어 공유 버튼 추가
 function addShareButtons() {
     const shareButtons = [
-        { id: 'facebookShare', alt: '페이스북 공유', icon: 'k-test/log/페이스북.png' },
-        { id: 'instagramShare', alt: '인스타그램 공유', icon: 'log/인스타.png' },
+
         { id: 'facebookShare', alt: '페이스북 공유', icon: '/k-test/log/페이스북.png' },
-        { id: 'instagramShare', alt: '인스타그램 공유', icon: '/log/인스타.png' },
-        { id: 'twitterShare', alt: '트위터 공유', icon: 'https://testpro.site/k-test/log/트위터.png' },
-        { id: 'kakaoShare', alt: '카카오톡 공유', icon: 'https://testpro.site/k-test/log/talk.png' },
-        { id: 'naverLineShare', alt: '네이버 라인 공유', icon: 'https://testpro.site/k-test/log/라인.png' },
-,
-        ];
+        { id: 'instagramShare', alt: '인스타그램 공유', icon: '/k-test/log/인스타.png' },
+        { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
+        { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/talk.png' },
+        { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
+        { id: 'naverLineShare', alt: 'url', icon: '/k-test/log/url.png' },     
+       ];
 
     const resultSection = document.getElementById('resultSection');
     const shareContainer = document.createElement('div');
