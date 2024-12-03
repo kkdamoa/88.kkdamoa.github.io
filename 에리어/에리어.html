@@ -1976,47 +1976,6 @@
             }, 1000);
         }
 
-        // 공유 버튼 표시 함수 
-        function showSocialShare() {
-            const socialShare = document.createElement('div');
-            socialShare.id = 'socialShare';
-            socialShare.classList.add('social-share');
-
-            // 카카오 공유 버튼
-            const kakaoShareButton = document.createElement('button');
-            kakaoShareButton.id = 'kakao-share-button';
-            kakaoShareButton.classList.add('share-button');
-            kakaoShareButton.textContent = '카카오로 공유하기';
-            socialShare.appendChild(kakaoShareButton);
-
-            popup.appendChild(socialShare); // 팝업에 공유 버튼 추가
-
-            // 카카오 공유 버튼 클릭 시 동작
-            document.getElementById('kakao-share-button').addEventListener('click', function () {
-                Kakao.Link.sendDefault({
-                    objectType: 'feed',
-                    content: {
-                        title: '나의 운명 이야기',
-                        description: '흥미로운 테스트가 가득한 나의 운명 이야기!',
-                        imageUrl: 'https://kkdamoa.github.io/k-test/메인.png',
-                        link: {
-                            mobileWebUrl: window.location.href,
-                            webUrl: window.location.href
-                        }
-                    },
-                    buttons: [
-                        {
-                            title: '테스트 보러 가기',
-                            link: {
-                                mobileWebUrl: window.location.href,
-                                webUrl: window.location.href
-                            }
-                        }
-                    ]
-                });
-            });
-        }
-
         // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
         const q63Radios = document.querySelectorAll('input[name="q63"]');
         q63Radios.forEach(radio => {

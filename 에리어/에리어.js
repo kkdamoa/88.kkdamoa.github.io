@@ -182,10 +182,7 @@ function shareContent(platform) {
         case 'twitterShare':
             window.open(`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
             break;
-       case 'kakaoShare':
-    const url = window.location.href;  // 공유할 URL
-    window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
-    break; case 'kakaoShare':
+        case 'kakaoShare':
             window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
             break;
         case 'naverLineShare':
