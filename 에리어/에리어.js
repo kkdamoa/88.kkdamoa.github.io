@@ -138,9 +138,7 @@ function addShareButtons() {
         { id: 'facebookShare', alt: '페이스북 공유', icon: '/k-test/log/페이스북.png' },
         { id: 'instagramShare', alt: '인스타그램 공유', icon: '/k-test/log/인스타.png' },
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
-        { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
-        { id: 'wechatShare', alt: '위챗 공유', icon: '/k-test/log/u.png' },
         { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },     
     ];
 
@@ -182,15 +180,8 @@ function shareContent(platform) {
         case 'twitterShare':
             window.open(`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
             break;
-        case 'kakaoShare':
-            window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
-            break;
         case 'naverLineShare':
             window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank');
-            break;
-        case 'wechatShare':
-            // WeChat 공유 URL
-            window.open(`https://open.weixin.qq.com/connect/qrconnect?url=${encodeURIComponent(url)}`, '_blank');
             break;
         case 'urlShare':
             alert('URL이 복사되었습니다: ' + url); // URL 복사 메시지
