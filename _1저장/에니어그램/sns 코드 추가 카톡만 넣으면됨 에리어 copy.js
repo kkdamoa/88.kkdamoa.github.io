@@ -140,9 +140,8 @@ function addShareButtons() {
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
         { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
-        { id: 'wechatShare', alt: '위챗 공유', icon: '/k-test/log/위챗.png' },
-        { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },     
-    ];
+        { id: 'naverLineShare', alt: 'url', icon: '/k-test/log/url.png' },     
+       ];
 
     const resultSection = document.getElementById('resultSection');
     const shareContainer = document.createElement('div');
@@ -189,8 +188,7 @@ function shareContent(platform) {
             window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank');
             break;
         case 'wechatShare':
-            // WeChat 공유 URL
-            window.open(`https://open.weixin.qq.com/connect/qrconnect?url=${encodeURIComponent(url)}`, '_blank');
+            window.open(`https://web.whatsapp.com/share?url=${encodeURIComponent(url)}`, '_blank');
             break;
         case 'urlShare':
             alert('URL이 복사되었습니다: ' + url); // URL 복사 메시지
