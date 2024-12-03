@@ -135,14 +135,13 @@ function showResult() {
 // 소셜 미디어 공유 버튼 추가
 function addShareButtons() {
     const shareButtons = [
-
         { id: 'facebookShare', alt: '페이스북 공유', icon: '/k-test/log/페이스북.png' },
         { id: 'instagramShare', alt: '인스타그램 공유', icon: '/k-test/log/인스타.png' },
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
         { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/talk.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
-        { id: 'naverLineShare', alt: 'url', icon: '/k-test/log/url.png' },     
-       ];
+        { id: 'urlShare', alt: 'URL 공유', icon: '/k-test/log/url.png' }
+    ];
 
     const resultSection = document.getElementById('resultSection');
     const shareContainer = document.createElement('div');
@@ -171,7 +170,7 @@ function addShareButtons() {
 function shareContent(platform) {
     const url = window.location.href;  // 현재 페이지 URL
     const text = '나의 에니어그램 유형은? 확인해보세요!';
-    
+
     switch(platform) {
         case 'facebookShare':
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
@@ -183,16 +182,35 @@ function shareContent(platform) {
             window.open(`https://twitter.com/share?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`, '_blank');
             break;
         case 'kakaoShare':
-            window.open(`https://share.kakao.com/talk/friends/push?url=${encodeURIComponent(url)}`, '_blank');
+            // 카카오톡 공유 기능
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '나의 에니어그램 테스트',
+                    description: text,
+                    imageUrl: 'https://kkdamoa.github.io/k-test/메인.png',  // 공유할 이미지 URL
+                    link: {
+                        mobileWebUrl: url,
+                        webUrl: url
+                    }
+                },
+                buttons: [
+                    {
+                        title: '테스트 보러 가기',
+                        link: {
+                            mobileWebUrl: url,
+                            webUrl: url
+                        }
+                    }
+                ]
+            });
             break;
         case 'naverLineShare':
             window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank');
             break;
-        case 'wechatShare':
-            window.open(`https://web.whatsapp.com/share?url=${encodeURIComponent(url)}`, '_blank');
-            break;
         case 'urlShare':
-            alert('URL이 복사되었습니다: ' + url); // URL 복사 메시지
+            // URL 복사 기능 (알림만 출력)
+            alert('URL이 복사되었습니다: ' + url);
             break;
     }
 }
