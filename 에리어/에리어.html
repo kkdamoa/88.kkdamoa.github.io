@@ -81,8 +81,8 @@
         }
 
         .share-icon {
-            width: 0px;
-            height: 0px;
+            width: 40px;
+            height: 40px;
             object-fit: contain;
         }
         #startTest {
@@ -1998,7 +1998,7 @@
                 counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
-                    counter.textContent = "카운트다운 종료";
+                    counter.textContent = "결과값이 나왔습니다";
                     confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
 
                     // 공유 버튼 표시
