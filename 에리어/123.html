@@ -96,12 +96,12 @@
             cursor: pointer;     /* 마우스 커서 모양 변경 */
             transition: background-color 0.3s, transform 0.3s; /* 배경색과 크기 변화에 애니메이션 추가 */
         }
-        
+
         #startTest:hover {
             background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
             transform: scale(1.1);      /* 마우스 오버 시 버튼 크기 키움 */
         }
-        
+
         #startTest:focus {
             outline: none;  /* 포커스 시 외곽선 제거 */
         }
@@ -187,12 +187,13 @@
         ];
 
         const container = document.getElementById('question-container');
+        const showResultButton = document.getElementById('showResultButton');
 
         // 질문 리스트를 자동으로 생성
         questions.forEach((question, index) => {
             const questionElement = document.createElement('div');
             questionElement.classList.add('question');
-            questionElement.classList.add('active');
+            if (index === 0) questionElement.classList.add('active'); // 첫 번째 질문만 보이도록 설정
             questionElement.setAttribute('data-question', index + 1);
 
             questionElement.innerHTML = `
@@ -226,16 +227,33 @@
             container.appendChild(questionElement);
         });
 
-        const showResultButton = document.getElementById('showResultButton');
-        const popup = document.querySelector('.popup');
-        const popupOverlay = document.querySelector('.popup-overlay');
-        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
-        const adsenseContainer = document.querySelector('#adsense-container');
-        const counter = document.querySelector('#counter');
-        let countdown;
+        // 라디오 버튼 클릭 시 다음 질문으로 넘어가는 기능
+        const allRadios = document.querySelectorAll('input[type="radio"]');
+        let currentQuestionIndex = 0;
+
+        allRadios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                const currentQuestion = document.querySelector(`.question[data-question="${currentQuestionIndex + 1}"]`);
+                currentQuestion.classList.remove('active');
+                
+                currentQuestionIndex++;
+                
+                if (currentQuestionIndex < questions.length) {
+                    const nextQuestion = document.querySelector(`.question[data-question="${currentQuestionIndex + 1}"]`);
+                    nextQuestion.classList.add('active');
+                    
+                    // 마지막 질문 후 결과 보기 버튼 보이기
+                    if (currentQuestionIndex === questions.length - 1) {
+                        showResultButton.style.display = 'inline-block';
+                    }
+                }
+            });
+        });
 
         // 결과 보기 버튼 클릭 시 팝업 열기
         showResultButton.addEventListener('click', () => {
+            const popup = document.querySelector('.popup');
+            const popupOverlay = document.querySelector('.popup-overlay');
             popup.style.display = 'block'; // 팝업 표시
             popupOverlay.style.display = 'block'; // 배경 표시
             loadAd(); // 광고 로드
@@ -243,20 +261,29 @@
         });
 
         // 확인 버튼 클릭 시 팝업 닫기
-        confirmPopupBtn.addEventListener('click', () => {
-            popup.style.display = 'none'; // 팝업 숨기기
-            popupOverlay.style.display = 'none'; // 배경 숨기기
-            clearAd(); // 광고 제거
-            clearInterval(countdown); // 카운트다운 정지
+        document.querySelector('.confirm-popup-btn').addEventListener('click', () => {
+            document.querySelector('.popup').style.display = 'none';
+            document.querySelector('.popup-overlay').style.display = 'none';
+            clearAd();
+            clearInterval(countdown);
         });
 
-        // 배경 클릭 시 팝업 닫기
-        popupOverlay.addEventListener('click', () => {
-            popup.style.display = 'none';
-            popupOverlay.style.display = 'none';
-            clearAd(); // 광고 제거
-            clearInterval(countdown); // 카운트다운 정지
-        });
+        // 카운트다운 함수
+        let countdown;
+        function startCountdown() {
+            let timeLeft = 7;
+            document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    document.querySelector('#counter').textContent = "결과값이 나왔습니다";
+                    document.querySelector('.confirm-popup-btn').style.display = 'inline-block';
+                }
+            }, 1000);
+        }
 
         // 광고 로드 함수
         function loadAd() {
@@ -273,39 +300,15 @@
             adContainer.setAttribute('data-ad-format', 'auto');
             adContainer.setAttribute('data-full-width-responsive', 'true');
 
-            adsenseContainer.appendChild(adContainer);
+            document.querySelector('#adsense-container').appendChild(adContainer);
 
             (adsbygoogle = window.adsbygoogle || []).push({});
         }
 
         // 광고 제거 함수
         function clearAd() {
-            adsenseContainer.innerHTML = '';
+            document.querySelector('#adsense-container').innerHTML = '';
         }
-
-        // 카운트다운 함수
-        function startCountdown() {
-            let timeLeft = 7;
-            counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
-
-            countdown = setInterval(() => {
-                timeLeft--;
-                counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    counter.textContent = "결과값이 나왔습니다";
-                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
-                }
-            }, 1000);
-        }
-
-        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
-        const q63Radios = document.querySelectorAll('input[name="q63"]');
-        q63Radios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
-            });
-        });
     </script>
 </body>
 </html>
