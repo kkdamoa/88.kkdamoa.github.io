@@ -131,7 +131,6 @@ function showResult() {
         addShareButtons();
     }, 7000);  // 7초(7000ms) 후에 실행
 }
-
 // 소셜 미디어 공유 버튼 추가
 function addShareButtons() {
     const shareButtons = [
@@ -139,6 +138,7 @@ function addShareButtons() {
         { id: 'instagramShare', alt: '인스타그램 공유', icon: '/k-test/log/인스타.png' },
         { id: 'twitterShare', alt: '트위터 공유', icon: '/k-test/log/트위터.png' },
         { id: 'naverLineShare', alt: '네이버 라인 공유', icon: '/k-test/log/라인.png' },
+        { id: 'kakaoShare', alt: '카카오톡 공유', icon: '/k-test/log/카톡.png' }, // 카카오톡 공유 버튼 추가
         { id: 'urlShare', alt: 'URL 복사', icon: '/k-test/log/url.png' },     
     ];
 
@@ -169,7 +169,7 @@ function addShareButtons() {
 function shareContent(platform) {
     const url = window.location.href;  // 현재 페이지 URL
     const text = '나의 에니어그램 유형은? 확인해보세요!';
-    
+
     switch(platform) {
         case 'facebookShare':
             window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank');
@@ -182,6 +182,30 @@ function shareContent(platform) {
             break;
         case 'naverLineShare':
             window.open(`https://social-plugins.line.me/lineit/share?url=${encodeURIComponent(url)}`, '_blank');
+            break;
+        case 'kakaoShare':
+            // 카카오톡 공유 기능
+            Kakao.Link.sendDefault({
+                objectType: 'feed',
+                content: {
+                    title: '나의 에니어그램 유형은?',
+                    description: text,
+                    imageUrl: 'https://your-image-url.com/image.jpg',  // 공유할 이미지 URL (필요시 수정)
+                    link: {
+                        mobileWebUrl: url,
+                        webUrl: url
+                    }
+                },
+                buttons: [
+                    {
+                        title: '자세히 보기',
+                        link: {
+                            mobileWebUrl: url,
+                            webUrl: url
+                        }
+                    }
+                ]
+            });
             break;
         case 'urlShare':
             alert('URL이 복사되었습니다: ' + url); // URL 복사 메시지
