@@ -140,7 +140,6 @@
         <button id="startTest">테스트 시작 ➔</button>
     </header>
 
-
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
         
@@ -150,7 +149,7 @@
         </div>
 
         <!-- 질문 목록 -->
-        <div id="question-container"></div> <!-- 질문들이 여기에 동적으로 생성됩니다 -->
+        <div id="question-container"></div>
 
         <!-- 결과 보기 버튼 -->
         <button id="showResultButton">결과 보기</button>
@@ -189,59 +188,82 @@
 
         const container = document.getElementById("question-container");
         const showResultButton = document.getElementById('showResultButton');
-        const qRadios = [];
+        const startTestButton = document.getElementById('startTest');
+        const progressBar = document.getElementById('progressBar');
+        const resultSection = document.getElementById('resultSection');
+        const testSection = document.getElementById('testSection');
 
-        // 질문 배열을 순회하여 자동으로 질문을 생성
-        questions.forEach((question, index) => {
-            const questionDiv = document.createElement("div");
-            questionDiv.classList.add("question");
-            questionDiv.setAttribute("data-question", index + 1);
+        let currentQuestionIndex = 0;
 
-            // 질문 내용 추가
-            const questionText = document.createElement("p");
-            questionText.textContent = question;
-            questionDiv.appendChild(questionText);
+        // 첫 번째 질문부터 표시하기
+        function showQuestion(index) {
+            container.innerHTML = ''; // 기존의 질문을 초기화
 
-            // 라디오 버튼 컨테이너 생성
-            const radioContainer = document.createElement("div");
-            radioContainer.classList.add("radioContainer");
+            if (index < questions.length) {
+                const questionDiv = document.createElement("div");
+                questionDiv.classList.add("question");
 
-            // 라디오 버튼 옵션 생성
-            const options = [
-                { value: "-2", label: "전혀 그렇지 않다" },
-                { value: "-1", label: "그렇지 않다" },
-                { value: "0", label: "보통이다" },
-                { value: "1", label: "그렇다" },
-                { value: "2", label: "매우 그렇다" }
-            ];
+                const questionText = document.createElement("p");
+                questionText.textContent = questions[index];
+                questionDiv.appendChild(questionText);
 
-            options.forEach(option => {
-                const label = document.createElement("label");
-                label.classList.add("labelContainer");
-                const radio = document.createElement("input");
-                radio.type = "radio";
-                radio.name = `q${index + 1}`;
-                radio.value = option.value;
-                radio.addEventListener("change", () => {
-                    showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
+                const radioContainer = document.createElement("div");
+                radioContainer.classList.add("radioContainer");
+
+                const options = [
+                    { value: "-2", label: "전혀 그렇지 않다" },
+                    { value: "-1", label: "그렇지 않다" },
+                    { value: "0", label: "보통이다" },
+                    { value: "1", label: "그렇다" },
+                    { value: "2", label: "매우 그렇다" }
+                ];
+
+                options.forEach(option => {
+                    const label = document.createElement("label");
+                    const radio = document.createElement("input");
+                    radio.type = "radio";
+                    radio.name = `q${index}`;
+                    radio.value = option.value;
+                    const span = document.createElement("span");
+                    span.classList.add("checkmark");
+                    label.appendChild(radio);
+                    label.appendChild(span);
+                    label.appendChild(document.createTextNode(option.label));
+                    radioContainer.appendChild(label);
                 });
-                const span = document.createElement("span");
-                span.classList.add("checkmark");
-                label.appendChild(radio);
-                label.appendChild(span);
-                radioContainer.appendChild(label);
-            });
 
-            questionDiv.appendChild(radioContainer);
-            container.appendChild(questionDiv);
+                questionDiv.appendChild(radioContainer);
+                container.appendChild(questionDiv);
+
+                // 진행 상태 업데이트
+                progressBar.textContent = `${Math.floor((index + 1) / questions.length * 100)}%`;
+
+                // '결과 보기' 버튼 숨기기
+                showResultButton.style.display = 'none';
+            } else {
+                showResultButton.style.display = 'inline-block'; // 모든 질문이 끝나면 결과 보기 버튼 보이기
+            }
+        }
+
+        // '결과 보기' 버튼 클릭 시 결과 섹션 보여주기
+        showResultButton.addEventListener('click', () => {
+            resultSection.classList.remove('hidden');
+            testSection.classList.add('hidden');
         });
 
-        // 결과 보기 버튼 클릭 시 팝업 열기
-        showResultButton.addEventListener('click', () => {
-            popup.style.display = 'block'; // 팝업 표시
-            popupOverlay.style.display = 'block'; // 배경 표시
-            loadAd(); // 광고 로드
-            startCountdown(); // 카운트다운 시작
+        // '테스트 시작' 버튼 클릭 시 첫 번째 질문 시작
+        startTestButton.addEventListener('click', () => {
+            testSection.classList.remove('hidden');
+            startTestButton.style.display = 'none'; // 시작 버튼 숨기기
+            showQuestion(currentQuestionIndex);
+        });
+
+        // 라디오 버튼을 선택하면 다음 질문을 표시
+        container.addEventListener('change', (event) => {
+            if (event.target.type === 'radio') {
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            }
         });
 
         // 확인 버튼 클릭 시 팝업 닫기
