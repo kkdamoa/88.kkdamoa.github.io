@@ -98,34 +98,15 @@
 
         .radioContainer {
             display: flex;
-            align-items: center;
             justify-content: space-between;
-            margin-top: 10px;
         }
 
         .labelContainer {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex: 1;
-            margin: 0 5px;
-        }
-
-        .labelContainer input[type="radio"] {
-            margin-right: 5px;
+            display: inline-block;
         }
 
         .hidden {
             display: none;
-        }
-
-        /* 추가 스타일: 라벨 배치 */
-        .question-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-            font-weight: bold;
         }
     </style>
 </head>
@@ -199,33 +180,21 @@
             questionDiv.classList.add('question');
             questionDiv.setAttribute('data-question', index + 1);
 
-            // 질문 헤더에 양쪽 라벨 추가
-            const questionHeader = document.createElement('div');
-            questionHeader.classList.add('question-header');
-
-            const falseLabel = document.createElement('span');
-            falseLabel.textContent = '전혀 그렇지 않다';
-            questionHeader.appendChild(falseLabel);
-
-            const trueLabel = document.createElement('span');
-            trueLabel.textContent = '매우 그렇다';
-            questionHeader.appendChild(trueLabel);
-
             const questionText = document.createElement('p');
             questionText.textContent = questions[index];
 
             const radioContainer = document.createElement('div');
             radioContainer.classList.add('radioContainer');
 
-            const radioLabels = ['-2', '-1', '0', '1', '2'];
-            radioLabels.forEach((label, i) => {
+            const labels = ['전혀 그렇지 않다', '-2', '-1', '0', '1', '2', '매우 그렇다'];
+            labels.forEach((label, i) => {
                 const labelElement = document.createElement('label');
                 labelElement.classList.add('labelContainer');
 
                 const inputElement = document.createElement('input');
                 inputElement.type = 'radio';
                 inputElement.name = `q${index + 1}`;
-                inputElement.value = label;
+                inputElement.value = i - 2;
 
                 inputElement.addEventListener('change', () => {
                     currentQuestionIndex++;
@@ -243,7 +212,6 @@
                 radioContainer.appendChild(labelElement);
             });
 
-            questionDiv.appendChild(questionHeader);
             questionDiv.appendChild(questionText);
             questionDiv.appendChild(radioContainer);
             questionContainer.appendChild(questionDiv);
@@ -273,6 +241,7 @@
             popup.style.display = 'none'; // 팝업 숨기기
             popupOverlay.style.display = 'none'; // 배경 숨기기
             clearAd();
+            clearAd(); // 광고 제거
             clearInterval(countdown); // 카운트다운 정지
         });
 
