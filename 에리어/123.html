@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화 코드
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에니어그램 테스트</title>
@@ -61,45 +69,59 @@
             display: none; /* 처음에는 숨김 */
         }
 
-        /* 공유 버튼 스타일 */
-        .social-share {
-            display: flex;
-            justify-content: space-around;
+        /* 질문 컨테이너 */
+        #question-container {
             margin-top: 20px;
         }
 
-        .share-button {
+        /* 라디오 버튼 스타일 */
+        .radioContainer {
+            display: flex;
+            justify-content: space-between;
+        }
+        .labelContainer {
             display: inline-block;
         }
 
-        .share-icon {
-            width: 40px;
-            height: 40px;
-            object-fit: contain;
-        }
+        /* 버튼 스타일 */
         #startTest {
-            padding: 20px 40px; /* 버튼의 크기를 키움 */
-            font-size: 24px;     /* 글씨 크기 */
-            font-weight: bold;   /* 글씨 굵게 */
-            background-color: #007bff; /* 버튼 배경색 */
-            color: white;        /* 글씨 색 */
-            border: none;        /* 테두리 제거 */
-            border-radius: 8px;  /* 둥근 모서리 */
-            cursor: pointer;     /* 마우스 커서 모양 변경 */
-            transition: background-color 0.3s, transform 0.3s; /* 배경색과 크기 변화에 애니메이션 추가 */
+            padding: 20px 40px;
+            font-size: 24px;
+            font-weight: bold;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
         }
         
         #startTest:hover {
-            background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
-            transform: scale(1.1);      /* 마우스 오버 시 버튼 크기 키움 */
+            background-color: #0056b3;
+            transform: scale(1.1);
         }
         
         #startTest:focus {
-            outline: none;  /* 포커스 시 외곽선 제거 */
+            outline: none;
         }
     </style>
 </head>
+
 <body>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+    crossorigin="anonymous"></script>
+    
+    <!-- 광고 삽입 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
     <header>
         <h1>에니어그램 테스트</h1>
         <button id="startTest">테스트 시작 ➔</button>
@@ -108,7 +130,15 @@
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
         
+        <!-- 진행 바 -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+
+        <!-- 질문 목록 -->
         <div id="question-container"></div>
+
+        <!-- 결과 보기 버튼 -->
         <button id="showResultButton">결과 보기</button>
     </main>
 
@@ -128,7 +158,6 @@
         <button class="confirm-popup-btn">확인</button>
     </div>
 
-    <script src="에리어.js"></script>
     <script>
         const questions = [
             "나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.",
@@ -144,148 +173,76 @@
         ];
 
         const questionContainer = document.getElementById('question-container');
-        const startTestButton = document.getElementById('startTest');
         const showResultButton = document.getElementById('showResultButton');
-        const popup = document.querySelector('.popup');
-        const popupOverlay = document.querySelector('.popup-overlay');
-        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
-        const adsenseContainer = document.querySelector('#adsense-container');
-        const counter = document.querySelector('#counter');
-        let currentQuestion = 0;
-        let countdown;
+        let currentQuestionIndex = 0;
 
-        // 질문을 동적으로 생성하는 함수
-        function generateQuestions() {
-            questions.forEach((question, index) => {
-                const questionDiv = document.createElement('div');
-                questionDiv.classList.add('question');
-                questionDiv.setAttribute('data-question', index + 1);
+        // 첫 번째 질문을 표시하는 함수
+        function renderQuestion(index) {
+            if (index >= questions.length) {
+                showResultButton.style.display = 'inline-block'; // 모든 질문을 다 끝냈을 때 결과 보기 버튼 표시
+                return;
+            }
 
-                const questionText = document.createElement('p');
-                questionText.textContent = question;
+            const questionDiv = document.createElement('div');
+            questionDiv.classList.add('question');
+            questionDiv.setAttribute('data-question', index + 1);
 
-                const radioContainer = document.createElement('div');
-                radioContainer.classList.add('radioContainer');
+            const questionText = document.createElement('p');
+            questionText.textContent = questions[index];
 
-                const radioValues = [-2, -1, 0, 1, 2];
-                radioValues.forEach(value => {
-                    const label = document.createElement('label');
-                    label.classList.add('labelContainer');
-                    label.innerHTML = `
-                        <input type="radio" name="q${index + 1}" value="${value}">
-                        <span class="checkmark"></span>
-                    `;
-                    radioContainer.appendChild(label);
+            const radioContainer = document.createElement('div');
+            radioContainer.classList.add('radioContainer');
+
+            const labels = ['전혀 그렇지 않다', '-2', '-1', '0', '1', '2', '매우 그렇다'];
+            labels.forEach((label, i) => {
+                const labelElement = document.createElement('label');
+                labelElement.classList.add('labelContainer');
+
+                const inputElement = document.createElement('input');
+                inputElement.type = 'radio';
+                inputElement.name = `q${index + 1}`;
+                inputElement.value = i - 2;
+
+                inputElement.addEventListener('change', () => {
+                    currentQuestionIndex++;
+                    questionContainer.innerHTML = ''; // 이전 질문 숨기기
+                    renderQuestion(currentQuestionIndex); // 다음 질문 표시
                 });
 
-                questionDiv.appendChild(questionText);
-                questionDiv.appendChild(radioContainer);
-                questionContainer.appendChild(questionDiv);
+                labelElement.appendChild(inputElement);
+                labelElement.appendChild(document.createTextNode(label));
+                radioContainer.appendChild(labelElement);
             });
+
+            questionDiv.appendChild(questionText);
+            questionDiv.appendChild(radioContainer);
+            questionContainer.appendChild(questionDiv);
         }
 
-        // 질문을 숨기고, 현재 질문을 표시하는 함수
-        function showNextQuestion() {
-            const questionsList = document.querySelectorAll('.question');
-            if (currentQuestion < questionsList.length) {
-                // 현재 질문 숨기기
-                questionsList[currentQuestion].classList.add('hidden');
-                // 다음 질문 표시
-                currentQuestion++;
-                questionsList[currentQuestion].classList.remove('hidden');
-            } else {
-                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
-            }
-        }
-
-        // 라디오 버튼 클릭 시 다음 질문으로 넘어가게 하는 이벤트 리스너
-        questionContainer.addEventListener('change', event => {
-            if (event.target.type === 'radio') {
-                showNextQuestion();
-            }
-        });
-
-        // 테스트 시작 버튼 클릭 시 첫 번째 질문 표시
-        startTestButton.addEventListener('click', () => {
-            document.getElementById('testSection').classList.remove('hidden');
-            startTestButton.classList.add('hidden');
-            generateQuestions();
-            showNextQuestion(); // 첫 번째 질문 표시
-        });
+        // 첫 번째 질문 표시
+        renderQuestion(currentQuestionIndex);
 
         // 결과 보기 버튼 클릭 시 팝업 열기
         showResultButton.addEventListener('click', () => {
-            popup.style.display = 'block'; // 팝업 표시
-            popupOverlay.style.display = 'block'; // 배경 표시
-            loadAd(); // 광고 로드
-            startCountdown(); // 카운트다운 시작
+            const popup = document.querySelector('.popup');
+            const popupOverlay = document.querySelector('.popup-overlay');
+            popup.style.display = 'block';
+            popupOverlay.style.display = 'block';
         });
 
-        // 팝업 확인 버튼 클릭 시 팝업 닫기
-        confirmPopupBtn.addEventListener('click', () => {
-            popup.style.display = 'none'; // 팝업 숨기기
-            popupOverlay.style.display = 'none'; // 배경 숨기기
-            clearAd(); // 광고 제거
-            clearInterval(countdown); // 카운트다운 정지
-        });
-
-        // 배경 클릭 시 팝업 닫기
-        popupOverlay.addEventListener('click', () => {
+        // 팝업 외부 클릭 시 팝업 닫기
+        document.querySelector('.popup-overlay').addEventListener('click', () => {
+            const popup = document.querySelector('.popup');
+            const popupOverlay = document.querySelector('.popup-overlay');
             popup.style.display = 'none';
             popupOverlay.style.display = 'none';
-            clearAd(); // 광고 제거
-            clearInterval(countdown); // 카운트다운 정지
         });
 
-        // 광고 로드 함수
-        function loadAd() {
-            const adScript = document.createElement('script');
-            adScript.async = true;
-            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
-            document.head.appendChild(adScript);
-
-            const adContainer = document.createElement('ins');
-            adContainer.classList.add('adsbygoogle');
-            adContainer.style.display = 'block';
-            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
-            adContainer.setAttribute('data-ad-slot', '3201247599');
-            adContainer.setAttribute('data-ad-format', 'auto');
-            adContainer.setAttribute('data-full-width-responsive', 'true');
-
-            adsenseContainer.appendChild(adContainer);
-
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        }
-
-        // 광고 제거 함수
-        function clearAd() {
-            adsenseContainer.innerHTML = '';
-        }
-
-        // 카운트다운 함수
-        function startCountdown() {
-            let timeLeft = 7;
-            counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
-
-            countdown = setInterval(() => {
-                timeLeft--;
-                counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
-                if (timeLeft <= 0) {
-                    clearInterval(countdown);
-                    counter.textContent = "결과값이 나왔습니다";
-                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
-                }
-            }, 1000);
-        }
-
-        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
-        const q63Radios = document.querySelectorAll('input[name="q63"]');
-        q63Radios.forEach(radio => {
-            radio.addEventListener('change', () => {
-                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
-            });
+        // 테스트 시작 버튼 클릭 시 섹션 보이기
+        document.getElementById('startTest').addEventListener('click', () => {
+            document.getElementById('testSection').classList.remove('hidden');
+            document.getElementById('startTest').classList.add('hidden');
         });
-
     </script>
 </body>
 </html>
