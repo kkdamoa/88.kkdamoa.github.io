@@ -1,14 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-
-    <!-- 카카오 SDK 초기화 -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        // 카카오 SDK 초기화 코드
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에니어그램 테스트</title>
@@ -107,51 +99,16 @@
         }
     </style>
 </head>
-
 <body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-    crossorigin="anonymous"></script>
-    
-    <!-- 광고 삽입 -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3201247599"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
     <header>
         <h1>에니어그램 테스트</h1>
-
-        <p>"에니어그램은 인간의 성격을 9가지 유형으로 분류하는 심리학적 모델로,</p>
-        <p>개인의 행동 패턴과 내면의 동기를 깊이 있게 이해하는 데 도움을 줍니다.</p>
-        <p>이 모델은 사람들이 자기 자신을 더 잘 이해하고,</p>
-        <p>타인과의 관계에서 효과적으로 소통할 수 있도록 돕기 위해 설계되었습니다.</p>
-        <p>각 성격 유형은 고유한 특징과 동기를 가지며,</p>
-        <p>이러한 특성을 이해함으로써 우리는 자신의 강점과 약점을 파악하고,</p>
-        <p>개인적 성장과 변화의 방향을 제시받을 수 있습니다.</p>
-        <p>에니어그램은 단순히 성격을 분류하는 것을 넘어,</p>
-        <p>더 나은 인간 관계와 자기 계발을 위한 중요한 도구로 활용됩니다.</p>
-        <p>이 테스트는 단순한 성격 분석을 넘어서, 여러분이 잠재된 가능성을 탐색하고,</p>
-        <p>자기 자신과 주변 사람들에 대한 이해를 높이는 기회가 될 것입니다."</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
 
     <main id="testSection" class="hidden">
         <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
         
-        <!-- 진행 바 -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar">0%</div>
-        </div>
-
-        <!-- 질문 목록 -->
         <div id="question-container"></div>
-
-        <!-- 결과 보기 버튼 -->
         <button id="showResultButton">결과 보기</button>
     </main>
 
@@ -186,87 +143,85 @@
             "내가 주는 사랑과 관심을 받지 못한다고 느낄 때 마음이 아프다."
         ];
 
-        const container = document.getElementById("question-container");
-        const showResultButton = document.getElementById('showResultButton');
+        const questionContainer = document.getElementById('question-container');
         const startTestButton = document.getElementById('startTest');
-        const progressBar = document.getElementById('progressBar');
-        const resultSection = document.getElementById('resultSection');
-        const testSection = document.getElementById('testSection');
+        const showResultButton = document.getElementById('showResultButton');
+        const popup = document.querySelector('.popup');
+        const popupOverlay = document.querySelector('.popup-overlay');
+        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
+        const adsenseContainer = document.querySelector('#adsense-container');
+        const counter = document.querySelector('#counter');
+        let currentQuestion = 0;
+        let countdown;
 
-        let currentQuestionIndex = 0;
+        // 질문을 동적으로 생성하는 함수
+        function generateQuestions() {
+            questions.forEach((question, index) => {
+                const questionDiv = document.createElement('div');
+                questionDiv.classList.add('question');
+                questionDiv.setAttribute('data-question', index + 1);
 
-        // 첫 번째 질문부터 표시하기
-        function showQuestion(index) {
-            container.innerHTML = ''; // 기존의 질문을 초기화
+                const questionText = document.createElement('p');
+                questionText.textContent = question;
 
-            if (index < questions.length) {
-                const questionDiv = document.createElement("div");
-                questionDiv.classList.add("question");
+                const radioContainer = document.createElement('div');
+                radioContainer.classList.add('radioContainer');
 
-                const questionText = document.createElement("p");
-                questionText.textContent = questions[index];
-                questionDiv.appendChild(questionText);
-
-                const radioContainer = document.createElement("div");
-                radioContainer.classList.add("radioContainer");
-
-                const options = [
-                    { value: "-2", label: "전혀 그렇지 않다" },
-                    { value: "-1", label: "그렇지 않다" },
-                    { value: "0", label: "보통이다" },
-                    { value: "1", label: "그렇다" },
-                    { value: "2", label: "매우 그렇다" }
-                ];
-
-                options.forEach(option => {
-                    const label = document.createElement("label");
-                    const radio = document.createElement("input");
-                    radio.type = "radio";
-                    radio.name = `q${index}`;
-                    radio.value = option.value;
-                    const span = document.createElement("span");
-                    span.classList.add("checkmark");
-                    label.appendChild(radio);
-                    label.appendChild(span);
-                    label.appendChild(document.createTextNode(option.label));
+                const radioValues = [-2, -1, 0, 1, 2];
+                radioValues.forEach(value => {
+                    const label = document.createElement('label');
+                    label.classList.add('labelContainer');
+                    label.innerHTML = `
+                        <input type="radio" name="q${index + 1}" value="${value}">
+                        <span class="checkmark"></span>
+                    `;
                     radioContainer.appendChild(label);
                 });
 
+                questionDiv.appendChild(questionText);
                 questionDiv.appendChild(radioContainer);
-                container.appendChild(questionDiv);
+                questionContainer.appendChild(questionDiv);
+            });
+        }
 
-                // 진행 상태 업데이트
-                progressBar.textContent = `${Math.floor((index + 1) / questions.length * 100)}%`;
-
-                // '결과 보기' 버튼 숨기기
-                showResultButton.style.display = 'none';
+        // 질문을 숨기고, 현재 질문을 표시하는 함수
+        function showNextQuestion() {
+            const questionsList = document.querySelectorAll('.question');
+            if (currentQuestion < questionsList.length) {
+                // 현재 질문 숨기기
+                questionsList[currentQuestion].classList.add('hidden');
+                // 다음 질문 표시
+                currentQuestion++;
+                questionsList[currentQuestion].classList.remove('hidden');
             } else {
-                showResultButton.style.display = 'inline-block'; // 모든 질문이 끝나면 결과 보기 버튼 보이기
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
             }
         }
 
-        // '결과 보기' 버튼 클릭 시 결과 섹션 보여주기
-        showResultButton.addEventListener('click', () => {
-            resultSection.classList.remove('hidden');
-            testSection.classList.add('hidden');
-        });
-
-        // '테스트 시작' 버튼 클릭 시 첫 번째 질문 시작
-        startTestButton.addEventListener('click', () => {
-            testSection.classList.remove('hidden');
-            startTestButton.style.display = 'none'; // 시작 버튼 숨기기
-            showQuestion(currentQuestionIndex);
-        });
-
-        // 라디오 버튼을 선택하면 다음 질문을 표시
-        container.addEventListener('change', (event) => {
+        // 라디오 버튼 클릭 시 다음 질문으로 넘어가게 하는 이벤트 리스너
+        questionContainer.addEventListener('change', event => {
             if (event.target.type === 'radio') {
-                currentQuestionIndex++;
-                showQuestion(currentQuestionIndex);
+                showNextQuestion();
             }
         });
 
-        // 확인 버튼 클릭 시 팝업 닫기
+        // 테스트 시작 버튼 클릭 시 첫 번째 질문 표시
+        startTestButton.addEventListener('click', () => {
+            document.getElementById('testSection').classList.remove('hidden');
+            startTestButton.classList.add('hidden');
+            generateQuestions();
+            showNextQuestion(); // 첫 번째 질문 표시
+        });
+
+        // 결과 보기 버튼 클릭 시 팝업 열기
+        showResultButton.addEventListener('click', () => {
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
+            startCountdown(); // 카운트다운 시작
+        });
+
+        // 팝업 확인 버튼 클릭 시 팝업 닫기
         confirmPopupBtn.addEventListener('click', () => {
             popup.style.display = 'none'; // 팝업 숨기기
             popupOverlay.style.display = 'none'; // 배경 숨기기
@@ -322,6 +277,15 @@
                 }
             }, 1000);
         }
+
+        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
+        const q63Radios = document.querySelectorAll('input[name="q63"]');
+        q63Radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
+            });
+        });
+
     </script>
 </body>
 </html>
