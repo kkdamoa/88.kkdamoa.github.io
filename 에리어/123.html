@@ -1,13 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <!-- 카카오 SDK 초기화 -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        // 카카오 SDK 초기화 코드
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
-    </script>
-
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>에니어그램 테스트</title>
@@ -109,34 +102,8 @@
 </head>
 
 <body>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-    crossorigin="anonymous"></script>
-    
-    <!-- 광고 삽입 -->
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-9374368296307755"
-         data-ad-slot="3201247599"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-
     <header>
         <h1>에니어그램 테스트</h1>
-
-        <p>"에니어그램은 인간의 성격을 9가지 유형으로 분류하는 심리학적 모델로,</p>
-        <p>개인의 행동 패턴과 내면의 동기를 깊이 있게 이해하는 데 도움을 줍니다.</p>
-        <p>이 모델은 사람들이 자기 자신을 더 잘 이해하고,</p>
-        <p>타인과의 관계에서 효과적으로 소통할 수 있도록 돕기 위해 설계되었습니다.</p>
-        <p>각 성격 유형은 고유한 특징과 동기를 가지며,</p>
-        <p>이러한 특성을 이해함으로써 우리는 자신의 강점과 약점을 파악하고,</p>
-        <p>개인적 성장과 변화의 방향을 제시받을 수 있습니다.</p>
-        <p>에니어그램은 단순히 성격을 분류하는 것을 넘어,</p>
-        <p>더 나은 인간 관계와 자기 계발을 위한 중요한 도구로 활용됩니다.</p>
-        <p>이 테스트는 단순한 성격 분석을 넘어서, 여러분이 잠재된 가능성을 탐색하고,</p>
-        <p>자기 자신과 주변 사람들에 대한 이해를 높이는 기회가 될 것입니다."</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
 
@@ -161,17 +128,13 @@
         <p id="resultText"></p>
     </div>
 
-    <!-- 팝업 배경 -->
     <div class="popup-overlay"></div>
-
-    <!-- 팝업 콘텐츠 -->
     <div class="popup">
         <div id="adsense-container"></div>
         <div class="counter" id="counter">결과값 분석중입니다.</div>
         <button class="confirm-popup-btn">확인</button>
     </div>
 
-    <script src="에리어.js"></script>
     <script>
         const questions = [
             "나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.",
@@ -237,7 +200,7 @@
                 currentQuestion.classList.remove('active');
                 
                 currentQuestionIndex++;
-                
+
                 if (currentQuestionIndex < questions.length) {
                     const nextQuestion = document.querySelector(`.question[data-question="${currentQuestionIndex + 1}"]`);
                     nextQuestion.classList.add('active');
@@ -272,11 +235,11 @@
         let countdown;
         function startCountdown() {
             let timeLeft = 7;
-            document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+            document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중입니다..`;
 
             countdown = setInterval(() => {
                 timeLeft--;
-                document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+                document.querySelector('#counter').textContent = `${timeLeft}초 결과값 확인중입니다..`;
                 if (timeLeft <= 0) {
                     clearInterval(countdown);
                     document.querySelector('#counter').textContent = "결과값이 나왔습니다";
