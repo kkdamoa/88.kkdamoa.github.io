@@ -413,6 +413,30 @@ document.addEventListener('DOMContentLoaded', () => {
                         alert('URL 복사에 실패했습니다. 수동으로 복사해 주세요.');
                     });
                 break;
+                case 'kakaoShare':
+                    // 카카오톡 공유 기능
+                    Kakao.Link.sendDefault({
+                        objectType: 'feed',
+                        content: {
+                            title: '나의 유형은?',
+                            description: text,
+                            imageUrl: 'https://testpro.site/k-test/연인/연인.png',  // 공유할 이미지 URL (필요시 수정)
+                            link: {
+                                mobileWebUrl: url,
+                                webUrl: url
+                            }
+                        },
+                        buttons: [
+                            {
+                                title: '자세히 보기',
+                                link: {
+                                    mobileWebUrl: url,
+                                    webUrl: url
+                                }
+                            }
+                        ]
+                    });
+                    break;    
             default:
                 break;
         }
