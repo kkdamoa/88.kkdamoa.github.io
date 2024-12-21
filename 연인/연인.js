@@ -3,7 +3,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     let currentQuestion = 1;
     const totalQuestions = 45;
-    const maxScorePerType = 9 * 5; // 각 유형당 최대 점수 (9문항 * 선택값 최대 5)
+    const maxScorePerType = 9 * 2; // 각 유형당 최대 점수 (9문항 * 선택값 최대 2)
     const progressBar = document.getElementById('progressBar');
     const testSection = document.getElementById('testSection');
     const resultSection = document.getElementById('resultSection');
@@ -19,6 +19,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const adsenseContainer = document.querySelector('#adsense-container');
     const counter = document.querySelector('#counter');
     let countdown;
+
+    // 질문 완료 안내 팝업 요소
+    const incompletePopup = document.getElementById('incompletePopup');
+    const incompletePopupOverlay = document.getElementById('incompletePopupOverlay');
 
     // 각 유형에 대한 점수
     let scores = {
@@ -38,53 +42,53 @@ document.addEventListener('DOMContentLoaded', () => {
         37: 'type5', 38: 'type5', 39: 'type5', 40: 'type5', 41: 'type5', 42: 'type5', 43: 'type5', 44: 'type5', 45: 'type5'
     };
     
-    // 질문 데이터 (예시: 실제 질문 내용으로 대체)
+    // 질문 데이터
     const questions = {
-        1: "나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.",
-        2: "나는 감정 표현을 자주 한다.",
-        3: "나는 새로운 상황에서 쉽게 적응한다.",
-        4: "나는 계획을 철저히 세우는 편이다.",
-        5: "나는 타인의 감정을 잘 이해한다.",
-        6: "나는 어려운 문제를 해결하는 것을 즐긴다.",
-        7: "나는 리더십을 발휘하는 것을 좋아한다.",
-        8: "나는 혼자 있는 시간을 선호한다.",
-        9: "나는 도전을 두려워하지 않는다.",
-        10: "나는 스트레스를 효과적으로 관리한다.",
-        11: "나는 타인의 기대에 부응하려 노력한다.",
-        12: "나는 자신의 감정을 숨기지 않는다.",
-        13: "나는 논리적으로 사고하는 편이다.",
-        14: "나는 새로운 사람들을 만나는 것을 즐긴다.",
-        15: "나는 자신의 실수를 인정하는 것을 어려워한다.",
-        16: "나는 일을 체계적으로 처리한다.",
-        17: "나는 타인에게 의존하는 것을 좋아한다.",
-        18: "나는 자신의 목표를 명확히 설정한다.",
-        19: "나는 과거의 실수를 자주 되새긴다.",
-        20: "나는 자신의 행동에 책임을 느낀다.",
-        21: "나는 문제 해결을 위해 다양한 방법을 시도한다.",
-        22: "나는 타인의 의견을 잘 수용한다.",
-        23: "나는 자신의 감정을 통제하는 편이다.",
-        24: "나는 도전을 통해 성장한다고 믿는다.",
-        25: "나는 자신의 한계를 인식하고 있다.",
-        26: "나는 타인과의 갈등을 피하려고 노력한다.",
-        27: "나는 자신의 결정에 확신이 있다.",
-        28: "나는 감정에 휘둘리지 않는다.",
-        29: "나는 논쟁을 즐기지 않는다.",
-        30: "나는 자신의 가치관을 고수한다.",
-        31: "나는 스트레스를 받으면 효과적으로 대처한다.",
-        32: "나는 타인의 기대에 맞추려 노력한다.",
-        33: "나는 자신의 감정을 잘 표현하지 않는다.",
-        34: "나는 계획 없이 일을 시작하는 편이다.",
-        35: "나는 타인과의 관계에서 주도권을 잡는 것을 좋아한다.",
-        36: "나는 혼자만의 시간을 필요로 한다.",
-        37: "나는 감정에 따라 행동하는 경우가 많다.",
-        38: "나는 논리적인 사고보다 직감을 더 신뢰한다.",
-        39: "나는 타인의 감정을 쉽게 상하게 하지 않는다.",
-        40: "나는 자신의 목표를 달성하기 위해 노력한다.",
-        41: "나는 타인과의 경쟁을 즐긴다.",
-        42: "나는 자신의 감정을 자주 억누른다.",
-        43: "나는 변화에 잘 적응한다.",
-        44: "나는 타인의 의견에 쉽게 동의한다.",
-        45: "나는 자신의 실수를 잘 인정하지 않는다."
+        1: "헤어진 후에도 상대방의 SNS를 자주 확인한다.",
+        2: "상대방과의 재회를 자주 상상하거나 계획한다.",
+        3: "상대방이 보낸 물건이나 사진을 정리하지 못한다.",
+        4: "상대방이 왜 이별을 결정했는지 이해하려고 계속 고민한다.",
+        5: "여전히 상대방에게 연락을 하고 싶다.",
+        6: "이별 후에도 상대방이 나를 다시 사랑할 것 같다고 생각한다.",
+        7: "상대방이 나 없이도 행복하다는 사실을 받아들이기 어렵다.",
+        8: "주변 사람들에게 상대방에 대해 자주 이야기한다.",
+        9: "상대방이 나를 그리워할 거라고 믿고 싶다.",
+        10: "상대방이 이별의 모든 원인이라고 생각한다.",
+        11: "상대방에 대한 부정적인 감정을 주변 사람들에게 자주 털어놓는다.",
+        12: "헤어진 후에도 상대방에게 화가 나는 순간이 많다.",
+        13: "상대방이 나를 배신했다고 느낀다.",
+        14: "상대방이 나보다 더 행복해지는 것을 용납할 수 없다.",
+        15: "이별 이후 상대방의 단점만 떠오른다.",
+        16: "상대방이 다시 나에게 후회하게 만들고 싶다.",
+        17: "주변 사람들에게 상대방에 대해 험담하는 것이 속이 풀린다.",
+        18: "상대방에게 복수하고 싶다는 생각이 든다.",
+        19: "이별의 이유가 상대방 탓이라고 생각한다.",
+        20: "이별 후 내가 상대방에게 더 잘했어야 했다고 생각한다.",
+        21: "이별을 피할 수 있었다고 생각한다.",
+        22: "내가 했던 말이나 행동을 자꾸 되돌아보며 후회한다.",
+        23: "상대방에게 마지막으로 사과하고 싶은 마음이 든다.",
+        24: "나의 실수로 인해 이별이 왔다고 느낀다.",
+        25: "상대방과의 대화에서 했던 말을 자꾸 떠올린다.",
+        26: "다시 시간을 돌릴 수 있다면 모든 것을 바꿀 수 있을 것 같다.",
+        27: "내가 더 노력했다면 이별을 막을 수 있었다고 생각한다.",
+        28: "상대방을 실망시킨 것이 마음에 걸린다.",
+        29: "상대방이 내 후회를 알아줬으면 좋겠다.",
+        30: "이별 후에도 감정이 크게 동요하지 않는다.",
+        31: "헤어진 것을 받아들이는 데 큰 어려움이 없다.",
+        32: "상대방과의 좋은 추억만 간직하려고 노력한다.",
+        33: "주변 사람들이 이별에 대해 묻더라도 크게 신경 쓰지 않는다.",
+        34: "이별 이후 일상생활에 큰 변화가 없다.",
+        35: "이별을 성장의 한 과정으로 받아들인다.",
+        36: "상대방과의 관계를 차분히 되돌아볼 수 있다.",
+        37: "이별이 두 사람 모두에게 필요한 선택이었다고 느낀다.",
+        38: "이별 후에도 평소와 비슷한 감정을 유지한다.",
+        39: "헤어진 후에도 상대방에게 특별한 감정이 없다.",
+        40: "이별 후 아무런 감정을 느끼지 않는다.",
+        41: "상대방이 있어도 없어도 내 삶에 큰 차이가 없다.",
+        42: "이별 후 공허함이나 외로움을 크게 느낀다.",
+        43: "이별을 통해 인간관계에 대한 냉소적인 태도가 생겼다.",
+        44: "감정적으로 무뎌져서 상대방에 대한 기억이 잘 떠오르지 않는다.",
+        45: "상대방과의 이별에 대해 아무 의미를 느끼지 않는다."
     };
     
     // 라디오 버튼 값 설정
@@ -119,6 +123,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
                 
                 const label = document.createElement('label');
+                label.classList.add('labelContainer');
                 
                 const input = document.createElement('input');
                 input.type = 'radio';
@@ -181,8 +186,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (currentQuestion <= totalQuestions) {
             showQuestion(currentQuestion);
         } else {
-            // 모든 질문을 끝낸 후 "결과 보기" 버튼 표시
-            showResultButton.classList.remove('hidden');
+            // 모든 질문을 끝낸 후 "결과 보기" 버튼 활성화
+            showResultButton.disabled = false;
         }
     }
     
@@ -202,25 +207,43 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 결과 보기 버튼 클릭 시 팝업 열기
     showResultButton.addEventListener('click', () => {
-        popup.style.display = 'block'; // 팝업 표시
-        popupOverlay.style.display = 'block'; // 배경 표시
-        loadAd(); // 광고 로드
-        startCountdown(); // 카운트다운 시작
+        if (currentQuestion > totalQuestions) {
+            // 모든 질문이 완료된 경우 팝업 열기
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
+            startCountdown(); // 카운트다운 시작
+        } else {
+            // 질문이 완료되지 않은 경우 안내 팝업 열기
+            incompletePopup.style.display = 'block';
+            incompletePopupOverlay.style.display = 'block';
+        }
     });
     
     // 확인 버튼 클릭 시 팝업 닫기 및 결과 표시
     confirmPopupBtn.addEventListener('click', () => {
+        // 팝업 닫기
         popup.style.display = 'none'; // 팝업 숨기기
         popupOverlay.style.display = 'none'; // 배경 숨기기
+        incompletePopup.style.display = 'none'; // 질문 완료 안내 팝업 숨기기
+        incompletePopupOverlay.style.display = 'none'; // 질문 완료 안내 팝업 배경 숨기기
+
+        // 광고 제거 및 카운트다운 정지
         clearAd(); // 광고 제거
         clearInterval(countdown); // 카운트다운 정지
-        showResult(); // 결과 표시
+
+        // 결과 표시 (모든 질문이 완료된 경우에만)
+        if (currentQuestion > totalQuestions) {
+            showResult(); // 결과 표시
+        }
     });
     
     // 배경 클릭 시 팝업 닫기
     popupOverlay.addEventListener('click', () => {
         popup.style.display = 'none';
         popupOverlay.style.display = 'none';
+        incompletePopup.style.display = 'none'; // 질문 완료 안내 팝업 숨기기
+        incompletePopupOverlay.style.display = 'none'; // 질문 완료 안내 팝업 배경 숨기기
         clearAd(); // 광고 제거
         clearInterval(countdown); // 카운트다운 정지
     });

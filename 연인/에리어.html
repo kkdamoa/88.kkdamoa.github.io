@@ -48,7 +48,7 @@
         <div id="questionsContainer"></div>
 
         <!-- 결과 보기 버튼 -->
-        <button id="showResultButton">결과 보기</button>
+        <button id="showResultButton" disabled>결과 보기</button>
     </main>
 
     <!-- 결과 섹션 -->
@@ -62,9 +62,16 @@
     <div class="popup-overlay"></div>
 
     <!-- 팝업 콘텐츠 -->
-    <div class="popup">
+    <div class="popup hidden">
         <div id="adsense-container"></div>
         <div class="counter" id="counter">결과값 분석중입니다.</div>
+        <button class="confirm-popup-btn">확인</button>
+    </div>
+
+    <!-- 질문 완료 안내 팝업 -->
+    <div class="popup-overlay" id="incompletePopupOverlay"></div>
+    <div class="popup hidden" id="incompletePopup">
+        <p>질문을 완료 하세요.</p>
         <button class="confirm-popup-btn">확인</button>
     </div>
 

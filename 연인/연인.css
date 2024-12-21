@@ -108,10 +108,17 @@ button {
     cursor: pointer;
     font-size: 16px;
     border-radius: 5px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 button:disabled {
     background-color: #ccc;
+    cursor: not-allowed;
+}
+
+button:hover:not(:disabled) {
+    background-color: #45a049;
+    transform: scale(1.05);
 }
 
 @media (max-width: 600px) {
@@ -248,10 +255,12 @@ button:disabled {
     cursor: pointer;
     border-radius: 5px;
     margin-top: 20px;
+    transition: background-color 0.3s, transform 0.3s;
 }
 
 .confirm-popup-btn:hover {
     background-color: #006400;
+    transform: scale(1.05);
 }
 
 /* 카운터 스타일 */
