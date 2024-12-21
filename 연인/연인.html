@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+
     <!-- 카카오 SDK 초기화 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
     <script>
@@ -74,16 +75,16 @@
             justify-content: space-around;
             margin-top: 20px;
         }
+
         .share-button {
             display: inline-block;
         }
+
         .share-icon {
             width: 40px;
             height: 40px;
             object-fit: contain;
         }
-
-        /* 테스트 시작 버튼 */
         #startTest {
             padding: 20px 40px; /* 버튼의 크기를 키움 */
             font-size: 24px;     /* 글씨 크기 */
@@ -95,82 +96,21 @@
             cursor: pointer;     /* 마우스 커서 모양 변경 */
             transition: background-color 0.3s, transform 0.3s; /* 배경색과 크기 변화에 애니메이션 추가 */
         }
+        
         #startTest:hover {
             background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
             transform: scale(1.1);      /* 마우스 오버 시 버튼 크기 키움 */
         }
+        
         #startTest:focus {
             outline: none;  /* 포커스 시 외곽선 제거 */
-        }
-
-        /* 숨김 처리를 위한 .hidden 클래스 */
-        .hidden {
-            display: none;
-        }
-
-        /* 질문 관련 스타일(진행바 등) - 필요에 따라 추가/수정 가능 */
-        .progress-container {
-            width: 100%;
-            background-color: #eee;
-            border-radius: 4px;
-            margin: 20px 0;
-        }
-        .progress-bar {
-            height: 20px;
-            background-color: #007bff;
-            width: 0%;
-            border-radius: 4px;
-            color: white;
-            text-align: center;
-            line-height: 20px;
-        }
-
-        /* 질문 스타일 */
-        .question {
-            margin: 20px 0;
-        }
-
-        .radioContainer {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-top: 10px;
-        }
-        .false, .true {
-            min-width: 120px;
-            text-align: center;
-        }
-
-        .labelContainer {
-            display: inline-block;
-            position: relative;
-            cursor: pointer;
-        }
-        .labelContainer input {
-            position: absolute;
-            opacity: 0;
-            cursor: pointer;
-        }
-        .checkmark {
-            display: inline-block;
-            width: 20px;
-            height: 20px;
-            background-color: #eee;
-            border-radius: 50%;
-            margin: 0 5px;
-        }
-        .labelContainer input:checked ~ .checkmark {
-            background-color: #007bff;
         }
     </style>
 </head>
 
 <body>
-    <!-- 광고 스크립트 / 광고 태그 -->
-    <script async 
-        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-        crossorigin="anonymous">
-    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+    crossorigin="anonymous"></script>
     
     <!-- 광고 삽입 -->
     <ins class="adsbygoogle"
@@ -178,28 +118,277 @@
          data-ad-client="ca-pub-9374368296307755"
          data-ad-slot="3201247599"
          data-ad-format="auto"
-         data-full-width-responsive="true">
-    </ins>
+         data-full-width-responsive="true"></ins>
     <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
 
     <header>
-        <h1>에니어그램 테스트</h1>
+        <h1>헤어진 연인을 대하는 나의 마음, 5가지 유형 중 당신은?</h1>
+
+        <p>이별은 누구에게나 가슴 아픈 경험이지만, 대처 방식은 사람마다 다릅니다.</p>
+        <p>추억을 간직하며 나아가는 사람도, 미련 속에 머무는 사람도 있죠.</p>
+        <p>당신의 감정은 아쉬움인가요, 후련함인가요, 아니면 복잡한 혼란일까요?</p>
+        <p>테스트를 통해 이별을 대하는 당신의 마음 유형을 알아보세요.</p>
+        <p>이별은 끝이 아닌 새로운 시작입니다. 자신의 감정을 더 이해해보세요.</p>
+        <p>지금 바로 테스트에 참여해 통찰과 조언을 얻어보세요!</p>
         <button id="startTest">테스트 시작 ➔</button>
     </header>
 
-    <!-- 테스트 섹션: 자바스크립트로 질문을 동적으로 생성 -->
-    <main id="testSection" class="hidden">
-        <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
 
-        <!-- 진행 바 -->
-        <div class="progress-container">
-            <div class="progress-bar" id="progressBar">0%</div>
+    <div class="question active" data-question="1">
+        <p>헤어진 후에도 상대방의 SNS를 확인한 적이 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q1" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q1" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q1" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q1" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q1" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
         </div>
+    </div>
+    
+    <div class="question active" data-question="2">
+        <p>연락을 끊어야 한다고 생각하면서도 메시지를 보내고 싶은 충동을 느낀 적이 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q2" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q2" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q2" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q2" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q2" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="3">
+        <p>혹시라도 다시 만날 수 있을 거라는 희망을 가지고 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q3" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q3" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q3" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q3" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q3" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="4">
+        <p>헤어진 연인의 주변 사람들과 우연히라도 마주치고 싶은 생각이 드나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q4" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q4" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q4" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q4" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q4" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="5">
+        <p>과거 함께한 추억을 자주 떠올리거나 미화해서 생각하나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q5" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q5" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q5" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q5" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q5" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="6">
+        <p>다른 연애를 시작하기보다 전 연인과의 관계 회복이 더 중요하다고 느낀 적이 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q6" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q6" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q6" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q6" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q6" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="7">
+        <p>상대방이 나를 어떻게 생각할지 고민하거나 궁금해한 적이 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q7" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q7" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q7" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q7" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q7" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="8">
+        <p>전 연인과의 재회를 상상하며 대화를 연습하거나 상황을 만들어 본 적이 있나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q8" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q8" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q8" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q8" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q8" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
+    <div class="question active" data-question="9">
+        <p>헤어졌다는 사실을 받아들이기보다, 아직 끝나지 않았다는 생각이 드나요?</p> 
+        <div class="radioContainer">
+            <span class="false">전혀 그렇지 않다</span>
+            <label class="labelContainer">
+                <input name="q9" value="-2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q9" value="-1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q9" value="0" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q9" value="1" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <label class="labelContainer">
+                <input name="q9" value="2" type="radio">
+                <span class="checkmark"></span>
+            </label>
+            <span class="true">매우 그렇다</span>
+        </div>
+    </div>
+    
 
-        <!-- 여기 아래에 질문들이 동적으로 생성됩니다. -->
-        
         <!-- 결과 보기 버튼 -->
         <button id="showResultButton">결과 보기</button>
     </main>
@@ -220,101 +409,8 @@
         <button class="confirm-popup-btn">확인</button>
     </div>
 
-    <!-- 연인.js 연결 가능: <script src="연인.js"></script> -->
+    <script src="연인.js"></script>
     <script>
-        /****************************************
-         * 1) 질문(Question) 목록을 자바스크립트로 관리
-         ****************************************/
-        const questionData = [
-            {
-                text: "나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.",
-                name: "q2"
-            },
-            {
-                text: "나는 일을 할 때, 결과보다 과정에 더 많은 신경을 쓴다.",
-                name: "q3"
-            },
-            // 필요하다면 질문을 계속 추가
-            /*
-            {
-                text: "추가 질문 예시 ...",
-                name: "q4"
-            }
-            */
-        ];
-
-        /****************************************
-         * 2) 페이지 로드 시 질문 생성 함수 호출
-         ****************************************/
-        window.addEventListener('DOMContentLoaded', generateQuestions);
-
-        /****************************************
-         * 3) 질문 생성 함수
-         ****************************************/
-        function generateQuestions() {
-            const testSection = document.getElementById('testSection');
-            const showResultBtn = document.getElementById('showResultButton');
-
-            questionData.forEach((q, index) => {
-                // (1) 각 질문을 감싸는 div.question
-                const questionDiv = document.createElement('div');
-                questionDiv.className = "question active";
-                questionDiv.setAttribute('data-question', index + 1);
-
-                // (2) 질문 텍스트
-                const p = document.createElement('p');
-                p.textContent = q.text;
-                questionDiv.appendChild(p);
-
-                // (3) 라디오 버튼 컨테이너
-                const radioContainer = document.createElement('div');
-                radioContainer.className = "radioContainer";
-
-                // "전혀 그렇지 않다" 문구
-                const falseSpan = document.createElement('span');
-                falseSpan.className = "false";
-                falseSpan.textContent = "전혀 그렇지 않다";
-                radioContainer.appendChild(falseSpan);
-
-                // 5개 라디오 (-2, -1, 0, 1, 2)
-                [-2, -1, 0, 1, 2].forEach((val) => {
-                    const label = document.createElement('label');
-                    label.className = "labelContainer";
-
-                    const input = document.createElement('input');
-                    input.type = "radio";
-                    input.name = q.name;
-                    input.value = val;
-
-                    const checkmark = document.createElement('span');
-                    checkmark.className = "checkmark";
-
-                    label.appendChild(input);
-                    label.appendChild(checkmark);
-                    radioContainer.appendChild(label);
-
-                    // (선택) 라디오 선택 시 이벤트 등 추가 가능
-                    // input.addEventListener('change', function() { ... });
-                });
-
-                // "매우 그렇다" 문구
-                const trueSpan = document.createElement('span');
-                trueSpan.className = "true";
-                trueSpan.textContent = "매우 그렇다";
-                radioContainer.appendChild(trueSpan);
-
-                questionDiv.appendChild(radioContainer);
-
-                // (4) 생성한 questionDiv를 "결과 보기 버튼" 위에 삽입
-                testSection.insertBefore(questionDiv, showResultBtn);
-            });
-        }
-    </script>
-
-    <script>
-        /****************************************
-         * [기존 showResultButton / 팝업 로직]
-         ****************************************/
         const showResultButton = document.getElementById('showResultButton');
         const popup = document.querySelector('.popup');
         const popupOverlay = document.querySelector('.popup-overlay');
@@ -343,8 +439,8 @@
         popupOverlay.addEventListener('click', () => {
             popup.style.display = 'none';
             popupOverlay.style.display = 'none';
-            clearAd();
-            clearInterval(countdown);
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
         });
 
         // 광고 로드 함수
@@ -363,6 +459,7 @@
             adContainer.setAttribute('data-full-width-responsive', 'true');
 
             adsenseContainer.appendChild(adContainer);
+
             (adsbygoogle = window.adsbygoogle || []).push({});
         }
 
@@ -384,35 +481,21 @@
                     counter.textContent = "결과값이 나왔습니다";
                     confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
 
-                    // 공유 버튼 표시 등 추가 로직 가능
+                    // 공유 버튼 표시
+                    showSocialShare(); // 공유 버튼 표시 함수 호출
                 }
             }, 1000);
         }
 
-        /****************************************
-         * (예시) 특정 질문(예: q63) 선택 시 '결과 보기' 버튼 노출
-         * 실제로 63번 질문이 없으면 원하는 로직으로 바꾸세요
-         ****************************************/
-        // 여기선 임시로 질문 개수가 적으므로, 
-        // "questionData.length"에 따른 다른 로직을 쓰거나,
-        // 2번 질문이 선택되면 '결과 보기' 버튼 표시 등으로 바꾸세요.
-
-        // 예시로 "q3" 라디오가 선택되면 showResultButton 보이기
-        const q3Radios = document.getElementsByName('q3');
-        q3Radios.forEach(radio => {
+        // 63번 질문의 라디오 버튼 클릭 시 결과 보기 버튼 표시
+        const q63Radios = document.querySelectorAll('input[name="q63"]');
+        q63Radios.forEach(radio => {
             radio.addEventListener('change', () => {
-                showResultButton.style.display = 'inline-block'; 
+                showResultButton.style.display = 'inline-block'; // 결과 보기 버튼 표시
             });
         });
 
-        /****************************************
-         * 테스트 시작 버튼 클릭 시, testSection 보이게
-         ****************************************/
-        const startTest = document.getElementById('startTest');
-        startTest.addEventListener('click', () => {
-            document.getElementById('testSection').classList.remove('hidden');
-            // 필요 시 scrollTo 등 추가
-        });
+        
     </script>
 </body>
 </html>
