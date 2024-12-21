@@ -16,17 +16,23 @@ body {
     border-radius: 10px;
 }
 
-h1, h2, h3 {
+header h1 {
     text-align: center;
     color: #333;
 }
 
 .question-section {
+    display: none; /* 초기에는 모든 섹션을 숨김 */
     margin-bottom: 40px;
 }
 
-.question {
-    margin-bottom: 20px;
+.question-section.active {
+    display: block; /* 활성화된 섹션만 표시 */
+}
+
+.question h2 {
+    color: #333;
+    margin-bottom: 10px;
 }
 
 .question p {
@@ -58,10 +64,19 @@ button {
     font-size: 1.1em;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    margin-top: 20px;
 }
 
 button:hover {
     background-color: #0056b3;
+}
+
+.submit-btn {
+    background-color: #28a745;
+}
+
+.submit-btn:hover {
+    background-color: #218838;
 }
 
 .result {
@@ -81,13 +96,9 @@ button:hover {
     color: #555;
 }
 
-#detailedResultBtn {
-    margin-top: 20px;
-    background-color: #28a745;
-}
-
-#detailedResultBtn:hover {
-    background-color: #218838;
+#ad-container {
+    margin: 30px 0;
+    text-align: center;
 }
 
 .hidden {
@@ -98,40 +109,6 @@ button:hover {
 .ad-container {
     margin: 30px 0;
     text-align: center;
-}
-
-/* 상세 결과 페이지 스타일 */
-#detailedResult {
-    margin-top: 20px;
-    text-align: left;
-}
-
-#detailedResult h2 {
-    color: #333;
-    margin-bottom: 10px;
-}
-
-#detailedResult h3 {
-    color: #555;
-    margin-top: 15px;
-}
-
-#detailedResult p {
-    color: #666;
-    line-height: 1.6;
-}
-
-#detailedResult ul {
-    list-style-type: disc;
-    margin-left: 20px;
-    color: #666;
-}
-
-#detailedResult img {
-    max-width: 100%;
-    height: auto;
-    margin-top: 10px;
-    border-radius: 5px;
 }
 
 /* 반응형 디자인 */
