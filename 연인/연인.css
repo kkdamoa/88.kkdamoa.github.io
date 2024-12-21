@@ -247,18 +247,32 @@ button:hover:not(:disabled) {
 }
 
 /* 확인 버튼 스타일 */
-.confirm-popup-btn {
+.confirm-popup-btn, .confirm-incomplete-btn {
     padding: 10px 20px;
     background-color: green;
     color: white;
     border: none;
-    cursor: pointer;
+    cursor: not-allowed; /* 초기 상태에서는 클릭할 수 없음을 표시 */
     border-radius: 5px;
     margin-top: 20px;
     transition: background-color 0.3s, transform 0.3s;
 }
 
-.confirm-popup-btn:hover {
+.confirm-popup-btn.enabled, .confirm-incomplete-btn:hover:not(:disabled) {
+    background-color: #006400;
+    cursor: pointer; /* 활성화된 상태에서는 클릭할 수 있음을 표시 */
+    transform: scale(1.05);
+}
+
+.confirm-popup-btn.enabled:hover {
+    background-color: #004d00;
+}
+
+.confirm-incomplete-btn {
+    cursor: pointer; /* 질문 완료 안내 팝업의 확인 버튼은 항상 클릭 가능 */
+}
+
+.confirm-incomplete-btn:hover {
     background-color: #006400;
     transform: scale(1.05);
 }

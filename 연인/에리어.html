@@ -61,18 +61,17 @@
     <!-- 팝업 배경 -->
     <div class="popup-overlay"></div>
 
-    <!-- 팝업 콘텐츠 -->
-    <div class="popup hidden">
+    <!-- 광고 팝업 콘텐츠 -->
+    <div class="popup hidden" id="adPopup">
         <div id="adsense-container"></div>
         <div class="counter" id="counter">결과값 분석중입니다.</div>
-        <button class="confirm-popup-btn">확인</button>
+        <button class="confirm-popup-btn" disabled>확인</button>
     </div>
 
     <!-- 질문 완료 안내 팝업 -->
-    <div class="popup-overlay" id="incompletePopupOverlay"></div>
     <div class="popup hidden" id="incompletePopup">
         <p>질문을 완료 하세요.</p>
-        <button class="confirm-popup-btn">확인</button>
+        <button class="confirm-incomplete-btn">확인</button>
     </div>
 
     <!-- 외부 JavaScript 파일 연결 -->
