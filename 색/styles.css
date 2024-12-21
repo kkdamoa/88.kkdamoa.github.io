@@ -1,0 +1,141 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f4f8;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    width: 90%;
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 30px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+h1, h2, h3 {
+    text-align: center;
+    color: #333;
+}
+
+.question {
+    margin-bottom: 25px;
+}
+
+.question p {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    color: #555;
+}
+
+.options label {
+    display: block;
+    margin-bottom: 8px;
+    cursor: pointer;
+    font-size: 1em;
+    color: #444;
+}
+
+.options input[type="radio"] {
+    margin-right: 10px;
+}
+
+button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    border-radius: 7px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.result {
+    text-align: center;
+    margin-top: 30px;
+    padding: 20px;
+    border-top: 2px solid #eee;
+}
+
+.result h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.result p {
+    font-size: 1.1em;
+    color: #555;
+}
+
+#detailedResultBtn {
+    margin-top: 20px;
+    background-color: #28a745;
+}
+
+#detailedResultBtn:hover {
+    background-color: #218838;
+}
+
+.hidden {
+    display: none;
+}
+
+/* 상세 결과 페이지 스타일 */
+#detailedResult {
+    margin-top: 20px;
+    text-align: left;
+}
+
+#detailedResult h2 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+#detailedResult h3 {
+    color: #555;
+    margin-top: 15px;
+}
+
+#detailedResult p {
+    color: #666;
+    line-height: 1.6;
+}
+
+#detailedResult ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    color: #666;
+}
+
+#detailedResult img {
+    max-width: 100%;
+    height: auto;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+    }
+
+    .question p {
+        font-size: 1.1em;
+    }
+
+    button {
+        font-size: 1em;
+        padding: 10px;
+    }
+}
