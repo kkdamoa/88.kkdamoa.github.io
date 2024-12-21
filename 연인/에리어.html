@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화 코드
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c'); // 카카오 JavaScript 키 초기화
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>에니어그램 테스트</title>
+    <link rel="stylesheet" href="에리어.css"> <!-- 외부 CSS 파일을 연결 -->
+    <style>
+        /* 팝업 스타일 */
+        .popup {
+            display: none; /* 기본적으로 팝업은 숨김 */
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80%;
+            max-width: 600px;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 20px;
+            z-index: 1000;
+        }
+
+        /* 배경 클릭 시 팝업 닫기 */
+        .popup-overlay {
+            display: none; /* 기본적으로 배경은 숨김 */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 999;
+        }
+
+        /* 버튼 스타일 */
+        .open-popup-btn,
+        .confirm-popup-btn {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .confirm-popup-btn {
+            display: none; /* 초기에는 숨김 */
+            background-color: green;
+        }
+
+        /* 카운터 스타일 */
+        .counter {
+            font-size: 20px;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        /* 결과 보기 버튼 */
+        #showResultButton {
+            display: none; /* 처음에는 숨김 */
+        }
+
+        /* 공유 버튼 스타일 */
+        .social-share {
+            display: flex;
+            justify-content: space-around;
+            margin-top: 20px;
+        }
+        .share-button {
+            display: inline-block;
+        }
+        .share-icon {
+            width: 40px;
+            height: 40px;
+            object-fit: contain;
+        }
+
+        /* 테스트 시작 버튼 */
+        #startTest {
+            padding: 20px 40px; /* 버튼의 크기를 키움 */
+            font-size: 24px;     /* 글씨 크기 */
+            font-weight: bold;   /* 글씨 굵게 */
+            background-color: #007bff; /* 버튼 배경색 */
+            color: white;        /* 글씨 색 */
+            border: none;        /* 테두리 제거 */
+            border-radius: 8px;  /* 둥근 모서리 */
+            cursor: pointer;     /* 마우스 커서 모양 변경 */
+            transition: background-color 0.3s, transform 0.3s; /* 배경색과 크기 변화에 애니메이션 추가 */
+        }
+        #startTest:hover {
+            background-color: #0056b3; /* 마우스 오버 시 배경색 변경 */
+            transform: scale(1.1);      /* 마우스 오버 시 버튼 크기 키움 */
+        }
+        #startTest:focus {
+            outline: none;  /* 포커스 시 외곽선 제거 */
+        }
+
+        /* 숨김 처리를 위한 .hidden 클래스 */
+        .hidden {
+            display: none;
+        }
+
+        /* 질문 관련 스타일(진행바 등) - 필요에 따라 추가/수정 가능 */
+        .progress-container {
+            width: 100%;
+            background-color: #eee;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+        .progress-bar {
+            height: 20px;
+            background-color: #007bff;
+            width: 0%;
+            border-radius: 4px;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+        }
+
+        /* 질문 스타일 */
+        .question {
+            margin: 20px 0;
+        }
+
+        .radioContainer {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-top: 10px;
+        }
+        .false, .true {
+            min-width: 120px;
+            text-align: center;
+        }
+
+        .labelContainer {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+        .labelContainer input {
+            position: absolute;
+            opacity: 0;
+            cursor: pointer;
+        }
+        .checkmark {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            background-color: #eee;
+            border-radius: 50%;
+            margin: 0 5px;
+        }
+        .labelContainer input:checked ~ .checkmark {
+            background-color: #007bff;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- 광고 스크립트 / 광고 태그 -->
+    <script async 
+        src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+        crossorigin="anonymous">
+    </script>
+    
+    <!-- 광고 삽입 -->
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-9374368296307755"
+         data-ad-slot="3201247599"
+         data-ad-format="auto"
+         data-full-width-responsive="true">
+    </ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+
+    <header>
+        <h1>에니어그램 테스트</h1>
+        <button id="startTest">테스트 시작 ➔</button>
+    </header>
+
+    <!-- 테스트 섹션: 자바스크립트로 질문을 동적으로 생성 -->
+    <main id="testSection" class="hidden">
+        <p>설명: 각 제안에 대해, 가장 적합한 선택지를 체크해주세요.</p>
+
+        <!-- 진행 바 -->
+        <div class="progress-container">
+            <div class="progress-bar" id="progressBar">0%</div>
+        </div>
+
+        <!-- 여기 아래에 질문들이 동적으로 생성됩니다. -->
+        
+        <!-- 결과 보기 버튼 -->
+        <button id="showResultButton">결과 보기</button>
+    </main>
+
+    <!-- 결과 섹션 -->
+    <div id="resultSection" class="hidden">
+        <h2>테스트 결과</h2>
+        <p id="resultText"></p>
+    </div>
+
+    <!-- 팝업 배경 -->
+    <div class="popup-overlay"></div>
+
+    <!-- 팝업 콘텐츠 -->
+    <div class="popup">
+        <div id="adsense-container"></div>
+        <div class="counter" id="counter">결과값 분석중입니다.</div>
+        <button class="confirm-popup-btn">확인</button>
+    </div>
+
+    <!-- 에리어.js 연결 가능: <script src="에리어.js"></script> -->
+    <script>
+        /****************************************
+         * 1) 질문(Question) 목록을 자바스크립트로 관리
+         ****************************************/
+        const questionData = [
+            {
+                text: "나는 일상에서 규칙을 지키는 것이 매우 중요하다고 느낀다.",
+                name: "q2"
+            },
+            {
+                text: "나는 일을 할 때, 결과보다 과정에 더 많은 신경을 쓴다.",
+                name: "q3"
+            },
+            // 필요하다면 질문을 계속 추가
+            /*
+            {
+                text: "추가 질문 예시 ...",
+                name: "q4"
+            }
+            */
+        ];
+
+        /****************************************
+         * 2) 페이지 로드 시 질문 생성 함수 호출
+         ****************************************/
+        window.addEventListener('DOMContentLoaded', generateQuestions);
+
+        /****************************************
+         * 3) 질문 생성 함수
+         ****************************************/
+        function generateQuestions() {
+            const testSection = document.getElementById('testSection');
+            const showResultBtn = document.getElementById('showResultButton');
+
+            questionData.forEach((q, index) => {
+                // (1) 각 질문을 감싸는 div.question
+                const questionDiv = document.createElement('div');
+                questionDiv.className = "question active";
+                questionDiv.setAttribute('data-question', index + 1);
+
+                // (2) 질문 텍스트
+                const p = document.createElement('p');
+                p.textContent = q.text;
+                questionDiv.appendChild(p);
+
+                // (3) 라디오 버튼 컨테이너
+                const radioContainer = document.createElement('div');
+                radioContainer.className = "radioContainer";
+
+                // "전혀 그렇지 않다" 문구
+                const falseSpan = document.createElement('span');
+                falseSpan.className = "false";
+                falseSpan.textContent = "전혀 그렇지 않다";
+                radioContainer.appendChild(falseSpan);
+
+                // 5개 라디오 (-2, -1, 0, 1, 2)
+                [-2, -1, 0, 1, 2].forEach((val) => {
+                    const label = document.createElement('label');
+                    label.className = "labelContainer";
+
+                    const input = document.createElement('input');
+                    input.type = "radio";
+                    input.name = q.name;
+                    input.value = val;
+
+                    const checkmark = document.createElement('span');
+                    checkmark.className = "checkmark";
+
+                    label.appendChild(input);
+                    label.appendChild(checkmark);
+                    radioContainer.appendChild(label);
+
+                    // (선택) 라디오 선택 시 이벤트 등 추가 가능
+                    // input.addEventListener('change', function() { ... });
+                });
+
+                // "매우 그렇다" 문구
+                const trueSpan = document.createElement('span');
+                trueSpan.className = "true";
+                trueSpan.textContent = "매우 그렇다";
+                radioContainer.appendChild(trueSpan);
+
+                questionDiv.appendChild(radioContainer);
+
+                // (4) 생성한 questionDiv를 "결과 보기 버튼" 위에 삽입
+                testSection.insertBefore(questionDiv, showResultBtn);
+            });
+        }
+    </script>
+
+    <script>
+        /****************************************
+         * [기존 showResultButton / 팝업 로직]
+         ****************************************/
+        const showResultButton = document.getElementById('showResultButton');
+        const popup = document.querySelector('.popup');
+        const popupOverlay = document.querySelector('.popup-overlay');
+        const confirmPopupBtn = document.querySelector('.confirm-popup-btn');
+        const adsenseContainer = document.querySelector('#adsense-container');
+        const counter = document.querySelector('#counter');
+        let countdown;
+
+        // 결과 보기 버튼 클릭 시 팝업 열기
+        showResultButton.addEventListener('click', () => {
+            popup.style.display = 'block'; // 팝업 표시
+            popupOverlay.style.display = 'block'; // 배경 표시
+            loadAd(); // 광고 로드
+            startCountdown(); // 카운트다운 시작
+        });
+
+        // 확인 버튼 클릭 시 팝업 닫기
+        confirmPopupBtn.addEventListener('click', () => {
+            popup.style.display = 'none'; // 팝업 숨기기
+            popupOverlay.style.display = 'none'; // 배경 숨기기
+            clearAd(); // 광고 제거
+            clearInterval(countdown); // 카운트다운 정지
+        });
+
+        // 배경 클릭 시 팝업 닫기
+        popupOverlay.addEventListener('click', () => {
+            popup.style.display = 'none';
+            popupOverlay.style.display = 'none';
+            clearAd();
+            clearInterval(countdown);
+        });
+
+        // 광고 로드 함수
+        function loadAd() {
+            const adScript = document.createElement('script');
+            adScript.async = true;
+            adScript.src = "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755";
+            document.head.appendChild(adScript);
+
+            const adContainer = document.createElement('ins');
+            adContainer.classList.add('adsbygoogle');
+            adContainer.style.display = 'block';
+            adContainer.setAttribute('data-ad-client', 'ca-pub-9374368296307755');
+            adContainer.setAttribute('data-ad-slot', '3201247599');
+            adContainer.setAttribute('data-ad-format', 'auto');
+            adContainer.setAttribute('data-full-width-responsive', 'true');
+
+            adsenseContainer.appendChild(adContainer);
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        }
+
+        // 광고 제거 함수
+        function clearAd() {
+            adsenseContainer.innerHTML = '';
+        }
+
+        // 카운트다운 함수
+        function startCountdown() {
+            let timeLeft = 7;
+            counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+
+            countdown = setInterval(() => {
+                timeLeft--;
+                counter.textContent = `${timeLeft}초 결과값 확인중 입니다..`;
+                if (timeLeft <= 0) {
+                    clearInterval(countdown);
+                    counter.textContent = "결과값이 나왔습니다";
+                    confirmPopupBtn.style.display = 'inline-block'; // 확인 버튼 표시
+
+                    // 공유 버튼 표시 등 추가 로직 가능
+                }
+            }, 1000);
+        }
+
+        /****************************************
+         * (예시) 특정 질문(예: q63) 선택 시 '결과 보기' 버튼 노출
+         * 실제로 63번 질문이 없으면 원하는 로직으로 바꾸세요
+         ****************************************/
+        // 여기선 임시로 질문 개수가 적으므로, 
+        // "questionData.length"에 따른 다른 로직을 쓰거나,
+        // 2번 질문이 선택되면 '결과 보기' 버튼 표시 등으로 바꾸세요.
+
+        // 예시로 "q3" 라디오가 선택되면 showResultButton 보이기
+        const q3Radios = document.getElementsByName('q3');
+        q3Radios.forEach(radio => {
+            radio.addEventListener('change', () => {
+                showResultButton.style.display = 'inline-block'; 
+            });
+        });
+
+        /****************************************
+         * 테스트 시작 버튼 클릭 시, testSection 보이게
+         ****************************************/
+        const startTest = document.getElementById('startTest');
+        startTest.addEventListener('click', () => {
+            document.getElementById('testSection').classList.remove('hidden');
+            // 필요 시 scrollTo 등 추가
+        });
+    </script>
+</body>
+</html>
