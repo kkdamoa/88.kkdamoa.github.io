@@ -18,6 +18,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Google AdSense 스크립트 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 
     <!-- 카카오 SDK 초기화 -->
@@ -34,8 +36,10 @@
                 e.preventDefault();
                 alert("F12 개발자 도구는 사용하실 수 없습니다.");
             }
-            if ((e.ctrlKey && (e.key === "u" || e.key === "U")) || 
-                (e.ctrlKey && e.shiftKey && e.key === "I")) {
+            if (
+                (e.ctrlKey && (e.key === "u" || e.key === "U")) || 
+                (e.ctrlKey && e.shiftKey && e.key === "I")
+            ) {
                 e.preventDefault();
                 alert("소스 코드는 보호되고 있습니다.");
             }
@@ -92,12 +96,10 @@
     <header class="page-header wrapper">
         <div style="display: flex; align-items: center; justify-content: space-between;">
             <div style="display: flex; align-items: center;">
-      
                 <nav>
                     <!-- 네비게이션 메뉴 -->
                     <ul class="main-nav" style="display: flex; align-items: center; gap: 30px;">
                         <li><a href="심리테스트.html">심리테스트</a></li>
-
                     </ul>
                 </nav>
             </div>
@@ -115,14 +117,13 @@
         <img src="메인.png" alt="이미지 메인">
     </div>
 
-    <!-- 광고를 감싸는 부모 컨테이너 -->
-    <div style="text-align: center;">
+    <!-- 1) 첫 번째 광고: 메인 이미지 아래 (slot: 3201247599) -->
+    <div style="text-align: center; margin: 20px auto;">
         <script async 
             src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
             crossorigin="anonymous">
         </script>
 
-        <!-- 광고 삽입 -->
         <ins class="adsbygoogle"
              style="display:inline-block; margin:0 auto;"
              data-ad-client="ca-pub-9374368296307755"
@@ -135,7 +136,6 @@
             (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
     </div>
-    
 
     <!-- 테스트 리스트 -->
     <div class="wrapper grid" style="text-align: center;">
@@ -177,6 +177,7 @@
         </div>
     </div>
 
+    <!-- 카카오톡 공유 기능 -->
     <script>
         document.getElementById('kakao-share-button').addEventListener('click', function () {
             Kakao.Link.sendDefault({
@@ -202,6 +203,26 @@
             });
         });
     </script>
+
+    <!-- 2) 두 번째 광고: 하단(푸터 위쪽, slot: 1724698171) -->
+    <div style="text-align: center; margin: 20px auto;">
+        <script async 
+            src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+            crossorigin="anonymous">
+        </script>
+
+        <ins class="adsbygoogle"
+             style="display:inline-block; margin:0 auto;"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="1724698171"
+             data-ad-format="auto"
+             data-full-width-responsive="true">
+        </ins>
+
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
     <!-- 페이지 하단 -->
     <footer>

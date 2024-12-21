@@ -5,7 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>헌신자에 대한 분석</title>
     <!-- Google AdSense 광고 스크립트 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+            crossorigin="anonymous">
+    </script>
 
     <style>
         /* 기본 스타일 */
@@ -73,6 +75,11 @@
             font-size: 1em;
         }
 
+        /* 초기 숨김 설정: 장점(1번) 제외하고 모두 숨기기 */
+        #section2, #section3, #section4, #conclusion {
+            display: none;
+        }
+
         /* 반응형 미디어 쿼리 */
         @media (max-width: 1100px) {
             #content {
@@ -130,6 +137,15 @@
                 font-size: 0.85em;
             }
         }
+
+        /* "다음" 버튼 스타일(선택 사항) */
+        #nextBtn {
+            display: block;
+            margin: 20px auto;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -161,7 +177,7 @@
             <h1>헌신자: 장점과 단점</h1>
         </header>
 
-        <!-- 1. 장점 섹션 -->
+        <!-- 1. 장점 섹션 (기본적으로 표시됨) -->
         <section class="section" id="section1">
             <h2>1. 장점</h2>
             <h3>1.1. 타인을 위한 배려와 사랑</h3>
@@ -273,11 +289,10 @@
                     document.getElementById('conclusion').style.display = 'block';
                     break;
                 default:
-                    // 단계 초과 시 버튼 안 보이도록 처리(선택)
                     break;
             }
 
-            // 모든 단계 수행 후(6단계) 버튼을 숨기고 싶다면:
+            // 모든 단계 수행 후(6단계) 버튼을 숨기기
             if (currentStep === maxStep) {
                 document.getElementById('nextBtn').style.display = 'none';
             }
