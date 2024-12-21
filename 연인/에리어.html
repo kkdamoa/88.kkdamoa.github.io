@@ -427,9 +427,10 @@
                 showQuestion(currentQuestion);
             } else {
                 // 45번째 질문을 끝낸 후 "결과 보기" 버튼 표시
-                showResultButton.classList.remove('hidden');
+                showResultButton.style.display = 'block'; 
             }
         }
+        
 
         // 결과 보기 버튼 클릭 시 결과 화면으로 전환
         showResultButton.addEventListener('click', () => {
