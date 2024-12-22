@@ -251,50 +251,30 @@
   <button id="nextBtn">다음</button>
 
   <script>
-    /**
-     * [구현 설명]
-     * 
-     * 1) sections 배열에 표시할 섹션 ID를 모두 등록
-     * 2) currentStep: 현재 단계 (1부터 시작)
-     * 3) 최대 단계(maxStep)는 sections.length + 1 (모두 본 뒤 마지막에 +1 => 전체 표시)
-     * 
-     * - 각 단계에서 '이전 섹션'은 숨기고 '다음 섹션'을 표시
-     * - 마지막 단계에서 모든 섹션을 한꺼번에 보임
-     * - 모든 단계를 마치면 "다음" 버튼을 숨김
-     */
-    const sections = ['section1', 'section2', 'section3', 'section4', 'conclusion'];
+    const sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6'];
     let currentStep = 1;
-    const maxStep = sections.length + 1; // 5개 섹션 + 1 = 6단계
 
-    const nextBtn = document.getElementById('nextBtn');
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        if (currentStep <= sections.length) {
+            const currentSection = document.getElementById(sections[currentStep - 1]);
+            currentSection.style.display = 'none';
 
-    nextBtn.addEventListener('click', () => {
-      // 1. 현재 섹션 숨기기
-      if (currentStep <= sections.length) {
-        const currentId = sections[currentStep - 1];
-        document.getElementById(currentId).style.display = 'none';
-      }
+            if (currentStep < sections.length) {
+                const nextSection = document.getElementById(sections[currentStep]);
+                nextSection.style.display = 'block';
+            } else {
+                // 마지막 섹션에서 모든 섹션 표시
+                sections.forEach(section => {
+                    document.getElementById(section).style.display = 'block';
+                });
 
-      // 2. 단계 증가
-      currentStep++;
+                // 다음 버튼 숨기기
+                document.getElementById('nextBtn').style.display = 'none';
+            }
 
-      // 3. 다음 섹션 표시
-      if (currentStep <= sections.length) {
-        const nextId = sections[currentStep - 1];
-        document.getElementById(nextId).style.display = 'block';
-      }
-      // 4. 마지막 단계 => 모든 섹션 한꺼번에 표시
-      else if (currentStep === maxStep) {
-        sections.forEach(secId => {
-          document.getElementById(secId).style.display = 'block';
-        });
-      }
-
-      // 5. 모든 단계를 마치면 버튼 숨김
-      if (currentStep === maxStep) {
-        nextBtn.style.display = 'none';
-      }
+            currentStep++;
+        }
     });
-  </script>
+</script>
 </body>
 </html>
