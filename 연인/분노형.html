@@ -9,54 +9,133 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>분노형 (Anger and Blame) - 상세 분석</title>
+ 
   <style>
-      body {
-          font-family: Arial, sans-serif;
-          margin: 0;
-          padding: 0;
-          background-color: #f4f4f4;
-      }
-      #content {
-          width: 70%;
-          margin: 0 auto;
-          background-color: #ffffff;
-          padding: 20px;
-          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      }
-      header {
-          text-align: center;
-          margin-bottom: 20px;
-      }
-      header h1 {
-          font-size: 2em;
-          color: #333;
-      }
-      .section {
-          margin-bottom: 30px;
-      }
-      .section h2 {
-          font-size: 1.5em;
-          color: #444;
-          border-bottom: 2px solid #ddd;
-          padding-bottom: 5px;
-      }
-      .section p, .section ul {
-          font-size: 1em;
-          line-height: 1.6;
-          color: #666;
-      }
-      footer {
-          text-align: center;
-          margin-top: 20px;
-      }
-      #nextBtn {
-          display: block;
-          margin: 20px auto;
-          padding: 10px 20px;
-          font-size: 16px;
-          cursor: pointer;
-      }
+    /* 기본 스타일 */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f4;
+    }
+
+    #content {
+        width: 60%;
+        margin: 0 auto;
+        background-color: #ffffff;
+        padding: 20px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    header {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+
+    header h1 {
+        font-size: 2em;
+        color: #333;
+        margin-bottom: 10px; /* 광고와의 간격 조절 */
+    }
+
+    .section {
+        margin-bottom: 30px;
+    }
+
+    .section h2 {
+        font-size: 1.5em;
+        color: #333;
+        border-bottom: 2px solid #ddd;
+        padding-bottom: 5px;
+    }
+
+    .section h3 {
+        font-size: 1.2em;
+        color: #444;
+        margin-top: 20px;
+    }
+
+    .section p {
+        font-size: 1em;
+        line-height: 1.6;
+        color: #666;
+    }
+
+    footer {
+        margin-top: 40px;
+        text-align: center;
+        background-color: #333;
+        color: #fff;
+        padding: 10px 0;
+    }
+
+    footer h2 {
+        font-size: 1.3em;
+        margin-bottom: 10px;
+    }
+
+    footer p {
+        font-size: 1em;
+        line-height: 1.6;
+    }
+
+    /* 반응형 미디어 쿼리: 중간 화면(태블릿 등) */
+    @media (max-width: 1100px) {
+        #content {
+            width: 95%;
+        }
+        header h1 {
+            font-size: 1.5em;
+        }
+        .section h2 {
+            font-size: 1.3em;
+        }
+        .section h3 {
+            font-size: 1.1em;
+        }
+        .section p {
+            font-size: 0.95em;
+        }
+        footer h2 {
+            font-size: 1.1em;
+        }
+        footer p {
+            font-size: 0.9em;
+        }
+    }
+
+    /* 모바일 화면에서 최적화 */
+    @media (max-width: 600px) {
+        body {
+            font-size: 14px;
+        }
+        header h1 {
+            font-size: 1.3em;
+        }
+        .section h2 {
+            font-size: 1.2em;
+        }
+        .section h3 {
+            font-size: 1em;
+        }
+        footer h2 {
+            font-size: 1em;
+        }
+        footer p {
+            font-size: 0.85em;
+        }
+    }
+
+    /* "다음" 버튼 스타일(선택 사항) */
+    #nextBtn {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        font-size: 16px;
+        cursor: pointer;
+    }
   </style>
+  
 </head>
 <body>
     <div id="content">
@@ -163,28 +242,34 @@
         </section>
     </div>
 
-    <!-- 다음 버튼 -->
-    <button id="nextBtn">다음</button>
+  <!-- "다음" 버튼 -->
+  <button id="nextBtn">다음</button>
 
-    <script>
-        const sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6'];
-        let currentStep = 1;
+  <script>
+    const sections = ['section1', 'section2', 'section3', 'section4', 'section5', 'section6'];
+    let currentStep = 1;
 
-        document.getElementById('nextBtn').addEventListener('click', () => {
-            if (currentStep <= sections.length) {
-                const currentSection = document.getElementById(sections[currentStep - 1]);
-                currentSection.style.display = 'none';
+    document.getElementById('nextBtn').addEventListener('click', () => {
+        if (currentStep <= sections.length) {
+            const currentSection = document.getElementById(sections[currentStep - 1]);
+            currentSection.style.display = 'none';
 
-                if (currentStep < sections.length) {
-                    const nextSection = document.getElementById(sections[currentStep]);
-                    nextSection.style.display = 'block';
-                } else {
-                    document.getElementById('nextBtn').style.display = 'none';
-                }
+            if (currentStep < sections.length) {
+                const nextSection = document.getElementById(sections[currentStep]);
+                nextSection.style.display = 'block';
+            } else {
+                // 마지막 섹션에서 모든 섹션 표시
+                sections.forEach(section => {
+                    document.getElementById(section).style.display = 'block';
+                });
 
-                currentStep++;
+                // 다음 버튼 숨기기
+                document.getElementById('nextBtn').style.display = 'none';
             }
-        });
-    </script>
+
+            currentStep++;
+        }
+    });
+</script>
 </body>
 </html>
