@@ -946,3 +946,61 @@ button:disabled:hover {
     backdrop-filter: blur(5px);
     display: block;
 }
+/* 로딩 화면 스타일 */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #ffd700;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* 카드 셔플 애니메이션 */
+@keyframes shuffle {
+    0% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(20px) rotate(5deg); }
+    75% { transform: translateX(-20px) rotate(-5deg); }
+    100% { transform: translateX(0) rotate(0); }
+}
+
+/* 결과 페이지 스타일 개선 */
+.overall-interpretation {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    margin-top: 2rem;
+    backdrop-filter: blur(5px);
+}
+
+.interpretation-categories {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.category {
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1.5rem;
+    border-radius: 10px;
+}
+
+.category h3 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+}
