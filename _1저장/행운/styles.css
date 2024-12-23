@@ -1,0 +1,153 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+#app {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.section {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.hidden {
+    display: none;
+}
+/* 폼 스타일 */
+#fortuneForm {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+input, select, button {
+    padding: 12px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+/* 운세 섹션 스타일 */
+.fortune-content {
+    margin: 20px 0;
+    font-size: 18px;
+    line-height: 1.6;
+}
+
+.progress-bar {
+    height: 4px;
+    background-color: #ddd;
+    margin: 20px 0;
+    border-radius: 2px;
+}
+
+.progress {
+    height: 100%;
+    background-color: #4CAF50;
+    border-radius: 2px;
+    transition: width 0.3s ease;
+}
+
+/* 바이오리듬 차트 스타일 */
+.biorhythm-section {
+    margin-top: 30px;
+}
+
+.biorhythm-bars {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.biorhythm-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.bar-label {
+    width: 80px;
+    font-weight: bold;
+}
+
+.bar-container {
+    flex-grow: 1;
+    height: 20px;
+    background: #ddd;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.bar-fill {
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.bar-value {
+    width: 120px;
+    text-align: right;
+}
+
+/* 카카오 공유 버튼 */
+.kakao-share-button {
+    display: block;
+    width: 100%;
+    max-width: 300px;
+    margin: 20px auto;
+    padding: 12px;
+    background-color: #FEE500;
+    color: #000000;
+    font-weight: bold;
+}
+
+.kakao-share-button:hover {
+    background-color: #FDD835;
+}
+
+/* 광고 배너 */
+.ad-banner {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* 반응형 디자인 */
+@media (max-width: 600px) {
+    #app {
+        padding: 10px;
+    }
+
+    .section {
+        padding: 15px;
+    }
+
+    .fortune-content {
+        font-size: 16px;
+    }
+}
