@@ -1,222 +1,168 @@
-let selectedCards = [];
-const MAX_CARDS = 3;
+import tarotData from './tarot-data.js';
 
-// 페이지 로드 시 초기화
-document.addEventListener('DOMContentLoaded', () => {
-    initializeApp();
-});
-
-async function initializeApp() {
-    try {
-        // 로딩 화면 표시
-        showLoading();
-        
-        // 카드 그리드 생성 및 초기화
-        await createCardGrid();
-        initializeButtons();
-        
-        // 카드 셔플
-        await shuffleCards();
-        
-        // 로딩 화면 숨기기
-        hideLoading();
-    } catch (error) {
-        console.error('초기화 중 오류 발생:', error);
-        hideLoading();
-    }
-}
-
-function showLoading() {
-    document.querySelector('.loading-screen').style.display = 'flex';
-}
-
-function hideLoading() {
-    document.querySelector('.loading-screen').style.display = 'none';
-}
-
-// 카드 그리드 생성
-async function createCardGrid() {
-    const cardGrid = document.getElementById('cardGrid');
-    
-    tarotData.major.forEach(card => {
-        const cardElement = createCardElement(card);
-        cardGrid.appendChild(cardElement);
-    });
-}
-
-// 카드 요소 생성
-function createCardElement(card) {
-    const cardDiv = document.createElement('div');
-    cardDiv.className = 'card';
-    cardDiv.setAttribute('data-card', card.id);
-    
-    cardDiv.innerHTML = `
-        <div class="card-inner">
-            <div class="card-back">
-                <div class="card-corner"></div>
-                <div class="card-corner"></div>
-                <div class="card-corner"></div>
-                <div class="card-corner"></div>
-            </div>
-            <div class="card-front">
-                <div class="card-number">${card.id}</div>
-                <div class="card-symbol"></div>
-                <div class="card-title">${card.name}</div>
-            </div>
-        </div>
-    `;
-
-    cardDiv.addEventListener('click', () => selectCard(cardDiv, card));
-    return cardDiv;
-}
-
-// 카드 셔플
-async function shuffleCards() {
-    const cardGrid = document.getElementById('cardGrid');
-    const cards = Array.from(cardGrid.children);
-    
-    cards.forEach(card => {
-        card.style.animation = 'shuffle 0.5s ease-in-out';
-    });
-    
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    cards.forEach(card => {
-        const random = Math.random();
-        card.style.order = Math.floor(random * cards.length);
-    });
-    
-    await new Promise(resolve => setTimeout(resolve, 500));
-    
-    cards.forEach(card => {
-        card.style.animation = '';
-    });
-}
-
-// 카드 선택 처리
-function selectCard(cardElement, card) {
-    if (selectedCards.length >= MAX_CARDS && !cardElement.classList.contains('selected')) {
-        return;
+class TarotReading {
+    constructor() {
+        this.cards = tarotData.major;
+        this.selectedCards = [];
+        this.currentStep = 0;
+        this.initializeElements();
+        this.addEventListeners();
     }
 
-    if (cardElement.classList.contains('selected')) {
-        cardElement.classList.remove('selected');
-        selectedCards = selectedCards.filter(c => c.id !== card.id);
-    } else {
+    initializeElements() {
+        this.shuffleBtn = document.getElementById('shuffleBtn');
+        this.cardElements = document.querySelectorAll('.card');
+        this.loadingScreen = document.querySelector('.loading-screen');
+        this.readingResult = document.querySelector('.reading-result');
+        this.shareButton = document.getElementById('shareKakao');
+        this.resetButton = document.getElementById('resetReading');
+    }
+
+    addEventListeners() {
+        this.shuffleBtn.addEventListener('click', () => this.startReading());
+        this.cardElements.forEach(card => {
+            card.addEventListener('click', (e) => this.handleCardClick(e));
+        });
+        this.shareButton.addEventListener('click', () => this.shareToKakao());
+        this.resetButton.addEventListener('click', () => this.resetReading());
+    }
+
+    startReading() {
+        this.showLoading();
+        this.shuffleCards();
+        this.enableCardSelection();
+        this.shuffleBtn.disabled = true;
+    }
+
+    showLoading() {
+        this.loadingScreen.style.display = 'flex';
+        setTimeout(() => {
+            this.loadingScreen.style.display = 'none';
+        }, 1500);
+    }
+
+    shuffleCards() {
+        this.cards = [...this.cards].sort(() => Math.random() - 0.5);
+    }
+
+    enableCardSelection() {
+        this.cardElements.forEach(card => {
+            if (!card.classList.contains('selected')) {
+                card.style.cursor = 'pointer';
+            }
+        });
+    }
+
+    handleCardClick(event) {
+        const card = event.currentTarget;
+        if (this.currentStep >= 3 || card.classList.contains('selected')) return;
+
+        const selectedCard = this.cards[this.currentStep];
+        const isReversed = Math.random() < 0.5;
+        
+        this.selectedCards.push({
+            ...selectedCard,
+            isReversed,
+            position: card.dataset.position
+        });
+
+        this.displayCard(card, selectedCard, isReversed);
+        this.currentStep++;
+
+        if (this.currentStep === 3) {
+            setTimeout(() => this.showResults(), 1000);
+        }
+    }
+
+    displayCard(cardElement, cardData, isReversed) {
+        const cardFront = cardElement.querySelector('.card-front');
+        cardFront.querySelector('.card-number').textContent = cardData.id;
+        cardFront.querySelector('.card-title').textContent = cardData.name;
+        cardFront.querySelector('.card-symbol').setAttribute('data-card', cardData.name.toLowerCase());
+
         cardElement.classList.add('selected');
-        selectedCards.push(card);
+        if (isReversed) {
+            cardFront.style.transform = 'rotate(180deg)';
+        }
     }
 
-    updateViewResultButton();
-}
-
-// 결과 보기 버튼 상태 업데이트
-function updateViewResultButton() {
-    const viewResultBtn = document.getElementById('viewResultBtn');
-    viewResultBtn.disabled = selectedCards.length !== MAX_CARDS;
-}
-
-// 결과 페이지 표시
-function showResults() {
-    document.querySelector('.selection-page').style.display = 'none';
-    document.querySelector('.reading-result').style.display = 'block';
-    
-    const resultContainer = document.querySelector('.result-container');
-    resultContainer.innerHTML = selectedCards.map((card, index) => `
-        <div class="result-card">
-            <div class="card-image">
-                <img src="images/${card.image}" alt="${card.name}">
-            </div>
-            <div class="card-info">
-                <h2>${card.name}</h2>
-                <p class="keywords">키워드: ${card.keywords.join(', ')}</p>
-                <div class="meanings">
-                    <h3>의미</h3>
-                    <p>사랑: ${card.meanings.love.upright}</p>
-                    <p>경력: ${card.meanings.career.upright}</p>
-                    <p>재물: ${card.meanings.money.upright}</p>
-                    <p>건강: ${card.meanings.health.upright}</p>
-                </div>
-            </div>
-        </div>
-    `).join('');
-
-    // 종합 해석 추가
-    const interpretations = getCardInterpretations(selectedCards);
-    document.querySelector('.overall-interpretation').innerHTML = `
-        <h2>종합 해석</h2>
-        <p>${interpretations.overall}</p>
+    showResults() {
+        this.readingResult.style.display = 'block';
         
-        <div class="interpretation-categories">
-            <div class="category">
-                <h3>사랑</h3>
-                <p>${interpretations.love}</p>
-            </div>
-            <div class="category">
-                <h3>경력</h3>
-                <p>${interpretations.career}</p>
-            </div>
-            <div class="category">
-                <h3>재물</h3>
-                <p>${interpretations.money}</p>
-            </div>
-            <div class="category">
-                <h3>건강</h3>
-                <p>${interpretations.health}</p>
-            </div>
-        </div>
-    `;
-}
+        const positions = ['past', 'present', 'future'];
+        positions.forEach(position => {
+            const card = this.selectedCards.find(c => c.position === position);
+            const reading = document.getElementById(`${position}Reading`);
+            
+            reading.innerHTML = `
+                <h4>${card.name} ${card.isReversed ? '(역방향)' : ''}</h4>
+                <p>${this.getCardMeaning(card)}</p>
+            `;
+        });
+    }
 
-// 카드 해석 생성
-function getCardInterpretations(cards) {
-    // 여기에 카드 조합에 따른 해석 로직 구현
-    return {
-        overall: "선택하신 카드들의 조합은...",
-        love: "사랑과 관련하여...",
-        career: "경력 측면에서...",
-        money: "재물운은...",
-        health: "건강 관련하여..."
-    };
-}
+    getCardMeaning(card) {
+        const meanings = card.meanings;
+        let interpretation = '';
+        
+        for (const aspect in meanings) {
+            interpretation += `<strong>${aspect}:</strong> ${card.isReversed ? meanings[aspect].reversed : meanings[aspect].upright}<br>`;
+        }
+        
+        return interpretation;
+    }
 
-// 카카오톡 공유
-function shareKakao() {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '타로 카드 운세 결과',
-            description: `선택된 카드: ${selectedCards.map(card => card.name).join(', ')}`,
-            imageUrl: 'YOUR_IMAGE_URL',
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-            },
-        },
-        buttons: [
-            {
-                title: '결과 보기',
+    shareToKakao() {
+        if (this.selectedCards.length !== 3) return;
+
+        Kakao.Link.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '타로카드 운세 결과',
+                description: this.getShareDescription(),
+                imageUrl: 'YOUR_IMAGE_URL', // 대표 이미지 URL 필요
                 link: {
                     mobileWebUrl: window.location.href,
                     webUrl: window.location.href,
-                },
+                }
             },
-        ],
-    });
+            buttons: [
+                {
+                    title: '나도 타로카드 보기',
+                    link: {
+                        mobileWebUrl: window.location.href,
+                        webUrl: window.location.href,
+                    }
+                }
+            ]
+        });
+    }
+
+    getShareDescription() {
+        return this.selectedCards.map(card => 
+            `${card.position}: ${card.name} ${card.isReversed ? '(역방향)' : ''}`
+        ).join('\n');
+    }
+
+    resetReading() {
+        this.selectedCards = [];
+        this.currentStep = 0;
+        this.shuffleBtn.disabled = false;
+        this.readingResult.style.display = 'none';
+        
+        this.cardElements.forEach(card => {
+            card.classList.remove('selected');
+            card.querySelector('.card-front').style.transform = '';
+            card.querySelector('.card-number').textContent = '';
+            card.querySelector('.card-title').textContent = '';
+        });
+    }
 }
 
-// 버튼 초기화
-function initializeButtons() {
-    document.getElementById('viewResultBtn').addEventListener('click', showResults);
-}
+// 페이지 로드 시 애플리케이션 초기화
+document.addEventListener('DOMContentLoaded', () => {
+    new TarotReading();
+});
 
-// 선택 페이지로 돌아가기
-function backToSelection() {
-    selectedCards = [];
-    document.querySelectorAll('.card.selected').forEach(card => {
-        card.classList.remove('selected');
-    });
-    document.querySelector('.reading-result').style.display = 'none';
-    document.querySelector('.selection-page').style.display = 'block';
-    updateViewResultButton();
-}
+// 구글 애드센스 광고 로드
+(adsbygoogle = window.adsbygoogle || []).push({});
