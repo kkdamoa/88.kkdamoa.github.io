@@ -15,7 +15,6 @@ class FortuneApp {
         this.fortuneForm = document.getElementById('fortuneForm');
         this.nameInput = document.getElementById('name');
         this.birthdateInput = document.getElementById('birthdate');
-        this.genderInput = document.getElementById('gender');
 
         // 섹션 요소
         this.userFormSection = document.getElementById('userForm');
@@ -35,25 +34,53 @@ class FortuneApp {
         // 카카오 공유 버튼
         this.kakaoShareButton = document.getElementById('kakaoShareButton');
     }
+
     addEventListeners() {
+        // 생년월일 입력 제한
+        this.birthdateInput.addEventListener('input', (e) => {
+            e.target.value = e.target.value.replace(/[^0-9]/g, '').slice(0, 6);
+        });
+
+        // 폼 제출
         this.fortuneForm.addEventListener('submit', (e) => this.handleFormSubmit(e));
+        
+        // 다음 버튼
         this.nextButton.addEventListener('click', () => this.handleNext());
+        
+        // 카카오 공유
         this.kakaoShareButton.addEventListener('click', () => this.shareToKakao());
     }
 
     initializeAds() {
-        // 구글 애드센스 광고 초기화
-        (adsbygoogle = window.adsbygoogle || []).push({});
+        try {
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        } catch (e) {
+            console.error('애드센스 초기화 실패:', e);
+        }
     }
 
     handleFormSubmit(e) {
         e.preventDefault();
+        
+        // 생년월일 유효성 검사
+        const birthdate = this.birthdateInput.value;
+        if (birthdate.length !== 6 || !/^\d{6}$/.test(birthdate)) {
+            alert('올바른 생년월일 6자리를 입력해주세요.');
+            return;
+        }
+
+        // 생년월일 변환 (YYMMDD -> YYYY-MM-DD)
+        const year = parseInt(birthdate.substring(0, 2));
+        const month = birthdate.substring(2, 4);
+        const day = birthdate.substring(4, 6);
+        const fullYear = year + (year < 50 ? 2000 : 1900);
+        
         this.userData = {
             name: this.nameInput.value,
-            birthdate: this.birthdateInput.value,
-            gender: this.genderInput.value
+            birthdate: `${fullYear}-${month}-${day}`,
+            gender: document.querySelector('input[name="gender"]:checked').value
         };
-        
+
         this.generateFortune();
         this.calculateBiorhythm();
         this.showFortuneSection();
@@ -70,7 +97,7 @@ class FortuneApp {
         const getRandomFortune = (category) => {
             const fortunes = fortuneData[category];
             const level = getLuckyLevel();
-            const startIndex = level * 10; // 각 레벨별로 10개씩 구분
+            const startIndex = level * 10;
             const endIndex = startIndex + 10;
             const selectedFortunes = fortunes.slice(startIndex, endIndex);
             return selectedFortunes[Math.floor(Math.random() * selectedFortunes.length)];
@@ -101,6 +128,12 @@ class FortuneApp {
     showFortuneSection() {
         this.userFormSection.classList.add('hidden');
         this.fortuneSection.classList.remove('hidden');
+        
+        // 애니메이션 효과
+        setTimeout(() => {
+            this.fortuneSection.classList.add('active');
+        }, 100);
+        
         this.updateFortuneContent();
     }
 
@@ -114,10 +147,18 @@ class FortuneApp {
             { title: '조언', content: this.fortune.caution }
         ];
 
-        this.sectionTitle.textContent = sections[this.currentSection].title;
-        this.fortuneContent.textContent = sections[this.currentSection].content;
+        // 콘텐츠 업데이트 애니메이션
+        this.fortuneContent.style.opacity = '0';
+        setTimeout(() => {
+            this.sectionTitle.textContent = sections[this.currentSection].title;
+            this.fortuneContent.textContent = sections[this.currentSection].content;
+            this.fortuneContent.style.opacity = '1';
+        }, 300);
+
+        // 프로그레스 바 업데이트
         this.progressFill.style.width = `${((this.currentSection + 1) / sections.length) * 100}%`;
         
+        // 마지막 섹션 체크
         if (this.currentSection === sections.length - 1) {
             this.nextButton.textContent = '전체 운세 보기';
         }
@@ -133,10 +174,19 @@ class FortuneApp {
     }
 
     showFullFortune() {
-        this.fortuneSection.classList.add('hidden');
-        this.fullFortuneSection.classList.remove('hidden');
-        this.displayFullFortune();
-        this.displayBiorhythm();
+        this.fortuneSection.classList.remove('active');
+        setTimeout(() => {
+            this.fortuneSection.classList.add('hidden');
+            this.fullFortuneSection.classList.remove('hidden');
+            
+            // 전체 운세 표시 애니메이션
+            setTimeout(() => {
+                this.fullFortuneSection.style.opacity = '1';
+            }, 100);
+            
+            this.displayFullFortune();
+            this.displayBiorhythm();
+        }, 300);
     }
 
     displayFullFortune() {
@@ -183,14 +233,21 @@ class FortuneApp {
             <div class="biorhythm-bar">
                 <div class="bar-label">${biorhythmTypes[type]}</div>
                 <div class="bar-container">
-                    <div class="bar-fill" style="
-                        width: ${Math.abs(value)}%;
-                        background-color: ${getBarColor(value)}
-                    "></div>
+                    <div class="bar-fill" style="width: 0%"></div>
                 </div>
                 <div class="bar-value">${value}% (${interpretBiorhythm(value)})</div>
             </div>
         `).join('');
+
+        // 바이오리듬 바 애니메이션
+        setTimeout(() => {
+            const bars = document.querySelectorAll('.bar-fill');
+            bars.forEach((bar, index) => {
+                const value = Object.values(this.biorhythm)[index];
+                bar.style.width = `${Math.abs(value)}%`;
+                bar.style.backgroundColor = getBarColor(value);
+            });
+        }, 100);
     }
 
     shareToKakao() {
@@ -200,7 +257,7 @@ class FortuneApp {
                 content: {
                     title: `${this.userData.name}님의 오늘의 운세`,
                     description: `${this.fortune.daily}\n\n바이오리듬: 신체(${this.biorhythm.physical}%) 감정(${this.biorhythm.emotional}%) 지성(${this.biorhythm.intellectual}%)`,
-                    imageUrl: 'https://your-domain.com/fortune-image.jpg', // 실제 이미지 URL로 변경 필요
+                    imageUrl: 'https://your-domain.com/fortune-image.jpg',
                     link: {
                         mobileWebUrl: window.location.href,
                         webUrl: window.location.href,
@@ -220,7 +277,13 @@ class FortuneApp {
     }
 }
 
-// 앱 초기화
+// 페이지 로드 애니메이션
 document.addEventListener('DOMContentLoaded', () => {
-    new FortuneApp();
+    document.body.style.opacity = '0';
+    const app = new FortuneApp();
+    
+    setTimeout(() => {
+        document.body.style.opacity = '1';
+        document.body.style.transition = 'opacity 0.5s ease';
+    }, 100);
 });

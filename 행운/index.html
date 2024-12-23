@@ -9,6 +9,8 @@
     <!-- 구글 애드센스 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
+    <!-- 폰트어썸 추가 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div id="app">
@@ -20,21 +22,42 @@
                  data-ad-slot="3201247599"
                  data-ad-format="auto"
                  data-full-width-responsive="true">
-            </ins>
+            </ins>        
+        <!-- 상단 타이틀 애니메이션 -->
+        <div class="title-section">
+            <div class="stars"></div>
+            <h1 class="main-title">✨ 오늘의 운세 ✨</h1>
+            <p class="subtitle">당신의 행운을 알아보세요</p>
+            <div class="crystal-ball">
+                <i class="fas fa-globe-asia"></i>
+            </div>
         </div>
 
         <!-- 입력 폼 -->
         <div id="userForm" class="section">
-            <h1>오늘의 운세</h1>
             <form id="fortuneForm">
-                <input type="text" id="name" placeholder="이름을 입력하세요" required>
-                <input type="date" id="birthdate" required>
-                <select id="gender" required>
-                    <option value="">성별 선택</option>
-                    <option value="male">남성</option>
-                    <option value="female">여성</option>
-                </select>
-                <button type="submit">운세 보기</button>
+                <div class="input-group">
+                    <label for="name">이름</label>
+                    <input type="text" id="name" placeholder="이름을 입력하세요" required>
+                </div>
+                <div class="input-group">
+                    <label for="birthdate">생년월일 (예: 980101)</label>
+                    <input type="text" id="birthdate" maxlength="6" placeholder="생년월일 6자리" 
+                           pattern="\d{6}" required>
+                </div>
+                <div class="input-group">
+                    <label for="gender">성별</label>
+                    <div class="gender-buttons">
+                        <input type="radio" id="male" name="gender" value="male" required>
+                        <label for="male" class="gender-label">남성</label>
+                        <input type="radio" id="female" name="gender" value="female">
+                        <label for="female" class="gender-label">여성</label>
+                    </div>
+                </div>
+                <button type="submit" class="submit-btn">
+                    <span class="btn-text">운세 보기</span>
+                    <i class="fas fa-star"></i>
+                </button>
             </form>
         </div>
 
