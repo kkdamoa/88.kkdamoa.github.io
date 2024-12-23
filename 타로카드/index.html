@@ -1,82 +1,51 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="무료 타로 카드 운세 보기">
-    <meta name="keywords" content="타로, 운세, 타로카드, 무료운세">
-    <meta property="og:title" content="타로 카드 운세">
-    <meta property="og:description" content="나의 운세를 타로카드로 알아보세요">
-    <meta property="og:image" content="path/to/your/og-image.jpg">
-    
-    <title>타로 카드 운세</title>
-    
-    <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap" rel="stylesheet">
-    
+    <title>타로 카드 리딩</title>
+    <link rel="stylesheet" href="styles.css">
     <!-- 카카오 SDK -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-    </script>
-
-    <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
-    
-    <link rel="stylesheet" href="style.css">
+    <!-- 구글 광고 -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-    <!-- 로딩 화면 -->
-    <div class="loading-screen">
-        <div class="loading-spinner"></div>
-        <p>타로 카드를 준비하고 있습니다...</p>
-    </div>
-
     <div class="container">
-        <!-- 광고 섹션 -->
+        <!-- 구글 광고 영역 -->
         <div class="ad-container">
             <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true"></ins>
-            <script>
-                 (adsbygoogle = window.adsbygoogle || []).push({});
-            </script>
+                style="display:block"
+                data-ad-client="ca-pub-9374368296307755"
+                data-ad-slot="3201247599"
+                data-ad-format="auto"
+                data-full-width-responsive="true">
+            </ins>
         </div>
 
-        <!-- 카드 선택 페이지 -->
-        <div class="page selection-page">
-            <h1>타로 카드 운세</h1>
-            <p class="instruction">당신의 운세를 알아보기 위해 카드 3장을 선택하세요</p>
-            
-            <div class="card-grid" id="cardGrid">
-                <!-- 카드들은 JavaScript로 동적 생성됨 -->
-            </div>
-
-            <button id="viewResultBtn" class="view-result-btn" disabled>결과 보기</button>
+        <h1>타로 카드 리딩</h1>
+        
+        <div class="deck-container">
+            <!-- 카드 덱이 표시될 곳 -->
         </div>
-
-        <!-- 결과 페이지 -->
-        <div class="page reading-result" style="display: none;">
-            <h1>타로 카드 해석</h1>
-            <div class="result-container">
-                <!-- 결과는 JavaScript로 동적 생성됨 -->
-            </div>
-            
-            <div class="overall-interpretation">
-                <!-- 종합 해석은 JavaScript로 동적 생성됨 -->
-            </div>
-
-            <div class="share-buttons">
-                <button onclick="shareKakao()">카카오톡으로 공유하기</button>
-                <button onclick="backToSelection()">다시 선택하기</button>
-            </div>
+        
+        <div class="selected-cards">
+            <!-- 선택된 3장의 카드가 표시될 곳 -->
+        </div>
+        
+        <div class="button-container">
+            <button id="readingBtn" class="hidden">상세 보기</button>
+            <button id="shareKakao" class="hidden">카카오톡 공유하기</button>
         </div>
     </div>
 
+    <script>
+        // 카카오 SDK 초기화
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+        
+        // 구글 광고 초기화
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
     <script src="tarot-data.js"></script>
-    <script src="script.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>
