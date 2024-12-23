@@ -844,3 +844,105 @@ button:hover::before {
         font-size: 0.9rem;
     }
 }
+/* 카드 그리드 레이아웃 */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+    justify-items: center;
+}
+
+/* 선택된 카드 스타일 */
+.card.selected .card-inner {
+    transform: rotateY(180deg);
+    box-shadow: 0 0 30px rgba(255, 215, 0, 0.5);
+}
+
+/* 결과 페이지 스타일 */
+.reading-result {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.result-card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 15px;
+    padding: 2rem;
+    backdrop-filter: blur(5px);
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+}
+
+.result-card .card-image {
+    flex: 0 0 200px;
+}
+
+.result-card .card-image img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+    border: 5px solid #daa520;
+}
+
+.result-card .card-info {
+    flex: 1;
+}
+
+.result-card h2 {
+    color: #ffd700;
+    margin-bottom: 1rem;
+    font-family: 'Cinzel', serif;
+}
+
+/* 버튼 비활성화 스타일 */
+button:disabled {
+    background: linear-gradient(45deg, #808080, #A9A9A9);
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+button:disabled:hover {
+    transform: none;
+    box-shadow: none;
+}
+
+/* 반응형 디자인 개선 */
+@media (max-width: 768px) {
+    .result-card {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .result-card .card-image {
+        flex: 0 0 auto;
+        width: 150px;
+        margin: 0 auto;
+    }
+
+    .container {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 2rem;
+    }
+
+    h1::before,
+    h1::after {
+        display: none;
+    }
+}
+
+/* 광고 컨테이너 개선 */
+.adsbygoogle {
+    margin: 2rem auto;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    padding: 1rem;
+    backdrop-filter: blur(5px);
+    display: block;
+}
