@@ -27,41 +27,44 @@ body {
     overflow: hidden;
 }
 
-.stars {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    pointer-events: none;
-}
-
-.stars::before {
-    content: '';
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    background-image: 
-        radial-gradient(2px 2px at 20px 30px, #eee, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 40px 70px, #fff, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 50px 160px, #ddd, rgba(0,0,0,0)),
-        radial-gradient(2px 2px at 90px 40px, #fff, rgba(0,0,0,0));
-    background-repeat: repeat;
-    animation: twinkle 4s infinite;
-}
-
 .main-title {
     font-size: 2.5em;
     color: #fff;
     text-shadow: 0 0 10px rgba(255,255,255,0.5);
     margin-bottom: 10px;
-    animation: float 3s ease-in-out infinite;
 }
 
 .subtitle {
     font-size: 1.2em;
     color: #a0a0a0;
     margin-bottom: 30px;
+}
+
+.crystal-ball {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8), rgba(255,255,255,0.1));
+    border-radius: 50%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.crystal-ball i {
+    font-size: 50px;
+    color: rgba(255,255,255,0.8);
+}
+
+/* 섹션 스타일 */
+.section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border-radius: 20px;
+    padding: 25px;
+    margin: 20px auto;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 /* 광고 배너 스타일 */
@@ -81,32 +84,21 @@ body {
     background: rgba(255, 255, 255, 0.15);
 }
 
-/* 섹션 공통 스타일 */
-.section {
-    background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    border-radius: 20px;
-    padding: 30px;
-    margin: 30px auto;
-    max-width: 600px;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-}
-
-/* 폼 스타일 */
+/* 입력 폼 스타일 */
 .input-group {
-    margin-bottom: 25px;
+    margin-bottom: 20px;
 }
 
 .input-group label {
     display: block;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
     color: #fff;
     font-size: 1em;
 }
 
 input[type="text"] {
     width: 100%;
-    padding: 15px;
+    padding: 12px;
     border: 2px solid rgba(255,255,255,0.1);
     background: rgba(255,255,255,0.05);
     border-radius: 10px;
@@ -129,7 +121,7 @@ input[type="text"]:focus {
 
 .gender-label {
     flex: 1;
-    padding: 15px;
+    padding: 12px;
     text-align: center;
     background: rgba(255,255,255,0.05);
     border: 2px solid rgba(255,255,255,0.1);
@@ -148,59 +140,69 @@ input[type="radio"]:checked + .gender-label {
 }
 
 /* 버튼 스타일 */
-.large-btn {
+.submit-btn, #nextButton {
     width: 100%;
-    padding: 18px 30px;
+    padding: 15px 25px;
     font-size: 1.2em;
-    margin: 20px 0;
-    background: linear-gradient(45deg, #4a90e2, #63b3ed);
+    background: #4a90e2;
     color: white;
     border: none;
-    border-radius: 15px;
+    border-radius: 10px;
     cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 20px 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    gap: 10px;
 }
 
-.large-btn:hover {
+.submit-btn:hover, #nextButton:hover {
+    background: #357abd;
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
 }
 
-.large-btn i {
+.submit-btn i, #nextButton i {
     font-size: 1.2em;
 }
 
 /* 운세 콘텐츠 스타일 */
 .fortune-content {
     background: rgba(255,255,255,0.05);
-    padding: 25px;
+    padding: 20px;
     border-radius: 15px;
-    margin: 30px 0;
+    margin: 20px 0;
     font-size: 1.1em;
     line-height: 1.8;
-    position: relative;
-    overflow: hidden;
+    transition: opacity 0.3s ease;
 }
 
 /* 프로그레스 바 */
 .progress-bar {
-    height: 6px;
+    height: 4px;
     background-color: rgba(255,255,255,0.1);
-    border-radius: 3px;
-    margin: 25px 0;
+    border-radius: 2px;
+    margin: 20px 0;
     overflow: hidden;
 }
 
 .progress {
     height: 100%;
-    background: linear-gradient(45deg, #4a90e2, #63b3ed);
-    border-radius: 3px;
+    background-color: #4a90e2;
     transition: width 0.3s ease;
+}
+
+/* 전체 운세 스타일 */
+.fortune-item {
+    background: rgba(255,255,255,0.05);
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.fortune-item h3 {
+    color: #4a90e2;
+    margin-bottom: 10px;
 }
 
 /* 바이오리듬 차트 */
@@ -211,21 +213,25 @@ input[type="radio"]:checked + .gender-label {
     border-radius: 15px;
 }
 
+.biorhythm-section h3 {
+    margin-bottom: 20px;
+    color: #4a90e2;
+}
+
 .biorhythm-bars {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
+    gap: 15px;
 }
 
 .biorhythm-bar {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 10px;
 }
 
 .bar-label {
-    width: 90px;
+    width: 80px;
     font-weight: bold;
 }
 
@@ -249,28 +255,40 @@ input[type="radio"]:checked + .gender-label {
 
 /* 카카오 공유 버튼 */
 .kakao-share-button {
+    width: 100%;
+    padding: 15px;
     background: #FEE500;
     color: #000000;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .kakao-share-button:hover {
     background: #FDD835;
+    transform: translateY(-2px);
 }
 
-/* 애니메이션 */
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.kakao-share-button i {
+    font-size: 1.2em;
 }
 
-@keyframes twinkle {
-    0%, 100% { opacity: 1; }
-    50% { opacity: 0.3; }
+/* 섹션 전환 애니메이션 */
+.section {
+    opacity: 1;
+    transition: opacity 0.3s ease;
 }
 
-/* 숨김 클래스 */
-.hidden {
+.section.hidden {
     display: none;
+    opacity: 0;
 }
 
 /* 반응형 디자인 */
@@ -281,30 +299,29 @@ input[type="radio"]:checked + .gender-label {
 
     .section {
         padding: 20px;
-        margin: 15px auto;
     }
 
     .main-title {
         font-size: 2em;
     }
 
-    .large-btn {
-        padding: 15px 25px;
-        font-size: 1.1em;
-    }
-
     .fortune-content {
-        padding: 20px;
         font-size: 1em;
+        padding: 15px;
     }
 
     .biorhythm-bar {
         flex-direction: column;
-        gap: 10px;
+        gap: 5px;
     }
 
     .bar-label, .bar-value {
         width: 100%;
         text-align: center;
+    }
+
+    .submit-btn, #nextButton, .kakao-share-button {
+        padding: 12px 20px;
+        font-size: 1.1em;
     }
 }
