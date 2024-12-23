@@ -2,19 +2,23 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>타로 카드 리딩</title>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
-    
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <h1>타로 카드 리딩</h1>
-        
-        <!-- AdSense 광고 -->
+    <div id="app">
+        <!-- 광고 삽입 -->
         <div class="ad-container">
             <ins class="adsbygoogle"
                  style="display:block"
@@ -22,31 +26,97 @@
                  data-ad-slot="3201247599"
                  data-ad-format="auto"
                  data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
-        
-        <p class="instruction">당신의 운세를 알아보세요.<br>카드를 선택하면 과거, 현재, 미래를 볼 수 있습니다.</p>
-        
-        <div id="cardsContainer" class="cards-container"></div>
-        
-        <div class="buttons">
-            <button id="shuffleButton" onclick="shuffleCards()">카드 섞기</button>
-            <button id="detailButton" onclick="showDetail()" style="display: none;">결과 보기</button>
-            <button id="shareButton" onclick="shareResult()" style="display: none;">공유하기</button>
-            <button id="restartButton" onclick="location.reload()" style="display: none;">다시 시작</button>
-        </div>
+
+        <!-- 시작 화면 -->
+        <section id="welcomeSection">
+            <h1>타로 카드 리딩</h1>
+            <div class="input-group">
+                <input type="text" id="nameInput" placeholder="이름을 입력하세요">
+                <input type="text" id="questionInput" placeholder="질문을 입력하세요">
+                <button id="startButton">시작하기</button>
+            </div>
+        </section>
+
+        <!-- 카테고리 선택 화면 -->
+        <section id="categorySection" class="hidden">
+            <h2>카테고리 선택</h2>
+            <div class="category-buttons">
+                <button data-category="love">연애/사랑</button>
+                <button data-category="career">직장/진로</button>
+                <button data-category="money">재물/금전</button>
+                <button data-category="health">건강/체력</button>
+            </div>
+        </section>
+
+        <!-- 카드 선택 화면 -->
+        <section id="cardSelectionSection" class="hidden">
+            <h2>카드를 선택하세요</h2>
+            <div class="cards-container">
+                <div class="card-selection-info">
+                    <p>3장의 카드를 선택해주세요</p>
+                    <p class="cards-remaining">남은 카드: <span>3</span></p>
+                </div>
+                <div class="cards-grid"></div>
+            </div>
+        </section>
+
+        <!-- 결과 화면 -->
+        <section id="resultSection" class="hidden">
+            <h2>타로 해석 결과</h2>
+            <div class="reading-info">
+                <p class="user-name"></p>
+                <p class="user-question"></p>
+                <p class="reading-category"></p>
+            </div>
+            <div class="spread-3cards">
+                <div class="card-position">
+                    <h3>과거/현재의 영향</h3>
+                    <div class="card-result card1"></div>
+                </div>
+                <div class="card-position">
+                    <h3>현재 상황</h3>
+                    <div class="card-result card2"></div>
+                </div>
+                <div class="card-position">
+                    <h3>조언/미래의 가능성</h3>
+                    <div class="card-result card3"></div>
+                </div>
+            </div>
+            <div class="result-content"></div>
+            <div class="action-buttons">
+                <button id="shareButton">결과 공유하기</button>
+                <button id="saveButton">결과 저장하기</button>
+                <button id="retryButton">다시 시작하기</button>
+            </div>
+        </section>
+
+        <!-- 로딩 화면 -->
+        <section id="loadingSection" class="hidden">
+            <div class="loading-spinner"></div>
+            <p>카드를 섞는 중...</p>
+        </section>
     </div>
 
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-    </script>
-    
-    <!-- AdSense 초기화 -->
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-    
-    <script type="module" src="app.js"></script>
+    <!-- 카드 템플릿 -->
+    <template id="cardTemplate">
+        <div class="tarot-card">
+            <div class="card-inner">
+                <div class="card-front">
+                    <div class="card-info">
+                        <h4 class="card-name"></h4>
+                        <p class="card-keywords"></p>
+                    </div>
+                </div>
+                <div class="card-back"></div>
+            </div>
+        </div>
+    </template>
+
+    <script src="js/tarot-data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
