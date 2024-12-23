@@ -37,10 +37,20 @@ function hideLoading() {
 // 카드 그리드 생성
 async function createCardGrid() {
     const cardGrid = document.getElementById('cardGrid');
+    cardGrid.innerHTML = ''; // 기존 카드들 제거
     
+    // major 배열이 존재하는지 확인
+    if (!tarotData.major || !Array.isArray(tarotData.major)) {
+        console.error('타로 데이터가 올바르지 않습니다:', tarotData);
+        return;
+    }
+
+    // 메이저 아르카나 카드만 표시
     tarotData.major.forEach(card => {
-        const cardElement = createCardElement(card);
-        cardGrid.appendChild(cardElement);
+        if (card && card.id !== undefined) {
+            const cardElement = createCardElement(card);
+            cardGrid.appendChild(cardElement);
+        }
     });
 }
 
@@ -66,7 +76,25 @@ function createCardElement(card) {
         </div>
     `;
 
-    cardDiv.addEventListener('click', () => selectCard(cardDiv, card));
+    // 카드 클릭 이벤트
+    cardDiv.addEventListener('click', () => {
+        if (!cardDiv.classList.contains('selected') && selectedCards.length >= MAX_CARDS) {
+            alert('이미 3장의 카드를 선택하셨습니다.');
+            return;
+        }
+        
+        if (cardDiv.classList.contains('selected')) {
+            cardDiv.classList.remove('selected');
+            selectedCards = selectedCards.filter(c => c.id !== card.id);
+        } else {
+            cardDiv.classList.add('selected');
+            selectedCards.push(card);
+        }
+        
+        updateViewResultButton();
+        console.log('현재 선택된 카드:', selectedCards.length);
+    });
+
     return cardDiv;
 }
 
@@ -93,27 +121,12 @@ async function shuffleCards() {
     });
 }
 
-// 카드 선택 처리
-function selectCard(cardElement, card) {
-    if (selectedCards.length >= MAX_CARDS && !cardElement.classList.contains('selected')) {
-        return;
-    }
-
-    if (cardElement.classList.contains('selected')) {
-        cardElement.classList.remove('selected');
-        selectedCards = selectedCards.filter(c => c.id !== card.id);
-    } else {
-        cardElement.classList.add('selected');
-        selectedCards.push(card);
-    }
-
-    updateViewResultButton();
-}
-
 // 결과 보기 버튼 상태 업데이트
 function updateViewResultButton() {
     const viewResultBtn = document.getElementById('viewResultBtn');
     viewResultBtn.disabled = selectedCards.length !== MAX_CARDS;
+    console.log('선택된 카드 수:', selectedCards.length);
+    console.log('버튼 상태:', viewResultBtn.disabled);
 }
 
 // 결과 페이지 표시
