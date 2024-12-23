@@ -1,83 +1,106 @@
-// 선택된 카드들을 저장할 배열
-let selectedCards = [];
+import tarotData from './tarot-data.js';
 
-// 카드 셔플 함수
+let selectedCards = [];
+let isShuffling = false;
+
 function shuffleCards() {
-    // 기존 선택된 카드들 초기화
+    if (isShuffling) return;
+    isShuffling = true;
+    
     selectedCards = [];
     const cardsContainer = document.getElementById('cardsContainer');
     cardsContainer.innerHTML = '';
     
-    // 카드 데이터 복사 후 셔플
-    const shuffledCards = [...tarotData].sort(() => Math.random() - 0.5);
+    // 버튼 숨기기
+    document.getElementById('detailButton').style.display = 'none';
+    document.getElementById('shareButton').style.display = 'none';
+    document.getElementById('restartButton').style.display = 'none';
     
-    // 3장의 카드만 선택
+    // 메이저 아르카나에서 카드 셔플
+    const shuffledCards = [...tarotData.major].sort(() => Math.random() - 0.5);
+    
+    // 3장의 카드 선택
     selectedCards = shuffledCards.slice(0, 3);
     
-    // 카드 애니메이션을 위한 지연 시간
+    // 카드 애니메이션
     selectedCards.forEach((card, index) => {
         setTimeout(() => {
             const cardElement = createCardElement(card, index);
             cardsContainer.appendChild(cardElement);
             
-            // 마지막 카드가 추가된 후 버튼들 표시
             if (index === 2) {
-                document.getElementById('detailButton').style.display = 'inline-block';
-                document.getElementById('shareButton').style.display = 'inline-block';
+                setTimeout(() => {
+                    document.getElementById('detailButton').style.display = 'inline-block';
+                    document.getElementById('shareButton').style.display = 'inline-block';
+                    document.getElementById('restartButton').style.display = 'inline-block';
+                    isShuffling = false;
+                }, 1000);
             }
-        }, index * 500); // 각 카드를 0.5초 간격으로 표시
+        }, index * 800);
     });
 }
 
-// 카드 엘리먼트 생성 함수
 function createCardElement(card, index) {
-    const cardElement = document.createElement('div');
-    cardElement.className = 'card';
-    cardElement.innerHTML = `
-        <img src="${card.image}" alt="${card.name}">
-        <h3>${card.name}</h3>
+    const cardDiv = document.createElement('div');
+    cardDiv.className = 'card';
+    cardDiv.innerHTML = `
+        <div class="card-inner">
+            <div class="card-front">
+                <img src="images/card-back.jpg" alt="카드 뒷면" loading="lazy">
+            </div>
+            <div class="card-back">
+                <img src="images/${card.image}" alt="${card.name}" loading="lazy">
+            </div>
+        </div>
     `;
     
-    // 카드 등장 애니메이션
-    cardElement.style.opacity = '0';
-    cardElement.style.transform = 'translateY(20px)';
-    
     setTimeout(() => {
-        cardElement.style.transition = 'all 0.5s ease';
-        cardElement.style.opacity = '1';
-        cardElement.style.transform = 'translateY(0)';
-    }, 100);
+        cardDiv.classList.add('flipped');
+    }, 500);
     
-    return cardElement;
+    return cardDiv;
 }
 
-// 상세 보기 페이지로 이동
 function showDetail() {
-    const cardIds = selectedCards.map(card => card.id).join(',');
-    window.location.href = `detail.html?cards=${cardIds}`;
+    const cardIds = selectedCards.map(card => card.id);
+    window.location.href = `detail.html?cards=${cardIds.join(',')}`;
 }
 
-// 카카오톡 공유하기 기능
-function shareToKakao() {
-    Kakao.Link.sendDefault({
-        objectType: 'feed',
-        content: {
-            title: '나의 타로 카드 운세',
-            description: '타로 카드로 보는 나의 운세 결과입니다.',
-            imageUrl: selectedCards[0].image,
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-            },
-        },
-        buttons: [
-            {
-                title: '결과 보기',
+function shareResult() {
+    const currentUrl = window.location.href;
+    
+    try {
+        Kakao.Share.sendDefault({
+            objectType: 'feed',
+            content: {
+                title: '나의 타로 카드 운세',
+                description: '타로 카드로 보는 나의 운세 결과입니다.',
+                imageUrl: `${window.location.origin}/images/${selectedCards[0].image}`,
                 link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
+                    mobileWebUrl: currentUrl,
+                    webUrl: currentUrl,
                 },
             },
-        ],
-    });
+            buttons: [
+                {
+                    title: '결과 보기',
+                    link: {
+                        mobileWebUrl: currentUrl,
+                        webUrl: currentUrl,
+                    },
+                },
+            ],
+        });
+    } catch (error) {
+        console.error('카카오 공유하기 에러:', error);
+        alert('공유하기를 실행할 수 없습니다.');
+    }
 }
+
+// 전역 함수로 등록
+window.shuffleCards = shuffleCards;
+window.showDetail = showDetail;
+window.shareResult = shareResult;
+
+// 페이지 로드 시 자동으로 카드 섞기
+document.addEventListener('DOMContentLoaded', shuffleCards);

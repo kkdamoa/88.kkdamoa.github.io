@@ -2,65 +2,86 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타로 카드 상세 해석</title>
-    
-    <!-- 폰트 -->
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap" rel="stylesheet">
-    
-    <!-- CSS -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>타로 카드 해석</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    
     <!-- Google AdSense -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
-     crossorigin="anonymous"></script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
+    
+    <style>
+        .card-detail {
+            background-color: #2a2a2a;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            text-align: left;
+        }
+        
+        .card-image {
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        .card-image img {
+            max-width: 200px;
+            width: 100%;
+            border-radius: 10px;
+        }
+        
+        .card-meanings h4 {
+            color: #ffd700;
+            margin-top: 15px;
+        }
+        
+        .card-meanings p {
+            margin-bottom: 15px;
+            color: #ccc;
+        }
+        
+        @media (max-width: 768px) {
+            .card-detail {
+                padding: 15px;
+            }
+            
+            .card-image img {
+                max-width: 160px;
+            }
+            
+            .card-meanings h4 {
+                font-size: 1.1em;
+            }
+            
+            .card-meanings p {
+                font-size: 0.9em;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
-        <!-- Google AdSense -->
-        <ins class="adsbygoogle"
-             style="display:block"
-             data-ad-client="ca-pub-9374368296307755"
-             data-ad-slot="3201247599"
-             data-ad-format="auto"
-             data-full-width-responsive="true"></ins>
-
-        <header>
-            <h1>🔮 타로 카드 상세 해석</h1>
-        </header>
-
-        <main>
-            <div class="cards-detail" id="cardsDetail">
-                <!-- 선택된 카드들의 상세 정보가 여기에 표시됩니다 -->
-            </div>
-
-            <div class="interpretation" id="interpretation">
-                <!-- 종합 해석이 여기에 표시됩니다 -->
-            </div>
-
-            <div class="button-container">
-                <button onclick="window.location.href='index.html'">다시 뽑기</button>
-                <button onclick="shareToKakao()">카카오톡 공유하기</button>
-            </div>
-        </main>
-
-        <footer>
-            <p>© 2024 타로 카드 리딩. All rights reserved.</p>
-        </footer>
-    </div>
-
-    <script>
-        // 카카오 SDK 초기화
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+        <h1>타로 카드 해석</h1>
         
-        // Google AdSense
+        <!-- AdSense 광고 -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+        </div>
+        
+        <div id="cardsDetail"></div>
+        <button onclick="location.href='index.html'">다시 시작</button>
+    </div>
+    
+    <!-- AdSense 초기화 -->
+    <script>
         (adsbygoogle = window.adsbygoogle || []).push({});
     </script>
-
-    <script src="tarot-data.js"></script>
-    <script src="detail.js"></script>
+    
+    <script type="module" src="detail.js"></script>
 </body>
 </html>
