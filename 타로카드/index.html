@@ -3,82 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타로 카드 리딩</title>
+    <title>타로 리딩</title>
     <link rel="stylesheet" href="style.css">
-    
-    <!-- 카카오 SDK -->
-    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
-    <script>
-        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
-    </script>
-    
-    <!-- 구글 애드센스 -->
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <h1>타로 카드 리딩</h1>
-        
-        <!-- 카드 선택 영역 -->
-        <div class="card-selection">
-            <p>마음을 가라앉히고 질문을 생각한 후, 카드를 선택하세요.</p>
+        <header>
+            <h1>🔮 타로 리딩</h1>
             <button id="shuffleBtn">카드 섞기</button>
-            <div class="cards-container">
-                <div class="card" data-index="0">
-                    <div class="card-inner">
-                        <div class="card-front"></div>
-                        <div class="card-back"></div>
-                    </div>
-                </div>
-                <div class="card" data-index="1">
-                    <div class="card-inner">
-                        <div class="card-front"></div>
-                        <div class="card-back"></div>
-                    </div>
-                </div>
-                <div class="card" data-index="2">
-                    <div class="card-inner">
-                        <div class="card-front"></div>
-                        <div class="card-back"></div>
-                    </div>
-                </div>
-            </div>
-        </div>
+        </header>
 
-        <!-- 결과 표시 영역 -->
-<div class="reading-result" style="display: none;">
-    <h2>타로 카드 리딩 결과</h2>
-    
-    <!-- 개별 카드 해석 -->
-    <div class="cards-interpretation">
-        <div class="card-step" id="step1">
-            <h3>첫 번째 카드 - 과거</h3>
-            <div class="selected-card"></div>
-            <div class="card-meaning"></div>
-            <button class="next-btn">다음 카드 보기 →</button>
-        </div>
-        
-        <div class="card-step" id="step2" style="display: none;">
-            <h3>두 번째 카드 - 현재</h3>
-            <div class="selected-card"></div>
-            <div class="card-meaning"></div>
-            <button class="next-btn">다음 카드 보기 →</button>
-        </div>
-        
-        <div class="card-step" id="step3" style="display: none;">
-            <h3>세 번째 카드 - 미래</h3>
-            <div class="selected-card"></div>
-            <div class="card-meaning"></div>
-            <button class="detail-btn">종합 해석 보기 →</button>
-        </div>
+        <main>
+            <section class="card-selection">
+                <div class="cards-container">
+                    <!-- 카드들이 여기에 동적으로 추가됩니다 -->
+                </div>
+            </section>
+
+            <section class="reading-result" style="display: none;">
+                <div class="selected-cards"></div>
+                <div class="interpretation"></div>
+            </section>
+        </main>
     </div>
 
-    <!-- 종합 해석 -->
-    <div class="comprehensive-reading" style="display: none;">
-        <h3>종합 타로 해석</h3>
-        <div class="all-cards-display"></div>
-        <div class="comprehensive-meaning"></div>
-        <button id="shareBtn">결과 공유하기</button>
-        <button id="restartBtn">다시 시작하기</button>
-    </div>
-</div>
+    <script type="module" src="main.js"></script>
+</body>
+</html>
