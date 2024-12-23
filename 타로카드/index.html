@@ -3,30 +3,42 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타로 리딩</title>
+    <title>타로 카드 리딩</title>
     <link rel="stylesheet" href="style.css">
+    <!-- 카카오 SDK 초기화 -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        // 카카오 SDK 초기화 코드
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <div class="container">
-        <header>
-            <h1>🔮 타로 리딩</h1>
-            <button id="shuffleBtn">카드 섞기</button>
-        </header>
+        <!-- Google 광고 -->
+        <ins class="adsbygoogle"
+             style="display:block"
+             data-ad-client="ca-pub-9374368296307755"
+             data-ad-slot="3201247599"
+             data-ad-format="auto"
+             data-full-width-responsive="true"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
 
-        <main>
-            <section class="card-selection">
-                <div class="cards-container">
-                    <!-- 카드들이 여기에 동적으로 추가됩니다 -->
-                </div>
-            </section>
-
-            <section class="reading-result" style="display: none;">
-                <div class="selected-cards"></div>
-                <div class="interpretation"></div>
-            </section>
-        </main>
+        <h1>타로 카드 리딩</h1>
+        <p class="instruction">아래에서 3장의 카드를 선택해주세요</p>
+        
+        <!-- 카드 컨테이너 -->
+        <div id="card-container" class="card-grid"></div>
+        
+        <!-- 결과 보기 버튼 -->
+        <button id="showResult" class="result-btn" disabled>결과 보기</button>
     </div>
 
-    <script type="module" src="main.js"></script>
+    <!-- 스크립트 로드 -->
+    <script src="tarot-data.js"></script>
+    <script src="app.js"></script>
 </body>
 </html>

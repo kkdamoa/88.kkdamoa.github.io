@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>타로 카드 해석</title>
+    <title>타로 카드 해석 결과</title>
     <link rel="stylesheet" href="style.css">
     <!-- 카카오 SDK 초기화 -->
     <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
@@ -27,10 +27,19 @@
              (adsbygoogle = window.adsbygoogle || []).push({});
         </script>
 
-        <h1>타로 카드 해석</h1>
+        <h1>타로 카드 해석 결과</h1>
+        
+        <!-- 결과 표시 영역 -->
         <div id="reading-result" class="reading-result"></div>
-        <button onclick="location.href='index.html'" class="back-btn">다시 선택하기</button>
+        
+        <!-- 버튼 영역 -->
+        <div class="button-group">
+            <button onclick="location.href='index.html'" class="back-btn">다시 선택하기</button>
+            <button onclick="shareToKakao()" class="share-btn">카카오톡 공유하기</button>
+        </div>
     </div>
+
+    <!-- 스크립트 로드 -->
     <script src="tarot-data.js"></script>
     <script src="result.js"></script>
 </body>
