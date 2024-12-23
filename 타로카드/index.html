@@ -46,15 +46,39 @@
         </div>
 
         <!-- 결과 표시 영역 -->
-        <div class="reading-result" style="display: none;">
-            <h2>타로 리딩 결과</h2>
-            <div class="selected-cards"></div>
-            <div class="interpretation"></div>
-            <button id="shareBtn">결과 공유하기</button>
-            <button id="restartBtn">다시 시작하기</button>
+<div class="reading-result" style="display: none;">
+    <h2>타로 카드 리딩 결과</h2>
+    
+    <!-- 개별 카드 해석 -->
+    <div class="cards-interpretation">
+        <div class="card-step" id="step1">
+            <h3>첫 번째 카드 - 과거</h3>
+            <div class="selected-card"></div>
+            <div class="card-meaning"></div>
+            <button class="next-btn">다음 카드 보기 →</button>
+        </div>
+        
+        <div class="card-step" id="step2" style="display: none;">
+            <h3>두 번째 카드 - 현재</h3>
+            <div class="selected-card"></div>
+            <div class="card-meaning"></div>
+            <button class="next-btn">다음 카드 보기 →</button>
+        </div>
+        
+        <div class="card-step" id="step3" style="display: none;">
+            <h3>세 번째 카드 - 미래</h3>
+            <div class="selected-card"></div>
+            <div class="card-meaning"></div>
+            <button class="detail-btn">종합 해석 보기 →</button>
         </div>
     </div>
 
-    <script type="module" src="script.js"></script>
-</body>
-</html>
+    <!-- 종합 해석 -->
+    <div class="comprehensive-reading" style="display: none;">
+        <h3>종합 타로 해석</h3>
+        <div class="all-cards-display"></div>
+        <div class="comprehensive-meaning"></div>
+        <button id="shareBtn">결과 공유하기</button>
+        <button id="restartBtn">다시 시작하기</button>
+    </div>
+</div>
