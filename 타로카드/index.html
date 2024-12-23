@@ -4,10 +4,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>타로 카드 리딩</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- 카카오 SDK -->
+    <script src="https://developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        Kakao.init('1a44c2004824d4e16e69f1fc7e81d82c');
+    </script>
+
+    <!-- Google AdSense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755"
+     crossorigin="anonymous"></script>
 </head>
 <body>
     <div id="app">
+        <!-- 광고 삽입 -->
+        <div class="ad-container">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
+
         <!-- 시작 화면 -->
         <section id="welcomeSection">
             <h1>타로 카드 리딩</h1>
@@ -83,7 +106,6 @@
         <div class="tarot-card">
             <div class="card-inner">
                 <div class="card-front">
-                    <img src="" alt="" class="card-image">
                     <div class="card-info">
                         <h4 class="card-name"></h4>
                         <p class="card-keywords"></p>
@@ -94,7 +116,7 @@
         </div>
     </template>
 
-    <script src="tarot-data.js"></script>
-    <script src="app.js"></script>
+    <script src="js/tarot-data.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>

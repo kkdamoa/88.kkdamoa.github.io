@@ -239,3 +239,195 @@ button:hover {
         grid-template-columns: 1fr;
     }
 }
+/* 파티클 효과를 위한 키프레임 */
+@keyframes particles {
+    0% {
+        transform: translate(0, 0) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: translate(var(--x, 100px), var(--y, 100px)) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* 빛나는 효과 키프레임 */
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 5px #fff,
+                   0 0 10px #fff,
+                   0 0 15px #e60073,
+                   0 0 20px #e60073;
+    }
+    100% {
+        box-shadow: 0 0 10px #fff,
+                   0 0 20px #fff,
+                   0 0 30px #e60073,
+                   0 0 40px #e60073;
+    }
+}
+
+/* 3D 플립 효과 */
+@keyframes flip {
+    0% {
+        transform: rotateY(0);
+    }
+    100% {
+        transform: rotateY(180deg);
+    }
+}
+
+/* 페이드 인 효과 */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* 기존 스타일 수정 및 새로운 스타일 추가 */
+.tarot-card {
+    aspect-ratio: 3/5;
+    perspective: 1000px;
+    cursor: pointer;
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.tarot-card::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 15px;
+    background: linear-gradient(45deg, #ff0066, #6600ff);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: -1;
+}
+
+.tarot-card:hover::before {
+    opacity: 1;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    transform-style: preserve-3d;
+}
+
+/* 카드 선택 효과 */
+.tarot-card.selected .card-inner {
+    animation: flip 0.8s forwards;
+}
+
+.tarot-card.selected::after {
+    content: '';
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: white;
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* 파티클 생성 */
+.tarot-card.selected::after {
+    animation: particles 0.6s ease-out forwards;
+    --x: calc(random() * 200px - 100px);
+    --y: calc(random() * 200px - 100px);
+}
+
+.card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 15px;
+    transition: transform 0.8s;
+}
+
+.card-front {
+    background: linear-gradient(135deg, #1a1a1a, #4a154b);
+    border: 2px solid gold;
+    transform: rotateY(0deg);
+}
+
+.card-back {
+    background: linear-gradient(45deg, #2c1810, #1a1a1a);
+    transform: rotateY(180deg);
+    border: 2px solid gold;
+    /* 타로 카드 뒷면 패턴 */
+    background-image: 
+        radial-gradient(circle at center, #4a154b 2px, transparent 2px),
+        linear-gradient(45deg, #2c1810, #1a1a1a);
+    background-size: 10px 10px, 100% 100%;
+}
+
+/* 선택된 카드 빛나는 효과 */
+.tarot-card.selected {
+    animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+/* 결과 카드 페이드인 효과 */
+.card-result {
+    animation: fadeIn 1s ease-out forwards;
+    opacity: 0;
+}
+
+/* 호버 효과 개선 */
+.tarot-card:hover .card-inner:not(.selected) {
+    transform: translateY(-15px) scale(1.05);
+    box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+}
+
+/* 카드 정보 스타일 개선 */
+.card-info {
+    padding: 15px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(5px);
+    border-radius: 0 0 15px 15px;
+}
+
+/* 결과 화면 애니메이션 */
+.spread-3cards > div {
+    opacity: 0;
+    animation: fadeIn 0.8s ease-out forwards;
+}
+
+.spread-3cards > div:nth-child(2) {
+    animation-delay: 0.2s;
+}
+
+.spread-3cards > div:nth-child(3) {
+    animation-delay: 0.4s;
+}
+
+/* 로딩 스피너 개선 */
+.loading-spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid #f3f3f3;
+    border-top: 5px solid #3498db;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    box-shadow: 0 0 15px rgba(52, 152, 219, 0.5);
+}
+/* 광고 컨테이너 스타일 */
+.ad-container {
+    max-width: 100%;
+    margin: 20px auto;
+    text-align: center;
+    overflow: hidden;
+}
+
+/* 기존 스타일은 그대로 유지 */
