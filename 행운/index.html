@@ -9,21 +9,12 @@
     <!-- 구글 애드센스 -->
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9374368296307755" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="styles.css">
-    <!-- 폰트어썸 추가 -->
+    <!-- 폰트어썸 -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div id="app">
-        <!-- 광고 배너 -->
-        <div class="ad-banner">
-            <ins class="adsbygoogle"
-                 style="display:block"
-                 data-ad-client="ca-pub-9374368296307755"
-                 data-ad-slot="3201247599"
-                 data-ad-format="auto"
-                 data-full-width-responsive="true">
-            </ins>        
-        <!-- 상단 타이틀 애니메이션 -->
+        <!-- 타이틀 섹션 -->
         <div class="title-section">
             <div class="stars"></div>
             <h1 class="main-title">✨ 오늘의 운세 ✨</h1>
@@ -31,6 +22,17 @@
             <div class="crystal-ball">
                 <i class="fas fa-globe-asia"></i>
             </div>
+        </div>
+
+        <!-- 중앙 광고 배너 -->
+        <div class="ad-banner-container main-ad">
+            <ins class="adsbygoogle"
+                 style="display:block"
+                 data-ad-client="ca-pub-9374368296307755"
+                 data-ad-slot="3201247599"
+                 data-ad-format="auto"
+                 data-full-width-responsive="true">
+            </ins>
         </div>
 
         <!-- 입력 폼 -->
@@ -42,8 +44,7 @@
                 </div>
                 <div class="input-group">
                     <label for="birthdate">생년월일 (예: 980101)</label>
-                    <input type="text" id="birthdate" maxlength="6" placeholder="생년월일 6자리" 
-                           pattern="\d{6}" required>
+                    <input type="text" id="birthdate" maxlength="6" placeholder="생년월일 6자리" pattern="\d{6}" required>
                 </div>
                 <div class="input-group">
                     <label for="gender">성별</label>
@@ -54,11 +55,22 @@
                         <label for="female" class="gender-label">여성</label>
                     </div>
                 </div>
-                <button type="submit" class="submit-btn">
+                <button type="submit" class="submit-btn large-btn">
                     <span class="btn-text">운세 보기</span>
                     <i class="fas fa-star"></i>
                 </button>
             </form>
+
+            <!-- 운세 보기 버튼 아래 광고 -->
+            <div class="ad-banner-container">
+                <ins class="adsbygoogle"
+                     style="display:block"
+                     data-ad-client="ca-pub-9374368296307755"
+                     data-ad-slot="3201247599"
+                     data-ad-format="auto"
+                     data-full-width-responsive="true">
+                </ins>
+            </div>
         </div>
 
         <!-- 운세 섹션 -->
@@ -68,7 +80,10 @@
             <div class="progress-bar">
                 <div id="progressFill" class="progress"></div>
             </div>
-            <button id="nextButton">다음</button>
+            <button id="nextButton" class="large-btn">
+                <span class="btn-text">다음</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
         </div>
 
         <!-- 전체 운세 -->
@@ -79,13 +94,14 @@
                 <h3>오늘의 바이오리듬</h3>
                 <div class="biorhythm-bars"></div>
             </div>
-            <button id="kakaoShareButton" class="kakao-share-button">
+            <button id="kakaoShareButton" class="kakao-share-button large-btn">
+                <i class="fas fa-share-alt"></i>
                 카카오톡으로 공유하기
             </button>
         </div>
 
         <!-- 하단 광고 배너 -->
-        <div class="ad-banner">
+        <div class="ad-banner-container">
             <ins class="adsbygoogle"
                  style="display:block"
                  data-ad-client="ca-pub-9374368296307755"

@@ -53,7 +53,10 @@ class FortuneApp {
 
     initializeAds() {
         try {
-            (adsbygoogle = window.adsbygoogle || []).push({});
+            // 페이지의 모든 광고 초기화
+            document.querySelectorAll('.adsbygoogle').forEach(ad => {
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            });
         } catch (e) {
             console.error('애드센스 초기화 실패:', e);
         }
@@ -73,8 +76,19 @@ class FortuneApp {
         const year = parseInt(birthdate.substring(0, 2));
         const month = birthdate.substring(2, 4);
         const day = birthdate.substring(4, 6);
+        
+        // 2000년 이후 출생자 처리
         const fullYear = year + (year < 50 ? 2000 : 1900);
         
+        // 날짜 유효성 검사
+        const birthDate = new Date(fullYear, parseInt(month) - 1, parseInt(day));
+        if (birthDate.getDate() !== parseInt(day) || 
+            birthDate.getMonth() !== parseInt(month) - 1 || 
+            birthDate.getFullYear() !== fullYear) {
+            alert('유효하지 않은 생년월일입니다.');
+            return;
+        }
+
         this.userData = {
             name: this.nameInput.value,
             birthdate: `${fullYear}-${month}-${day}`,
@@ -160,7 +174,10 @@ class FortuneApp {
         
         // 마지막 섹션 체크
         if (this.currentSection === sections.length - 1) {
-            this.nextButton.textContent = '전체 운세 보기';
+            this.nextButton.innerHTML = `
+                <span class="btn-text">전체 운세 보기</span>
+                <i class="fas fa-chart-bar"></i>
+            `;
         }
     }
 
