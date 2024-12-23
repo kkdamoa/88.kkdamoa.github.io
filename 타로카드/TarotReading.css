@@ -1,0 +1,110 @@
+/* TarotReading.css */
+.tarot-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    min-height: 100vh;
+    background: #1a1a1a;
+    color: white;
+  }
+  
+  .start-button {
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    background: #4a154b;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .start-button:hover {
+    transform: scale(1.05);
+  }
+  
+  .cards-container {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem 0;
+  }
+  
+  .tarot-card {
+    width: 200px;
+    height: 350px;
+    perspective: 1000px;
+    cursor: pointer;
+  }
+  
+  .card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.8s;
+  }
+  
+  .tarot-card.flip .card-inner {
+    transform: rotateY(180deg);
+  }
+  
+  .card-front, .card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 1rem;
+  }
+  
+  .card-front {
+    background: linear-gradient(45deg, #2c1810, #1a1a1a);
+    border: 2px solid #4a154b;
+  }
+  
+  .card-back {
+    background: linear-gradient(45deg, #4a154b, #2c1810);
+    transform: rotateY(180deg);
+    border: 2px solid gold;
+  }
+  
+  .interpretation-container {
+    margin-top: 2rem;
+    text-align: center;
+  }
+  
+  .interpretation {
+    margin: 1rem 0;
+    padding: 1rem;
+    border: 1px solid #4a154b;
+    border-radius: 5px;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .fade-in {
+    animation: fadeIn 1s forwards;
+  }
+  
+  @media (max-width: 768px) {
+    .cards-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
