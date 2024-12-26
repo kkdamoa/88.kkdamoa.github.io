@@ -293,3 +293,31 @@ button:disabled {
 .card-image.reversed img {
     transform: rotate(180deg);
 }
+.card {
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card.selected {
+    pointer-events: none;
+}
+
+.card-inner {
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+
+.card-inner.reversed .card-front {
+    transform: rotate(180deg);
+}
+
+.card.shuffle {
+    animation: shuffle 0.5s ease;
+}
+
+@keyframes shuffle {
+    0% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(5px) rotate(5deg); }
+    75% { transform: translateX(-5px) rotate(-5deg); }
+    100% { transform: translateX(0) rotate(0); }
+}

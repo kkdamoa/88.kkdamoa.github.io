@@ -17,8 +17,20 @@ class TarotReading {
         this.shareButton = document.getElementById('shareKakao');
         this.resetButton = document.getElementById('resetReading');
         
-        // 초기 카드 생성
         this.createCards();
+    }
+
+    addEventListeners() {
+        this.shuffleBtn.addEventListener('click', () => this.shuffleCards());
+        
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.addEventListener('click', (e) => this.handleCardClick(e));
+        });
+
+        if (this.resetButton) {
+            this.resetButton.addEventListener('click', () => this.resetReading());
+        }
     }
 
     createCards() {
@@ -36,70 +48,60 @@ class TarotReading {
                     </div>
                 </div>
             `;
+            card.style.pointerEvents = 'none';
             this.cardsContainer.appendChild(card);
         }
-        this.cardElements = document.querySelectorAll('.card');
-    }
-
-    addEventListeners() {
-        this.shuffleBtn.addEventListener('click', () => this.startReading());
-        this.cardElements.forEach(card => {
-            card.addEventListener('click', (e) => this.handleCardClick(e));
-        });
-        this.shareButton?.addEventListener('click', () => this.shareToKakao());
-        this.resetButton?.addEventListener('click', () => this.resetReading());
-    }
-
-    startReading() {
-        this.showLoading();
-        this.shuffleCards();
-        setTimeout(() => {
-            this.hideLoading();
-            this.enableCardSelection();
-        }, 1500);
     }
 
     shuffleCards() {
         this.cards = [...this.cards].sort(() => Math.random() - 0.5);
-        this.cardsContainer.classList.add('shuffling');
-        setTimeout(() => {
-            this.cardsContainer.classList.remove('shuffling');
-        }, 800);
+        
+        const cards = document.querySelectorAll('.card');
+        cards.forEach(card => {
+            card.classList.add('shuffle');
+            setTimeout(() => {
+                card.classList.remove('shuffle');
+            }, 500);
+        });
+        
+        this.shuffleBtn.disabled = true;
+        cards.forEach(card => {
+            card.style.pointerEvents = 'auto';
+        });
     }
 
     handleCardClick(event) {
         const card = event.currentTarget;
         if (card.classList.contains('selected') || this.currentStep >= this.maxCards) return;
-    
+
         const selectedCard = this.cards[this.currentStep];
         const isReversed = Math.random() < 0.5;
-    
+
         card.classList.add('selecting');
         setTimeout(() => {
             card.classList.remove('selecting');
             card.classList.add('selected');
             
-            // 카드 내용 업데이트
             const cardInner = card.querySelector('.card-inner');
             const cardFront = card.querySelector('.card-front');
             const cardNumber = card.querySelector('.card-number');
             const cardSymbol = card.querySelector('.card-symbol');
             const cardTitle = card.querySelector('.card-title');
-    
+
             cardNumber.textContent = selectedCard.id;
             cardSymbol.textContent = this.getCardSymbol(selectedCard.id);
             cardTitle.textContent = selectedCard.name;
-    
+
             if (isReversed) {
                 cardInner.classList.add('reversed');
             }
-    
+
             this.selectedCards.push({
                 ...selectedCard,
                 position: this.positions[this.currentStep],
                 isReversed: isReversed
             });
-    
+
             this.currentStep++;
             if (this.currentStep === this.maxCards) {
                 this.showResults();
@@ -108,26 +110,30 @@ class TarotReading {
     }
 
     getCardSymbol(id) {
-        // 카드 ID에 따른 심볼 반환
-        const symbols = {
-            0: '☆',
-            1: '✦',
-            // ... 다른 카드 심볼들
-        };
-        return symbols[id] || '★';
+        // 카드 심볼 로직 구현
+        return '★'; // 또는 다른 심볼
     }
 
     showResults() {
-        this.shuffleBtn.disabled = true;
-        this.readingResult.innerHTML = '<h2>타로 리딩 결과</h2>';
+        this.loadingScreen.style.display = 'flex';
         
-        this.selectedCards.forEach(card => {
-            this.displayCardResult(card);
-        });
-
-        this.readingResult.style.display = 'block';
-        if (this.shareButton) this.shareButton.style.display = 'block';
-        if (this.resetButton) this.resetButton.style.display = 'block';
+        setTimeout(() => {
+            this.loadingScreen.style.display = 'none';
+            this.readingResult.style.display = 'block';
+            this.readingResult.innerHTML = '';
+            
+            this.selectedCards.forEach(card => {
+                this.displayCardResult(card);
+            });
+            
+            if (this.shareButton) {
+                this.shareButton.style.display = 'block';
+                this.initializeKakaoShare();
+            }
+            if (this.resetButton) {
+                this.resetButton.style.display = 'block';
+            }
+        }, 2000);
     }
 
     displayCardResult(card) {
@@ -150,7 +156,7 @@ class TarotReading {
                     <p><strong>재물:</strong> ${card.meanings.경제적[card.isReversed ? '역방향' : '정방향']}</p>
                     <p><strong>건강:</strong> ${card.meanings.건강[card.isReversed ? '역방향' : '정방향']}</p>
                 </div>
-    
+
                 <div class="interpretation">
                     <h3>카드 해석</h3>
                     <p>${card.interpretation.설명}</p>
@@ -160,36 +166,20 @@ class TarotReading {
                 </div>
             </div>
         `;
-    
+
         this.readingResult.appendChild(resultDiv);
     }
 
-    showLoading() {
-        this.loadingScreen.style.display = 'flex';
-    }
-
-    hideLoading() {
-        this.loadingScreen.style.display = 'none';
-    }
-
-    enableCardSelection() {
-        this.shuffleBtn.disabled = true;
-        this.cardElements.forEach(card => {
-            card.style.cursor = 'pointer';
-        });
-    }
-
-    shareToKakao() {
-        Kakao.Link.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: '타로 카드 리딩 결과',
-                description: this.getShareDescription(),
-                imageUrl: 'YOUR_IMAGE_URL', // 대표 이미지 URL
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
-                }
+    initializeKakaoShare() {
+        if (!window.Kakao) return;
+        
+        window.Kakao.Share.createDefaultButton({
+            container: '#shareKakao',
+            objectType: 'text',
+            text: `타로카드 운세 결과\n\n${this.getShareDescription()}`,
+            link: {
+                mobileWebUrl: window.location.href,
+                webUrl: window.location.href,
             },
             buttons: [
                 {
@@ -215,16 +205,13 @@ class TarotReading {
         this.shuffleBtn.disabled = false;
         this.readingResult.style.display = 'none';
         
-        // 카드 초기화
         this.createCards();
         
-        // 공유 버튼 숨기기
         if (this.shareButton) this.shareButton.style.display = 'none';
         if (this.resetButton) this.resetButton.style.display = 'none';
     }
 }
 
-// 페이지 로드 시 애플리케이션 초기화
 document.addEventListener('DOMContentLoaded', () => {
     new TarotReading();
 });
