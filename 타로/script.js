@@ -16,6 +16,7 @@ class TarotReading {
         this.readingResult = document.querySelector('.reading-result');
         this.shareButton = document.getElementById('shareKakao');
         this.resetButton = document.getElementById('resetReading');
+        this.cardsContainer = document.querySelector('.cards-container');
     }
 
     addEventListeners() {
@@ -28,16 +29,14 @@ class TarotReading {
     }
 
     startReading() {
-        this.showLoading();
-        this.shuffleCards();
-        this.enableCardSelection();
-        this.shuffleBtn.disabled = true;
-    }
-
-    showLoading() {
+        // 로딩 화면 표시
         this.loadingScreen.style.display = 'flex';
+        this.shuffleBtn.style.display = 'none'; // 섞기 버튼 숨기기
+        
         setTimeout(() => {
+            this.shuffleCards();
             this.loadingScreen.style.display = 'none';
+            this.enableCardSelection();
         }, 1500);
     }
 
@@ -48,7 +47,6 @@ class TarotReading {
     enableCardSelection() {
         this.cardElements.forEach(card => {
             if (!card.classList.contains('selected')) {
-                card.style.cursor = 'pointer';
                 card.classList.add('selectable');
             }
         });
@@ -56,7 +54,7 @@ class TarotReading {
 
     handleCardClick(event) {
         const card = event.currentTarget;
-        if (this.currentStep >= 3 || card.classList.contains('selected')) return;
+        if (!card.classList.contains('selectable') || this.currentStep >= 3) return;
 
         const selectedCard = this.cards[this.currentStep];
         const isReversed = Math.random() < 0.5;
@@ -76,53 +74,46 @@ class TarotReading {
     }
 
     displayCard(cardElement, cardData, isReversed) {
-        cardElement.classList.add('selected');
         cardElement.classList.remove('selectable');
-        
-        // 카드 내용을 표시하는 div 생성
-        const cardContent = document.createElement('div');
-        cardContent.className = 'card-content';
-        cardContent.style.transform = isReversed ? 'rotate(180deg)' : '';
-        
-        cardContent.innerHTML = `
-            <h3>${cardData.name}</h3>
-            <p>${isReversed ? '(역방향)' : '(정방향)'}</p>
-        `;
-        
-        // 기존 내용을 지우고 새 내용으로 교체
-        cardElement.innerHTML = '';
-        cardElement.appendChild(cardContent);
+        cardElement.classList.add('selected');
+
+        const cardFront = cardElement.querySelector('.card-front');
+        const cardContent = cardFront.querySelector('.card-content');
+
+        // 카드 내용 업데이트
+        cardContent.querySelector('.card-number').textContent = cardData.id;
+        cardContent.querySelector('.card-title').textContent = cardData.name;
+
+        // 역방향 적용
+        if (isReversed) {
+            cardFront.style.transform = 'rotate(180deg)';
+        }
+
+        // 카드 뒤집기 애니메이션
+        cardElement.querySelector('.card-inner').style.transform = 'rotateY(180deg)';
     }
 
     showResults() {
         this.readingResult.style.display = 'block';
-        this.readingResult.innerHTML = ''; // 기존 결과 초기화
-
-        const positions = ['과거', '현재', '미래'];
         
-        this.selectedCards.forEach((card, index) => {
-            const resultSection = document.createElement('div');
-            resultSection.className = 'reading-section';
+        const positions = ['과거', '현재', '미래'];
+        positions.forEach((position, index) => {
+            const card = this.selectedCards[index];
+            const readingElement = document.getElementById(`${position}Reading`);
             
-            resultSection.innerHTML = `
-                <h3>${positions[index]}</h3>
-                <div class="card-result">
-                    <h4>${card.name} ${card.isReversed ? '(역방향)' : '(정방향)'}</h4>
-                    <div class="keywords">
-                        <strong>키워드:</strong> ${card.keywords.join(', ')}
-                    </div>
-                    ${this.getCardMeaning(card)}
-                    ${this.getCardInterpretation(card)}
+            readingElement.innerHTML = `
+                <h4>${card.name} ${card.isReversed ? '(역방향)' : '(정방향)'}</h4>
+                <div class="keywords">
+                    <strong>키워드:</strong> ${card.keywords.join(', ')}
                 </div>
+                ${this.getCardMeaning(card)}
+                ${this.getCardInterpretation(card)}
             `;
-            
-            this.readingResult.appendChild(resultSection);
         });
     }
 
     getCardMeaning(card) {
         let html = '<div class="meanings">';
-        
         for (const aspect in card.meanings) {
             html += `
                 <div class="aspect">
@@ -131,7 +122,6 @@ class TarotReading {
                 </div>
             `;
         }
-        
         html += '</div>';
         return html;
     }
@@ -155,13 +145,13 @@ class TarotReading {
     resetReading() {
         this.selectedCards = [];
         this.currentStep = 0;
-        this.shuffleBtn.disabled = false;
+        this.shuffleBtn.style.display = 'block';
         this.readingResult.style.display = 'none';
         
         this.cardElements.forEach(card => {
-            card.classList.remove('selected');
-            card.classList.remove('selectable');
-            card.innerHTML = '<div class="card-back">타로 카드</div>';
+            card.classList.remove('selected', 'selectable');
+            card.querySelector('.card-inner').style.transform = '';
+            card.querySelector('.card-front').style.transform = '';
         });
     }
 }
