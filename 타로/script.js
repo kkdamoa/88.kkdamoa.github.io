@@ -30,11 +30,9 @@ document.addEventListener('DOMContentLoaded', () => {
             
             // 카드 이미지와 정보 설정
             cardFront.innerHTML = `
-                <h3>${card.name}</h3>
-                <img src="images/${card.image}" alt="${card.name}" 
-                     style="width: 150px; height: 250px; object-fit: cover; 
-                     transform: ${isUpright ? 'none' : 'rotate(180deg)'}">
-            `;
+            <h3>${card.name}</h3>
+            <div class="card-image" style="background-image: url('images/${card.image}'); ${isUpright ? '' : 'transform: rotate(180deg)'}"></div>
+        `;
 
             // 클릭 이벤트 추가
             cardSlot.onclick = () => revealCard(index + 1, card, isUpright);

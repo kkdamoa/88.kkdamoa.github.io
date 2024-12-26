@@ -1,49 +1,94 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Arial', sans-serif;
     background-color: #1a1a1a;
     color: #ffffff;
-    margin: 0;
+    min-height: 100vh;
+}
+
+/* 광고 레이아웃 */
+.ad-top, .ad-bottom {
+    width: 100%;
+    height: 90px;
+    background: rgba(0,0,0,0.2);
+    margin: 10px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.layout-container {
+    display: flex;
+    justify-content: space-between;
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.ad-sidebar {
+    width: 160px;
+    height: 600px;
+    background: rgba(0,0,0,0.2);
+    position: sticky;
+    top: 20px;
+}
+
+/* 메인 컨텐츠 */
+.main-content {
+    flex: 1;
+    max-width: 1200px;
+    margin: 0 20px;
     padding: 20px;
 }
 
 .container {
-    max-width: 1200px;
-    margin: 0 auto;
     text-align: center;
 }
 
 h1 {
     color: #ffd700;
-    margin-bottom: 30px;
+    margin: 20px 0;
+    font-size: 2em;
 }
 
 .instructions {
-    margin-bottom: 20px;
+    margin: 20px 0;
+    color: #ddd;
 }
 
-button {
+/* 카드 선택 버튼 */
+#selectCards {
     background-color: #ffd700;
     color: #1a1a1a;
     border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.2em;
     cursor: pointer;
     margin: 20px 0;
-    font-size: 16px;
+    transition: all 0.3s ease;
 }
 
-button:hover {
+#selectCards:hover {
     background-color: #ffed4a;
+    transform: scale(1.05);
 }
 
+/* 카드 컨테이너 */
 .cards-container {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 30px;
     margin: 40px 0;
     flex-wrap: wrap;
 }
 
+/* 카드 스타일링 */
 .card-slot {
     width: 200px;
     height: 350px;
@@ -61,23 +106,37 @@ button:hover {
 }
 
 .card-back {
-    background-color: #2c1810;
-    border: 2px solid #ffd700;
+    background: linear-gradient(45deg, #2c1810 0%, #3d261c 100%);
     display: flex;
-    align-items: center;
     justify-content: center;
-    font-size: 20px;
+    align-items: center;
+    font-size: 1.2em;
     color: #ffd700;
+    border: 2px solid #ffd700;
 }
 
 .card-front {
-    background-color: #ffffff;
+    background: #2c1810;
     transform: rotateY(180deg);
+    border: 2px solid #ffd700;
+    padding: 10px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 10px;
-    box-sizing: border-box;
+}
+
+.card-front h3 {
+    color: #ffd700;
+    margin-bottom: 10px;
+}
+
+.card-front .card-image {
+    width: 150px;
+    height: 250px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 5px;
+    margin: 10px 0;
 }
 
 .card-slot.flipped .card-back {
@@ -88,8 +147,10 @@ button:hover {
     transform: rotateY(0);
 }
 
+/* 해석 컨테이너 */
 .reading-container {
-    margin-top: 40px;
+    margin: 40px auto;
+    max-width: 800px;
 }
 
 .reading {
@@ -99,10 +160,86 @@ button:hover {
     padding: 20px;
     border-radius: 10px;
     display: none;
+    text-align: left;
 }
 
+.reading h3 {
+    color: #ffd700;
+    margin-bottom: 15px;
+}
+
+.reading p {
+    margin: 10px 0;
+    line-height: 1.6;
+}
+
+.reading strong {
+    color: #ffd700;
+}
+
+/* 카카오톡 공유 버튼 */
 #shareKakao {
     background-color: #FEE500;
     color: #000000;
-    margin-top: 30px;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 25px;
+    font-size: 1.2em;
+    cursor: pointer;
+    margin: 20px 0;
+    display: none;
+    transition: all 0.3s ease;
+}
+
+#shareKakao:hover {
+    transform: scale(1.05);
+}
+
+/* 반응형 디자인 */
+@media (max-width: 1200px) {
+    .ad-sidebar {
+        display: none;
+    }
+    
+    .main-content {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 768px) {
+    .cards-container {
+        gap: 15px;
+    }
+    
+    .card-slot {
+        width: 150px;
+        height: 260px;
+    }
+    
+    .card-front .card-image {
+        width: 120px;
+        height: 200px;
+    }
+    
+    .reading {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card-slot {
+        width: 200px;
+        height: 350px;
+        margin-bottom: 20px;
+    }
+    
+    .card-front .card-image {
+        width: 150px;
+        height: 250px;
+    }
 }
