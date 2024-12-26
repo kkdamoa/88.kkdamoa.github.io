@@ -70,35 +70,36 @@ class TarotReading {
     handleCardClick(event) {
         const card = event.currentTarget;
         if (card.classList.contains('selected') || this.currentStep >= this.maxCards) return;
-
+    
         const selectedCard = this.cards[this.currentStep];
         const isReversed = Math.random() < 0.5;
-
+    
         card.classList.add('selecting');
         setTimeout(() => {
             card.classList.remove('selecting');
             card.classList.add('selected');
             
             // 카드 내용 업데이트
+            const cardInner = card.querySelector('.card-inner');
             const cardFront = card.querySelector('.card-front');
             const cardNumber = card.querySelector('.card-number');
             const cardSymbol = card.querySelector('.card-symbol');
             const cardTitle = card.querySelector('.card-title');
-
+    
             cardNumber.textContent = selectedCard.id;
             cardSymbol.textContent = this.getCardSymbol(selectedCard.id);
             cardTitle.textContent = selectedCard.name;
-
+    
             if (isReversed) {
-                cardFront.style.transform = 'rotateY(180deg) rotateX(180deg)';
+                cardInner.classList.add('reversed');
             }
-
+    
             this.selectedCards.push({
                 ...selectedCard,
                 position: this.positions[this.currentStep],
                 isReversed: isReversed
             });
-
+    
             this.currentStep++;
             if (this.currentStep === this.maxCards) {
                 this.showResults();
@@ -134,7 +135,7 @@ class TarotReading {
         resultDiv.className = 'result-card';
         
         resultDiv.innerHTML = `
-            <div class="card-image">
+            <div class="card-image ${card.isReversed ? 'reversed' : ''}">
                 <img src="images/${card.image}" alt="${card.name}">
             </div>
             <div class="card-info">
@@ -144,12 +145,12 @@ class TarotReading {
                 
                 <div class="meanings">
                     <h3>의미</h3>
-                    <p><strong>사랑:</strong> ${card.meanings.love[card.isReversed ? 'reversed' : 'upright']}</p>
-                    <p><strong>경력:</strong> ${card.meanings.career[card.isReversed ? 'reversed' : 'upright']}</p>
-                    <p><strong>재물:</strong> ${card.meanings.money[card.isReversed ? 'reversed' : 'upright']}</p>
-                    <p><strong>건강:</strong> ${card.meanings.health[card.isReversed ? 'reversed' : 'upright']}</p>
+                    <p><strong>사랑:</strong> ${card.meanings.사랑[card.isReversed ? '역방향' : '정방향']}</p>
+                    <p><strong>직업/목표:</strong> ${card.meanings.직업목표_성취_열망[card.isReversed ? '역방향' : '정방향']}</p>
+                    <p><strong>재물:</strong> ${card.meanings.경제적[card.isReversed ? '역방향' : '정방향']}</p>
+                    <p><strong>건강:</strong> ${card.meanings.건강[card.isReversed ? '역방향' : '정방향']}</p>
                 </div>
-
+    
                 <div class="interpretation">
                     <h3>카드 해석</h3>
                     <p>${card.interpretation.설명}</p>
@@ -159,7 +160,7 @@ class TarotReading {
                 </div>
             </div>
         `;
-
+    
         this.readingResult.appendChild(resultDiv);
     }
 
