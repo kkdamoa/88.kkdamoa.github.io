@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;600&display=swap');
@@ -16,20 +17,22 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    padding: 1rem;
     line-height: 1.6;
+    overflow-x: hidden;
 }
 
 .container {
+    width: 100%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem;
+    padding: 1rem;
 }
 
 /* 헤더 스타일 */
 h1 {
     font-family: 'Cinzel', serif;
-    font-size: 3rem;
+    font-size: clamp(2rem, 5vw, 3rem);
     color: #ffd700;
     text-align: center;
     margin-bottom: 2rem;
@@ -45,7 +48,7 @@ h1::after {
     top: 50%;
     transform: translateY(-50%);
     color: #ffd700;
-    font-size: 2rem;
+    font-size: clamp(1.5rem, 4vw, 2rem);
 }
 
 h1::before { left: -3rem; }
@@ -54,7 +57,7 @@ h1::after { right: -3rem; }
 /* 설명 텍스트 */
 .instruction {
     text-align: center;
-    font-size: 1.2rem;
+    font-size: clamp(1rem, 3vw, 1.2rem);
     color: #e0e0e0;
     margin-bottom: 2rem;
     font-style: italic;
@@ -65,15 +68,16 @@ button {
     background: linear-gradient(45deg, #ffd700, #daa520);
     color: #1a1a2e;
     border: none;
-    padding: 1rem 2.5rem;
+    padding: clamp(0.8rem, 2vw, 1rem) clamp(1.5rem, 4vw, 2.5rem);
     border-radius: 30px;
     font-family: 'Cinzel', serif;
-    font-size: 1.1rem;
+    font-size: clamp(0.9rem, 2.5vw, 1.1rem);
     cursor: pointer;
     transition: all 0.3s ease;
     box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
     position: relative;
     overflow: hidden;
+    -webkit-tap-highlight-color: transparent;
 }
 
 button:hover {
@@ -93,20 +97,22 @@ button:disabled {
 .cards-container {
     display: flex;
     justify-content: center;
-    gap: 2rem;
+    gap: clamp(1rem, 3vw, 2rem);
     margin: 3rem 0;
     perspective: 1000px;
     flex-wrap: wrap;
+    padding: 0 1rem;
 }
 
 /* 카드 기본 스타일 */
 .card {
-    width: 200px;
-    height: 350px;
+    width: clamp(140px, 30vw, 200px);
+    height: clamp(245px, 52.5vw, 350px);
     position: relative;
     perspective: 1000px;
     cursor: pointer;
     transition: transform 0.3s ease;
+    -webkit-tap-highlight-color: transparent;
 }
 
 .card-inner {
@@ -117,8 +123,33 @@ button:disabled {
     transition: transform 0.8s cubic-bezier(0.645, 0.045, 0.355, 1);
 }
 
+/* 카드 선택 효과 */
 .card.selected .card-inner {
     transform: rotateY(180deg);
+}
+
+.card.selecting::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle, rgba(255,215,0,0.4) 0%, rgba(255,215,0,0) 70%);
+    border-radius: 15px;
+    animation: ripple 0.8s ease-out;
+    z-index: 1;
+}
+
+@keyframes ripple {
+    0% {
+        transform: scale(0.8);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(1.5);
+        opacity: 0;
+    }
 }
 
 /* 카드 앞면과 뒷면 공통 스타일 */
@@ -135,7 +166,7 @@ button:disabled {
 /* 카드 뒷면 */
 .card-back {
     background: linear-gradient(45deg, #1a1a2e, #16213e);
-    border: 8px solid #daa520;
+    border: clamp(4px, 1.5vw, 8px) solid #daa520;
     position: relative;
     overflow: hidden;
 }
@@ -159,88 +190,66 @@ button:disabled {
     border-radius: 10px;
 }
 
-.card-back::after {
-    content: '★';
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 40px;
-    color: #daa520;
-    text-shadow: 0 0 10px rgba(218, 165, 32, 0.5);
-}
-
 /* 카드 앞면 */
 .card-front {
     transform: rotateY(180deg);
-    border: 12px solid #daa520;
-    padding: 15px;
+    border: clamp(6px, 2vw, 12px) solid #daa520;
+    padding: clamp(8px, 2vw, 15px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: space-between;
     background: #fff;
     position: relative;
-    overflow: hidden;
 }
 
 /* 카드 내부 요소 */
 .card-number {
     position: absolute;
-    top: 20px;
-    left: 20px;
+    top: clamp(10px, 3vw, 20px);
+    left: clamp(10px, 3vw, 20px);
     font-family: 'Cinzel', serif;
-    font-size: 24px;
+    font-size: clamp(16px, 4vw, 24px);
     color: #daa520;
 }
 
 .card-title {
     font-family: 'Cinzel', serif;
-    font-size: 1.2rem;
+    font-size: clamp(0.8rem, 2.5vw, 1.2rem);
     color: #1a1a2e;
     text-align: center;
     margin-top: auto;
-    padding: 10px;
+    padding: clamp(5px, 1.5vw, 10px);
     width: 100%;
     background: rgba(218, 165, 32, 0.1);
     border-top: 1px solid rgba(218, 165, 32, 0.3);
 }
 
 .card-symbol {
-    font-size: 60px;
+    font-size: clamp(40px, 10vw, 60px);
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
 }
 
-/* 애니메이션 */
-@keyframes shuffleCards {
-    0% { transform: translateX(0) rotate(0); }
-    25% { transform: translateX(-100px) rotate(-20deg); }
-    75% { transform: translateX(100px) rotate(20deg); }
-    100% { transform: translateX(0) rotate(0); }
-}
-
-@keyframes selectCard {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+/* 카드 섞기 애니메이션 */
+@keyframes shuffle {
+    0%, 100% { transform: translateX(0) rotate(0); }
+    25% { transform: translateX(-5%) rotate(-5deg); }
+    75% { transform: translateX(5%) rotate(5deg); }
 }
 
 .shuffling .card {
-    animation: shuffleCards 1s ease-in-out;
-}
-
-.card.selecting {
-    animation: selectCard 0.5s ease-in-out;
+    animation: shuffle 0.8s ease-in-out;
 }
 
 /* 결과 섹션 */
 .reading-result {
+    width: 100%;
     background: rgba(255, 255, 255, 0.1);
     border-radius: 15px;
-    padding: 2rem;
+    padding: clamp(1rem, 3vw, 2rem);
     margin-top: 2rem;
     backdrop-filter: blur(5px);
 }
@@ -254,13 +263,14 @@ button:disabled {
 
 .category {
     background: rgba(255, 255, 255, 0.05);
-    padding: 1.5rem;
+    padding: clamp(1rem, 3vw, 1.5rem);
     border-radius: 10px;
 }
 
 .category h3 {
     color: #ffd700;
     margin-bottom: 1rem;
+    font-size: clamp(1.1rem, 3vw, 1.3rem);
 }
 
 /* 로딩 화면 */
@@ -279,8 +289,8 @@ button:disabled {
 }
 
 .loading-spinner {
-    width: 50px;
-    height: 50px;
+    width: clamp(40px, 8vw, 50px);
+    height: clamp(40px, 8vw, 50px);
     border: 5px solid #f3f3f3;
     border-top: 5px solid #ffd700;
     border-radius: 50%;
@@ -292,44 +302,6 @@ button:disabled {
     100% { transform: rotate(360deg); }
 }
 
-/* 반응형 디자인 */
-@media (max-width: 768px) {
-    .container {
-        padding: 1rem;
-    }
-
-    h1 {
-        font-size: 2rem;
-    }
-
-    h1::before,
-    h1::after {
-        display: none;
-    }
-
-    .cards-container {
-        gap: 1rem;
-    }
-
-    .card {
-        width: 140px;
-        height: 245px;
-    }
-
-    .card-symbol {
-        font-size: 40px;
-    }
-
-    .card-title {
-        font-size: 0.8rem;
-        padding: 5px;
-    }
-
-    .interpretation-categories {
-        grid-template-columns: 1fr;
-    }
-}
-
 /* 광고 컨테이너 */
 .ad-container {
     width: 100%;
@@ -339,4 +311,45 @@ button:disabled {
     border-radius: 10px;
     padding: 1rem;
     backdrop-filter: blur(5px);
+}
+
+/* 터치 디바이스 최적화 */
+@media (hover: none) {
+    button:hover {
+        transform: none;
+        box-shadow: 0 4px 15px rgba(218, 165, 32, 0.3);
+    }
+}
+
+/* 모바일 최적화 */
+@media (max-width: 768px) {
+    body {
+        padding: 0.5rem;
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    h1::before,
+    h1::after {
+        display: none;
+    }
+
+    .cards-container {
+        gap: 0.8rem;
+    }
+
+    .interpretation-categories {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* 안전한 영역 확보 */
+@supports (padding: max(0px)) {
+    body {
+        padding-left: max(1rem, env(safe-area-inset-left));
+        padding-right: max(1rem, env(safe-area-inset-right));
+        padding-bottom: max(1rem, env(safe-area-inset-bottom));
+    }
 }
