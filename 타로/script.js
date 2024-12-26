@@ -1,217 +1,132 @@
-class TarotReading {
+import tarotData from './tarot-data.js';
+
+class TarotApp {
     constructor() {
         this.cards = tarotData.major;
         this.selectedCards = [];
-        this.currentStep = 0;
         this.maxCards = 3;
         this.positions = ['과거', '현재', '미래'];
+        this.isShuffling = false;
+        
         this.initializeElements();
         this.addEventListeners();
+        this.renderCards();
     }
 
     initializeElements() {
-        this.shuffleBtn = document.getElementById('shuffleBtn');
         this.cardsContainer = document.querySelector('.cards-container');
-        this.readingResult = document.querySelector('.reading-result');
+        this.shuffleButton = document.querySelector('button');
+        this.resultSection = document.querySelector('.reading-result');
         this.loadingScreen = document.querySelector('.loading-screen');
-        this.shareButton = document.getElementById('shareKakao');
-        this.resetButton = document.getElementById('resetReading');
-        
-        this.createCards();
     }
 
     addEventListeners() {
-        this.shuffleBtn.addEventListener('click', () => this.shuffleCards());
-        
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.addEventListener('click', (e) => this.handleCardClick(e));
+        this.shuffleButton.addEventListener('click', () => this.shuffleCards());
+        this.cardsContainer.addEventListener('click', (e) => {
+            const card = e.target.closest('.card');
+            if (card && !this.isShuffling && !card.classList.contains('selected')) {
+                this.selectCard(card);
+            }
         });
-
-        if (this.resetButton) {
-            this.resetButton.addEventListener('click', () => this.resetReading());
-        }
     }
 
-    createCards() {
-        this.cardsContainer.innerHTML = '';
-        for (let i = 0; i < this.maxCards; i++) {
-            const card = document.createElement('div');
-            card.className = 'card';
-            card.innerHTML = `
+    renderCards() {
+        this.cardsContainer.innerHTML = this.cards.map((card, index) => `
+            <div class="card" data-index="${index}">
                 <div class="card-inner">
                     <div class="card-back"></div>
                     <div class="card-front">
-                        <div class="card-number"></div>
-                        <div class="card-symbol"></div>
-                        <div class="card-title"></div>
+                        <span class="card-number">${card.id}</span>
+                        <div class="card-title">${card.name}</div>
                     </div>
                 </div>
-            `;
-            card.style.pointerEvents = 'none';
-            this.cardsContainer.appendChild(card);
+            </div>
+        `).join('');
+    }
+
+    async shuffleCards() {
+        if (this.isShuffling) return;
+        
+        this.isShuffling = true;
+        this.shuffleButton.disabled = true;
+        this.showLoading('카드를 섞는 중...');
+
+        // 카드 섞기 애니메이션
+        this.cardsContainer.classList.add('shuffling');
+        
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        
+        // 카드 배열 섞기
+        this.cards = [...this.cards].sort(() => Math.random() - 0.5);
+        
+        this.renderCards();
+        this.hideLoading();
+        
+        this.cardsContainer.classList.remove('shuffling');
+        this.shuffleButton.disabled = false;
+        this.isShuffling = false;
+        
+        // 선택된 카드 초기화
+        this.selectedCards = [];
+        if (this.resultSection) {
+            this.resultSection.innerHTML = '';
         }
     }
 
-    shuffleCards() {
-        this.cards = [...this.cards].sort(() => Math.random() - 0.5);
+    selectCard(cardElement) {
+        if (this.selectedCards.length >= this.maxCards) return;
+
+        const index = parseInt(cardElement.dataset.index);
+        const card = this.cards[index];
         
-        const cards = document.querySelectorAll('.card');
-        cards.forEach(card => {
-            card.classList.add('shuffle');
-            setTimeout(() => {
-                card.classList.remove('shuffle');
-            }, 500);
-        });
-        
-        this.shuffleBtn.disabled = true;
-        cards.forEach(card => {
-            card.style.pointerEvents = 'auto';
-        });
-    }
-
-    handleCardClick(event) {
-        const card = event.currentTarget;
-        if (card.classList.contains('selected') || this.currentStep >= this.maxCards) return;
-
-        const selectedCard = this.cards[this.currentStep];
-        const isReversed = Math.random() < 0.5;
-
-        card.classList.add('selecting');
+        // 카드 선택 효과
+        cardElement.classList.add('selecting');
         setTimeout(() => {
-            card.classList.remove('selecting');
-            card.classList.add('selected');
-            
-            const cardInner = card.querySelector('.card-inner');
-            const cardFront = card.querySelector('.card-front');
-            const cardNumber = card.querySelector('.card-number');
-            const cardSymbol = card.querySelector('.card-symbol');
-            const cardTitle = card.querySelector('.card-title');
-
-            cardNumber.textContent = selectedCard.id;
-            cardSymbol.textContent = this.getCardSymbol(selectedCard.id);
-            cardTitle.textContent = selectedCard.name;
-
-            if (isReversed) {
-                cardInner.classList.add('reversed');
-            }
-
-            this.selectedCards.push({
-                ...selectedCard,
-                position: this.positions[this.currentStep],
-                isReversed: isReversed
-            });
-
-            this.currentStep++;
-            if (this.currentStep === this.maxCards) {
-                this.showResults();
-            }
+            cardElement.classList.add('selected');
+            cardElement.classList.remove('selecting');
         }, 800);
-    }
 
-    getCardSymbol(id) {
-        // 카드 심볼 로직 구현
-        return '★'; // 또는 다른 심볼
-    }
-
-    showResults() {
-        this.loadingScreen.style.display = 'flex';
-        
-        setTimeout(() => {
-            this.loadingScreen.style.display = 'none';
-            this.readingResult.style.display = 'block';
-            this.readingResult.innerHTML = '';
-            
-            this.selectedCards.forEach(card => {
-                this.displayCardResult(card);
-            });
-            
-            if (this.shareButton) {
-                this.shareButton.style.display = 'block';
-                this.initializeKakaoShare();
-            }
-            if (this.resetButton) {
-                this.resetButton.style.display = 'block';
-            }
-        }, 2000);
-    }
-
-    displayCardResult(card) {
-        const resultDiv = document.createElement('div');
-        resultDiv.className = 'result-card';
-        
-        resultDiv.innerHTML = `
-            <div class="card-image ${card.isReversed ? 'reversed' : ''}">
-                <img src="images/${card.image}" alt="${card.name}">
-            </div>
-            <div class="card-info">
-                <h2>${card.name} ${card.isReversed ? '(역방향)' : ''}</h2>
-                <p><strong>위치:</strong> ${card.position}</p>
-                <p><strong>키워드:</strong> ${card.keywords.join(', ')}</p>
-                
-                <div class="meanings">
-                    <h3>의미</h3>
-                    <p><strong>사랑:</strong> ${card.meanings.사랑[card.isReversed ? '역방향' : '정방향']}</p>
-                    <p><strong>직업/목표:</strong> ${card.meanings.직업목표_성취_열망[card.isReversed ? '역방향' : '정방향']}</p>
-                    <p><strong>재물:</strong> ${card.meanings.경제적[card.isReversed ? '역방향' : '정방향']}</p>
-                    <p><strong>건강:</strong> ${card.meanings.건강[card.isReversed ? '역방향' : '정방향']}</p>
-                </div>
-
-                <div class="interpretation">
-                    <h3>카드 해석</h3>
-                    <p>${card.interpretation.설명}</p>
-                    <p><strong>긍정적 메시지:</strong> ${card.interpretation.긍정적인}</p>
-                    <p><strong>주의할 점:</strong> ${card.interpretation.부정적인}</p>
-                    <p><strong>핵심 메시지:</strong> ${card.interpretation.메시지}</p>
-                </div>
-            </div>
-        `;
-
-        this.readingResult.appendChild(resultDiv);
-    }
-
-    initializeKakaoShare() {
-        if (!window.Kakao) return;
-        
-        window.Kakao.Share.createDefaultButton({
-            container: '#shareKakao',
-            objectType: 'text',
-            text: `타로카드 운세 결과\n\n${this.getShareDescription()}`,
-            link: {
-                mobileWebUrl: window.location.href,
-                webUrl: window.location.href,
-            },
-            buttons: [
-                {
-                    title: '나도 타로카드 보기',
-                    link: {
-                        mobileWebUrl: window.location.href,
-                        webUrl: window.location.href,
-                    }
-                }
-            ]
+        this.selectedCards.push({
+            ...card,
+            isReversed: Math.random() < 0.5
         });
+
+        if (this.selectedCards.length === this.maxCards) {
+            this.showReading();
+        }
     }
 
-    getShareDescription() {
-        return this.selectedCards.map(card => 
-            `${card.position}: ${card.name} ${card.isReversed ? '(역방향)' : ''}`
-        ).join('\n');
+    showReading() {
+        const readingHTML = this.selectedCards.map((card, index) => `
+            <div class="category">
+                <h3>${this.positions[index]}: ${card.name} ${card.isReversed ? '(역방향)' : ''}</h3>
+                <p>${card.interpretation.설명}</p>
+                <p>${card.isReversed ? card.interpretation.부정적인 : card.interpretation.긍정적인}</p>
+                <p><strong>메시지:</strong> ${card.interpretation.메시지}</p>
+            </div>
+        `).join('');
+
+        if (this.resultSection) {
+            this.resultSection.innerHTML = `
+                <h2>타로 해석</h2>
+                <div class="interpretation-categories">
+                    ${readingHTML}
+                </div>
+            `;
+        }
     }
 
-    resetReading() {
-        this.selectedCards = [];
-        this.currentStep = 0;
-        this.shuffleBtn.disabled = false;
-        this.readingResult.style.display = 'none';
-        
-        this.createCards();
-        
-        if (this.shareButton) this.shareButton.style.display = 'none';
-        if (this.resetButton) this.resetButton.style.display = 'none';
+    showLoading(message) {
+        this.loadingScreen.querySelector('p').textContent = message;
+        this.loadingScreen.style.display = 'flex';
+    }
+
+    hideLoading() {
+        this.loadingScreen.style.display = 'none';
     }
 }
 
+// 앱 초기화
 document.addEventListener('DOMContentLoaded', () => {
-    new TarotReading();
+    new TarotApp();
 });
