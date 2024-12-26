@@ -49,6 +49,7 @@ class TarotReading {
         this.cardElements.forEach(card => {
             if (!card.classList.contains('selected')) {
                 card.style.cursor = 'pointer';
+                card.classList.add('selectable');
             }
         });
     }
@@ -75,38 +76,47 @@ class TarotReading {
     }
 
     displayCard(cardElement, cardData, isReversed) {
-        const cardFront = cardElement.querySelector('.card-front');
-        const cardImage = cardFront.querySelector('img');
-        
-        // 이미지 경로 설정
-        cardImage.src = `images/${cardData.image}`;
-        cardImage.alt = cardData.name;
-        
-        // 카드 정보 표시
-        cardFront.querySelector('.card-title').textContent = cardData.name;
-        
         cardElement.classList.add('selected');
-        if (isReversed) {
-            cardFront.style.transform = 'rotate(180deg)';
-        }
+        cardElement.classList.remove('selectable');
+        
+        // 카드 내용을 표시하는 div 생성
+        const cardContent = document.createElement('div');
+        cardContent.className = 'card-content';
+        cardContent.style.transform = isReversed ? 'rotate(180deg)' : '';
+        
+        cardContent.innerHTML = `
+            <h3>${cardData.name}</h3>
+            <p>${isReversed ? '(역방향)' : '(정방향)'}</p>
+        `;
+        
+        // 기존 내용을 지우고 새 내용으로 교체
+        cardElement.innerHTML = '';
+        cardElement.appendChild(cardContent);
     }
 
     showResults() {
         this.readingResult.style.display = 'block';
-        
+        this.readingResult.innerHTML = ''; // 기존 결과 초기화
+
         const positions = ['과거', '현재', '미래'];
-        positions.forEach((position, index) => {
-            const card = this.selectedCards[index];
-            const reading = document.getElementById(`${position.toLowerCase()}Reading`);
+        
+        this.selectedCards.forEach((card, index) => {
+            const resultSection = document.createElement('div');
+            resultSection.className = 'reading-section';
             
-            reading.innerHTML = `
-                <h4>${card.name} ${card.isReversed ? '(역방향)' : ''}</h4>
-                <div class="keywords">
-                    <strong>키워드:</strong> ${card.keywords.join(', ')}
+            resultSection.innerHTML = `
+                <h3>${positions[index]}</h3>
+                <div class="card-result">
+                    <h4>${card.name} ${card.isReversed ? '(역방향)' : '(정방향)'}</h4>
+                    <div class="keywords">
+                        <strong>키워드:</strong> ${card.keywords.join(', ')}
+                    </div>
+                    ${this.getCardMeaning(card)}
+                    ${this.getCardInterpretation(card)}
                 </div>
-                ${this.getCardMeaning(card)}
-                ${this.getCardInterpretation(card)}
             `;
+            
+            this.readingResult.appendChild(resultSection);
         });
     }
 
@@ -139,34 +149,7 @@ class TarotReading {
 
     shareToKakao() {
         if (this.selectedCards.length !== 3) return;
-
-        Kakao.Link.sendDefault({
-            objectType: 'feed',
-            content: {
-                title: '타로카드 운세 결과',
-                description: this.getShareDescription(),
-                imageUrl: 'YOUR_IMAGE_URL', // 대표 이미지 URL 필요
-                link: {
-                    mobileWebUrl: window.location.href,
-                    webUrl: window.location.href,
-                }
-            },
-            buttons: [
-                {
-                    title: '나도 타로카드 보기',
-                    link: {
-                        mobileWebUrl: window.location.href,
-                        webUrl: window.location.href,
-                    }
-                }
-            ]
-        });
-    }
-
-    getShareDescription() {
-        return this.selectedCards.map(card => 
-            `${card.position}: ${card.name} ${card.isReversed ? '(역방향)' : ''}`
-        ).join('\n');
+        alert('카카오톡 공유 기능은 현재 준비중입니다.');
     }
 
     resetReading() {
@@ -175,11 +158,10 @@ class TarotReading {
         this.shuffleBtn.disabled = false;
         this.readingResult.style.display = 'none';
         
-        this.cardElements.forEach(cardElement => {
-            cardElement.classList.remove('selected');
-            const cardFront = cardElement.querySelector('.card-front');
-            cardFront.style.transform = '';
-            cardFront.querySelector('img').src = 'images/card-back.jpg'; // 카드 뒷면 이미지로 리셋
+        this.cardElements.forEach(card => {
+            card.classList.remove('selected');
+            card.classList.remove('selectable');
+            card.innerHTML = '<div class="card-back">타로 카드</div>';
         });
     }
 }
