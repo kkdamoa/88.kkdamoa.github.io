@@ -2,7 +2,8 @@ import tarotData from './tarot-data.js';
 
 class TarotApp {
     constructor() {
-        this.cards = tarotData.major;
+        this.allCards = tarotData.major;
+        this.displayedCards = [];
         this.selectedCards = [];
         this.maxCards = 3;
         this.positions = ['과거', '현재', '미래'];
@@ -10,7 +11,7 @@ class TarotApp {
         
         this.initializeElements();
         this.addEventListeners();
-        this.renderCards();
+        this.selectRandomCards();
     }
 
     initializeElements() {
@@ -30,8 +31,17 @@ class TarotApp {
         });
     }
 
+    selectRandomCards() {
+        // 전체 카드에서 랜덤하게 3장 선택
+        this.displayedCards = [...this.allCards]
+            .sort(() => Math.random() - 0.5)
+            .slice(0, this.maxCards);
+        
+        this.renderCards();
+    }
+
     renderCards() {
-        this.cardsContainer.innerHTML = this.cards.map((card, index) => `
+        this.cardsContainer.innerHTML = this.displayedCards.map((card, index) => `
             <div class="card" data-index="${index}">
                 <div class="card-inner">
                     <div class="card-back"></div>
@@ -56,12 +66,10 @@ class TarotApp {
         
         await new Promise(resolve => setTimeout(resolve, 1000));
         
-        // 카드 배열 섞기
-        this.cards = [...this.cards].sort(() => Math.random() - 0.5);
+        // 새로운 랜덤 카드 3장 선택
+        this.selectRandomCards();
         
-        this.renderCards();
         this.hideLoading();
-        
         this.cardsContainer.classList.remove('shuffling');
         this.shuffleButton.disabled = false;
         this.isShuffling = false;
@@ -74,10 +82,8 @@ class TarotApp {
     }
 
     selectCard(cardElement) {
-        if (this.selectedCards.length >= this.maxCards) return;
-
         const index = parseInt(cardElement.dataset.index);
-        const card = this.cards[index];
+        const card = this.displayedCards[index];
         
         // 카드 선택 효과
         cardElement.classList.add('selecting');
@@ -91,28 +97,34 @@ class TarotApp {
             isReversed: Math.random() < 0.5
         });
 
-        if (this.selectedCards.length === this.maxCards) {
-            this.showReading();
-        }
+        this.showReading();
     }
 
     showReading() {
-        const readingHTML = this.selectedCards.map((card, index) => `
+        const card = this.selectedCards[this.selectedCards.length - 1];
+        const position = this.positions[this.selectedCards.length - 1];
+
+        const readingHTML = `
             <div class="category">
-                <h3>${this.positions[index]}: ${card.name} ${card.isReversed ? '(역방향)' : ''}</h3>
+                <h3>${position}: ${card.name} ${card.isReversed ? '(역방향)' : ''}</h3>
                 <p>${card.interpretation.설명}</p>
                 <p>${card.isReversed ? card.interpretation.부정적인 : card.interpretation.긍정적인}</p>
                 <p><strong>메시지:</strong> ${card.interpretation.메시지}</p>
             </div>
-        `).join('');
+        `;
 
         if (this.resultSection) {
-            this.resultSection.innerHTML = `
-                <h2>타로 해석</h2>
-                <div class="interpretation-categories">
-                    ${readingHTML}
-                </div>
-            `;
+            if (this.selectedCards.length === 1) {
+                this.resultSection.innerHTML = `
+                    <h2>타로 해석</h2>
+                    <div class="interpretation-categories">
+                        ${readingHTML}
+                    </div>
+                `;
+            } else {
+                this.resultSection.querySelector('.interpretation-categories')
+                    .insertAdjacentHTML('beforeend', readingHTML);
+            }
         }
     }
 
