@@ -1,0 +1,80 @@
+/* style.css */
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+}
+
+main {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 10px;
+}
+
+article {
+    flex: 3;
+    padding-right: 20px;
+}
+
+aside {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 10px;
+}
+
+.adsense-ad-top,
+.adsense-ad-mid,
+.adsense-ad-side,
+.adsense-ad-bottom
+{
+    background-color: #eee;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* 한국어 주석: 기본 광고 스타일 */
+
+/* Mobile Styles */
+@media (max-width: 768px) {
+     main {
+            flex-direction: column;
+        }
+
+     article{
+           padding-right: 0;
+        }
+      .adsense-ad-side{
+             margin-top: 20px;
+        }
+      .adsense-ad-top,
+      .adsense-ad-mid
+      {
+         width: 100%;
+      }
+    .adsense-ad-side {
+        width: 100%; /* 모바일에서는 사이드바 광고를 콘텐츠 아래로 이동 */
+     }
+}
+
+/* 한국어 주석: 모바일 화면에 대한 광고 스타일 */
+
+/* Desktop Styles */
+@media (min-width: 769px) {
+     .adsense-ad-top,
+    .adsense-ad-mid{
+        width: 80%;
+        margin-left: auto;
+        margin-right: auto;
+    }
+    .adsense-ad-side {
+           width: 100%;
+        }
+  /* 한국어 주석: 데스크탑 화면에 대한 광고 스타일*/
+}
