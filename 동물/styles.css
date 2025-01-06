@@ -1,0 +1,84 @@
+/* 기본 스타일 */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+/* 헤더 스타일 */
+header {
+    background-color: #333;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+}
+
+/* 메인 콘텐츠 스타일 */
+main {
+    padding: 20px;
+}
+
+/* 섹션 스타일 */
+section {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* 제목 스타일 */
+h1, h2 {
+    color: #333;
+}
+
+/* CTA 버튼 스타일 */
+.cta-button {
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cta-button:hover {
+    background-color: #0056b3;
+}
+
+/* 추가 내용 숨김 스타일 */
+.hidden {
+    display: none;
+    margin-top: 10px;
+}
+
+/* 강조 문구 스타일 */
+.highlight {
+    background-color: #fff3cd;
+    padding: 10px;
+    border-left: 5px solid #ffc107;
+    margin-top: 10px;
+}
+
+/* 애드센스 광고 컨테이너 스타일 */
+.ad-container {
+    margin: 20px 0;
+    text-align: center;
+}
+
+/* 푸터 스타일 */
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
