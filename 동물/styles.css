@@ -105,4 +105,52 @@ article li {
     clear: both;
 }
 
+/* 컨테이너 레이아웃 */
+.container {
+    display: flex;
+    max-width: 1000px;  /* 1200px에서 1000px로 축소 */
+    margin: 0 auto;
+    padding: 15px;
+    gap: 15px;
+}
+
+/* 메인 콘텐츠 영역 */
+main {
+    flex: 1;
+    max-width: 650px;  /* 800px에서 650px로 축소 */
+}
+
+/* 사이드바 영역 */
+.sidebar {
+    width: 250px;  /* 300px에서 250px로 축소 */
+}
+
+/* 반응형 디자인 개선 */
+@media screen and (max-width: 1024px) {
+    .container {
+        max-width: 95%;
+        padding: 10px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+    
+    main {
+        max-width: 100%;
+    }
+    
+    .sidebar {
+        width: 100%;
+    }
+
+    /* 모바일에서 사이드바 광고 크기 조정 */
+    .ad-container.sidebar-ad ins {
+        width: 100% !important;
+        height: 280px !important;
+    }
+}
+
 /* ...existing code... */
