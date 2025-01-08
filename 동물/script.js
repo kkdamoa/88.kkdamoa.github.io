@@ -1,6 +1,18 @@
-// 기존 토글 함수
+// 광고 로딩 최적화
+window.addEventListener('load', function() {
+    // 광고 초기화 함수
+    function initAds() {
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    }
+
+    // 광고 로딩 지연
+    setTimeout(initAds, 1000);
+});
+
+// 콘텐츠 토글 함수
 function toggleContent(id) {
-    // ...existing code...
+    const content = document.getElementById(id + '-more');
+    content.style.display = content.style.display === 'none' ? 'block' : 'none';
 }
 
 // 팝업 광고 관련 함수
